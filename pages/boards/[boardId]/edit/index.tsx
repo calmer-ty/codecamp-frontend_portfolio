@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useQuery, gql } from "@apollo/client";
 // TYPES
-import {
+import type {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../src/commons/types/generated/types";
@@ -19,10 +19,10 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function BoardsEditPage() {
+export default function BoardsEditPage(): JSX.Element {
   const router = useRouter();
   // boardId의 타입을 정확히 넣어주기 위한 조건
-  if (!router || typeof router.query.boardId !== "string") return <></>;
+  if (typeof router.query.boardId !== "string") return <></>;
 
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
     FETCH_BOARD,

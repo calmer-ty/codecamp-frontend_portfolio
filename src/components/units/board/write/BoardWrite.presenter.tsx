@@ -1,17 +1,13 @@
 import * as S from "./BoardWrite.styles";
 
 // TYPES
-import { IBoardWriteUIProps } from "./BoardWrite.types";
+import type { IBoardWriteUIProps } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props: IBoardWriteUIProps) {
+export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
   return (
     <>
       <S.Wrapper>
-        <S.Container
-          // data >> 타입을 모르겠음
-          // onSubmit={handleSubmit((data: any) => console.log(data))}
-          onSubmit={props.handleSubmit(props.onSubmitHandler)}
-        >
+        <S.Container onSubmit={props.handleSubmit(props.onSubmitHandler)}>
           <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
           <S.RowWrap>
             <S.ColumnWrap>
@@ -20,7 +16,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
                 type="text"
                 placeholder="이름을 작성해주세요."
                 defaultValue={props.data?.fetchBoard.writer ?? ""}
-                readOnly={!!props.data?.fetchBoard.writer}
+                readOnly={Boolean(props.data?.fetchBoard.writer)}
                 {...props.register("writer", {
                   required: props.isEdit ? "" : "This is required.",
                 })}

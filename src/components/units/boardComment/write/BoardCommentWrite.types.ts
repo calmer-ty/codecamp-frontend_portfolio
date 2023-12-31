@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import type { ChangeEvent, MouseEvent } from "react";
 
 export interface BoardCommentWriteUIProps {
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;

@@ -1,9 +1,11 @@
 // TYPES
-import { BoardCommentWriteUIProps } from "./BoardCommentWrite.types";
+import type { BoardCommentWriteUIProps } from "./BoardCommentWrite.types";
 // STYLES
 import * as S from "./BoardCommentWrite.styles";
 
-export default function BoardCommentWriteUI(props: BoardCommentWriteUIProps) {
+export default function BoardCommentWriteUI(
+  props: BoardCommentWriteUIProps
+): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>

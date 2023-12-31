@@ -1,8 +1,8 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
 // TYPES
-import {
+import type {
   IQuery,
   IQueryFetchBoardCommentsArgs,
   IMutation,
@@ -16,9 +16,9 @@ import {
   FETCH_BOARD_COMMENTS,
 } from "./BoardCommentList.queries";
 
-export default function BoardCommentList() {
+export default function BoardCommentList(): JSX.Element {
   const router = useRouter();
-  if (!router || typeof router.query.boardId !== "string") return <></>;
+  if (typeof router.query.boardId !== "string") return <></>;
 
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
@@ -34,7 +34,9 @@ export default function BoardCommentList() {
     },
   });
 
-  const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
+  const onClickDelete = async (
+    event: MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     const password = prompt("비밀번호를 입력하세요.");
     try {
       if (!(event.target instanceof HTMLButtonElement)) {

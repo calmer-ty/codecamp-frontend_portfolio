@@ -1,11 +1,11 @@
 // TYPES
-import { BoardDetailUIProps } from "./BoardDetail.types";
+import type { BoardDetailUIProps } from "./BoardDetail.types";
 // STYLES
 import * as S from "./BoardDetail.styles";
 // UTILS
 import { getDate } from "../../../../commons/libraries/utils";
 
-export default function BoardDetailUI(props: BoardDetailUIProps) {
+export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
   return (
     <>
       <S.Wrapper>

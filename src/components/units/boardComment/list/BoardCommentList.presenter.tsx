@@ -1,10 +1,12 @@
 // TYPES
-import { BoardCommentListUIProps } from "./BoardCommentList.types";
+import type { BoardCommentListUIProps } from "./BoardCommentList.types";
 // STYLES
 import * as S from "./BoardCommentList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
-export default function BoardCommentListUI(props: BoardCommentListUIProps) {
+export default function BoardCommentListUI(
+  props: BoardCommentListUIProps
+): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>

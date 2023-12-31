@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ISubmitButtonProps } from "./BoardWrite.types";
+import type { ISubmitButtonProps } from "./BoardWrite.types";
 
 // emotion은 태그로 쓰이기 때문에 대문자로 사용한다
 export const Wrapper = styled.div`

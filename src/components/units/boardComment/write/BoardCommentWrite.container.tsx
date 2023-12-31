@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import type { ChangeEvent } from "react";
 // QUERIES
 import {
   CREATE_BOARD_COMMENT,
@@ -9,7 +10,7 @@ import {
 // PRESENTER
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
 
-export default function BoardComment() {
+export default function BoardComment(): JSX.Element {
   const router = useRouter();
 
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
@@ -18,24 +19,24 @@ export default function BoardComment() {
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
   };
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
   };
-  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setContents(event.target.value);
   };
 
-  const onClickSubmit = async () => {
+  const onClickSubmit = async (): Promise<void> => {
     try {
       await createBoardComment({
         variables: {
           createBoardCommentInput: {
-            writer: writer,
-            password: password,
-            contents: contents,
+            writer,
+            password,
+            contents,
             rating: 5,
           },
           boardId: router.query.boardId,

@@ -2,9 +2,9 @@ import * as S from "./BoardList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 // TYPES
-import { BoardListUIProps } from "./BoardList.types";
+import type { BoardListUIProps } from "./BoardList.types";
 
-export default function BoardListUI(props: BoardListUIProps) {
+export default function BoardListUI(props: BoardListUIProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>

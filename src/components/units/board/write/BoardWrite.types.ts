@@ -1,6 +1,6 @@
-import { MouseEvent } from "react";
-import { IQuery } from "../../../../commons/types/generated/types";
-import {
+import type { MouseEvent } from "react";
+import type { IQuery } from "../../../../commons/types/generated/types";
+import type {
   FieldErrors,
   UseFormHandleSubmit,
   UseFormRegister,

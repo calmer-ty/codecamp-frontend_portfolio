@@ -1,20 +1,20 @@
 import { useMutation } from "@apollo/client";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 // TYPES
-import {
+import type {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
   IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
-import { IBoardWriteProps, IFormValues } from "./BoardWrite.types";
+import type { IBoardWriteProps, IFormValues } from "./BoardWrite.types";
 // UI
 import BoardWriteUI from "./BoardWrite.presenter";
 // API
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 
-export default function BoardWrite(props: IBoardWriteProps) {
+export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
 
   // FROM
@@ -26,7 +26,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
     formState: { errors },
   } = useForm<IFormValues>();
 
-  const onSubmitHandler = (data: IFormValues) => console.log(data);
+  const onSubmitHandler = (data: IFormValues): void => {
+    console.log(data);
+  };
 
   const writer = watch().writer;
   const password = watch().password;
@@ -50,13 +52,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   // watch의 객체 값을 배열로 정의한다
   // inputValue: 사용자가 입력해야하는 값의 개수
-  const inputValue = Object.values(watch());
+  const inputValue: number[] = Object.values(watch());
 
   // input 값이 채워질 때 카운트를 담는 변수
   let inputValueCount = 0;
 
-  for (let key in inputValue) {
-    if (inputValue[key]) {
+  for (const key of inputValue) {
+    if (inputValue[key] !== 0) {
       inputValueCount += 1;
     }
     // 배열에 넣은 객체 값이 있다면 카운트 값을 1씩 올린다.
@@ -69,7 +71,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   }
 
   // onClickBoardNew
-  const onClickSubmit = async () => {
+  const onClickSubmit = async (): Promise<void> => {
     const passwordLength = password.length;
 
     if (
@@ -99,26 +101,26 @@ export default function BoardWrite(props: IBoardWriteProps) {
           },
         });
 
-        router.push(`/boards/${result.data?.createBoard._id}`);
+        void router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         if (error instanceof Error) alert(error.message);
       }
     }
   };
 
-  const onClickUpdate = async () => {
-    if (!title && !contents) {
+  const onClickUpdate = async (): Promise<void> => {
+    if (title !== "" && contents !== "") {
       alert("수정한 내용이 없습니다.");
       return;
     }
-    if (!password) {
+    if (password !== "") {
       alert("비밀번호를 입력해주세요.");
       return;
     }
     const updateBoardInput: IUpdateBoardInput = {};
-    if (title) updateBoardInput.title = title;
-    if (contents) updateBoardInput.contents = contents;
-    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (title !== "") updateBoardInput.title = title;
+    if (contents !== "") updateBoardInput.contents = contents;
+    if (youtubeUrl !== "") updateBoardInput.youtubeUrl = youtubeUrl;
 
     // boardId의 타입이 문자가 아닐 때 함수 실행 종료
     if (typeof router.query.boardId !== "string") {
@@ -134,7 +136,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
           password,
         },
       });
-      router.push(`/boards/${result.data?.updateBoard._id}`);
+      void router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
