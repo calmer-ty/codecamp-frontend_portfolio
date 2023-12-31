@@ -1,0 +1,65 @@
+import styled from "@emotion/styled";
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+`;
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #bdbdbd;
+`;
+export const RowWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+export const Avatar = styled.img`
+  margin-right: 12px;
+`;
+export const Writer = styled.div`
+  margin-right: 16px;
+`;
+export const Like = styled.div``;
+export const Contents = styled.div``;
+
+export const CreateDate = styled.div`
+  margin-top: 20px;
+  margin-left: 52px;
+`;
+
+// BTN
+export const OptBtnWrap = styled.div`
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  column-gap: 10px;
+`;
+export const EditBtn = styled.button`
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: url("/images/ic_edit.png") no-repeat center/contain;
+  cursor: pointer;
+`;
+export const DeleteBtn = styled.button`
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: url("/images/ic_exit.png") no-repeat center/contain;
+  cursor: pointer;
+`;
