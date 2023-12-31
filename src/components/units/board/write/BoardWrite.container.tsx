@@ -52,32 +52,36 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   // watch의 객체 값을 배열로 정의한다
   // inputValue: 사용자가 입력해야하는 값의 개수
-  const inputValue: number[] = Object.values(watch());
+  const inputValue: string[] | number[] = Object.values(watch());
 
   // input 값이 채워질 때 카운트를 담는 변수
   let inputValueCount = 0;
 
   for (const key of inputValue) {
-    if (inputValue[key] !== 0) {
-      inputValueCount += 1;
+    if (key === null) {
+      inputValueCount--;
+    }
+    if (key !== "") {
+      inputValueCount++;
     }
     // 배열에 넣은 객체 값이 있다면 카운트 값을 1씩 올린다.
   }
+  console.log(inputValueCount);
 
-  if (inputValueCount === 0) {
-    isActive = false;
-  } else if (inputValue.length === inputValueCount) {
+  if (
+    inputValue.length === inputValueCount &&
+    password?.length >= 4 &&
+    password?.length <= 16
+  ) {
     isActive = true;
   }
 
   // onClickBoardNew
   const onClickSubmit = async (): Promise<void> => {
-    const passwordLength = password.length;
-
     if (
       inputValue.length === inputValueCount &&
-      passwordLength >= 4 &&
-      passwordLength <= 16
+      password.length >= 4 &&
+      password.length <= 16
     ) {
       alert("게시물 등록");
 
