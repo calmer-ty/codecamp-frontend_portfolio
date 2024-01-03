@@ -20,6 +20,7 @@ export const List = styled.div`
 `;
 export const RowWrap = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: row;
 `;
 export const ColWrap = styled.div`
