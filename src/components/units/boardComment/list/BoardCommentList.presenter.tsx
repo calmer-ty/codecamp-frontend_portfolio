@@ -3,6 +3,7 @@ import type { BoardCommentListUIProps } from "./BoardCommentList.types";
 // STYLES
 import * as S from "./BoardCommentList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
+import { Rate } from "antd";
 
 export default function BoardCommentListUI(
   props: BoardCommentListUIProps
@@ -14,11 +15,13 @@ export default function BoardCommentListUI(
           <S.List key={el._id}>
             <S.RowWrap>
               <S.Avatar src="/images/ic_profile-40px.png" />
-              <S.Title>
-                <S.Writer>{el.writer}</S.Writer>
-                <S.Like>★</S.Like>
-              </S.Title>
-              <S.Contents>{el.contents}</S.Contents>
+              <S.ColWrap>
+                <S.Title>
+                  <S.Writer>{el.writer}</S.Writer>
+                  <Rate value={el.rating} disabled={true} />
+                </S.Title>
+                <S.Contents>{el.contents}</S.Contents>
+              </S.ColWrap>
             </S.RowWrap>
 
             <S.CreateDate>{getDate(el?.createdAt)}</S.CreateDate>

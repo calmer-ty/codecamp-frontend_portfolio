@@ -62,15 +62,18 @@ export const Video = styled.div``;
 export const LikeWrap = styled.div`
   display: flex;
   justify-content: center;
-  column-gap: 10px;
+  column-gap: 20px;
 `;
-export const LikeBtn = styled.div`
+export const LikeItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 40px;
   height: 51px;
+`;
+export const LikeScore = styled.div`
+  margin-top: 10px;
 `;
 
 export const MoveBtnWrap = styled.div`

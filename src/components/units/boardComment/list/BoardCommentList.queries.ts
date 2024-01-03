@@ -6,6 +6,7 @@ export const FETCH_BOARD_COMMENTS = gql`
       _id
       writer
       contents
+      rating
       createdAt
     }
   }

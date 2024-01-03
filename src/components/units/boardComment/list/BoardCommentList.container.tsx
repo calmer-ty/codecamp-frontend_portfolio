@@ -60,5 +60,7 @@ export default function BoardCommentList(): JSX.Element {
     }
   };
 
+  console.log(data);
+
   return <BoardCommentListUI data={data} onClickDelete={onClickDelete} />;
 }

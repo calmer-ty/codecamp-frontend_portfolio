@@ -11,6 +11,7 @@ import type {
 } from "../../../../commons/types/generated/types";
 // PRESENTER
 import BoardDetailUI from "./BoardDetail.presenter";
+import { useState } from "react";
 
 export default function BoardDetail(): JSX.Element {
   const router = useRouter();
@@ -48,18 +49,15 @@ export default function BoardDetail(): JSX.Element {
     void router.push(`/boards/${router.query.boardId}/edit`);
   };
   // 게시물 삭제
-  console.log(data);
   const onClickDeleteBoardDetail = async (): Promise<void> => {
-    if (data?.fetchBoard._id !== "string") {
-      // if (typeof router.query.boardId !== "string") {
+    if (typeof data?.fetchBoard._id !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
     }
 
     try {
       await deleteBoard({
-        variables: { boardId: data.fetchBoard._id },
-        // variables: { boardId: typeof router.query.boardId },
+        variables: { boardId: data?.fetchBoard._id },
       });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
@@ -69,12 +67,27 @@ export default function BoardDetail(): JSX.Element {
     void router.push(`/boards`);
   };
 
+  // 좋아요 기능
+  const [likeScore, setLikeScore] = useState(0);
+  const [disLikeScore, setDisLikeScore] = useState(0);
+
+  const onClickLikeScore = (): void => {
+    setLikeScore((prev) => prev + 1);
+  };
+  const onClickDisLikeScore = (): void => {
+    setDisLikeScore((prev) => prev + 1);
+  };
+
   return (
     <BoardDetailUI
       data={data}
       onClickMoveToBoardList={onClickMoveToBoardList}
       onClickMoveToBoardEdit={onClickMoveToBoardEdit}
       onClickDeleteBoardDetail={onClickDeleteBoardDetail}
+      likeScore={likeScore}
+      onClickLikeScore={onClickLikeScore}
+      disLikeScore={disLikeScore}
+      onClickDisLikeScore={onClickDisLikeScore}
     />
   );
 }

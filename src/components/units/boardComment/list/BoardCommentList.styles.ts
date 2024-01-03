@@ -22,10 +22,15 @@ export const RowWrap = styled.div`
   display: flex;
   flex-direction: row;
 `;
+export const ColWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const Title = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 4px;
 `;
 export const Avatar = styled.img`
   margin-right: 12px;

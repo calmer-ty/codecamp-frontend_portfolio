@@ -2,6 +2,7 @@
 import type { BoardDetailUIProps } from "./BoardDetail.types";
 // STYLES
 import * as S from "./BoardDetail.styles";
+import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 // UTILS
 import { getDate } from "../../../../commons/libraries/utils";
 
@@ -31,14 +32,20 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
             <S.Video></S.Video>
             <S.LikeWrap>
-              <S.LikeBtn>
-                <img src="/images/ic_like.png" alt="" width={20} />
-                1920
-              </S.LikeBtn>
-              <S.LikeBtn>
-                <img src="/images/ic_dislike.png" alt="" width={20} />
-                768
-              </S.LikeBtn>
+              <S.LikeItem>
+                <LikeOutlined
+                  onClick={props.onClickLikeScore}
+                  style={{ fontSize: "30px", cursor: "pointer" }}
+                />
+                <S.LikeScore>{props.likeScore}</S.LikeScore>
+              </S.LikeItem>
+              <S.LikeItem>
+                <DislikeOutlined
+                  onClick={props.onClickDisLikeScore}
+                  style={{ fontSize: "30px", cursor: "pointer" }}
+                />
+                <S.LikeScore>{props.disLikeScore}</S.LikeScore>
+              </S.LikeItem>
             </S.LikeWrap>
           </S.Body>
         </S.CardWrap>

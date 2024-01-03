@@ -18,6 +18,7 @@ export default function BoardComment(): JSX.Element {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
+  const [rating, setRating] = useState(3);
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
@@ -37,7 +38,7 @@ export default function BoardComment(): JSX.Element {
             writer,
             password,
             contents,
-            rating: 5,
+            rating,
           },
           boardId: router.query.boardId,
         },
@@ -53,12 +54,16 @@ export default function BoardComment(): JSX.Element {
     }
   };
 
+  // 좋아요 기능
+
   return (
     <BoardCommentWriteUI
       onClickSubmit={onClickSubmit}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
+      rating={rating}
+      setRating={setRating}
     />
   );
 }
