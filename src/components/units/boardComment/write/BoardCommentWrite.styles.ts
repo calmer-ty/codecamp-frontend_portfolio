@@ -37,14 +37,12 @@ export const Writer = styled.input`
   height: 52px;
   border: 1px solid #bdbdbd;
   padding: 14px 20px;
-  /* margin-right: 24px; */
 `;
 export const Password = styled.input`
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
   padding: 14px 20px;
-  /* margin-right: 24px; */
 `;
 export const Rating = styled.div`
   width: 120px;

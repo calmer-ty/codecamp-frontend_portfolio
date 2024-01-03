@@ -39,7 +39,6 @@ export const Avatar = styled.img`
 export const Writer = styled.div`
   margin-right: 16px;
 `;
-export const Like = styled.div``;
 export const Contents = styled.div``;
 
 export const CreateDate = styled.div`
@@ -62,7 +61,7 @@ export const EditBtn = styled.button`
   background: url("/images/ic_edit.png") no-repeat center/contain;
   cursor: pointer;
 `;
-export const DeleteBtn = styled.button`
+export const DelBtn = styled.button`
   width: 18px;
   height: 18px;
   border: 0;

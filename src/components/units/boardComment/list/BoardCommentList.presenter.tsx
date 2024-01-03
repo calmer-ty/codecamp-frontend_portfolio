@@ -3,7 +3,7 @@ import type { BoardCommentListUIProps } from "./BoardCommentList.types";
 // STYLES
 import * as S from "./BoardCommentList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
-import { Rate } from "antd";
+import { Modal, Rate } from "antd";
 
 export default function BoardCommentListUI(
   props: BoardCommentListUIProps
@@ -28,11 +28,23 @@ export default function BoardCommentListUI(
 
             <S.OptBtnWrap>
               <S.EditBtn />
-              <S.DeleteBtn id={el._id} onClick={props.onClickDelete} />
+              <S.DelBtn id={el._id} onClick={props.onClickOpenDeleteModal} />
             </S.OptBtnWrap>
           </S.List>
         ))}
       </S.Container>
+
+      {props.isOpenDeleteModal && (
+        <Modal
+          title="댓글을 삭제하시겠습니까?"
+          open={props.isOpenDeleteModal}
+          onOk={props.onClickDelete}
+          onCancel={props.onClickCloseDeleteModal}
+        >
+          비밀번호 입력: {""}
+          <input type="password" onChange={props.onChangeDeletePassword} />
+        </Modal>
+      )}
     </S.Wrapper>
   );
 }
