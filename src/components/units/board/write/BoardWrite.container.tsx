@@ -37,9 +37,14 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const title = watch().title;
   const contents = watch().contents;
   const youtubeUrl = watch().youtubeUrl;
-  const address = watch().address;
+
+  // 리랜더링을 위한 state 선언
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+
   const addressDetail = watch().addressDetail;
-  const zipcode = watch().zipcode;
+
+  console.log(zipcode);
 
   // DATA API
   const [createBoard] = useMutation<
@@ -157,7 +162,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
           password,
         },
       });
-      console.log(result);
       void router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
@@ -165,27 +169,26 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   };
 
   // 주소 모달
-  const [isOpenPostcodeModal, setIsOpenPostcodeModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const showPostcodeModal = (): void => {
-    setIsOpenPostcodeModal(true);
+  const onClickAddressSearch = (): void => {
+    setIsOpen(true);
   };
 
   const handleOk = (): void => {
-    setIsOpenPostcodeModal(false);
+    setIsOpen(false);
   };
 
   const handleCancel = (): void => {
-    setIsOpenPostcodeModal(false);
+    setIsOpen(false);
   };
 
   const handleComplete = (data: Address): void => {
-    console.log(data.address);
-    setIsOpenPostcodeModal(false);
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
   };
-
-  // Youtube
-  console.log(props.data);
+  // console.log(watch());
 
   return (
     <BoardWriteUI
@@ -198,12 +201,14 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
-      // Postcode Modal
-      isOpenPostcodeModal={isOpenPostcodeModal}
-      showPostcodeModal={showPostcodeModal}
+      // Zipcode Modal
+      isOpen={isOpen}
+      onClickAddressSearch={onClickAddressSearch}
       handleOk={handleOk}
       handleCancel={handleCancel}
       handleComplete={handleComplete}
+      zipcode={zipcode}
+      address={address}
     />
   );
 }

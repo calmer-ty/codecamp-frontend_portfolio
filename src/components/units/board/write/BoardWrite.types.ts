@@ -41,9 +41,11 @@ export interface IBoardWriteUIProps {
   onSubmitHandler: (data: IFormValues) => void;
   errors?: FieldErrors<IFormValues>;
 
-  // Postcode Modal
-  isOpenPostcodeModal: boolean;
-  showPostcodeModal: () => void;
+  // Zipcode
+  isOpen: boolean;
+  zipcode: string;
+  address: string;
+  onClickAddressSearch: () => void;
   handleOk: () => void;
   handleCancel: () => void;
   handleComplete: (data: Address) => void;

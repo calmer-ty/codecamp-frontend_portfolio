@@ -79,7 +79,7 @@ export const Zipcode = styled.input`
   padding: 0 12px;
   text-align: center;
 `;
-export const ZipcodeSearchBtn = styled.button`
+export const SearchBtn = styled.button`
   width: 124px;
   height: 52px;
   margin-left: 16px;

@@ -74,11 +74,26 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
           <S.ColumnWrap>
             <S.Label>주소</S.Label>
             <S.ZipcodeWrap>
-              <S.Zipcode placeholder="07250" />
-              <S.ZipcodeSearchBtn>우편번호 검색</S.ZipcodeSearchBtn>
+              <S.Zipcode
+                value={
+                  props.zipcode !== ""
+                    ? props.zipcode
+                    : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
+                }
+                {...props.register("zipcode", {
+                  required: props.isEdit ? "" : "This is required.",
+                })}
+              />
+              <S.SearchBtn onClick={props.onClickAddressSearch}>
+                우편번호 검색
+              </S.SearchBtn>
             </S.ZipcodeWrap>
             <S.Address
-              defaultValue={props.data?.fetchBoard.boardAddress?.address ?? ""}
+              defaultValue={
+                props.address !== ""
+                  ? props.address
+                  : props.data?.fetchBoard.boardAddress?.address ?? ""
+              }
               {...props.register("address", {
                 required: props.isEdit ? "" : "This is required.",
               })}
@@ -148,9 +163,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
           </S.WriteBtn>
         </S.Container>
 
-        {props.isOpenPostcodeModal && (
+        {props.isOpen && (
           <Modal
-            open={props.isOpenPostcodeModal}
+            open={props.isOpen}
             onOk={props.handleOk}
             onCancel={props.handleCancel}
           >
