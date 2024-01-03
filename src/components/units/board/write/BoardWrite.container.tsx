@@ -19,7 +19,6 @@ import BoardWriteUI from "./BoardWrite.presenter";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
-
   // FROM
   const {
     register,
@@ -30,7 +29,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   } = useForm<IFormValues>();
 
   const onSubmitHandler = (data: IFormValues): void => {
-    console.log(data);
+    // console.log(data);
   };
 
   const writer = watch().writer;
@@ -38,6 +37,9 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const title = watch().title;
   const contents = watch().contents;
   const youtubeUrl = watch().youtubeUrl;
+  const address = watch().address;
+  const addressDetail = watch().addressDetail;
+  const zipcode = watch().zipcode;
 
   // DATA API
   const [createBoard] = useMutation<
@@ -103,6 +105,11 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               title,
               contents,
               youtubeUrl,
+              boardAddress: {
+                address,
+                addressDetail,
+                zipcode,
+              },
             },
           },
         });
@@ -115,18 +122,26 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   };
 
   const onClickUpdate = async (): Promise<void> => {
-    if (title !== "" && contents !== "") {
+    if (title !== "" && contents !== "" && youtubeUrl !== "") {
       alert("수정한 내용이 없습니다.");
       return;
     }
-    if (password !== "") {
+    if (password === "") {
       alert("비밀번호를 입력해주세요.");
       return;
     }
+
     const updateBoardInput: IUpdateBoardInput = {};
     if (title !== "") updateBoardInput.title = title;
     if (contents !== "") updateBoardInput.contents = contents;
     if (youtubeUrl !== "") updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode !== "" || address !== "" || addressDetail !== "") {
+      updateBoardInput.boardAddress = {};
+      if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address !== "") updateBoardInput.boardAddress.address = address;
+      if (addressDetail !== "")
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
 
     // boardId의 타입이 문자가 아닐 때 함수 실행 종료
     if (typeof router.query.boardId !== "string") {
@@ -142,6 +157,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
           password,
         },
       });
+      console.log(result);
       void router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
@@ -167,6 +183,9 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     console.log(data.address);
     setIsOpenPostcodeModal(false);
   };
+
+  // Youtube
+  console.log(props.data);
 
   return (
     <BoardWriteUI

@@ -1,9 +1,11 @@
+// Types
 import type { BoardDetailUIProps } from "./BoardDetail.types";
-// STYLES
+// Styles
 import * as S from "./BoardDetail.styles";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
-// UTILS
+// Utils
 import { getDate } from "../../../../commons/libraries/utils";
+// Library
 import { Modal } from "antd";
 
 export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
@@ -30,7 +32,13 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             <S.Title>{props.data?.fetchBoard?.title}</S.Title>
             <img src="/images/image.png" alt="" />
             <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
-            <S.Video></S.Video>
+            <S.Youtube
+              url={props.data?.fetchBoard?.youtubeUrl ?? ""}
+              width={800}
+              height={600}
+              muted
+              playing
+            />
             <S.LikeWrap>
               <S.LikeItem>
                 <LikeOutlined

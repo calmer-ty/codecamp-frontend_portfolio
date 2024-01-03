@@ -75,22 +75,24 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.Label>주소</S.Label>
             <S.ZipcodeWrap>
               <S.Zipcode placeholder="07250" />
-              <S.ZipcodeSearchBtn onClick={props.showPostcodeModal}>
-                우편번호 검색
-              </S.ZipcodeSearchBtn>
+              <S.ZipcodeSearchBtn>우편번호 검색</S.ZipcodeSearchBtn>
             </S.ZipcodeWrap>
             <S.Address
-              {...props.register("address1", {
+              defaultValue={props.data?.fetchBoard.boardAddress?.address ?? ""}
+              {...props.register("address", {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
-            <S.Error>{props.errors?.address1?.message}</S.Error>
+            <S.Error>{props.errors?.address?.message}</S.Error>
             <S.Address
-              {...props.register("address2", {
+              defaultValue={
+                props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
+              }
+              {...props.register("addressDetail", {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
-            <S.Error>{props.errors?.address2?.message}</S.Error>
+            <S.Error>{props.errors?.addressDetail?.message}</S.Error>
           </S.ColumnWrap>
 
           <S.ColumnWrap>

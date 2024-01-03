@@ -14,8 +14,9 @@ export interface IFormValues {
   password: string;
   title: string;
   contents: string;
-  address1: string;
-  address2: string;
+  address: string;
+  addressDetail: string;
+  zipcode: string;
   youtubeUrl: string;
   mainSetting: string;
 }

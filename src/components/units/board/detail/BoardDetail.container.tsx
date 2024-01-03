@@ -63,7 +63,7 @@ export default function BoardDetail(): JSX.Element {
       if (error instanceof Error) alert(error.message);
     }
 
-    showModal();
+    alert("게시물이 삭제되었습니다.");
     void router.push(`/boards`);
   };
 
@@ -93,6 +93,7 @@ export default function BoardDetail(): JSX.Element {
     setIsModalOpen(false);
   };
 
+  console.log(data);
   return (
     <BoardDetailUI
       data={data}

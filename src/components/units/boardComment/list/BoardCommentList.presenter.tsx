@@ -1,5 +1,5 @@
 import type { BoardCommentListUIProps } from "./BoardCommentList.types";
-// STYLES
+// Styles
 import * as S from "./BoardCommentList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 import { Modal, Rate } from "antd";

@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+// Library
+import ReactPlayer from "react-player";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -47,8 +49,10 @@ export const OptBtn = styled.img`
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 export const Title = styled.div`
+  width: 100%;
   margin: 80px 0 40px 0;
   font-size: 36px;
   font-weight: 700;
@@ -57,7 +61,9 @@ export const Contents = styled.div`
   height: 96px;
   margin-top: 20px;
 `;
-export const Video = styled.div``;
+export const Youtube = styled(ReactPlayer)`
+  margin: auto;
+`;
 
 export const LikeWrap = styled.div`
   display: flex;
