@@ -1,14 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import type { MouseEvent } from "react";
-// TYPES
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
 // QUERIES
 import { FETCH_BOARDS } from "./BoardList.queries";
-// PRESENTER
+// UI
 import BoardListUI from "./BoardList.presenter";
 
 export default function BoardList(): JSX.Element {

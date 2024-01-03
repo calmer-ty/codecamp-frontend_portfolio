@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useQuery, gql } from "@apollo/client";
-// TYPES
+
 import type {
   IQuery,
   IQueryFetchBoardArgs,

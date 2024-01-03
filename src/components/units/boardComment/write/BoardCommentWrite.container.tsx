@@ -7,7 +7,7 @@ import {
   CREATE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
 } from "./BoardCommentWrite.queries";
-// PRESENTER
+// UI
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
 
 export default function BoardComment(): JSX.Element {

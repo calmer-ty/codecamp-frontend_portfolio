@@ -1,4 +1,3 @@
-// TYPES
 import type { BoardCommentWriteUIProps } from "./BoardCommentWrite.types";
 // STYLES
 import { Rate } from "antd";

@@ -5,6 +5,8 @@ import type {
   UseFormHandleSubmit,
   UseFormRegister,
 } from "react-hook-form";
+// Library
+import type { Address } from "react-daum-postcode";
 
 // container
 export interface IFormValues {
@@ -23,7 +25,7 @@ export interface IBoardWriteProps {
   data?: Pick<IQuery, "fetchBoard">;
 }
 
-// presenter
+// UI
 export interface IBoardWriteUIProps {
   onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -32,11 +34,18 @@ export interface IBoardWriteUIProps {
   isActive: boolean;
   data?: Pick<IQuery, "fetchBoard">;
 
-  // react hook form
+  // React Hook Form
   register: UseFormRegister<IFormValues>;
   handleSubmit: UseFormHandleSubmit<IFormValues>;
   onSubmitHandler: (data: IFormValues) => void;
   errors?: FieldErrors<IFormValues>;
+
+  // Postcode Modal
+  isOpenPostcodeModal: boolean;
+  showPostcodeModal: () => void;
+  handleOk: () => void;
+  handleCancel: () => void;
+  handleComplete: (data: Address) => void;
 }
 
 export interface ISubmitButtonProps {

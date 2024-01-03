@@ -1,10 +1,10 @@
-// TYPES
 import type { BoardDetailUIProps } from "./BoardDetail.types";
 // STYLES
 import * as S from "./BoardDetail.styles";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 // UTILS
 import { getDate } from "../../../../commons/libraries/utils";
+import { Modal } from "antd";
 
 export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
   return (
@@ -57,6 +57,13 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             삭제하기
           </S.MoveBtn>
         </S.MoveBtnWrap>
+
+        <Modal
+          title="시스템에 문제가 있습니다"
+          open={props.isModalOpen}
+          onOk={props.handleOk}
+          onCancel={props.handleCancel}
+        ></Modal>
       </S.Wrapper>
     </>
   );

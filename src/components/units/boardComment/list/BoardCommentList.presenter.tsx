@@ -1,4 +1,3 @@
-// TYPES
 import type { BoardCommentListUIProps } from "./BoardCommentList.types";
 // STYLES
 import * as S from "./BoardCommentList.styles";

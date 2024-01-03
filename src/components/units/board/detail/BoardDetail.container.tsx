@@ -2,14 +2,14 @@ import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 // QUERIES
 import { FETCH_BOARD, DELETE_BOARD } from "./BoardDetail.queries";
-// TYPES
+
 import type {
   IMutation,
   IMutationDeleteBoardArgs,
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
-// PRESENTER
+// UI
 import BoardDetailUI from "./BoardDetail.presenter";
 import { useState } from "react";
 
@@ -33,7 +33,7 @@ export default function BoardDetail(): JSX.Element {
   // 게시물 리스트 페이지로 이동
   const onClickMoveToBoardList = (): void => {
     if (typeof router.query.boardId !== "string") {
-      alert("시스템에 문제가 있습니다.");
+      showModal();
       return;
     }
 
@@ -42,7 +42,7 @@ export default function BoardDetail(): JSX.Element {
   // 게시물 수정 페이지로 이동
   const onClickMoveToBoardEdit = (): void => {
     if (typeof router.query.boardId !== "string") {
-      alert("시스템에 문제가 있습니다.");
+      showModal();
       return;
     }
 
@@ -51,7 +51,7 @@ export default function BoardDetail(): JSX.Element {
   // 게시물 삭제
   const onClickDeleteBoardDetail = async (): Promise<void> => {
     if (typeof data?.fetchBoard._id !== "string") {
-      alert("시스템에 문제가 있습니다.");
+      showModal();
       return;
     }
 
@@ -63,7 +63,7 @@ export default function BoardDetail(): JSX.Element {
       if (error instanceof Error) alert(error.message);
     }
 
-    alert("게시물이 삭제되었습니다");
+    showModal();
     void router.push(`/boards`);
   };
 
@@ -78,16 +78,37 @@ export default function BoardDetail(): JSX.Element {
     setDisLikeScore((prev) => prev + 1);
   };
 
+  // 모달창 기능
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = (): void => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = (): void => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = (): void => {
+    setIsModalOpen(false);
+  };
+
   return (
     <BoardDetailUI
       data={data}
       onClickMoveToBoardList={onClickMoveToBoardList}
       onClickMoveToBoardEdit={onClickMoveToBoardEdit}
       onClickDeleteBoardDetail={onClickDeleteBoardDetail}
+      // 좋아요 기능
       likeScore={likeScore}
       onClickLikeScore={onClickLikeScore}
       disLikeScore={disLikeScore}
       onClickDisLikeScore={onClickDisLikeScore}
+      // 모달창
+      isModalOpen={isModalOpen}
+      showModal={showModal}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
     />
   );
 }

@@ -12,4 +12,10 @@ export interface BoardDetailUIProps {
   onClickLikeScore: (event: MouseEvent<HTMLSpanElement>) => void;
   disLikeScore: number;
   onClickDisLikeScore: (event: MouseEvent<HTMLSpanElement>) => void;
+
+  // 모달창
+  isModalOpen: boolean;
+  showModal: () => void;
+  handleOk: () => void;
+  handleCancel: () => void;
 }

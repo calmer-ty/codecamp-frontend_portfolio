@@ -1,7 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-// TYPES
 import type {
   IMutation,
   IMutationCreateBoardArgs,
@@ -9,10 +8,14 @@ import type {
   IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
 import type { IBoardWriteProps, IFormValues } from "./BoardWrite.types";
-// UI
-import BoardWriteUI from "./BoardWrite.presenter";
+
 // API
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { useState } from "react";
+// Library
+import type { Address } from "react-daum-postcode";
+// UI
+import BoardWriteUI from "./BoardWrite.presenter";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
@@ -66,7 +69,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
     // 배열에 넣은 객체 값이 있다면 카운트 값을 1씩 올린다.
   }
-  console.log(inputValueCount);
 
   if (
     inputValue.length === inputValueCount &&
@@ -146,6 +148,26 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  // 주소 모달
+  const [isOpenPostcodeModal, setIsOpenPostcodeModal] = useState(false);
+
+  const showPostcodeModal = (): void => {
+    setIsOpenPostcodeModal(true);
+  };
+
+  const handleOk = (): void => {
+    setIsOpenPostcodeModal(false);
+  };
+
+  const handleCancel = (): void => {
+    setIsOpenPostcodeModal(false);
+  };
+
+  const handleComplete = (data: Address): void => {
+    console.log(data.address);
+    setIsOpenPostcodeModal(false);
+  };
+
   return (
     <BoardWriteUI
       register={register}
@@ -157,6 +179,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
+      // Postcode Modal
+      isOpenPostcodeModal={isOpenPostcodeModal}
+      showPostcodeModal={showPostcodeModal}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
+      handleComplete={handleComplete}
     />
   );
 }

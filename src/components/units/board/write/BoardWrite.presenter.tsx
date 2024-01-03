@@ -1,7 +1,9 @@
+import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styles";
 
-// TYPES
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
+// Library
+import { Modal } from "antd";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
   return (
@@ -73,7 +75,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.Label>주소</S.Label>
             <S.ZipcodeWrap>
               <S.Zipcode placeholder="07250" />
-              <S.ZipcodeSearchBtn>우편번호 검색</S.ZipcodeSearchBtn>
+              <S.ZipcodeSearchBtn onClick={props.showPostcodeModal}>
+                우편번호 검색
+              </S.ZipcodeSearchBtn>
             </S.ZipcodeWrap>
             <S.Address
               {...props.register("address1", {
@@ -141,6 +145,16 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             {props.isEdit ? "수정" : "등록"}하기
           </S.WriteBtn>
         </S.Container>
+
+        {props.isOpenPostcodeModal && (
+          <Modal
+            open={props.isOpenPostcodeModal}
+            onOk={props.handleOk}
+            onCancel={props.handleCancel}
+          >
+            <DaumPostcodeEmbed onComplete={props.handleComplete} />
+          </Modal>
+        )}
       </S.Wrapper>
     </>
   );

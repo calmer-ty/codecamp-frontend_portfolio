@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-// TYPES
+
 import type { MouseEvent, ChangeEvent } from "react";
 import type {
   IQuery,
@@ -9,7 +9,7 @@ import type {
   IMutation,
   IMutationDeleteBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
-// PRESENTER
+// UI
 import BoardCommentListUI from "./BoardCommentList.presenter";
 // QUERIES
 import {
