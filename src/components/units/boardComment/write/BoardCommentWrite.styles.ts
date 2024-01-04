@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+// Library
+import { Rate } from "antd";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -44,11 +46,7 @@ export const Password = styled.input`
   border: 1px solid #bdbdbd;
   padding: 14px 20px;
 `;
-export const Rating = styled.div`
-  width: 120px;
-  height: 24px;
-  background-color: yellowgreen;
-`;
+export const Like = styled(Rate)``;
 export const Content = styled.div`
   position: relative;
   width: 1200px;

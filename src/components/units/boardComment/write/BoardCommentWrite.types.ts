@@ -6,6 +6,10 @@ export interface BoardCommentWriteUIProps {
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
 
+  writer: string;
+  password: string;
+  contents: string;
+
   rating: number;
   setRating: Dispatch<SetStateAction<number>>;
 }

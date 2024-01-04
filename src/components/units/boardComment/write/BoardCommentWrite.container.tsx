@@ -52,6 +52,9 @@ export default function BoardComment(): JSX.Element {
     } catch (error) {
       alert(error);
     }
+    setWriter("");
+    setPassword("");
+    setContents("");
   };
 
   // 좋아요 기능
@@ -62,6 +65,9 @@ export default function BoardComment(): JSX.Element {
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
+      writer={writer}
+      password={password}
+      contents={contents}
       rating={rating}
       setRating={setRating}
     />
