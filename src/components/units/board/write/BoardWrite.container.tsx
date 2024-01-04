@@ -138,7 +138,14 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   };
 
   const onClickUpdate = async (): Promise<void> => {
-    if (title !== "" && contents !== "" && youtubeUrl !== "") {
+    if (
+      title !== "" &&
+      contents !== "" &&
+      youtubeUrl !== "" &&
+      zipcode !== "" &&
+      address !== "" &&
+      addressDetail !== ""
+    ) {
       alert("수정한 내용이 없습니다.");
       return;
     }
@@ -169,8 +176,8 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       const result = await updateBoard({
         variables: {
           boardId: router.query.boardId,
-          updateBoardInput,
           password,
+          updateBoardInput,
         },
       });
       void router.push(`/boards/${result.data?.updateBoard._id}`);
