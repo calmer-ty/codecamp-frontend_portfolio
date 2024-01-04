@@ -1,7 +1,5 @@
 import * as S from "./BoardWrite.styles";
-
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
-// Library
 
 export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
   return (
@@ -73,6 +71,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.Label>주소</S.Label>
             <S.ZipcodeWrap>
               <S.Zipcode
+                readOnly
                 value={
                   props.zipcode !== ""
                     ? props.zipcode
@@ -87,6 +86,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
               </S.SearchBtn>
             </S.ZipcodeWrap>
             <S.Address
+              readOnly
               defaultValue={
                 // 주소 값이 비어있지 않다면 = 즉 주소 값이 있다면 새로 받아진 주소 값을 넣어줌.
                 // 그렇지 않다면 패치한 값, 가지고 있던 주소 값을 넣어준다.
@@ -159,12 +159,11 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
 
         {props.isOpen && (
           <S.AddressModal
-            // open={props.isOpen}
-            // onOk={props.handleOk}
-            // onCancel={props.handleCancel}
-            visible={true}
+            open={props.isOpen}
+            onOk={props.onClickAddressSearch}
+            onCancel={props.onClickAddressSearch}
           >
-            <S.AddressSearchInput onComplete={props.handleComplete} />
+            <S.AddressSearchInput onComplete={props.onCompleteAddressSearch} />
           </S.AddressModal>
         )}
       </S.Wrapper>

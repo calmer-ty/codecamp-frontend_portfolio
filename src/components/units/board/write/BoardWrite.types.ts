@@ -46,9 +46,7 @@ export interface IBoardWriteUIProps {
   zipcode: string;
   address: string;
   onClickAddressSearch: () => void;
-  handleOk: () => void;
-  handleCancel: () => void;
-  handleComplete: (data: Address) => void;
+  onCompleteAddressSearch: (data: Address) => void;
 }
 
 export interface ISubmitButtonProps {

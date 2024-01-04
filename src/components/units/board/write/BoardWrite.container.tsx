@@ -29,7 +29,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   } = useForm<IFormValues>();
 
   const onSubmitHandler = (data: IFormValues): void => {
-    // console.log(data);
+    console.log(data);
   };
 
   const writer = watch().writer;
@@ -110,7 +110,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       password?.length >= 4 &&
       password?.length <= 16
     ) {
-      alert("게시물 등록");
+      alert("게시물이 등록되었습니다.");
 
       try {
         const result = await createBoard({
@@ -122,9 +122,9 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               contents,
               youtubeUrl,
               boardAddress: {
+                zipcode,
                 address,
                 addressDetail,
-                zipcode,
               },
             },
           },
@@ -183,23 +183,13 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClickAddressSearch = (): void => {
-    setIsOpen(true);
+    setIsOpen((prev) => !prev);
   };
-
-  const handleOk = (): void => {
-    setIsOpen(false);
-  };
-
-  const handleCancel = (): void => {
-    setIsOpen(false);
-  };
-
-  const handleComplete = (data: Address): void => {
+  const onCompleteAddressSearch = (data: Address): void => {
     setAddress(data.address);
     setZipcode(data.zonecode);
-    setIsOpen(false);
+    setIsOpen((prev) => !prev);
   };
-  // console.log(watch());
 
   return (
     <BoardWriteUI
@@ -212,12 +202,10 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
-      // Zipcode Modal
+      // Zipcode
       isOpen={isOpen}
       onClickAddressSearch={onClickAddressSearch}
-      handleOk={handleOk}
-      handleCancel={handleCancel}
-      handleComplete={handleComplete}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       zipcode={zipcode}
       address={address}
     />
