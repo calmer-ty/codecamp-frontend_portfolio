@@ -1,9 +1,7 @@
-import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styles";
 
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
 // Library
-import { Modal } from "antd";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
   return (
@@ -90,6 +88,8 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             </S.ZipcodeWrap>
             <S.Address
               defaultValue={
+                // 주소 값이 비어있지 않다면 = 즉 주소 값이 있다면 새로 받아진 주소 값을 넣어줌.
+                // 그렇지 않다면 패치한 값, 가지고 있던 주소 값을 넣어준다.
                 props.address !== ""
                   ? props.address
                   : props.data?.fetchBoard.boardAddress?.address ?? ""
@@ -98,7 +98,6 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
-            <S.Error>{props.errors?.address?.message}</S.Error>
             <S.Address
               defaultValue={
                 props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
@@ -107,7 +106,6 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
-            <S.Error>{props.errors?.addressDetail?.message}</S.Error>
           </S.ColumnWrap>
 
           <S.ColumnWrap>
@@ -120,7 +118,6 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
-            <S.Error>{props.errors?.youtubeUrl?.message}</S.Error>
           </S.ColumnWrap>
 
           <S.ColumnWrap>
@@ -137,7 +134,6 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.RadioWrap>
               <S.RadioBtn
                 type="radio"
-                // name="main-setting"
                 {...props.register("mainSetting", {
                   required: props.isEdit ? "" : "This is required.",
                 })}
@@ -145,32 +141,31 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
               <S.RadioLabel>유튜브</S.RadioLabel>
               <S.RadioBtn
                 type="radio"
-                // name="main-setting"
                 {...props.register("mainSetting", {
                   required: props.isEdit ? "" : "This is required.",
                 })}
               />
               <S.RadioLabel>사진</S.RadioLabel>
             </S.RadioWrap>
-            <S.Error>{props.errors?.mainSetting?.message}</S.Error>
           </S.ColumnWrap>
 
-          <S.WriteBtn
+          <S.SubmitBtn
             onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
             isActive={props.isEdit ? true : props.isActive}
           >
             {props.isEdit ? "수정" : "등록"}하기
-          </S.WriteBtn>
+          </S.SubmitBtn>
         </S.Container>
 
         {props.isOpen && (
-          <Modal
-            open={props.isOpen}
-            onOk={props.handleOk}
-            onCancel={props.handleCancel}
+          <S.AddressModal
+            // open={props.isOpen}
+            // onOk={props.handleOk}
+            // onCancel={props.handleCancel}
+            visible={true}
           >
-            <DaumPostcodeEmbed onComplete={props.handleComplete} />
-          </Modal>
+            <S.AddressSearchInput onComplete={props.handleComplete} />
+          </S.AddressModal>
         )}
       </S.Wrapper>
     </>

@@ -34,8 +34,8 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
             <S.Youtube
               url={props.data?.fetchBoard?.youtubeUrl ?? ""}
-              width={800}
-              height={600}
+              width={486}
+              height={240}
               muted
               playing
             />

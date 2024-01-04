@@ -58,17 +58,17 @@ export const Title = styled.div`
   font-weight: 700;
 `;
 export const Contents = styled.div`
-  height: 96px;
-  margin-top: 20px;
+  /* height: 96px; */
+  margin-top: 40px;
+  margin-bottom: 120px;
 `;
-export const Youtube = styled(ReactPlayer)`
-  margin: auto;
-`;
+export const Youtube = styled(ReactPlayer)``;
 
 export const LikeWrap = styled.div`
   display: flex;
   justify-content: center;
   column-gap: 20px;
+  margin-top: 160px;
 `;
 export const LikeItem = styled.div`
   display: flex;
@@ -78,9 +78,7 @@ export const LikeItem = styled.div`
   width: 40px;
   height: 51px;
 `;
-export const LikeScore = styled.div`
-  margin-top: 10px;
-`;
+export const LikeScore = styled.div``;
 
 export const MoveBtnWrap = styled.div`
   display: flex;

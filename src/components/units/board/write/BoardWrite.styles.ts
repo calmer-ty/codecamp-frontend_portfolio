@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import type { ISubmitButtonProps } from "./BoardWrite.types";
+// Library
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 // emotion은 태그로 쓰이기 때문에 대문자로 사용한다
 export const Wrapper = styled.div`
@@ -108,7 +111,6 @@ export const UploadBtn = styled.button`
   display: inline-block;
   width: 78px;
   height: 78px;
-  /* margin-right: 24px; */
   cursor: pointer;
   border: none;
   background-color: #bdbdbd;
@@ -117,7 +119,6 @@ export const RadioWrap = styled.div`
   display: flex;
 `;
 export const RadioLabel = styled.div`
-  /* display: inline-block; */
   margin-left: 8px;
   margin-right: 20px;
   font-weight: 500;
@@ -126,7 +127,7 @@ export const RadioBtn = styled.input`
   display: inline-block;
 `;
 
-export const WriteBtn = styled.button`
+export const SubmitBtn = styled.button`
   width: 179px;
   height: 52px;
   margin-top: 40px;
@@ -136,3 +137,6 @@ export const WriteBtn = styled.button`
   font-weight: 500;
   cursor: pointer;
 `;
+
+export const AddressModal = styled(Modal)``;
+export const AddressSearchInput = styled(DaumPostcodeEmbed)``;
