@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Modal, Rate } from "antd";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -68,3 +69,7 @@ export const DelBtn = styled.button`
   background: url("/images/ic_exit.png") no-repeat center/contain;
   cursor: pointer;
 `;
+
+// Library
+export const CommentDeleteModal = styled(Modal)``;
+export const Like = styled(Rate)``;

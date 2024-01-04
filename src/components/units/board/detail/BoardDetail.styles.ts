@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 // Library
 import ReactPlayer from "react-player";
+import { Modal, Tooltip } from "antd";
+import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -62,7 +64,6 @@ export const Contents = styled.div`
   margin-top: 40px;
   margin-bottom: 120px;
 `;
-export const Youtube = styled(ReactPlayer)``;
 
 export const LikeWrap = styled.div`
   display: flex;
@@ -92,3 +93,9 @@ export const MoveBtn = styled.button`
   border: 1px solid #bdbdbd;
   cursor: pointer;
 `;
+
+export const Youtube = styled(ReactPlayer)``;
+export const WarningModal = styled(Modal)``;
+export const AddressInfo = styled(Tooltip)``;
+export const LikeIcon = styled(LikeOutlined)``;
+export const DislikeIcon = styled(DislikeOutlined)``;

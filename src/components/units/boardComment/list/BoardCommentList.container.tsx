@@ -16,14 +16,13 @@ import {
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
 } from "./BoardCommentList.queries";
-// ANTD DESIGN
 
 export default function BoardCommentList(): JSX.Element {
   const router = useRouter();
   if (typeof router.query.boardId !== "string") return <></>;
 
   // router 조건 충족 시 랜더링
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [boardCommentId, setBoardCommentId] = useState("");
 
@@ -57,7 +56,7 @@ export default function BoardCommentList(): JSX.Element {
           },
         ],
       });
-      setIsOpenDeleteModal(false);
+      setIsOpen(false);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -66,12 +65,12 @@ export default function BoardCommentList(): JSX.Element {
   const onClickOpenDeleteModal = (
     event: MouseEvent<HTMLButtonElement>
   ): void => {
-    setIsOpenDeleteModal(true);
+    setIsOpen(true);
     setBoardCommentId(event.currentTarget.id);
   };
 
   const onClickCloseDeleteModal = (): void => {
-    setIsOpenDeleteModal(false);
+    setIsOpen(false);
   };
 
   const onChangeDeletePassword = (
@@ -83,8 +82,8 @@ export default function BoardCommentList(): JSX.Element {
   return (
     <BoardCommentListUI
       data={data}
+      isOpen={isOpen}
       onClickDelete={onClickDelete}
-      isOpenDeleteModal={isOpenDeleteModal}
       onClickOpenDeleteModal={onClickOpenDeleteModal}
       onClickCloseDeleteModal={onClickCloseDeleteModal}
       onChangeDeletePassword={onChangeDeletePassword}

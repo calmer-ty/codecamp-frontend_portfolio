@@ -5,7 +5,7 @@ export interface BoardCommentListUIProps {
   data?: Pick<IQuery, "fetchBoardComments">;
   onClickDelete: (event: MouseEvent<HTMLButtonElement>) => void;
 
-  isOpenDeleteModal: boolean;
+  isOpen: boolean;
   onClickOpenDeleteModal: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickCloseDeleteModal: () => void;
   onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;

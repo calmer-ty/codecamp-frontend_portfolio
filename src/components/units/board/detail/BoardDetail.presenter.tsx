@@ -2,13 +2,12 @@
 import type { BoardDetailUIProps } from "./BoardDetail.types";
 // Styles
 import * as S from "./BoardDetail.styles";
-import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 // Utils
 import { getDate } from "../../../../commons/libraries/utils";
-// Library
-import { Modal } from "antd";
 
 export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
+  console.log(props.likeScore);
+
   return (
     <>
       <S.Wrapper>
@@ -25,7 +24,13 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             </S.RowWrap>
             <S.RowWrap>
               <S.OptBtn src="/images/ic_link-32px.png"></S.OptBtn>
-              <S.OptBtn src="/images/ic_location_on-32px.png"></S.OptBtn>
+              <S.AddressInfo
+                title={`${
+                  props.data?.fetchBoard?.boardAddress?.address ?? ""
+                } ${props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}`}
+              >
+                <S.OptBtn src="/images/ic_location_on-32px.png"></S.OptBtn>
+              </S.AddressInfo>
             </S.RowWrap>
           </S.Header>
           <S.Body>
@@ -41,14 +46,14 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             />
             <S.LikeWrap>
               <S.LikeItem>
-                <LikeOutlined
+                <S.LikeIcon
                   onClick={props.onClickLikeScore}
                   style={{ fontSize: "30px", cursor: "pointer" }}
                 />
                 <S.LikeScore>{props.likeScore}</S.LikeScore>
               </S.LikeItem>
               <S.LikeItem>
-                <DislikeOutlined
+                <S.DislikeIcon
                   onClick={props.onClickDisLikeScore}
                   style={{ fontSize: "30px", cursor: "pointer" }}
                 />
@@ -65,13 +70,6 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             삭제하기
           </S.MoveBtn>
         </S.MoveBtnWrap>
-
-        <Modal
-          title="시스템에 문제가 있습니다"
-          open={props.isModalOpen}
-          onOk={props.handleOk}
-          onCancel={props.handleCancel}
-        ></Modal>
       </S.Wrapper>
     </>
   );
