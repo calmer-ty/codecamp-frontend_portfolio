@@ -1,5 +1,5 @@
 import LayoutBanner from "./banner";
-import LayoutHeader from "./header";
+import LayoutHeader from "./header/LayoutHeader.container";
 import LayoutNavigation from "./navigation";
 
 interface ILayoutProps {
@@ -12,7 +12,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
       <LayoutHeader />
       <LayoutBanner />
       <LayoutNavigation />
-      {props.children}
+      <div style={{ margin: "55px 0" }}>{props.children}</div>
     </>
   );
 }

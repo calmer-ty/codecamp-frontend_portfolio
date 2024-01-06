@@ -30,7 +30,7 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
         </S.Table>
         <S.TableBottom></S.TableBottom>
         <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
-          <S.MoveBtnIcon src="/images/ic_create-24px.png" />
+          <S.MoveBtnIcon src="/images/board/list/ic_create.png" />
           게시물 등록하기
         </S.MoveBtn>
       </S.Container>
