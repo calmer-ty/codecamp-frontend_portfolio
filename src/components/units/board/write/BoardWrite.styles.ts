@@ -87,7 +87,6 @@ export const SearchBtn = styled.button`
   height: 52px;
   margin-left: 16px;
   background-color: black;
-  cursor: pointer;
   color: white;
 `;
 export const Address = styled.input`
@@ -111,8 +110,6 @@ export const UploadBtn = styled.button`
   display: inline-block;
   width: 78px;
   height: 78px;
-  cursor: pointer;
-  border: none;
   background-color: #bdbdbd;
 `;
 export const RadioWrap = styled.div`
@@ -131,11 +128,9 @@ export const SubmitBtn = styled.button`
   width: 179px;
   height: 52px;
   margin-top: 40px;
-  border: none;
   background-color: ${(props: ISubmitButtonProps) =>
     props.isActive ? "#FFD600" : ""};
   font-weight: 500;
-  cursor: pointer;
 `;
 
 export const AddressModal = styled(Modal)``;

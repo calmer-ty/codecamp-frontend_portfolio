@@ -16,9 +16,7 @@ export const Logo = styled.img``;
 export const MemberBtn = styled.button`
   width: 92px;
   height: 44px;
-  border: none;
   border-radius: 10px;
   background-color: ${(props: IMemberButton) =>
     props.isLogin ? "#FFD600" : ""};
-  cursor: pointer;
 `;

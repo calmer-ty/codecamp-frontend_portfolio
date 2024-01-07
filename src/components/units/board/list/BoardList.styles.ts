@@ -48,11 +48,8 @@ export const ListItem = styled.div`
 `;
 export const ListItemTitle = styled.button`
   width: 400px;
-  border: none;
-  background-color: initial;
   text-align: center;
   color: #4f4f4f;
-  cursor: pointer;
 
   :hover {
     color: blue;
@@ -76,7 +73,6 @@ export const MoveBtn = styled.button`
   border: 1px solid #f2f2f2;
   border-radius: 10px;
   font-weight: 500;
-  cursor: pointer;
 `;
 export const MoveBtnIcon = styled.img`
   margin-right: 8px;

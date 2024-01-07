@@ -1,4 +1,4 @@
-import LayoutBanner from "./banner";
+import LayoutBanner from "./banner/LayoutBanner.container";
 import LayoutHeader from "./header/LayoutHeader.container";
 import LayoutNavigation from "./navigation";
 

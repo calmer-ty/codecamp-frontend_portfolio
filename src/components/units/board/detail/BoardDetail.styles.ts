@@ -91,7 +91,6 @@ export const MoveBtn = styled.button`
   width: 179px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  cursor: pointer;
 `;
 
 export const Youtube = styled(ReactPlayer)``;
