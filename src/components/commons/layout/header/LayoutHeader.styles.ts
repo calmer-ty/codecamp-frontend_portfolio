@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import type { IMemberButton } from "./LayoutHeader.types";
+import type { IMemberItem } from "./LayoutHeader.types";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,12 +11,15 @@ export const Container = styled.div`
   justify-content: space-between;
   width: 1200px;
 `;
-export const Logo = styled.img``;
+export const Logo = styled.button`
+  width: 236px;
+  height: 36px;
+  background: url("/images/layout/header/logo.png") no-repeat center/contain;
+`;
 
-export const MemberBtn = styled.button`
+export const MemberItem = styled.button`
   width: 92px;
   height: 44px;
   border-radius: 10px;
-  background-color: ${(props: IMemberButton) =>
-    props.isLogin ? "#FFD600" : ""};
+  background-color: ${(props: IMemberItem) => (props.isLogin ? "#FFD600" : "")};
 `;

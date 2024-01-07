@@ -1,3 +1,3 @@
-export interface INavLink {
-  isActive: boolean;
-}
+// export interface IMenuItem {
+//   isActive: boolean;
+// }

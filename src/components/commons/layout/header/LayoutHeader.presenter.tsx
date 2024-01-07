@@ -1,13 +1,16 @@
 import * as S from "./LayoutHeader.styles";
-export default function LayoutHeaderUI(): JSX.Element {
+import type { ILayoutHeaderProps } from "./LayoutHeader.types";
+
+export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
-        <S.Logo src={"/images/layout/header/logo.png"} />
-
+        <S.Logo onClick={props.onClickLogo} />
         <div>
-          <S.MemberBtn isLogin={false}>회원가입</S.MemberBtn>
-          <S.MemberBtn isLogin={true}>로그인</S.MemberBtn>
+          <S.MemberItem isLogin={false}>회원가입</S.MemberItem>
+          <S.MemberItem onClick={props.onClickMoveToLogin} isLogin={true}>
+            로그인
+          </S.MemberItem>
         </div>
       </S.Container>
     </S.Wrapper>
