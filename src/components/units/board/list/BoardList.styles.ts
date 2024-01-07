@@ -72,6 +72,7 @@ export const MoveBtn = styled.button`
   height: 52px;
   border: 1px solid #f2f2f2;
   border-radius: 10px;
+  background-color: #fff;
   font-weight: 500;
 `;
 export const MoveBtnIcon = styled.img`
