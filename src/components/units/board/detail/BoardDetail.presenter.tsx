@@ -14,7 +14,7 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
         <S.CardWrap>
           <S.Header>
             <S.RowWrap>
-              <S.Avatar src="/images/ic_profile-56px.png"></S.Avatar>
+              <S.Avatar src="/images/board/detail/ic_profile.png"></S.Avatar>
               <S.ColumnWrap>
                 <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
                 <S.CreatedAt>
@@ -23,19 +23,19 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
               </S.ColumnWrap>
             </S.RowWrap>
             <S.RowWrap>
-              <S.OptBtn src="/images/ic_link-32px.png"></S.OptBtn>
+              <S.OptBtn src="/images/board/detail/ic_link.png"></S.OptBtn>
               <S.AddressInfo
                 title={`${
                   props.data?.fetchBoard?.boardAddress?.address ?? ""
                 } ${props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}`}
               >
-                <S.OptBtn src="/images/ic_location_on-32px.png"></S.OptBtn>
+                <S.OptBtn src="/images/board/detail/ic_location.png"></S.OptBtn>
               </S.AddressInfo>
             </S.RowWrap>
           </S.Header>
           <S.Body>
             <S.Title>{props.data?.fetchBoard?.title}</S.Title>
-            <img src="/images/image.png" alt="" />
+            <img src="/images/board/detail/image.png" alt="" />
             <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
             <S.Youtube
               url={props.data?.fetchBoard?.youtubeUrl ?? ""}

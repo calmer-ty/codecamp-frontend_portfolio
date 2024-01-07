@@ -12,7 +12,7 @@ export default function BoardCommentListUI(
         {props.data?.fetchBoardComments.map((el) => (
           <S.List key={el._id}>
             <S.RowWrap>
-              <S.Avatar src="/images/ic_profile-40px.png" />
+              <S.Avatar src="/images/boardComment/list/ic_profile.png" />
               <S.ColWrap>
                 <S.Title>
                   <S.Writer>{el.writer}</S.Writer>

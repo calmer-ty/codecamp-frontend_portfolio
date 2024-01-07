@@ -9,7 +9,7 @@ export default function BoardCommentWriteUI(
     <S.Wrapper>
       <S.Container>
         <S.Title>
-          <S.TitleImg src="/images/comment_logo.png" />
+          <S.TitleImg src="/images/boardComment/write/ic_logo.png" />
           댓글
         </S.Title>
         <S.InputWrap>

@@ -58,12 +58,14 @@ export const OptBtnWrap = styled.div`
 export const EditBtn = styled.button`
   width: 18px;
   height: 18px;
-  background: url("/images/ic_edit.png") no-repeat center/contain;
+  background: url("/images/boardComment/list/ic_edit.png") no-repeat
+    center/contain;
 `;
 export const DelBtn = styled.button`
   width: 18px;
   height: 18px;
-  background: url("/images/ic_exit.png") no-repeat center/contain;
+  background: url("/images/boardComment/list/ic_exit.png") no-repeat
+    center/contain;
 `;
 
 // Library
