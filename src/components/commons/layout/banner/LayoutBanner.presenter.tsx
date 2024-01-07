@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import * as S from "./LayoutBanner.Styles";
+import * as S from "./LayoutBanner.styles";
 
 export default function LayoutBannerUI(): JSX.Element {
   const settings = {

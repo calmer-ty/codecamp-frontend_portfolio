@@ -1,6 +1,6 @@
 import LayoutBanner from "./banner/LayoutBanner.container";
 import LayoutHeader from "./header/LayoutHeader.container";
-import LayoutNavigation from "./navigation";
+import LayoutNavigation from "./navigation/LayoutNavigation.container";
 
 interface ILayoutProps {
   children: JSX.Element;
