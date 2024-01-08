@@ -30,10 +30,12 @@ export default function BoardList(): JSX.Element {
   };
 
   return (
-    <BoardListUI
-      data={data}
-      onClickMoveToBoardNew={onClickMoveToBoardNew}
-      onClickMoveToBoardDetail={onClickMoveToBoardDetail}
-    />
+    <>
+      <BoardListUI
+        data={data}
+        onClickMoveToBoardNew={onClickMoveToBoardNew}
+        onClickMoveToBoardDetail={onClickMoveToBoardDetail}
+      />
+    </>
   );
 }

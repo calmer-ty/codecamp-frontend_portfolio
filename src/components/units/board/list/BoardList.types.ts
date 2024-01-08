@@ -5,5 +5,5 @@ export interface BoardListUIProps {
   onClickMoveToBoardNew: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickMoveToBoardDetail: (event: MouseEvent<HTMLButtonElement>) => void;
 
-  data?: Pick<IQuery, "fetchBoards">;
+  data?: Pick<IQuery, "fetchBoards"> | undefined;
 }

@@ -2,6 +2,7 @@ import * as S from "./BoardList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 import type { BoardListUIProps } from "./BoardList.types";
+import Pagination from "../../../commons/pagination";
 
 export default function BoardListUI(props: BoardListUIProps): JSX.Element {
   return (
@@ -14,7 +15,7 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
             <S.HeaderItem>작성자</S.HeaderItem>
             <S.HeaderItem>날짜</S.HeaderItem>
           </S.Header>
-          {props.data?.fetchBoards.map((el: any) => (
+          {props.data?.fetchBoards.map((el) => (
             <S.List key={el._id}>
               <S.ListItem>{String(el._id).slice(-4).toUpperCase()}</S.ListItem>
               <S.ListItemTitle
@@ -28,7 +29,8 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
             </S.List>
           ))}
         </S.Table>
-        <S.TableBottom></S.TableBottom>
+        {/* Pagination */}
+        <Pagination />
         <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
           <S.MoveBtnIcon src="/images/board/list/ic_create.png" />
           게시물 등록하기
