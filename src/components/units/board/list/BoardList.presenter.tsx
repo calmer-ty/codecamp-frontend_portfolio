@@ -30,7 +30,7 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
           ))}
         </S.Table>
         {/* Pagination */}
-        <Pagination />
+        <Pagination data={props.data} />
         <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
           <S.MoveBtnIcon src="/images/board/list/ic_create.png" />
           게시물 등록하기

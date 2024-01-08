@@ -9,6 +9,9 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   position: relative;
   width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export const Table = styled.div`
   display: flex;
