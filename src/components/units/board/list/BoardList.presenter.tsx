@@ -2,7 +2,7 @@ import * as S from "./BoardList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 import type { BoardListUIProps } from "./BoardList.types";
-import Pagination from "../../../commons/pagination";
+import Pagination from "../../../commons/pagination/Pagination.container";
 
 export default function BoardListUI(props: BoardListUIProps): JSX.Element {
   return (
@@ -30,7 +30,7 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
           ))}
         </S.Table>
         {/* Pagination */}
-        <Pagination data={props.data} />
+        <Pagination refetch={props.refetch} count={props.count} />
         <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
           <S.MoveBtnIcon src="/images/board/list/ic_create.png" />
           게시물 등록하기
