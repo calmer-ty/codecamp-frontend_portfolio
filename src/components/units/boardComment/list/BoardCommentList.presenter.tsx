@@ -2,6 +2,7 @@ import type { BoardCommentListUIProps } from "./BoardCommentList.types";
 import { getDate } from "../../../../commons/libraries/utils";
 // Styles
 import * as S from "./BoardCommentList.styles";
+import InfiniteScroll from "react-infinite-scroller";
 
 export default function BoardCommentListUI(
   props: BoardCommentListUIProps
@@ -9,27 +10,34 @@ export default function BoardCommentListUI(
   return (
     <S.Wrapper>
       <S.Container>
-        {props.data?.fetchBoardComments.map((el) => (
-          <S.List key={el._id}>
-            <S.RowWrap>
-              <S.Avatar src="/images/boardComment/list/ic_profile.png" />
-              <S.ColWrap>
-                <S.Title>
-                  <S.Writer>{el.writer}</S.Writer>
-                  <S.Like value={el.rating} disabled={true} />
-                </S.Title>
-                <S.Contents>{el.contents}</S.Contents>
-              </S.ColWrap>
-            </S.RowWrap>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={props.onLoadMore}
+          hasMore={true}
+          useWindow={false}
+        >
+          {props.data?.fetchBoardComments.map((el) => (
+            <S.List key={el._id}>
+              <S.RowWrap>
+                <S.Avatar src="/images/boardComment/list/ic_profile.png" />
+                <S.ColWrap>
+                  <S.Title>
+                    <S.Writer>{el.writer}</S.Writer>
+                    <S.Like value={el.rating} disabled={true} />
+                  </S.Title>
+                  <S.Contents>{el.contents}</S.Contents>
+                </S.ColWrap>
+              </S.RowWrap>
 
-            <S.CreateDate>{getDate(el?.createdAt)}</S.CreateDate>
+              <S.CreateDate>{getDate(el?.createdAt)}</S.CreateDate>
 
-            <S.OptBtnWrap>
-              <S.EditBtn />
-              <S.DelBtn id={el._id} onClick={props.onClickOpenDeleteModal} />
-            </S.OptBtnWrap>
-          </S.List>
-        ))}
+              <S.OptBtnWrap>
+                <S.EditBtn />
+                <S.DelBtn id={el._id} onClick={props.onClickOpenDeleteModal} />
+              </S.OptBtnWrap>
+            </S.List>
+          ))}
+        </InfiniteScroll>
       </S.Container>
 
       {props.isOpen && (

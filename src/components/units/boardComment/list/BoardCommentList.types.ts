@@ -9,4 +9,7 @@ export interface BoardCommentListUIProps {
   onClickOpenDeleteModal: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickCloseDeleteModal: () => void;
   onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+
+  // 무한스크롤
+  onLoadMore: () => void;
 }

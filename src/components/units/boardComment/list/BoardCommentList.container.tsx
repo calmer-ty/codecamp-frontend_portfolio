@@ -31,7 +31,7 @@ export default function BoardCommentList(): JSX.Element {
     IMutationDeleteBoardCommentArgs
   >(DELETE_BOARD_COMMENT);
 
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
@@ -79,10 +79,32 @@ export default function BoardCommentList(): JSX.Element {
     setPassword(event.target.value);
   };
 
+  // 댓글 무한 스크롤
+  const onLoadMore = (): void => {
+    void fetchMore({
+      variables: {
+        page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchBoardComments === undefined) {
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
+  console.log(data?.fetchBoardComments.length);
+
   return (
     <BoardCommentListUI
       data={data}
       isOpen={isOpen}
+      onLoadMore={onLoadMore}
       onClickDelete={onClickDelete}
       onClickOpenDeleteModal={onClickOpenDeleteModal}
       onClickCloseDeleteModal={onClickCloseDeleteModal}
