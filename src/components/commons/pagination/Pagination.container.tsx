@@ -16,13 +16,13 @@ export default function Pagination(props: IPaginationProps): JSX.Element {
 
   const onClickPrevPage = (): void => {
     if (startPage <= 1) return;
-    setStartPage(startPage - 10);
+    setStartPage((prev) => prev - 10);
     setActivedPage(startPage - 10);
     void props.refetch({ page: startPage - 10 });
   };
   const onClickNextPage = (): void => {
     if (startPage + 10 <= lastPage) {
-      setStartPage(startPage + 10);
+      setStartPage((prev) => prev + 10);
       setActivedPage(startPage + 10);
       void props.refetch({ page: startPage + 10 });
     }

@@ -8,6 +8,9 @@ import type { MouseEvent } from "react";
 export interface IPageProps {
   isActive: boolean;
 }
+export interface IPageBtnProps {
+  onDisable: boolean;
+}
 
 export interface IPaginationProps {
   refetch: (

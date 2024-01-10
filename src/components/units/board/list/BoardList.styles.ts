@@ -18,6 +18,7 @@ export const Table = styled.div`
   flex-direction: column;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
+  margin-bottom: 57px;
 `;
 export const Header = styled.div`
   display: flex;
