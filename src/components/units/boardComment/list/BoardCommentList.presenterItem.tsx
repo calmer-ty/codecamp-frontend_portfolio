@@ -110,7 +110,7 @@ export default function BoardCommentListitem(
           </S.OptBtnWrap>
         </S.List>
       ) : (
-        <BoardCommentWrite isEdit={true} el={props.el} />
+        <BoardCommentWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
       )}
     </>
   );

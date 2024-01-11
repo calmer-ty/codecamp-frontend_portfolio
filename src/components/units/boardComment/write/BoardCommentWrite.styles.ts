@@ -13,7 +13,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 1200px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+  padding: 40px 0;
 `;
 
 export const Title = styled.div`

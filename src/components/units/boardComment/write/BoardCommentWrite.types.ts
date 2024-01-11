@@ -1,16 +1,19 @@
 import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
+import type { IBoardComment } from "../../../../commons/types/generated/types";
 
 export interface BoardCommentWriteProps {
   // 댓글 등록/수정 분기처리
   isEdit?: boolean;
-  el?: any;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  el?: IBoardComment;
 }
 
 export interface BoardCommentWriteUIProps {
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickWrite: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
 
   writer: string;
   password: string;

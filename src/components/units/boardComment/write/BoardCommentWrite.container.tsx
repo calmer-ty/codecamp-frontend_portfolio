@@ -5,26 +5,28 @@ import type { ChangeEvent } from "react";
 // QUERIES
 import {
   CREATE_BOARD_COMMENT,
-  FETCH_BOARD_COMMENTS,
+  UPDATE_BOARD_COMMENT,
 } from "./BoardCommentWrite.queries";
+import { FETCH_BOARD_COMMENTS } from "../list/BoardCommentList.queries";
 // UI
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
 import type { BoardCommentWriteProps } from "./BoardCommentWrite.types";
-import { IUpdateBoardCommentInput } from "../../../../commons/types/generated/types";
+import type { IUpdateBoardCommentInput } from "../../../../commons/types/generated/types";
 
 export default function BoardCommentWrite(
   props: BoardCommentWriteProps
 ): JSX.Element {
   const router = useRouter();
 
+  console.log(props.el?._id);
+
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(3);
-
-  console.log(props.el?.);
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
@@ -36,7 +38,8 @@ export default function BoardCommentWrite(
     setContents(event.target.value);
   };
 
-  const onClickSubmit = async (): Promise<void> => {
+  // 등록 기능
+  const onClickWrite = async (): Promise<void> => {
     try {
       await createBoardComment({
         variables: {
@@ -63,8 +66,9 @@ export default function BoardCommentWrite(
     setContents("");
   };
 
+  // 수정 기능
   const onClickUpdate = async (): Promise<void> => {
-    if (contents !== "") {
+    if (contents === "") {
       alert("수정한 내용이 없습니다.");
       return;
     }
@@ -73,9 +77,9 @@ export default function BoardCommentWrite(
       return;
     }
 
-    const updateBoardInput: IUpdateBoardCommentInput = {};
-    if (contents !== "") updateBoardInput.contents = contents;
-    if (rating !== "") updateBoardInput.rating = rating;
+    const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+    if (contents !== "") updateBoardCommentInput.contents = contents;
+    if (rating !== props.el?.rating) updateBoardCommentInput.rating = rating;
 
     // boardId의 타입이 문자가 아닐 때 함수 실행 종료
     if (typeof router.query.boardId !== "string") {
@@ -84,14 +88,20 @@ export default function BoardCommentWrite(
     }
 
     try {
-      const result = await updateBoard({
+      await updateBoardComment({
         variables: {
-          boardId: router.query.boardId,
+          updateBoardCommentInput,
           password,
-          updateBoardInput,
+          boardCommentId: props.el?._id,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
       });
-      void router.push(`/boards/${result.data?.updateBoard._id}`);
+      props.setIsEdit?.(false);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -101,7 +111,8 @@ export default function BoardCommentWrite(
 
   return (
     <BoardCommentWriteUI
-      onClickSubmit={onClickSubmit}
+      onClickWrite={onClickWrite}
+      onClickUpdate={onClickUpdate}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
