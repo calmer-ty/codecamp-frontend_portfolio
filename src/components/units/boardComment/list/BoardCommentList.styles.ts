@@ -11,6 +11,8 @@ export const Container = styled.div`
   flex-direction: column;
   width: 1200px;
 `;
+
+// List Item Styles
 export const List = styled.div`
   display: flex;
   flex-direction: column;

@@ -47,12 +47,12 @@ export const Password = styled.input`
   padding: 14px 20px;
 `;
 export const Like = styled(Rate)``;
-export const Content = styled.div`
+export const ContentsWrap = styled.div`
   position: relative;
   width: 1200px;
   height: 161px;
 `;
-export const ContentTextarea = styled.textarea`
+export const Contents = styled.textarea`
   width: 100%;
   height: 100%;
   border: 1px solid #bdbdbd;
