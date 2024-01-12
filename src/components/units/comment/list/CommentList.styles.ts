@@ -12,12 +12,12 @@ export const Container = styled.div`
   flex-direction: column;
   width: 1200px;
 `;
-export const RowWrap = styled.div`
+export const RowWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
 `;
-export const ColWrap = styled.div`
+export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -27,7 +27,6 @@ export const ListItem = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-top: 20px;
   padding: 20px 0;
   border-bottom: 1px solid #bdbdbd;
 `;
@@ -52,20 +51,20 @@ export const CreateDate = styled.div`
 `;
 
 // BTN
-export const OptBtnWrap = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
   position: absolute;
-  top: 0;
+  top: 20px;
   right: 0;
   column-gap: 10px;
 `;
-export const EditBtn = styled.button`
+export const EditButton = styled.button`
   width: 18px;
   height: 18px;
   background: url("/images/boardComment/list/ic_edit.png") no-repeat
     center/contain;
 `;
-export const DelBtn = styled.button`
+export const DeleteButton = styled.button`
   width: 18px;
   height: 18px;
   background: url("/images/boardComment/list/ic_exit.png") no-repeat

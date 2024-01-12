@@ -1,7 +1,7 @@
 import type { IBoardCommentListUIProps } from "./BoardCommentList.types";
 import * as S from "./BoardCommentList.styles";
 // 무한 스크롤
-import InfiniteScroll from "react-infinite-scroller";
+// import InfiniteScroll from "react-infinite-scroller";
 // 댓글 리스트 아이템
 import BoardCommentListItem from "./BoardCommentList.presenterItem";
 
