@@ -4,8 +4,8 @@ import type { IBoardComment } from "../../../../commons/types/generated/types";
 export interface BoardCommentWriteProps {
   // 댓글 등록/수정 분기처리
   isEdit?: boolean;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
   el?: IBoardComment;
+  setIsEdit?: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface BoardCommentWriteUIProps {

@@ -11,15 +11,15 @@ export default function BoardCommentListUI(
   return (
     <S.Wrapper>
       <S.Container>
-        <InfiniteScroll
+        {/* <InfiniteScroll
           pageStart={0}
           loadMore={props.onLoadMore}
           hasMore={true}
-        >
-          {props.data?.fetchBoardComments.map((el) => (
-            <BoardCommentListItem key={el._id} el={el} />
-          )) ?? <></>}
-        </InfiniteScroll>
+        > */}
+        {props.data?.fetchBoardComments.map((el) => (
+          <BoardCommentListItem key={el._id} el={el} />
+        )) ?? <></>}
+        {/* </InfiniteScroll> */}
       </S.Container>
     </S.Wrapper>
   );

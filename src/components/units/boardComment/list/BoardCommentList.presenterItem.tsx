@@ -20,11 +20,12 @@ export default function BoardCommentListitem(
 ): JSX.Element {
   const router = useRouter();
 
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [password, setPassword] = useState("");
-  const [boardCommentId, setBoardCommentId] = useState("");
+
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
+  // 삭제 기능
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
@@ -37,7 +38,7 @@ export default function BoardCommentListitem(
       await deleteBoardComment({
         variables: {
           password,
-          boardCommentId,
+          boardCommentId: props.el._id,
         },
         refetchQueries: [
           {
@@ -52,12 +53,10 @@ export default function BoardCommentListitem(
     }
   };
 
-  // 삭제 기능
   const onClickOpenDeleteModal = (
     event: MouseEvent<HTMLButtonElement>
   ): void => {
     setIsOpenDeleteModal(true);
-    setBoardCommentId(event.currentTarget.id);
   };
 
   const onClickCloseDeleteModal = (): void => {
