@@ -1,8 +1,6 @@
 import BoardDetail from "../../../src/components/units/board/detail/BoardDetail.container";
-import CommentWrite from "../../../src/components/units/comment/write";
-import CommentList from "../../../src/components/units/comment/list";
-// import BoardCommentWrite from "../../../src/components/units/boardComment/write/BoardCommentWrite.container";
-// import BoardCommentList from "../../../src/components/units/boardComment/list/BoardCommentList.container";
+import CommentWrite from "../../../src/components/units/comment/write/CommentWrite.container";
+import CommentList from "../../../src/components/units/comment/list/CommentList.container";
 
 export default function BoardsDetailPage(): JSX.Element {
   return (
@@ -10,8 +8,6 @@ export default function BoardsDetailPage(): JSX.Element {
       <BoardDetail />
       <CommentWrite />
       <CommentList />
-      {/* <BoardCommentWrite /> */}
-      {/* <BoardCommentList /> */}
     </>
   );
 }

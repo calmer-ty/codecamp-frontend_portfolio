@@ -1,26 +1,33 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import type { ChangeEvent } from "react";
-
-import * as S from "./CommentWrite.styles";
-
-//
 import { useMutation } from "@apollo/client";
-import { CREATE_COMMENT } from "./CommentWrite.queries";
+
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import type {
+  IBoardComment,
   IMutation,
   IMutationCreateBoardCommentArgs,
+  IMutationUpdateBoardCommentArgs,
+  IUpdateBoardCommentInput,
 } from "../../../../commons/types/generated/types";
-import { FETCH_COMMENTS } from "../list/CommentList.queries";
 
-export default function CommentWrite(): JSX.Element {
+import { CREATE_COMMENT, UPDATE_COMMENT } from "./CommentWrite.queries";
+import { FETCH_COMMENTS } from "../list/CommentList.queries";
+import * as S from "./CommentWrite.styles";
+
+interface ICommentWriteProps {
+  isEdit: boolean;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  el: IBoardComment;
+}
+
+export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   // Var
   const router = useRouter();
   const [inputs, setInputs] = useState({
     writer: "",
     password: "",
   });
-  // const [boardCommentId, setBoardCommentId] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(0);
 
@@ -28,11 +35,10 @@ export default function CommentWrite(): JSX.Element {
     Pick<IMutation, "createBoardComment">,
     IMutationCreateBoardCommentArgs
   >(CREATE_COMMENT);
-
-  // const [updateComment] = useMutation<
-  //   Pick<IMutation, "updateBoardComment">,
-  //   IMutationUpdateBoardCommentArgs
-  // >(UPDATE_COMMENT);
+  const [updateComment] = useMutation<
+    Pick<IMutation, "updateBoardComment">,
+    IMutationUpdateBoardCommentArgs
+  >(UPDATE_COMMENT);
 
   // Function
   const onChangeInputs = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -77,43 +83,52 @@ export default function CommentWrite(): JSX.Element {
   };
 
   // Update
+  const onClickUpdate = async (): Promise<void> => {
+    if (contents === "") {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+    if (inputs.password === "") {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
 
-  // const onClickUpdate = async (event) => {
-  //   if (contents === "") {
-  //     alert("수정한 내용이 없습니다.");
-  //     return;
-  //   }
-  //   if (inputs.password === "") {
-  //     alert("비밀번호를 입력해주세요.");
-  //     return;
-  //   }
+    try {
+      const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+      if (contents !== "") updateBoardCommentInput.contents = contents;
+      if (rating !== props.el?.rating) updateBoardCommentInput.rating = rating;
 
-  //   const updateBoardCommentInput = {};
-  //   if (contents !== "") updateBoardCommentInput.contents = contents;
-  //   // if(rating !== )
-
-  //   await updateComment({
-  //     variables: {
-  //       updateBoardCommentInput,
-  //       boardCommentId,
-  //       password: inputs.password,
-  //     },
-  //     refetchQueries: [
-  //       {
-  //         query: FETCH_COMMENTS,
-  //         variables: { boardId: router.query.boardId },
-  //       },
-  //     ],
-  //   });
-  // };
+      await updateComment({
+        variables: {
+          updateBoardCommentInput,
+          boardCommentId: props.el?._id,
+          password: inputs.password,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_COMMENTS,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
+      });
+      props.setIsEdit(false);
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
+  const onClickUpdateCancel = (): void => {
+    props.setIsEdit(false);
+  };
 
   return (
     <S.Wrapper>
       <S.Container>
-        <S.Title>
-          <S.TitleImage src="/images/comment/write/ic_logo.png" />
-          댓글
-        </S.Title>
+        {!props.isEdit && (
+          <S.Title>
+            <S.TitleImage src="/images/comment/write/ic_logo.png" />
+            댓글
+          </S.Title>
+        )}
         <S.RowWrapper>
           <S.InfoInput
             type="text"
@@ -143,7 +158,20 @@ export default function CommentWrite(): JSX.Element {
             <S.ContentsLength>
               {contents !== "" ? contents.length : 0}/100
             </S.ContentsLength>
-            <S.SubmitButton onClick={onClickWrite}>등록하기</S.SubmitButton>
+            <S.ButtonWrapper>
+              {props.isEdit ? (
+                <S.CancelButton onClick={onClickUpdateCancel}>
+                  수정취소
+                </S.CancelButton>
+              ) : (
+                ""
+              )}
+              <S.SubmitButton
+                onClick={props.isEdit ? onClickUpdate : onClickWrite}
+              >
+                {props.isEdit ? "수정하기" : "등록하기"}
+              </S.SubmitButton>
+            </S.ButtonWrapper>
           </S.ContentsBottom>
         </S.ContentsWrapper>
       </S.Container>

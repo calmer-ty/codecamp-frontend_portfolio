@@ -7,13 +7,12 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-top: 1px solid #bdbdbd;
 `;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 1200px;
-  margin: 40px 0 20px 0;
+  margin: 40px 0;
 `;
 export const RowWrapper = styled.div`
   display: flex;
@@ -67,12 +66,18 @@ export const ContentsLength = styled.div`
   color: #bdbdbd;
 `;
 // Btn
+export const ButtonWrapper = styled.div`
+  display: flex;
+`;
 export const SubmitButton = styled.button`
-  /* position: absolute;
-  right: 0;
-  bottom: 0; */
   width: 91px;
   height: 52px;
   background-color: #000;
+  color: #fff;
+`;
+export const CancelButton = styled.button`
+  width: 91px;
+  height: 52px;
+  background-color: #f00;
   color: #fff;
 `;
