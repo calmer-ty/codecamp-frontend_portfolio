@@ -43,6 +43,7 @@ export default function BoardCommentList(): JSX.Element {
       },
     });
   };
+  console.log(onLoadMore);
 
   return <BoardCommentListUI data={data} onLoadMore={onLoadMore} />;
 }

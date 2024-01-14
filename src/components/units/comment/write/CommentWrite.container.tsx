@@ -2,24 +2,18 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { CREATE_COMMENT, UPDATE_COMMENT } from "./CommentWrite.queries";
+import { FETCH_COMMENTS } from "../list/CommentList.queries";
+import CommentWriteUI from "./CommentWrite.presenter";
+
+import type { ChangeEvent } from "react";
 import type {
-  IBoardComment,
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
   IUpdateBoardCommentInput,
 } from "../../../../commons/types/generated/types";
-
-import { CREATE_COMMENT, UPDATE_COMMENT } from "./CommentWrite.queries";
-import { FETCH_COMMENTS } from "../list/CommentList.queries";
-import * as S from "./CommentWrite.styles";
-
-interface ICommentWriteProps {
-  isEdit: boolean;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
-  el: IBoardComment;
-}
+import type { ICommentWriteProps } from "./CommentWrite.types";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   // Var
@@ -54,7 +48,10 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   // Write
   const onClickWrite = async (): Promise<void> => {
     try {
-      if (typeof router.query.boardId !== "string") return;
+      if (typeof router.query.boardId !== "string") {
+        alert("시스템에 문제가 있습니다.");
+        return;
+      }
       await createComment({
         variables: {
           createBoardCommentInput: {
@@ -98,11 +95,15 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
       if (contents !== "") updateBoardCommentInput.contents = contents;
       if (rating !== props.el?.rating) updateBoardCommentInput.rating = rating;
 
+      if (typeof props.el?._id !== "string") {
+        alert("시스템에 문제가 있습니다.");
+        return;
+      }
       await updateComment({
         variables: {
           updateBoardCommentInput,
-          boardCommentId: props.el?._id,
           password: inputs.password,
+          boardCommentId: props.el?._id,
         },
         refetchQueries: [
           {
@@ -111,70 +112,27 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
           },
         ],
       });
-      props.setIsEdit(false);
+      props.setIsEdit?.(false);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
   };
   const onClickUpdateCancel = (): void => {
-    props.setIsEdit(false);
+    props.setIsEdit?.(false);
   };
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        {!props.isEdit && (
-          <S.Title>
-            <S.TitleImage src="/images/comment/write/ic_logo.png" />
-            댓글
-          </S.Title>
-        )}
-        <S.RowWrapper>
-          <S.InfoInput
-            type="text"
-            id="writer"
-            onChange={onChangeInputs}
-            placeholder="작성자"
-            value={inputs.writer}
-          />
-          <S.InfoInput
-            type="password"
-            id="password"
-            onChange={onChangeInputs}
-            placeholder="비밀번호"
-            value={inputs.password}
-          />
-          <S.RateScore onChange={setRating} value={rating} />
-        </S.RowWrapper>
-        <S.ContentsWrapper>
-          <S.Contents
-            id="contents"
-            maxLength={100}
-            onChange={onChangeContents}
-            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
-            value={contents}
-          />
-          <S.ContentsBottom>
-            <S.ContentsLength>
-              {contents !== "" ? contents.length : 0}/100
-            </S.ContentsLength>
-            <S.ButtonWrapper>
-              {props.isEdit ? (
-                <S.CancelButton onClick={onClickUpdateCancel}>
-                  수정취소
-                </S.CancelButton>
-              ) : (
-                ""
-              )}
-              <S.SubmitButton
-                onClick={props.isEdit ? onClickUpdate : onClickWrite}
-              >
-                {props.isEdit ? "수정하기" : "등록하기"}
-              </S.SubmitButton>
-            </S.ButtonWrapper>
-          </S.ContentsBottom>
-        </S.ContentsWrapper>
-      </S.Container>
-    </S.Wrapper>
+    <CommentWriteUI
+      inputs={inputs}
+      contents={contents}
+      rating={rating}
+      setRating={setRating}
+      isEdit={props.isEdit}
+      onChangeInputs={onChangeInputs}
+      onChangeContents={onChangeContents}
+      onClickWrite={onClickWrite}
+      onClickUpdate={onClickUpdate}
+      onClickUpdateCancel={onClickUpdateCancel}
+    />
   );
 }
