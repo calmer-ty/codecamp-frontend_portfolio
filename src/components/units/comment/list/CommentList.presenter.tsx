@@ -1,6 +1,6 @@
 import * as S from "./CommentList.styles";
 
-import CommentItem from "../../../commons/commentItem";
+import CommentItem from "../../../commons/commentItem/CommentItem.container";
 import InfiniteScroll from "react-infinite-scroller";
 import type { IQuery } from "../../../../commons/types/generated/types";
 

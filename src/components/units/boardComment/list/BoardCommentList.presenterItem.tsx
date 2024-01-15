@@ -11,7 +11,7 @@ import {
   FETCH_BOARD_COMMENTS,
 } from "./BoardCommentList.queries";
 import * as S from "./BoardCommentList.styles";
-import { getDate } from "../../../../commons/libraries/utils";
+// import { getDate } from "../../../../commons/libraries/utils";
 import type { IBoardCommentListItemProps } from "./BoardCommentList.types";
 import BoardCommentWrite from "../write/BoardCommentWrite.container";
 
@@ -101,7 +101,7 @@ export default function BoardCommentListitem(
             </S.ColWrap>
           </S.RowWrap>
 
-          <S.CreateDate>{getDate(props.el?.createdAt)}</S.CreateDate>
+          {/* <S.CreateDate>{getDate(props.el?.createdAt)}</S.CreateDate> */}
 
           <S.OptBtnWrap>
             <S.EditBtn onClick={onClickUpdate} />

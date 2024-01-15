@@ -1,5 +1,5 @@
 import * as S from "./BoardList.styles";
-import { getDate } from "../../../../commons/libraries/utils";
+// import { getDate } from "../../../../commons/libraries/utils";
 
 import type { BoardListUIProps } from "./BoardList.types";
 import Pagination from "../../../commons/pagination/Pagination.container";
@@ -25,7 +25,7 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
                 {el.title}
               </S.ListItemTitle>
               <S.ListItem>{el.writer}</S.ListItem>
-              <S.ListItem>{getDate(el.createdAt)}</S.ListItem>
+              {/* <S.ListItem>{getDate(el.createdAt)}</S.ListItem> */}
             </S.List>
           ))}
         </S.Table>

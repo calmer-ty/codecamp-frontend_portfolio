@@ -11,6 +11,7 @@ import type {
 } from "../../../commons/types/generated/types";
 import * as S from "./CommentItem.styles";
 import CommentWrite from "../../units/comment/write/CommentWrite.container";
+// import { getDate } from "../../../commons/libraries/utils";
 
 interface CommentItemProps {
   el: IBoardComment;
@@ -101,7 +102,7 @@ export default function CommentItem(props: CommentItemProps): JSX.Element {
               <S.Contents>{props.el.contents}</S.Contents>
             </S.ColumnWrapper>
           </S.RowWrapper>
-          <S.CreateDate>{props.el.createdAt}</S.CreateDate>
+          {/* <S.CreateDate>{getDate(props.el.createdAt)}</S.CreateDate> */}
           <S.ButtonWrapper>
             <S.EditButton onClick={onClickUpdate} />
             <S.DeleteButton

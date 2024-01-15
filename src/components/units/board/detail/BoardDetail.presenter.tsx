@@ -6,8 +6,6 @@ import * as S from "./BoardDetail.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
-  console.log(props.likeScore);
-
   return (
     <>
       <S.Wrapper>
