@@ -1,19 +1,20 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import type { ChangeEvent, MouseEvent } from "react";
-import type {
-  IMutation,
-  IMutationDeleteBoardCommentArgs,
-} from "../../../../commons/types/generated/types";
 import {
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
 } from "./BoardCommentList.queries";
 import * as S from "./BoardCommentList.styles";
-// import { getDate } from "../../../../commons/libraries/utils";
-import type { IBoardCommentListItemProps } from "./BoardCommentList.types";
 import BoardCommentWrite from "../write/BoardCommentWrite.container";
+// import { getDate } from "../../../../commons/libraries/utils";
+
+import type { IBoardCommentListItemProps } from "./BoardCommentList.types";
+import type { ChangeEvent, MouseEvent } from "react";
+import type {
+  IMutation,
+  IMutationDeleteBoardCommentArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoardCommentListitem(
   props: IBoardCommentListItemProps

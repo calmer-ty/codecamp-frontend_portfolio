@@ -14,7 +14,7 @@ export const Container = styled.div`
   width: 1200px;
   margin: 40px 0;
 `;
-export const RowWrapper = styled.div`
+export const RowWrap = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -29,7 +29,7 @@ export const Title = styled.div`
   font-size: 18px;
   font-weight: 500;
 `;
-export const TitleImage = styled.img`
+export const TitleImg = styled.img`
   margin-right: 12px;
 `;
 
@@ -43,7 +43,7 @@ export const InfoInput = styled.input`
 export const RateScore = styled(Rate)``;
 
 // Contents
-export const ContentsWrapper = styled.div`
+export const ContentsWrap = styled.div`
   position: relative;
   width: 1200px;
   /* height: 161px; */
@@ -66,16 +66,16 @@ export const ContentsLength = styled.div`
   color: #bdbdbd;
 `;
 // Btn
-export const ButtonWrapper = styled.div`
+export const BtnWrap = styled.div`
   display: flex;
 `;
-export const SubmitButton = styled.button`
+export const SubmitBtn = styled.button`
   width: 91px;
   height: 52px;
   background-color: #000;
   color: #fff;
 `;
-export const CancelButton = styled.button`
+export const CancelBtn = styled.button`
   width: 91px;
   height: 52px;
   background-color: #f00;
