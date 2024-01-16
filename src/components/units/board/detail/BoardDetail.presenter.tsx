@@ -13,12 +13,12 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
           <S.Header>
             <S.RowWrap>
               <S.Avatar src="/images/board/detail/ic_profile.png"></S.Avatar>
-              <S.ColumnWrap>
+              <S.ColWrap>
                 <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
                 <S.CreatedAt>
                   {/* {getDate(props.data?.fetchBoard?.createdAt)} */}
                 </S.CreatedAt>
-              </S.ColumnWrap>
+              </S.ColWrap>
             </S.RowWrap>
             <S.RowWrap>
               <S.OptBtn src="/images/board/detail/ic_link.png"></S.OptBtn>

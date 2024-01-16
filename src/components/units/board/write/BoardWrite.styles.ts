@@ -28,7 +28,7 @@ export const RowWrap = styled.div`
   justify-content: space-between;
   width: 100%;
 `;
-export const ColumnWrap = styled.div`
+export const ColWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

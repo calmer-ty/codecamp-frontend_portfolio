@@ -9,11 +9,11 @@ export default function CommentWriteUI(
       <S.Container>
         {props.isEdit === false && (
           <S.Title>
-            <S.TitleImage src="/images/comment/write/ic_logo.png" />
+            <S.TitleImg src="/images/comment/write/ic_logo.png" />
             댓글
           </S.Title>
         )}
-        <S.RowWrapper>
+        <S.RowWrap>
           <S.InfoInput
             type="text"
             id="writer"
@@ -29,8 +29,8 @@ export default function CommentWriteUI(
             value={props.inputs.password}
           />
           <S.RateScore onChange={props.setRating} value={props.rating} />
-        </S.RowWrapper>
-        <S.ContentsWrapper>
+        </S.RowWrap>
+        <S.ContentsWrap>
           <S.Contents
             id="contents"
             maxLength={100}
@@ -42,15 +42,15 @@ export default function CommentWriteUI(
             <S.ContentsLength>
               {props.contents !== "" ? props.contents.length : 0}/100
             </S.ContentsLength>
-            <S.ButtonWrapper>
+            <S.BtnWrap>
               {props.isEdit === true ? (
-                <S.CancelButton onClick={props.onClickUpdateCancel}>
+                <S.CancelBtn onClick={props.onClickUpdateCancel}>
                   수정취소
-                </S.CancelButton>
+                </S.CancelBtn>
               ) : (
                 ""
               )}
-              <S.SubmitButton
+              <S.SubmitBtn
                 onClick={
                   props.isEdit === true
                     ? props.onClickUpdate
@@ -58,10 +58,10 @@ export default function CommentWriteUI(
                 }
               >
                 {props.isEdit === true ? "수정하기" : "등록하기"}
-              </S.SubmitButton>
-            </S.ButtonWrapper>
+              </S.SubmitBtn>
+            </S.BtnWrap>
           </S.ContentsBottom>
-        </S.ContentsWrapper>
+        </S.ContentsWrap>
       </S.Container>
     </S.Wrapper>
   );

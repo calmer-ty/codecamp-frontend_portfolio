@@ -8,9 +8,7 @@ export const Wrapper = styled.div`
   background-color: #ffd600;
 `;
 export const Container = styled.div``;
-// export const Nav = styled.div`
-//   display: flex;
-// `;
+
 export const MenuItem = styled.button`
   width: 200px;
   height: 50px;

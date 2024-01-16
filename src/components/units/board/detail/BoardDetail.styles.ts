@@ -23,7 +23,7 @@ export const RowWrap = styled.div`
   flex-direction: row;
   align-items: center;
 `;
-export const ColumnWrap = styled.div`
+export const ColWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;

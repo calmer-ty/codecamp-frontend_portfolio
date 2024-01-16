@@ -8,7 +8,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
         <S.Container onSubmit={props.handleSubmit(props.onSubmitHandler)}>
           <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
           <S.RowWrap>
-            <S.ColumnWrap>
+            <S.ColWrap>
               <S.Label>작성자</S.Label>
               <S.Writer
                 type="text"
@@ -20,8 +20,8 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 })}
               />
               <S.Error>{props.errors?.writer?.message}</S.Error>
-            </S.ColumnWrap>
-            <S.ColumnWrap>
+            </S.ColWrap>
+            <S.ColWrap>
               <S.Label>비밀번호</S.Label>
               <S.Password
                 type="password"
@@ -39,10 +39,10 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 })}
               />
               <S.Error>{props.errors?.password?.message}</S.Error>
-            </S.ColumnWrap>
+            </S.ColWrap>
           </S.RowWrap>
 
-          <S.ColumnWrap>
+          <S.ColWrap>
             <S.Label>제목</S.Label>
             <S.Subject
               type="text"
@@ -53,9 +53,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
               })}
             />
             <S.Error>{props.errors?.title?.message}</S.Error>
-          </S.ColumnWrap>
+          </S.ColWrap>
 
-          <S.ColumnWrap>
+          <S.ColWrap>
             <S.Label>내용</S.Label>
             <S.Contents
               placeholder="내용을 작성해주세요."
@@ -65,9 +65,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
               })}
             />
             <S.Error>{props.errors?.contents?.message}</S.Error>
-          </S.ColumnWrap>
+          </S.ColWrap>
 
-          <S.ColumnWrap>
+          <S.ColWrap>
             <S.Label>주소</S.Label>
             <S.ZipcodeWrap>
               <S.Zipcode
@@ -106,9 +106,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
-          </S.ColumnWrap>
+          </S.ColWrap>
 
-          <S.ColumnWrap>
+          <S.ColWrap>
             <S.Label>유튜브</S.Label>
             <S.Youtube
               type="text"
@@ -118,18 +118,18 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
-          </S.ColumnWrap>
+          </S.ColWrap>
 
-          <S.ColumnWrap>
+          <S.ColWrap>
             <S.Label>사진 첨부</S.Label>
             <S.ImgWrap>
               <S.UploadBtn>+</S.UploadBtn>
               <S.UploadBtn>+</S.UploadBtn>
               <S.UploadBtn>+</S.UploadBtn>
             </S.ImgWrap>
-          </S.ColumnWrap>
+          </S.ColWrap>
 
-          <S.ColumnWrap>
+          <S.ColWrap>
             <S.Label>메인 설정</S.Label>
             <S.RadioWrap>
               <S.RadioBtn
@@ -147,7 +147,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
               />
               <S.RadioLabel>사진</S.RadioLabel>
             </S.RadioWrap>
-          </S.ColumnWrap>
+          </S.ColWrap>
 
           <S.SubmitBtn
             onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
