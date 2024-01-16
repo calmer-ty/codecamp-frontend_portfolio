@@ -3,7 +3,7 @@ import type { BoardDetailUIProps } from "./BoardDetail.types";
 // Styles
 import * as S from "./BoardDetail.styles";
 // Utils
-import { getDate } from "../../../../commons/libraries/utils";
+// import { getDate } from "../../../../commons/libraries/utils";
 
 export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
   return (
@@ -16,7 +16,7 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
               <S.ColumnWrap>
                 <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
                 <S.CreatedAt>
-                  {getDate(props.data?.fetchBoard?.createdAt)}
+                  {/* {getDate(props.data?.fetchBoard?.createdAt)} */}
                 </S.CreatedAt>
               </S.ColumnWrap>
             </S.RowWrap>

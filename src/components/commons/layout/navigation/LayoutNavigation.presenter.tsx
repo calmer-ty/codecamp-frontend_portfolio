@@ -6,6 +6,7 @@ export default function LayoutNavigationUI(props: any): JSX.Element {
     { name: "자유게시판", page: "/boards" },
     { name: "중고마켓", page: "/markets" },
     { name: "마이페이지", page: "/mypages" },
+    { name: "무료API", page: "/freeApi" },
   ];
 
   return (
