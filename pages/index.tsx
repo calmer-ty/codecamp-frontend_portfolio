@@ -1,5 +1,10 @@
+import styled from "@emotion/styled";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
+
+const Wrapper = styled.div`
+  // background: url("/videos/bg_main_video.mp4") no-repeat center/contain;
+`;
 
 export default function Home(): JSX.Element {
   return (
@@ -10,9 +15,14 @@ export default function Home(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      {/* <main className={styles.main}> */}
+      <Wrapper>
+        <video autoPlay muted loop>
+          <source src="/videos/bg_main_video.mp4" type="video/mp4" />
+        </video>
         <button>시작하기</button>
-      </main>
+      </Wrapper>
+      {/* </main> */}
     </>
   );
 }
