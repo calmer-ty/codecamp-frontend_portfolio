@@ -10,7 +10,7 @@ import { globalStyles } from "../src/commons/styles/globalStyles";
 
 export default function App({ Component }: AppProps): JSX.Element {
   return (
-    <div>
+    <>
       <ApolloSetting>
         <>
           <Global styles={globalStyles} />
@@ -19,6 +19,6 @@ export default function App({ Component }: AppProps): JSX.Element {
           </Layout>
         </>
       </ApolloSetting>
-    </div>
+    </>
   );
 }

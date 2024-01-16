@@ -10,8 +10,8 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   return (
     <>
       <LayoutHeader />
-      <LayoutBanner />
       <LayoutNavigation />
+      <LayoutBanner />
       <div style={{ margin: "55px 0" }}>{props.children}</div>
     </>
   );
