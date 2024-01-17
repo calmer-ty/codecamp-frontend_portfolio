@@ -4,7 +4,7 @@ import type { IMemberItem } from "./LayoutHeader.types";
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 58px 0;
+  padding: 58px 0;
 `;
 export const Container = styled.div`
   display: flex;

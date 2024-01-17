@@ -17,21 +17,27 @@ export default function LayoutBannerUI(): JSX.Element {
         <Slider {...settings}>
           <S.SliderItem>
             <h3>1</h3>
+            <button>자유게시판</button>
           </S.SliderItem>
           <S.SliderItem>
             <h3>2</h3>
+            <button>자유게시판</button>
           </S.SliderItem>
           <S.SliderItem>
             <h3>3</h3>
+            <button>자유게시판</button>
           </S.SliderItem>
           <S.SliderItem>
             <h3>4</h3>
+            <button>자유게시판</button>
           </S.SliderItem>
           <S.SliderItem>
             <h3>5</h3>
+            <button>자유게시판</button>
           </S.SliderItem>
           <S.SliderItem>
             <h3>6</h3>
+            <button>자유게시판</button>
           </S.SliderItem>
         </Slider>
       </S.Wrapper>

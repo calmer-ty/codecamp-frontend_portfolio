@@ -1,12 +1,44 @@
-import styled from "@emotion/styled";
 import Head from "next/head";
-// import styles from "../styles/Home.module.css";
-
-const Wrapper = styled.div`
-  // background: url("/videos/bg_main_video.mp4") no-repeat center/contain;
-`;
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import * as S from "../styles/landing";
 
 export default function Home(): JSX.Element {
+  const LANDING_MENUS = [
+    {
+      name: "자유게시판",
+      src: "/images/landing/board.jpg",
+      desc: "자유롭게 게시물을 등록하고, 수정하고, 삭제할 수 있습니다",
+    },
+    {
+      name: "중고마켓",
+      src: "/images/landing/e-commerce.jpg",
+      desc: "중고상품을 등록하고, 거래해보세요",
+    },
+    {
+      name: "마이페이지",
+      src: "/images/landing/e-commerce.jpg",
+      desc: "나를 소개합니다",
+    },
+    {
+      name: "랜덤강아지",
+      src: "/images/landing/e-commerce.jpg",
+      desc: "랜덤으로 강아지를 볼 수 있습니다",
+    },
+    {
+      name: "openApi",
+      src: "/images/landing/e-commerce.jpg",
+      desc: "openApi",
+    },
+  ];
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <>
       <Head>
@@ -15,14 +47,23 @@ export default function Home(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <main className={styles.main}> */}
-      <Wrapper>
-        <video autoPlay muted loop>
-          <source src="/videos/bg_main_video.mp4" type="video/mp4" />
-        </video>
-        <button>시작하기</button>
-      </Wrapper>
-      {/* </main> */}
+      <S.Wrapper>
+        <S.Container>
+          <Slider {...settings}>
+            {LANDING_MENUS.map((el, index) => (
+              <S.SliderItem key={index}>
+                <S.SliderItemInner>
+                  <S.PageInfoWrap>
+                    <S.Title>{el.name}</S.Title>
+                    <S.Desc>{el.desc}</S.Desc>
+                  </S.PageInfoWrap>
+                  <S.PageMainImg src={el.src} />
+                </S.SliderItemInner>
+              </S.SliderItem>
+            ))}
+          </Slider>
+        </S.Container>
+      </S.Wrapper>
     </>
   );
 }
