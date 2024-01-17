@@ -11,15 +11,19 @@ export const Container = styled.div`
   justify-content: space-between;
   width: 1200px;
 `;
-export const Logo = styled.button`
+export const Logo = styled.div`
   width: 236px;
   height: 36px;
-  background: url("/images/layout/header/logo.png") no-repeat center/contain;
+  font-size: 50px;
+  font-weight: bold;
+  /* background: url("/images/layout/header/logo.png") no-repeat center/contain; */
 `;
 
 export const MemberItem = styled.button`
   width: 92px;
   height: 44px;
   border-radius: 10px;
-  background-color: ${(props: IMemberItem) => (props.isLogin ? "#FFD600" : "")};
+  font-weight: bold;
+  background-color: ${(props: IMemberItem) => (props.isLogin ? "#284b63" : "")};
+  color: ${(props: IMemberItem) => (props.isLogin ? "#ffffff" : "")};
 `;

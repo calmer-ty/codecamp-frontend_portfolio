@@ -6,7 +6,8 @@ interface ILayoutProps {
   children: JSX.Element;
 }
 const LayoutBody = styled.div`
-  margin: 55px 0;
+  padding: 74px 0;
+  /* background-color: #e1e5f2; */
 `;
 
 export default function Layout(props: ILayoutProps): JSX.Element {

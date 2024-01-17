@@ -2,13 +2,17 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   overflow: hidden;
-  padding: 280px 150px;
+  padding: 220px 150px;
 `;
-export const Container = styled.div``;
+export const Container = styled.div`
+  padding: 50px;
+  border-radius: 20px;
+  border: 8px solid #284b63;
+  background-color: #ffffff;
+`;
 export const PageMainImg = styled.img`
   width: 40%;
   height: 350px;
-  /* background-color: #ad3838; */
   object-fit: contain;
 `;
 export const PageInfoWrap = styled.div`

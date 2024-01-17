@@ -5,7 +5,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
-        <S.Logo onClick={props.onClickLogo} />
+        <S.Logo onClick={props.onClickLogo}>Logo</S.Logo>
         <div>
           <S.MemberItem isLogin={false}>회원가입</S.MemberItem>
           <S.MemberItem onClick={props.onClickMoveToLogin} isLogin={true}>

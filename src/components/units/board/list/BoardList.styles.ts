@@ -74,7 +74,7 @@ export const MoveBtn = styled.button`
   bottom: 0;
   width: 171px;
   height: 52px;
-  border: 1px solid #f2f2f2;
+  border: 1px solid #d9d9d9;
   border-radius: 10px;
   background-color: #fff;
   font-weight: 500;

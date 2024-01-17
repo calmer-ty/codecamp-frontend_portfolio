@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 64px;
-  background-color: #ffd600;
+  background-color: #3c6e71;
 `;
 export const Container = styled.div``;
 
@@ -15,7 +15,7 @@ export const MenuItem = styled.button`
   padding: 0 40px;
   font-size: 18px;
   font-weight: 700;
-  color: "#514400";
+  color: #ffffff;
 `;
 export const NavLine = styled.div`
   width: 1px;
