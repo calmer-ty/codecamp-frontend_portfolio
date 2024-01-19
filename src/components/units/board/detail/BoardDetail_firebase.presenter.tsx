@@ -1,6 +1,6 @@
 import * as S from "./BoardDetail.styles";
 // import { getDate } from "../../../../commons/libraries/utils";
-import type { BoardDetailUIProps } from "./BoardDetail.types";
+import type { BoardDetailUIProps } from "./BoardDetail_firebase.types";
 
 export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
   return (
@@ -11,29 +11,29 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             <S.RowWrap>
               <S.Avatar src="/images/board/detail/ic_profile.png"></S.Avatar>
               <S.ColWrap>
-                <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
+                <S.Writer>{props.boardsData.writer}</S.Writer>
                 <S.CreatedAt>
-                  {/* {getDate(props.data?.fetchBoard?.createdAt)} */}
+                  {/* {getDate(props.boardsData.createdAt)} */}
                 </S.CreatedAt>
               </S.ColWrap>
             </S.RowWrap>
             <S.RowWrap>
               <S.OptBtn src="/images/board/detail/ic_link.png"></S.OptBtn>
               <S.AddressInfo
-                title={`${
-                  props.data?.fetchBoard?.boardAddress?.address ?? ""
-                } ${props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}`}
+                title={`${props.boardsData.boardAddress?.address ?? ""} ${
+                  props.boardsData.boardAddress?.addressDetail ?? ""
+                }`}
               >
                 <S.OptBtn src="/images/board/detail/ic_location.png"></S.OptBtn>
               </S.AddressInfo>
             </S.RowWrap>
           </S.Header>
           <S.Body>
-            <S.Title>{props.data?.fetchBoard?.title}</S.Title>
+            <S.Title>{props.boardsData.title}</S.Title>
             <img src="/images/board/detail/image.png" alt="" />
-            <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
+            <S.Contents>{props.boardsData.contents}</S.Contents>
             <S.Youtube
-              url={props.data?.fetchBoard?.youtubeUrl ?? ""}
+              url={props.boardsData.youtubeUrl ?? ""}
               width={486}
               height={240}
               muted

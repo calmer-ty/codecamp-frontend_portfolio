@@ -16,6 +16,8 @@ import { useState } from "react";
 import type { Address } from "react-daum-postcode";
 // UI
 import BoardWriteUI from "./BoardWrite.presenter";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { firebaseApp } from "../../../../commons/libraries/firebase";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
@@ -32,23 +34,26 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     console.log(data);
   };
 
-  const writer = watch().writer;
-  const password = watch().password;
-  const title = watch().title;
-  const contents = watch().contents;
-  const youtubeUrl = watch().youtubeUrl;
+  const uuid;
+
+  const inputs = {
+    writer: watch().writer,
+    password: watch().password,
+    title: watch().title,
+    contents: watch().contents,
+    youtubeUrl: watch().youtubeUrl,
+  };
 
   // 리랜더링을 위한 state 선언
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
-
-  const addressDetail = watch().addressDetail;
+  const addressInput = {
+    zipcode,
+    address,
+    addressDetail: watch().addressDetail,
+  };
 
   // DATA API
-  const [createBoard] = useMutation<
-    Pick<IMutation, "createBoard">,
-    IMutationCreateBoardArgs
-  >(CREATE_BOARD);
   const [updateBoard] = useMutation<
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
@@ -58,45 +63,36 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   let isActive = false;
 
   if (
-    writer !== "" &&
-    title !== "" &&
-    contents !== "" &&
-    password?.length >= 4 &&
-    password?.length <= 16
+    inputs.writer !== "" &&
+    inputs.title !== "" &&
+    inputs.contents !== "" &&
+    inputs.password?.length >= 4 &&
+    inputs.password?.length <= 16
   ) {
     isActive = true;
   }
 
+  const board = collection(getFirestore(firebaseApp), "board");
   // onClickBoardNew
   const onClickSubmit = async (): Promise<void> => {
     if (
-      writer !== "" &&
-      title !== "" &&
-      contents !== "" &&
-      password?.length >= 4 &&
-      password?.length <= 16
+      inputs.writer !== "" &&
+      inputs.title !== "" &&
+      inputs.contents !== "" &&
+      inputs.password?.length >= 4 &&
+      inputs.password?.length <= 16
     ) {
       alert("게시물이 등록되었습니다.");
 
       try {
-        const result = await createBoard({
-          variables: {
-            createBoardInput: {
-              writer,
-              password,
-              title,
-              contents,
-              youtubeUrl,
-              boardAddress: {
-                zipcode,
-                address,
-                addressDetail,
-              },
-            },
+        void addDoc(board, {
+          ...inputs,
+          addressInput: {
+            ...addressInput,
           },
         });
 
-        void router.push(`/boards/${result.data?.createBoard._id}`);
+        // void router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         if (error instanceof Error) alert(error.message);
       }
@@ -105,31 +101,39 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   const onClickUpdate = async (): Promise<void> => {
     if (
-      title !== "" &&
-      contents !== "" &&
-      youtubeUrl !== "" &&
-      zipcode !== "" &&
-      address !== "" &&
-      addressDetail !== ""
+      inputs.title !== "" &&
+      inputs.contents !== "" &&
+      inputs.youtubeUrl !== "" &&
+      addressInput.zipcode !== "" &&
+      addressInput.address !== "" &&
+      addressInput.addressDetail !== ""
     ) {
       alert("수정한 내용이 없습니다.");
       return;
     }
-    if (password === "") {
+    if (inputs.password === "") {
       alert("비밀번호를 입력해주세요.");
       return;
     }
 
     const updateBoardInput: IUpdateBoardInput = {};
-    if (title !== "") updateBoardInput.title = title;
-    if (contents !== "") updateBoardInput.contents = contents;
-    if (youtubeUrl !== "") updateBoardInput.youtubeUrl = youtubeUrl;
-    if (zipcode !== "" || address !== "" || addressDetail !== "") {
+    if (inputs.title !== "") updateBoardInput.title = inputs.title;
+    if (inputs.contents !== "") updateBoardInput.contents = inputs.contents;
+    if (inputs.youtubeUrl !== "")
+      updateBoardInput.youtubeUrl = inputs.youtubeUrl;
+    if (
+      addressInput.zipcode !== "" ||
+      addressInput.address !== "" ||
+      addressInput.addressDetail !== ""
+    ) {
       updateBoardInput.boardAddress = {};
-      if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
-      if (address !== "") updateBoardInput.boardAddress.address = address;
-      if (addressDetail !== "")
-        updateBoardInput.boardAddress.addressDetail = addressDetail;
+      if (addressInput.zipcode !== "")
+        updateBoardInput.boardAddress.zipcode = addressInput.zipcode;
+      if (addressInput.address !== "")
+        updateBoardInput.boardAddress.address = addressInput.address;
+      if (addressInput.addressDetail !== "")
+        updateBoardInput.boardAddress.addressDetail =
+          addressInput.addressDetail;
     }
 
     // boardId의 타입이 문자가 아닐 때 함수 실행 종료
@@ -142,7 +146,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       const result = await updateBoard({
         variables: {
           boardId: router.query.boardId,
-          password,
+          password: inputs.password,
           updateBoardInput,
         },
       });
