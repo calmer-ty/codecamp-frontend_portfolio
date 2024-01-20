@@ -4,7 +4,6 @@ import BoardDetailUI from "./BoardDetail.presenter";
 // Firebase
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 export default function BoardDetail(): JSX.Element {
