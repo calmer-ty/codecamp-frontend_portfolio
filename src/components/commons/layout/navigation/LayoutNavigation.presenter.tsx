@@ -10,6 +10,7 @@ export default function LayoutNavigationUI(
   props: LayoutNavigationUIProps
 ): JSX.Element {
   const NAVIGATION_MENUS = [
+    { name: "자유게시판_Firebase", page: "/boards_firebase" },
     { name: "자유게시판", page: "/boards" },
     { name: "중고마켓", page: "/markets" },
     { name: "마이페이지", page: "/mypages" },

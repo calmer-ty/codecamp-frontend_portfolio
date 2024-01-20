@@ -95,7 +95,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             },
           },
         });
-
+        console.log(result.data?.createBoard);
         void router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         if (error instanceof Error) alert(error.message);

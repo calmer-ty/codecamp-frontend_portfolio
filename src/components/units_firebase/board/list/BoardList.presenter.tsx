@@ -1,8 +1,9 @@
 import * as S from "./BoardList.styles";
 // import { getDate } from "../../../../commons/libraries/utils";
+import { doc } from "firebase/firestore";
 
-import type { BoardListUIProps } from "./BoardList_firebase.types";
-import { v4 as uuid } from "uuid";
+import type { BoardListUIProps } from "./BoardList.types";
+// import { v4 as uuid } from "uuid";
 
 export default function BoardListUI(props: BoardListUIProps): JSX.Element {
   return (
@@ -16,10 +17,10 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
             <S.HeaderItem>날짜</S.HeaderItem>
           </S.Header>
           {props.boardsData.map((el: any, index: number) => (
-            <S.List key={uuid()}>
+            <S.List key={index}>
               <S.ListItem>{index + 1}</S.ListItem>
               <S.ListItemTitle
-                id={uuid()}
+                id={index}
                 onClick={props.onClickMoveToBoardDetail}
               >
                 {el.title}

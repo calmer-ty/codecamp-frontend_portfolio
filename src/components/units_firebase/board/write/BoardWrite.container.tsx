@@ -1,23 +1,16 @@
-import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import type {
-  IMutation,
-  IMutationCreateBoardArgs,
-  IMutationUpdateBoardArgs,
-  IUpdateBoardInput,
-} from "../../../../commons/types/generated/types";
 import type { IBoardWriteProps, IFormValues } from "./BoardWrite.types";
 
 // API
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { useState } from "react";
 // Library
 import type { Address } from "react-daum-postcode";
 // UI
 import BoardWriteUI from "./BoardWrite.presenter";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { collection, addDoc, getFirestore } from "firebase/firestore";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
+// import { v4 as uuid } from "uuid";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
@@ -34,7 +27,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     console.log(data);
   };
 
-  const uuid;
+  // const uuid = uuid();
 
   const inputs = {
     writer: watch().writer,
@@ -53,12 +46,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     addressDetail: watch().addressDetail,
   };
 
-  // DATA API
-  const [updateBoard] = useMutation<
-    Pick<IMutation, "updateBoard">,
-    IMutationUpdateBoardArgs
-  >(UPDATE_BOARD);
-
   // 모든 input 값에 입력 값이 있다면.. 등록하기 버튼의 색을 바꾸어 주는 함수
   let isActive = false;
 
@@ -71,9 +58,10 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   ) {
     isActive = true;
   }
+  const db = getFirestore(firebaseApp);
 
-  const board = collection(getFirestore(firebaseApp), "board");
-  // onClickBoardNew
+  const [boardId, setBoardId] = useState("");
+
   const onClickSubmit = async (): Promise<void> => {
     if (
       inputs.writer !== "" &&
@@ -85,76 +73,22 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       alert("게시물이 등록되었습니다.");
 
       try {
-        void addDoc(board, {
+        const docRef = await addDoc(collection(db, "board"), {
           ...inputs,
           addressInput: {
             ...addressInput,
           },
+          // id: boardId,
         });
+        setBoardId(docRef.id);
 
-        // void router.push(`/boards/${result.data?.createBoard._id}`);
+        void router.push(`/boards_firebase/${docRef.id}`);
       } catch (error) {
         if (error instanceof Error) alert(error.message);
       }
     }
   };
-
-  const onClickUpdate = async (): Promise<void> => {
-    if (
-      inputs.title !== "" &&
-      inputs.contents !== "" &&
-      inputs.youtubeUrl !== "" &&
-      addressInput.zipcode !== "" &&
-      addressInput.address !== "" &&
-      addressInput.addressDetail !== ""
-    ) {
-      alert("수정한 내용이 없습니다.");
-      return;
-    }
-    if (inputs.password === "") {
-      alert("비밀번호를 입력해주세요.");
-      return;
-    }
-
-    const updateBoardInput: IUpdateBoardInput = {};
-    if (inputs.title !== "") updateBoardInput.title = inputs.title;
-    if (inputs.contents !== "") updateBoardInput.contents = inputs.contents;
-    if (inputs.youtubeUrl !== "")
-      updateBoardInput.youtubeUrl = inputs.youtubeUrl;
-    if (
-      addressInput.zipcode !== "" ||
-      addressInput.address !== "" ||
-      addressInput.addressDetail !== ""
-    ) {
-      updateBoardInput.boardAddress = {};
-      if (addressInput.zipcode !== "")
-        updateBoardInput.boardAddress.zipcode = addressInput.zipcode;
-      if (addressInput.address !== "")
-        updateBoardInput.boardAddress.address = addressInput.address;
-      if (addressInput.addressDetail !== "")
-        updateBoardInput.boardAddress.addressDetail =
-          addressInput.addressDetail;
-    }
-
-    // boardId의 타입이 문자가 아닐 때 함수 실행 종료
-    if (typeof router.query.boardId !== "string") {
-      alert("시스템에 문제가 있습니다.");
-      return;
-    }
-
-    try {
-      const result = await updateBoard({
-        variables: {
-          boardId: router.query.boardId,
-          password: inputs.password,
-          updateBoardInput,
-        },
-      });
-      void router.push(`/boards/${result.data?.updateBoard._id}`);
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
+  console.log(boardId);
 
   // 주소 모달
   const [isOpen, setIsOpen] = useState(false);
@@ -175,7 +109,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       onSubmitHandler={onSubmitHandler}
       errors={errors}
       onClickSubmit={onClickSubmit}
-      onClickUpdate={onClickUpdate}
+      // onClickUpdate={onClickUpdate}
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
