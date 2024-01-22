@@ -3,26 +3,30 @@ import { useEffect, type MouseEvent, useState } from "react";
 
 // UI
 import BoardListUI from "./BoardList.presenter";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  type DocumentData,
+  collection,
+  getDocs,
+  getFirestore,
+} from "firebase/firestore";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
-import type { DocumentData } from "firebase/firestore/lite";
 
 export default function BoardList(): JSX.Element {
   const router = useRouter();
-  const [boardsData, setBoardsData] = useState<DocumentData[]>([]);
+  const db = getFirestore(firebaseApp);
+  const [docs, setDocs] = useState<DocumentData>();
 
   const onClickMoveToBoardNew = (): void => {
     void router.push("/boards_firebase/new");
   };
 
   useEffect(() => {
-    const fetchBoards = async (): Promise<void> => {
-      const board = collection(getFirestore(firebaseApp), "board");
-      const result = await getDocs(board);
-      const boards = result.docs.map((el) => el.data());
-      setBoardsData(boards);
+    const query = async (): Promise<void> => {
+      const querySnapshot = await getDocs(collection(db, "board"));
+      const datas = querySnapshot.docs.map((el) => el);
+      setDocs(datas);
     };
-    void fetchBoards();
+    void query();
   }, []);
 
   const onClickMoveToBoardDetail = (
@@ -36,7 +40,7 @@ export default function BoardList(): JSX.Element {
   return (
     <>
       <BoardListUI
-        boardsData={boardsData}
+        docs={docs}
         onClickMoveToBoardNew={onClickMoveToBoardNew}
         onClickMoveToBoardDetail={onClickMoveToBoardDetail}
       />

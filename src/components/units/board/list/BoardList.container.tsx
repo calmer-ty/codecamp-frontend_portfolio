@@ -30,6 +30,8 @@ export default function BoardList(): JSX.Element {
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
 
+  console.log(data);
+
   const onClickMoveToBoardDetail = (
     event: MouseEvent<HTMLButtonElement>
   ): void => {

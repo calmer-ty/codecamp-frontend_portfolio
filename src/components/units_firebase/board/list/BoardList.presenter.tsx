@@ -1,3 +1,4 @@
+import type { DocumentData } from "firebase/firestore";
 import * as S from "./BoardList.styles";
 // import { getDate } from "../../../../commons/libraries/utils";
 
@@ -14,17 +15,17 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
             <S.HeaderItem>작성자</S.HeaderItem>
             <S.HeaderItem>날짜</S.HeaderItem>
           </S.Header>
-          {props.boardsData.map((el: any, index: number) => (
-            <S.List key={index}>
+          {props.docs?.map((el: DocumentData, index: number) => (
+            <S.List key={el.id}>
               <S.ListItem>{index + 1}</S.ListItem>
               <S.ListItemTitle
-                // id={index}
+                id={el.id}
                 onClick={props.onClickMoveToBoardDetail}
               >
-                {el.title}
+                {el.data().title}
               </S.ListItemTitle>
-              <S.ListItem>{el.writer}</S.ListItem>
-              {/* <S.ListItem>{new Date()}</S.ListItem> */}
+              <S.ListItem>{el.data().writer}</S.ListItem>
+              <S.ListItem>추후 제공</S.ListItem>
             </S.List>
           ))}
         </S.Table>

@@ -60,8 +60,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   }
   const db = getFirestore(firebaseApp);
 
-  const [boardId, setBoardId] = useState("");
-
   const onClickSubmit = async (): Promise<void> => {
     if (
       inputs.writer !== "" &&
@@ -78,9 +76,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
           addressInput: {
             ...addressInput,
           },
-          // id: boardId,
         });
-        setBoardId(docRef.id);
 
         void router.push(`/boards_firebase/${docRef.id}`);
       } catch (error) {
@@ -88,7 +84,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       }
     }
   };
-  console.log(boardId);
 
   // 주소 모달
   const [isOpen, setIsOpen] = useState(false);

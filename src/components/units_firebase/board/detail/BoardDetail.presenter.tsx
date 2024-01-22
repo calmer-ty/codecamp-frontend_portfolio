@@ -1,17 +1,28 @@
-import * as S from "../../../../components/units/board/detail/BoardDetail.styles";
+import * as S from "./BoardDetail.styles";
 // import { getDate } from "../../../../commons/libraries/utils";
-import type { BoardDetailUIProps } from "./BoardDetail.types";
+import type { IBoardDetailUIProps } from "./BoardDetail.types";
 
-export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
+export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
   return (
     <>
+      {" "}
+      {props.isOpenDeleteModal && (
+        <S.DeleteModal
+          visible={true}
+          onOk={props.onClickDeleteBoard}
+          onCancel={props.onToggleDeleteModal}
+        >
+          <span>비밀번호 입력: </span>
+          <input type="password" onChange={props.onChangePassword} />
+        </S.DeleteModal>
+      )}
       <S.Wrapper>
         <S.CardWrap>
           <S.Header>
             <S.RowWrap>
               <S.Avatar src="/images/board/detail/ic_profile.png"></S.Avatar>
               <S.ColWrap>
-                {/* <S.Writer>{props.boardsData.writer}</S.Writer> */}
+                <S.Writer>{props.docData?.writer}</S.Writer>
                 <S.CreatedAt>
                   {/* {getDate(props.boardsData.createdAt)} */}
                 </S.CreatedAt>
@@ -20,20 +31,20 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
             <S.RowWrap>
               <S.OptBtn src="/images/board/detail/ic_link.png"></S.OptBtn>
               <S.AddressInfo
-              // title={`${props.boardsData.boardAddress?.address ?? ""} ${
-              //   props.boardsData.boardAddress?.addressDetail ?? ""
-              // }`}
+                title={`${props.docData?.addressInput?.address ?? ""} ${
+                  props.docData?.addressInput?.addressDetail ?? ""
+                }`}
               >
                 <S.OptBtn src="/images/board/detail/ic_location.png"></S.OptBtn>
               </S.AddressInfo>
             </S.RowWrap>
           </S.Header>
           <S.Body>
-            {/* <S.Title>{props.boardsData.title}</S.Title> */}
+            <S.Title>{props.docData?.title}</S.Title>
             <img src="/images/board/detail/image.png" alt="" />
-            {/* <S.Contents>{props.boardsData.contents}</S.Contents> */}
+            <S.Contents>{props.docData?.contents}</S.Contents>
             <S.Youtube
-              // url={props.boardsData.youtubeUrl ?? ""}
+              url={props.docData?.youtubeUrl ?? ""}
               width={486}
               height={240}
               muted
@@ -59,9 +70,9 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
         </S.CardWrap>
 
         <S.MoveBtnWrap>
-          <S.MoveBtn onClick={props.onClickMoveToBoardList}>목록으로</S.MoveBtn>
-          <S.MoveBtn>수정하기</S.MoveBtn>
-          <S.MoveBtn>삭제하기</S.MoveBtn>
+          <S.MoveBtn onClick={props.onClickMoveToList}>목록으로</S.MoveBtn>
+          <S.MoveBtn onClick={props.onClickMoveToEdit}>수정하기</S.MoveBtn>
+          <S.MoveBtn onClick={props.onToggleDeleteModal}>삭제하기</S.MoveBtn>
         </S.MoveBtnWrap>
       </S.Wrapper>
     </>
