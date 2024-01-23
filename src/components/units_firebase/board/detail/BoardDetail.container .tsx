@@ -36,8 +36,6 @@ export default function BoardDetail(): JSX.Element {
     void query();
   }, []);
 
-  console.log(typeof docData);
-
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
   };

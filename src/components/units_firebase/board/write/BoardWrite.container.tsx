@@ -8,7 +8,13 @@ import { useState } from "react";
 import type { Address } from "react-daum-postcode";
 // UI
 import BoardWriteUI from "./BoardWrite.presenter";
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getFirestore,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
 // import { v4 as uuid } from "uuid";
 
@@ -19,15 +25,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     register,
     handleSubmit,
     watch,
-    // watch: reg에 입력된 값을 객체에 담아준다
     formState: { errors },
   } = useForm<IFormValues>();
 
   const onSubmitHandler = (data: IFormValues): void => {
     console.log(data);
   };
-
-  // const uuid = uuid();
 
   const inputs = {
     writer: watch().writer,
@@ -85,16 +88,29 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  const onClickUpdate = async (): Promise<void> => {
+    const goalRef = doc(db, "boards_firebase", String(router.query.boardId));
+
+    console.log(goalRef);
+
+    // const updateBoardInput = {};
+
+    // Set the "capital" field of the city 'DC'
+    await updateDoc(goalRef, {
+      writer: "update",
+    });
+  };
+
   // 주소 모달
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAddressModal, setIsOpenAddressModal] = useState(false);
 
   const onClickAddressSearch = (): void => {
-    setIsOpen((prev) => !prev);
+    setIsOpenAddressModal((prev) => !prev);
   };
   const onCompleteAddressSearch = (data: Address): void => {
     setAddress(data.address);
     setZipcode(data.zonecode);
-    setIsOpen((prev) => !prev);
+    setIsOpenAddressModal((prev) => !prev);
   };
 
   return (
@@ -104,12 +120,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       onSubmitHandler={onSubmitHandler}
       errors={errors}
       onClickSubmit={onClickSubmit}
-      // onClickUpdate={onClickUpdate}
+      onClickUpdate={onClickUpdate}
       isActive={isActive}
       isEdit={props.isEdit}
-      data={props.data}
+      docData={props.docData}
       // Zipcode
-      isOpen={isOpen}
+      isOpenAddressModal={isOpenAddressModal}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
       zipcode={zipcode}

@@ -13,8 +13,8 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
               <S.Writer
                 type="text"
                 placeholder="이름을 작성해주세요."
-                defaultValue={props.data?.fetchBoard.writer ?? ""}
-                readOnly={Boolean(props.data?.fetchBoard.writer)}
+                defaultValue={props.docData?.writer ?? ""}
+                readOnly={Boolean(props.docData?.writer)}
                 {...props.register("writer", {
                   required: props.isEdit ? "" : "This is required.",
                 })}
@@ -47,7 +47,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.Subject
               type="text"
               placeholder="제목을 작성해주세요."
-              defaultValue={props.data?.fetchBoard.title}
+              defaultValue={props.docData?.title}
               {...props.register("title", {
                 required: props.isEdit ? "" : "This is required.",
               })}
@@ -59,7 +59,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.Label>내용</S.Label>
             <S.Contents
               placeholder="내용을 작성해주세요."
-              defaultValue={props.data?.fetchBoard.contents}
+              defaultValue={props.docData?.contents}
               {...props.register("contents", {
                 required: props.isEdit ? "" : "This is required.",
               })}
@@ -75,7 +75,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 value={
                   props.zipcode !== ""
                     ? props.zipcode
-                    : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
+                    : props.docData?.addressInput?.zipcode ?? ""
                 }
                 {...props.register("zipcode", {
                   required: props.isEdit ? "" : "This is required.",
@@ -92,16 +92,14 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                 // 그렇지 않다면 패치한 값, 가지고 있던 주소 값을 넣어준다.
                 props.address !== ""
                   ? props.address
-                  : props.data?.fetchBoard.boardAddress?.address ?? ""
+                  : props.docData?.addressInput?.address ?? ""
               }
               {...props.register("address", {
                 required: props.isEdit ? "" : "This is required.",
               })}
             />
             <S.Address
-              defaultValue={
-                props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
-              }
+              defaultValue={props.docData?.addressInput?.addressDetail ?? ""}
               {...props.register("addressDetail", {
                 required: props.isEdit ? "" : "This is required.",
               })}
@@ -113,7 +111,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.Youtube
               type="text"
               placeholder="링크를 복사해주세요."
-              defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""}
+              defaultValue={props.docData?.youtubeUrl ?? ""}
               {...props.register("youtubeUrl", {
                 required: props.isEdit ? "" : "This is required.",
               })}
@@ -157,9 +155,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
           </S.SubmitBtn>
         </S.Container>
 
-        {props.isOpen && (
+        {props.isOpenAddressModal && (
           <S.AddressModal
-            open={props.isOpen}
+            open={props.isOpenAddressModal}
             onOk={props.onClickAddressSearch}
             onCancel={props.onClickAddressSearch}
           >

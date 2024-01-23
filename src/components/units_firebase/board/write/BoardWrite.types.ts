@@ -1,5 +1,3 @@
-import type { MouseEvent } from "react";
-import type { IQuery } from "../../../../commons/types/generated/types";
 import type {
   FieldErrors,
   UseFormHandleSubmit,
@@ -7,6 +5,7 @@ import type {
 } from "react-hook-form";
 // Library
 import type { Address } from "react-daum-postcode";
+import type { DocumentData } from "firebase/firestore";
 
 // container
 export interface IFormValues {
@@ -23,16 +22,17 @@ export interface IFormValues {
 
 export interface IBoardWriteProps {
   isEdit: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
+  docData?: DocumentData;
 }
 
 // UI
 export interface IBoardWriteUIProps {
-  onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
-
+  docData?: DocumentData;
   isEdit: boolean;
   isActive: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
+
+  onClickSubmit: () => Promise<void>;
+  onClickUpdate: () => Promise<void>;
 
   // React Hook Form
   register: UseFormRegister<IFormValues>;
@@ -41,7 +41,7 @@ export interface IBoardWriteUIProps {
   errors?: FieldErrors<IFormValues>;
 
   // Zipcode
-  isOpen: boolean;
+  isOpenAddressModal: boolean;
   zipcode: string;
   address: string;
   onClickAddressSearch: () => void;
