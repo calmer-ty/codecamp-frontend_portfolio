@@ -25,6 +25,7 @@ export default function BoardDetail(): JSX.Element {
       variables: { boardId: router.query.boardId },
     }
   );
+  console.log(data);
 
   const [deleteBoard] = useMutation<
     Pick<IMutation, "deleteBoard">,

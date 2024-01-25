@@ -1,5 +1,5 @@
 import * as S from "./BoardDetail.styles";
-// import { getDate } from "../../../../commons/libraries/utils";
+import { getDate } from "../../../../commons/libraries/utils";
 import type { BoardDetailUIProps } from "./BoardDetail.types";
 
 export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
@@ -13,7 +13,7 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
               <S.ColWrap>
                 <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
                 <S.CreatedAt>
-                  {/* {getDate(props.data?.fetchBoard?.createdAt)} */}
+                  {getDate(props.data?.fetchBoard?.createdAt)}
                 </S.CreatedAt>
               </S.ColWrap>
             </S.RowWrap>
@@ -30,7 +30,15 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
           </S.Header>
           <S.Body>
             <S.Title>{props.data?.fetchBoard?.title}</S.Title>
-            <img src="/images/board/detail/image.png" alt="" />
+            {props.data?.fetchBoard.images
+              ?.filter((el) => el)
+              .map((el) => (
+                <S.ImgItem
+                  width={800}
+                  key={el}
+                  src={`http://storage.googleapis.com/${el}`}
+                />
+              ))}
             <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
             <S.Youtube
               url={props.data?.fetchBoard?.youtubeUrl ?? ""}

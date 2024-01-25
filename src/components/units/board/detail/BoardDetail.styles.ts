@@ -60,6 +60,10 @@ export const Title = styled.div`
   font-size: 36px;
   font-weight: 700;
 `;
+export const ImgItem = styled.img`
+  width: 100%;
+  margin-bottom: 20px;
+`;
 export const Contents = styled.div`
   /* height: 96px; */
   margin-top: 40px;

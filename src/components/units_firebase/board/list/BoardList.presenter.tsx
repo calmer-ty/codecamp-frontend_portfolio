@@ -1,6 +1,5 @@
 import type { DocumentData } from "firebase/firestore";
 import * as S from "./BoardList.styles";
-// import { getDate } from "../../../../commons/libraries/utils";
 
 import type { BoardListUIProps } from "./BoardList.types";
 

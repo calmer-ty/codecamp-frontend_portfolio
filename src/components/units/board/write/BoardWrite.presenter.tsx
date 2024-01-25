@@ -1,4 +1,4 @@
-import UploadBtn01 from "../../../commons/uploadBtn01/UploadBtn01.container";
+import UploadBtn01 from "../../../commons/uploadBtn01/01/UploadBtn01.container";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
 
@@ -124,12 +124,12 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
           <S.ColWrap>
             <S.Label>사진 첨부</S.Label>
             <S.ImgWrap>
-              {new Array(3).fill(1).map((data, index) => (
+              {props.fileUrls.map((el, index) => (
                 <UploadBtn01
-                  key={`${data}_${index}`}
+                  key={`${el}_${index}`}
                   index={index}
-                  onChangeFiles={props.onChangeFiles}
-                  fileUrls={props.fileUrls}
+                  fileUrl={el}
+                  onChangeFileUrls={props.onChangeFileUrls}
                 />
               ))}
             </S.ImgWrap>

@@ -11,6 +11,7 @@ export interface IBoardDetailUIProps {
       address: string;
       addressDetail: string;
     };
+    createdAt?: string;
   };
   // List
   onClickMoveToList: (event: MouseEvent<HTMLButtonElement>) => void;

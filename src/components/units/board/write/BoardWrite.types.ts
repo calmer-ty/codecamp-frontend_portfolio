@@ -28,8 +28,8 @@ export interface IBoardWriteProps {
 
 // UI
 export interface IBoardWriteUIProps {
-  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
 
   isEdit: boolean;
   isActive: boolean;
@@ -49,8 +49,8 @@ export interface IBoardWriteUIProps {
   onCompleteAddressSearch: (data: Address) => void;
 
   // Upload
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
   fileUrls: string[];
-  onChangeFiles: (file: File, index: number, url: string) => void;
 }
 
 export interface ISubmitButtonProps {

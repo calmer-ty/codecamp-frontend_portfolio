@@ -1,5 +1,5 @@
 import * as S from "./BoardDetail.styles";
-// import { getDate } from "../../../../commons/libraries/utils";
+import { getDate } from "../../../../commons/libraries/utils";
 import type { IBoardDetailUIProps } from "./BoardDetail.types";
 
 export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
@@ -23,9 +23,7 @@ export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
               <S.Avatar src="/images/board/detail/ic_profile.png"></S.Avatar>
               <S.ColWrap>
                 <S.Writer>{props.docData?.writer}</S.Writer>
-                <S.CreatedAt>
-                  {/* {getDate(props.boardsData.createdAt)} */}
-                </S.CreatedAt>
+                <S.CreatedAt>{getDate(props.docData?.createdAt)}</S.CreatedAt>
               </S.ColWrap>
             </S.RowWrap>
             <S.RowWrap>

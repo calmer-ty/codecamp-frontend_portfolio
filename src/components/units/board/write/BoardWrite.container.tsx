@@ -42,6 +42,8 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
 
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
   const addressDetail = watch().addressDetail;
 
   // DATA API
@@ -92,6 +94,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                 address,
                 addressDetail,
               },
+              images: [...fileUrls],
             },
           },
         });
@@ -164,28 +167,13 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     setIsOpen((prev) => !prev);
   };
 
-  // Upload
-  const [files, setFiles] = useState<File[]>([]);
-  const [fileUrls, setFileUrls] = useState<string[]>([]);
-
-  const onChangeFiles = (file: File, index: number, url: string): void => {
-    const newFiles = [...files];
+  // 파일 업로드
+  const onChangeFileUrls = (fileUrl: string, index: number): void => {
     const newFileUrls = [...fileUrls];
-
-    if (files[index]) {
-      newFiles[index] = file;
-      newFileUrls[index] = url;
-    } else {
-      newFiles.push(file);
-      newFileUrls.push(url);
-    }
-
-    setFiles([...files]);
-    setFileUrls([...fileUrls]);
-
-    console.log(files);
-    // console.log(fileUrls);
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
+  console.log(fileUrls);
 
   return (
     <BoardWriteUI
@@ -205,7 +193,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       zipcode={zipcode}
       address={address}
       // Upload
-      onChangeFiles={onChangeFiles}
+      onChangeFileUrls={onChangeFileUrls}
       fileUrls={fileUrls}
     />
   );
