@@ -5,13 +5,14 @@ import type {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IMutationUploadFileArgs,
   IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
 import type { IBoardWriteProps, IFormValues } from "./BoardWrite.types";
 
 // API
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { useEffect, useState } from "react";
+import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./BoardWrite.queries";
+import { useState } from "react";
 // Library
 import type { Address } from "react-daum-postcode";
 // UI
@@ -24,7 +25,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     register,
     handleSubmit,
     watch,
-    // watch: reg에 입력된 값을 객체에 담아준다
     formState: { errors },
   } = useForm<IFormValues>();
 
@@ -32,18 +32,18 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     console.log(data);
   };
 
-  const writer = watch().writer;
-  const password = watch().password;
-  const title = watch().title;
-  const contents = watch().contents;
-  const youtubeUrl = watch().youtubeUrl;
+  // 입력값 변수
+  const inputs = {
+    writer: watch().writer,
+    password: watch().password,
+    title: watch().title,
+    contents: watch().contents,
+    youtubeUrl: watch().youtubeUrl,
+  };
 
   // 리랜더링을 위한 state 선언
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
-
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
-
   const addressDetail = watch().addressDetail;
 
   // DATA API
@@ -55,32 +55,31 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
 
   // 모든 input 값에 입력 값이 있다면.. 등록하기 버튼의 색을 바꾸어 주는 함수
   let isActive = false;
   if (
-    writer !== "" &&
-    title !== "" &&
-    contents !== "" &&
-    password?.length >= 4 &&
-    password?.length <= 16
+    inputs.writer !== "" &&
+    inputs.title !== "" &&
+    inputs.contents !== "" &&
+    inputs.password?.length >= 4 &&
+    inputs.password?.length <= 16
   ) {
     isActive = true;
   }
 
-  useEffect(() => {
-    const images = props.data?.fetchBoard.images;
-    if (images !== undefined && images !== null) setFileUrls([...images]);
-  }, [props.data]);
-
-  // onClickBoardNew
+  // 게시판 등록 기능
   const onClickSubmit = async (): Promise<void> => {
     if (
-      writer !== "" &&
-      title !== "" &&
-      contents !== "" &&
-      password?.length >= 4 &&
-      password?.length <= 16
+      inputs.writer !== "" &&
+      inputs.title !== "" &&
+      inputs.contents !== "" &&
+      inputs.password?.length >= 4 &&
+      inputs.password?.length <= 16
     ) {
       alert("게시물이 등록되었습니다.");
 
@@ -88,17 +87,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
         const result = await createBoard({
           variables: {
             createBoardInput: {
-              writer,
-              password,
-              title,
-              contents,
-              youtubeUrl,
+              ...inputs,
               boardAddress: {
                 zipcode,
                 address,
                 addressDetail,
               },
-              images: [...fileUrls],
             },
           },
         });
@@ -110,11 +104,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  // 게시판 수정 기능
   const onClickUpdate = async (): Promise<void> => {
     if (
-      title !== "" &&
-      contents !== "" &&
-      youtubeUrl !== "" &&
+      inputs.title !== "" &&
+      inputs.contents !== "" &&
+      inputs.youtubeUrl !== "" &&
       zipcode !== "" &&
       address !== "" &&
       addressDetail !== ""
@@ -122,15 +117,16 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       alert("수정한 내용이 없습니다.");
       return;
     }
-    if (password === "") {
+    if (inputs.password === "") {
       alert("비밀번호를 입력해주세요.");
       return;
     }
 
     const updateBoardInput: IUpdateBoardInput = {};
-    if (title !== "") updateBoardInput.title = title;
-    if (contents !== "") updateBoardInput.contents = contents;
-    if (youtubeUrl !== "") updateBoardInput.youtubeUrl = youtubeUrl;
+    if (inputs.title !== "") updateBoardInput.title = inputs.title;
+    if (inputs.contents !== "") updateBoardInput.contents = inputs.contents;
+    if (inputs.youtubeUrl !== "")
+      updateBoardInput.youtubeUrl = inputs.youtubeUrl;
     if (zipcode !== "" || address !== "" || addressDetail !== "") {
       updateBoardInput.boardAddress = {};
       if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
@@ -149,7 +145,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       const result = await updateBoard({
         variables: {
           boardId: router.query.boardId,
-          password,
+          password: inputs.password,
           updateBoardInput,
         },
       });
@@ -159,7 +155,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
-  // 주소 모달
+  // 주소 모달창 기능
   const [isOpen, setIsOpen] = useState(false);
 
   const onClickAddressSearch = (): void => {
@@ -171,13 +167,16 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     setIsOpen((prev) => !prev);
   };
 
-  // 파일 업로드
-  const onChangeFileUrls = (fileUrl: string, index: number): void => {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
+  // 파일 업로드 기능
+  // const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const onChangeFile = async (event: any): Promise<void> => {
+    const file = event?.target.files?.[0];
+    console.log(file);
+
+    const result = await uploadFile({ variables: { file } });
+    console.log(result);
   };
-  console.log(fileUrls);
+  void onChangeFile("허스키로 인한 임시 선언// 기능없음");
 
   return (
     <BoardWriteUI
@@ -197,8 +196,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       zipcode={zipcode}
       address={address}
       // Upload
-      onChangeFileUrls={onChangeFileUrls}
-      fileUrls={fileUrls}
+      // onChangeFile={onChangeFile}
     />
   );
 }
