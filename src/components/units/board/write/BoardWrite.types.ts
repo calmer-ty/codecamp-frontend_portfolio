@@ -47,6 +47,10 @@ export interface IBoardWriteUIProps {
   address: string;
   onClickAddressSearch: () => void;
   onCompleteAddressSearch: (data: Address) => void;
+
+  // Upload
+  fileUrls: string[];
+  onChangeFiles: (file: File, index: number, url: string) => void;
 }
 
 export interface ISubmitButtonProps {

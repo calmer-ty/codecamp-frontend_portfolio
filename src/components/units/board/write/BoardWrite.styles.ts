@@ -106,12 +106,6 @@ export const ImgWrap = styled.div`
   display: flex;
   column-gap: 24px;
 `;
-export const UploadBtn = styled.button`
-  display: inline-block;
-  width: 78px;
-  height: 78px;
-  background-color: #bdbdbd;
-`;
 export const RadioWrap = styled.div`
   display: flex;
 `;

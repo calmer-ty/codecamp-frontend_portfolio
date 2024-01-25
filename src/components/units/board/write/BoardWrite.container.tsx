@@ -164,6 +164,29 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     setIsOpen((prev) => !prev);
   };
 
+  // Upload
+  const [files, setFiles] = useState<File[]>([]);
+  const [fileUrls, setFileUrls] = useState<string[]>([]);
+
+  const onChangeFiles = (file: File, index: number, url: string): void => {
+    const newFiles = [...files];
+    const newFileUrls = [...fileUrls];
+
+    if (files[index]) {
+      newFiles[index] = file;
+      newFileUrls[index] = url;
+    } else {
+      newFiles.push(file);
+      newFileUrls.push(url);
+    }
+
+    setFiles([...files]);
+    setFileUrls([...fileUrls]);
+
+    console.log(files);
+    // console.log(fileUrls);
+  };
+
   return (
     <BoardWriteUI
       register={register}
@@ -181,6 +204,9 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       onCompleteAddressSearch={onCompleteAddressSearch}
       zipcode={zipcode}
       address={address}
+      // Upload
+      onChangeFiles={onChangeFiles}
+      fileUrls={fileUrls}
     />
   );
 }

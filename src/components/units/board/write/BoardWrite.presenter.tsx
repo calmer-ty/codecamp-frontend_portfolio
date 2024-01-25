@@ -1,3 +1,4 @@
+import UploadBtn01 from "../../../commons/uploadBtn01/UploadBtn01.container";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
 
@@ -123,9 +124,14 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
           <S.ColWrap>
             <S.Label>사진 첨부</S.Label>
             <S.ImgWrap>
-              <S.UploadBtn>+</S.UploadBtn>
-              <S.UploadBtn>+</S.UploadBtn>
-              <S.UploadBtn>+</S.UploadBtn>
+              {new Array(3).fill(1).map((data, index) => (
+                <UploadBtn01
+                  key={`${data}_${index}`}
+                  index={index}
+                  onChangeFiles={props.onChangeFiles}
+                  fileUrls={props.fileUrls}
+                />
+              ))}
             </S.ImgWrap>
           </S.ColWrap>
 
