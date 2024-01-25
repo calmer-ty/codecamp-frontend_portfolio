@@ -1,6 +1,6 @@
 export const getDate = (date: any): string => {
   if (typeof date !== "string") {
-    return "날짜 불러오기 실패";
+    return "";
   }
   const _date = new Date(date);
   const yyyy = _date.getFullYear();

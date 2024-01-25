@@ -7,8 +7,8 @@ import type {
   IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
 import UploadBtnUI from "./UploadBtn01.presenter";
-import { UPLOAD_FILE } from "./UpdateBtn01.queries";
-import type { IUploadBtn01Props } from "./UpdateBtn01.types";
+import { UPLOAD_FILE } from "./UploadBtn01.queries";
+import type { IUploadBtn01Props } from "./UploadBtn01.types";
 import { Modal } from "antd";
 
 export default function UploadBtn01(props: IUploadBtn01Props): JSX.Element {

@@ -1,5 +1,5 @@
-import type { IUploadBtnUI01Props } from "./UpdateBtn01.types";
-import * as S from "./UpdateBtn01.styles";
+import type { IUploadBtnUI01Props } from "./UploadBtn01.types";
+import * as S from "./UploadBtn01.styles";
 
 export default function UploadBtnUI(props: IUploadBtnUI01Props): JSX.Element {
   return (

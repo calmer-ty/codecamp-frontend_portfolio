@@ -11,7 +11,7 @@ import type { IBoardWriteProps, IFormValues } from "./BoardWrite.types";
 
 // API
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // Library
 import type { Address } from "react-daum-postcode";
 // UI
@@ -58,7 +58,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   // 모든 input 값에 입력 값이 있다면.. 등록하기 버튼의 색을 바꾸어 주는 함수
   let isActive = false;
-
   if (
     writer !== "" &&
     title !== "" &&
@@ -68,6 +67,11 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   ) {
     isActive = true;
   }
+
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images !== undefined && images !== null) setFileUrls([...images]);
+  }, [props.data]);
 
   // onClickBoardNew
   const onClickSubmit = async (): Promise<void> => {

@@ -13,7 +13,7 @@ export default function BoardDetailUI(props: BoardDetailUIProps): JSX.Element {
               <S.ColWrap>
                 <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
                 <S.CreatedAt>
-                  {getDate(props.data?.fetchBoard?.createdAt)}
+                  {getDate(props.data?.fetchBoard?.createdAt ?? "")}
                 </S.CreatedAt>
               </S.ColWrap>
             </S.RowWrap>
