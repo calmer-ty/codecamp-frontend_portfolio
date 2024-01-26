@@ -1,20 +1,77 @@
-import { useRef } from "react";
+import { type ChangeEvent, useRef } from "react";
 import * as S from "./Upload01.styles";
+import type {
+  IMutation,
+  IMutationUploadFileArgs,
+} from "../../../../commons/types/generated/types";
+import { gql, useMutation } from "@apollo/client";
+import { Modal } from "antd";
+import checkValidationImg from "./Upload01.validation";
 
-export default function Upload01(props: any): JSX.Element {
+interface IUpload01Props {
+  index: number;
+  fileUrl: string;
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
+}
+
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
+  }
+`;
+
+export default function Upload01(props: IUpload01Props): JSX.Element {
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
+
+  // 참조 기능
   const fileRef = useRef<HTMLInputElement>(null);
-
   const onClickUpload = (): void => {
     fileRef.current?.click();
   };
+
+  const onChangeFile = async (
+    event: ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
+    const file = event?.target.files?.[0];
+
+    // 파일 업로드 조건을 걸어준다
+    const isValid = checkValidationImg(file);
+    if (!isValid) return;
+
+    try {
+      const result = await uploadFile({ variables: { file } });
+      if (result.data?.uploadFile.url === undefined) return;
+      // 업로드 API 결과 값과, 프리젠터에서 받은 index를 게시판 컨테이너로 전달인자를 보낸다
+      props.onChangeFileUrls(result.data?.uploadFile.url, props.index);
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
+  };
   return (
     <>
-      {/* <S.UploadImg src={`http://storage.googleapis.com/${}`} /> */}
-      <S.UploadBtn onClick={onClickUpload}>
-        <>+</>
-        <>Upload</>
-      </S.UploadBtn>
-      <S.UploadInput type="file" ref={fileRef} onChange={props.onChangeFile} />
+      {props.fileUrl !== "" ? (
+        // fileUrl에 값이 있다면 이미지 요소를 보여주고 없다면 버튼을 보여준다
+        <S.UploadImg
+          // 참조한 UploadInput을 클릭 이벤트로 넣어준다
+          onClick={onClickUpload}
+          src={`http://storage.googleapis.com/${props.fileUrl}`}
+        />
+      ) : (
+        <S.UploadBtn
+          // 참조한 UploadInput을 클릭 이벤트로 넣어준다
+          onClick={onClickUpload}
+        >
+          <>+</>
+          <>Upload</>
+        </S.UploadBtn>
+      )}
+      {/* UploadInput을 참조한다 */}
+      <S.UploadInput type="file" ref={fileRef} onChange={onChangeFile} />
     </>
   );
 }

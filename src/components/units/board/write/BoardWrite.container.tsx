@@ -5,14 +5,13 @@ import type {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
-  IMutationUploadFileArgs,
   IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
 import type { IBoardWriteProps, IFormValues } from "./BoardWrite.types";
 
 // API
-import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./BoardWrite.queries";
-import { useState } from "react";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { useEffect, useState } from "react";
 // Library
 import type { Address } from "react-daum-postcode";
 // UI
@@ -29,7 +28,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   } = useForm<IFormValues>();
 
   const onSubmitHandler = (data: IFormValues): void => {
-    console.log(data);
+    // console.log(data);
   };
 
   // 입력값 변수
@@ -46,6 +45,8 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const [address, setAddress] = useState("");
   const addressDetail = watch().addressDetail;
 
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
   // DATA API
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -55,10 +56,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
 
   // 모든 input 값에 입력 값이 있다면.. 등록하기 버튼의 색을 바꾸어 주는 함수
   let isActive = false;
@@ -93,6 +90,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                 address,
                 addressDetail,
               },
+              images: fileUrls,
             },
           },
         });
@@ -106,13 +104,17 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   // 게시판 수정 기능
   const onClickUpdate = async (): Promise<void> => {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
     if (
       inputs.title !== "" &&
       inputs.contents !== "" &&
       inputs.youtubeUrl !== "" &&
-      zipcode !== "" &&
-      address !== "" &&
-      addressDetail !== ""
+      zipcode === "" &&
+      address === "" &&
+      addressDetail === "" &&
+      !isChangedFiles
     ) {
       alert("수정한 내용이 없습니다.");
       return;
@@ -134,6 +136,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       if (addressDetail !== "")
         updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
+    if (isChangedFiles) updateBoardInput.images = fileUrls;
 
     // boardId의 타입이 문자가 아닐 때 함수 실행 종료
     if (typeof router.query.boardId !== "string") {
@@ -168,15 +171,21 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   };
 
   // 파일 업로드 기능
-  // const [fileUrls, setFileUrls] = useState(["", "", ""]);
-  const onChangeFile = async (event: any): Promise<void> => {
-    const file = event?.target.files?.[0];
-    console.log(file);
 
-    const result = await uploadFile({ variables: { file } });
-    console.log(result);
+  // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선
+  // Upload 컴포넌트의 file input클릭 시 얻어온 url 값이 필요하다
+  const onChangeFileUrls = (fileUrl: string, index: number): void => {
+    // 객체나 배열은 값을 바꾸면 주소값은 그대로이기 떄문에 setState 에서 인식을 하지 못하여 리랜더링이 되지 않는다
+    // 그래서 얕은 복사를 하여 새로운 배열로 변수를 만들어주어 배열 전체를 바꾸는식으로 스테이트 값을 변경한다.
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
-  void onChangeFile("허스키로 인한 임시 선언// 기능없음");
+
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images !== undefined && images !== null) setFileUrls([...images]);
+  }, [props.data]);
 
   return (
     <BoardWriteUI
@@ -196,7 +205,8 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       zipcode={zipcode}
       address={address}
       // Upload
-      // onChangeFile={onChangeFile}
+      fileUrls={fileUrls}
+      onChangeFileUrls={onChangeFileUrls}
     />
   );
 }

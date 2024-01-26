@@ -60,6 +60,7 @@ export const Title = styled.div`
   font-size: 36px;
   font-weight: 700;
 `;
+export const ImgWrap = styled.div``;
 export const ImgItem = styled.img`
   width: 100%;
   margin-bottom: 20px;

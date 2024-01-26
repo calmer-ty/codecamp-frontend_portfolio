@@ -25,6 +25,7 @@ export default function BoardDetail(): JSX.Element {
       variables: { boardId: router.query.boardId },
     }
   );
+
   console.log(data);
 
   const [deleteBoard] = useMutation<
@@ -43,7 +44,6 @@ export default function BoardDetail(): JSX.Element {
       alert("시스템에 문제가 있습니다.");
       return;
     }
-
     void router.push("/boards");
   };
   // 게시물 수정 페이지로 이동

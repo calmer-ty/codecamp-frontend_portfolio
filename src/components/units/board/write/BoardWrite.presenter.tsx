@@ -124,20 +124,13 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
           <S.ColWrap>
             <S.Label>사진 첨부</S.Label>
             <S.ImgWrap>
-              {/* {props.fileUrls.map((el, index) => (
-                <UploadBtn01
-                  key={`${el}_${index}`}
-                  index={index}
-                  fileUrl={el}
-                  onChangeFileUrls={props.onChangeFileUrls}
-                />
-              ))} */}
-              {new Array(3).fill("upload").map((el, index) => {
-                console.log(el, index);
+              {props.fileUrls.map((el, index) => {
                 return (
                   <Upload01
                     key={`${el}_${index}`}
-                    onChangeFile={props.onChangeFile}
+                    index={index}
+                    fileUrl={el}
+                    onChangeFileUrls={props.onChangeFileUrls}
                   />
                 );
               })}

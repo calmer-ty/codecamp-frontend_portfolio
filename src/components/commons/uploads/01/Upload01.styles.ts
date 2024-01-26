@@ -8,4 +8,8 @@ export const UploadBtn = styled.button`
 export const UploadInput = styled.input`
   display: none;
 `;
-export const UploadImg = styled.img``;
+export const UploadImg = styled.img`
+  width: 78px;
+  height: 78px;
+  cursor: pointer;
+`;
