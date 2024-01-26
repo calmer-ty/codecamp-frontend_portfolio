@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import type { ChangeEvent, MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -14,4 +14,8 @@ export interface BoardListUIProps {
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   count?: number;
+
+  // 검색
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  keyword: string;
 }
