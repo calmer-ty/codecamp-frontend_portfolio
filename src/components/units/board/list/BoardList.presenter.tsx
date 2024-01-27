@@ -36,7 +36,9 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
                     props.keyword,
                     `${SECRET_STRING}${props.keyword}${SECRET_STRING}`
                   )
+                  // 입력된 키워드 값의 문자열을 시크릿코드를 붙여 변경해주고
                   .split(SECRET_STRING)
+                  // 시크릿 코드 기준으로 잘라 배열로 변환한다.
                   .map((el) => (
                     <S.KeywordToken
                       key={uuidv4()}

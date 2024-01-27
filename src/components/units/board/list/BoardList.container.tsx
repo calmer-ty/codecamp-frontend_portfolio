@@ -29,12 +29,13 @@ export default function BoardList(): JSX.Element {
   const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
+    // 보드 카운트를 검색할 때마다 리패치 한다
   >(FETCH_BOARDS_COUNT);
 
   const onClickMoveToBoardDetail = (
     event: MouseEvent<HTMLButtonElement>
   ): void => {
-    // 이벤트 타겟은 여러 기능으로 사용되기 떄문에 타입을 정의해주어야 한다.
+    // 이벤트 타겟은 여러 기능으로 사용되기 떄문에 타입을 정의해주어야 한다
     if (event.target instanceof HTMLButtonElement)
       void router.push(`/boards/${event.target.id}`);
   };
@@ -45,9 +46,7 @@ export default function BoardList(): JSX.Element {
   const onChangeKeyword = (value: string): void => {
     setKeyword(value);
   };
-
-  console.log(data);
-  console.log(dataBoardsCount?.fetchBoardsCount);
+  // 키워드가 바뀔 때마다 리랜더링 하는 함수를 검색 컴포넌트로 보내준다
 
   return (
     <>
