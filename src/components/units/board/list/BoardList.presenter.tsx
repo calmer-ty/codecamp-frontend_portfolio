@@ -2,15 +2,19 @@ import * as S from "./BoardList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 import type { BoardListUIProps } from "./BoardList.types";
-import Pagination from "../../../commons/pagination/Pagination.container";
-import SearchBar01 from "../../../commons/searchbar/01/SearchBar01.container";
+import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
+import Searchbar01 from "../../../commons/searchbar/01/Searchbar01.container";
 import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: BoardListUIProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
-        <SearchBar01 onChangeSearch={props.onChangeSearch} />
+        <Searchbar01
+          onChangeKeyword={props.onChangeKeyword}
+          refetch={props.refetch}
+          refetchBoardsCount={props.refetchBoardsCount}
+        />
         <S.Table>
           <S.Header>
             <S.HeaderItem>번호</S.HeaderItem>
@@ -43,7 +47,7 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
           ))}
         </S.Table>
         {/* Pagination */}
-        <Pagination refetch={props.refetch} count={props.count} />
+        <Pagination01 refetch={props.refetch} count={props.count} />
         <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
           <S.MoveBtnIcon src="/images/board/list/ic_create.png" />
           게시물 등록하기

@@ -2,7 +2,7 @@ import type { ApolloQueryResult } from "@apollo/client";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
-} from "../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
 import type { MouseEvent } from "react";
 
 export interface IPageProps {
@@ -12,14 +12,14 @@ export interface IPageBtnProps {
   onDisable: boolean;
 }
 
-export interface IPaginationProps {
+export interface IPagination01Props {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   count?: number;
 }
 
-export interface IPaginationUIProps {
+export interface IPagination01UIProps {
   startPage: number;
   activedPage: number;
   lastPage: number;

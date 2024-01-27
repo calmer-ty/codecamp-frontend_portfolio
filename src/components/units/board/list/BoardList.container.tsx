@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import type { MouseEvent, ChangeEvent } from "react";
+import type { MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -11,7 +11,6 @@ import type {
 import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.queries";
 // UI
 import BoardListUI from "./BoardList.presenter";
-import _ from "lodash";
 
 export default function BoardList(): JSX.Element {
   // Router
@@ -27,7 +26,7 @@ export default function BoardList(): JSX.Element {
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
 
-  const { data: dataBoardsCount } = useQuery<
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
@@ -43,14 +42,12 @@ export default function BoardList(): JSX.Element {
   // 검색 기능
   const [keyword, setKeyword] = useState("");
 
-  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>): void => {
-    getDebounce(event.currentTarget.value);
+  const onChangeKeyword = (value: string): void => {
+    setKeyword(value);
   };
 
-  const getDebounce = _.debounce((value: string) => {
-    void refetch({ search: value, page: 1 });
-    setKeyword(value);
-  }, 500);
+  console.log(data);
+  console.log(dataBoardsCount?.fetchBoardsCount);
 
   return (
     <>
@@ -61,8 +58,9 @@ export default function BoardList(): JSX.Element {
         onClickMoveToBoardNew={onClickMoveToBoardNew}
         onClickMoveToBoardDetail={onClickMoveToBoardDetail}
         // 검색
-        onChangeSearch={onChangeSearch}
         keyword={keyword}
+        onChangeKeyword={onChangeKeyword}
+        refetchBoardsCount={refetchBoardsCount}
       />
     </>
   );

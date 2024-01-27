@@ -1,7 +1,9 @@
-import * as S from "./Pagination.styles";
-import type { IPaginationUIProps } from "./Pagination.types";
+import * as S from "./Pagination01.styles";
+import type { IPagination01UIProps } from "./Pagination01.types";
 
-export default function PaginationUI(props: IPaginationUIProps): JSX.Element {
+export default function Pagination01UI(
+  props: IPagination01UIProps
+): JSX.Element {
   return (
     <S.Wrapper>
       <S.PageBtn
@@ -10,19 +12,6 @@ export default function PaginationUI(props: IPaginationUIProps): JSX.Element {
       >
         {"<"}
       </S.PageBtn>
-      {/* {new Array(10).fill(1).map(
-        (_, index) =>
-          props.startPage + index <= props.lastPage && (
-            <S.Page
-              key={props.startPage + index}
-              id={String(props.startPage + index)}
-              onClick={props.onClickPage}
-              isActive={props.startPage + index === props.activedPage}
-            >
-              {props.startPage + index}
-            </S.Page>
-          )
-      )} */}
       {new Array(10)
         .fill(1)
         .filter((_, index) => {

@@ -1,7 +1,8 @@
-import type { ChangeEvent, MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
@@ -16,6 +17,9 @@ export interface BoardListUIProps {
   count?: number;
 
   // 검색
-  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
   keyword: string;
+  onChangeKeyword: (value: string) => void;
+  refetchBoardsCount: (
+    variables?: Partial<IQueryFetchBoardsCountArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
 }

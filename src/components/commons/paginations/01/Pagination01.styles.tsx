@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import type { IPageBtnProps, IPageProps } from "./Pagination.types";
+import type { IPageBtnProps, IPageProps } from "./Pagination01.types";
 
 export const Wrapper = styled.div`
   display: flex;

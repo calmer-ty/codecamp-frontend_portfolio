@@ -1,6 +1,6 @@
-export const getDate = (date: any): string => {
+export const getDate = (date: unknown): string => {
   if (typeof date !== "string") {
-    return "";
+    return "-";
   }
   const _date = new Date(date);
   const yyyy = _date.getFullYear();
