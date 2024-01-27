@@ -23,3 +23,7 @@ export interface BoardListUIProps {
     variables?: Partial<IQueryFetchBoardsCountArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
 }
+
+export interface IKeywordTokenProps {
+  isMatched: boolean;
+}

@@ -6,6 +6,8 @@ import Pagination01 from "../../../commons/paginations/01/Pagination01.container
 import Searchbar01 from "../../../commons/searchbar/01/Searchbar01.container";
 import { v4 as uuidv4 } from "uuid";
 
+const SECRET_STRING = "!@#$";
+
 export default function BoardListUI(props: BoardListUIProps): JSX.Element {
   return (
     <S.Wrapper>
@@ -30,15 +32,19 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
                 onClick={props.onClickMoveToBoardDetail}
               >
                 {el.title
-                  .replaceAll(props.keyword, `!@#${props.keyword}!@#`)
-                  .split("!@#")
+                  .replaceAll(
+                    props.keyword,
+                    `${SECRET_STRING}${props.keyword}${SECRET_STRING}`
+                  )
+                  .split(SECRET_STRING)
                   .map((el) => (
-                    <span
+                    <S.KeywordToken
                       key={uuidv4()}
-                      style={{ color: props.keyword === el ? "red" : "" }}
+                      isMatched={props.keyword === el}
+                      // style={{ color: props.keyword === el ? "red" : "" }}
                     >
                       {el}
-                    </span>
+                    </S.KeywordToken>
                   ))}
               </S.ListItemTitle>
               <S.ListItem>{el.writer}</S.ListItem>

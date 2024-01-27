@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import type { IKeywordTokenProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -58,6 +59,9 @@ export const ListItemTitle = styled.button`
   :hover {
     color: blue;
   }
+`;
+export const KeywordToken = styled.span`
+  color: ${(props: IKeywordTokenProps) => (props.isMatched ? "red" : "")};
 `;
 
 export const TableBottom = styled.div`
