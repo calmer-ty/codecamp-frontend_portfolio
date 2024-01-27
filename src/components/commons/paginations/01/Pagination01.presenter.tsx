@@ -8,7 +8,7 @@ export default function Pagination01UI(
     <S.Wrapper>
       <S.PageBtn
         onClick={props.onClickPrevPage}
-        onDisable={props.startPage <= 1}
+        isDisabled={props.startPage <= 1}
       >
         {"<"}
       </S.PageBtn>
@@ -31,7 +31,7 @@ export default function Pagination01UI(
 
       <S.PageBtn
         onClick={props.onClickNextPage}
-        onDisable={props.lastPage - props.startPage < 10}
+        isDisabled={props.lastPage - props.startPage < 10}
       >
         {">"}
       </S.PageBtn>

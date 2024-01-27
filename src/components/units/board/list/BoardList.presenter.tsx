@@ -43,7 +43,6 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
                     <S.KeywordToken
                       key={uuidv4()}
                       isMatched={props.keyword === el}
-                      // style={{ color: props.keyword === el ? "red" : "" }}
                     >
                       {el}
                     </S.KeywordToken>

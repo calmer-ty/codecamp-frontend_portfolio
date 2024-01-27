@@ -5,5 +5,5 @@ export interface BoardListUIProps {
   docs?: DocumentData;
   // docs?: any;
   onClickMoveToBoardNew: () => void;
-  onClickMoveToBoardDetail: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickMoveToBoardDetail: (event: MouseEvent<HTMLDivElement>) => void;
 }

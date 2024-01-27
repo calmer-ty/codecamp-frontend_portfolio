@@ -9,7 +9,7 @@ export interface IPageProps {
   isActive: boolean;
 }
 export interface IPageBtnProps {
-  onDisable: boolean;
+  isDisabled: boolean;
 }
 
 export interface IPagination01Props {

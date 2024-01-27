@@ -33,11 +33,10 @@ export default function BoardList(): JSX.Element {
   >(FETCH_BOARDS_COUNT);
 
   const onClickMoveToBoardDetail = (
-    event: MouseEvent<HTMLButtonElement>
+    event: MouseEvent<HTMLDivElement>
   ): void => {
-    // 이벤트 타겟은 여러 기능으로 사용되기 떄문에 타입을 정의해주어야 한다
-    if (event.target instanceof HTMLButtonElement)
-      void router.push(`/boards/${event.target.id}`);
+    // 이벤트 타겟은 여러 기능으로 사용되기 떄문에 타입을 정의해주어야 한다 => 이벤트 버블링으로 인해 currentTarget으로 사용하면 id를 지정해줄 수 있다
+    void router.push(`/boards/${event.currentTarget.id}`);
   };
 
   // 검색 기능

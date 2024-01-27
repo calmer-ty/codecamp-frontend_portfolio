@@ -14,9 +14,9 @@ export const Page = styled.button`
   }
 `;
 export const PageBtn = styled.button`
-  opacity: ${(props: IPageBtnProps) => (props.onDisable ? "0" : "1")};
+  opacity: ${(props: IPageBtnProps) => (props.isDisabled ? "0" : "1")};
   cursor: ${(props: IPageBtnProps) =>
-    props.onDisable ? "initial" : "pointer"};
+    props.isDisabled ? "initial" : "pointer"};
   :hover {
     color: #ffd600;
   }

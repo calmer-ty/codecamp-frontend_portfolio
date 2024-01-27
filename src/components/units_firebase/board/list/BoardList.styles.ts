@@ -50,7 +50,7 @@ export const ListItem = styled.div`
   text-align: center;
   color: #4f4f4f;
 `;
-export const ListItemTitle = styled.button`
+export const ListItemTitle = styled.div`
   width: 400px;
   text-align: center;
   color: #4f4f4f;

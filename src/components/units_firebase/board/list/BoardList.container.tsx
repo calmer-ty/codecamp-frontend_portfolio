@@ -30,10 +30,10 @@ export default function BoardList(): JSX.Element {
   }, []);
 
   const onClickMoveToBoardDetail = (
-    event: MouseEvent<HTMLButtonElement>
+    event: MouseEvent<HTMLDivElement>
   ): void => {
     // 이벤트 타겟은 여러 기능으로 사용되기 떄문에 타입을 정의해주어야 한다.
-    if (event.target instanceof HTMLButtonElement)
+    if (event.target instanceof HTMLDivElement)
       void router.push(`/boards_firebase/${event.target.id}`);
   };
 
