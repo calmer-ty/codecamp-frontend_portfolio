@@ -7,12 +7,12 @@ interface ILayoutProps {
 }
 const LayoutBody = styled.div`
   padding: 74px 0;
-  /* background-color: #e1e5f2; */
 `;
 
 export default function Layout(props: ILayoutProps): JSX.Element {
   return (
     <>
+      {/* {isLogState === true && <LayoutHeader />} */}
       <LayoutHeader />
       <LayoutNavigation />
       <LayoutBody>{props.children}</LayoutBody>

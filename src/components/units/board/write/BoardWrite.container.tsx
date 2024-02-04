@@ -27,10 +27,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     formState: { errors },
   } = useForm<IFormValues>();
 
-  const onSubmitHandler = (data: IFormValues): void => {
-    // console.log(data);
-  };
-
   // 입력값 변수
   const inputs = {
     writer: watch().writer,
@@ -191,7 +187,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     <BoardWriteUI
       register={register}
       handleSubmit={handleSubmit}
-      onSubmitHandler={onSubmitHandler}
       errors={errors}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}

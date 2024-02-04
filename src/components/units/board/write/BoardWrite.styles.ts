@@ -10,14 +10,11 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const Container = styled.form`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  row-gap: 40px;
   width: 1200px;
-  padding: 100px 102px;
+  padding: 100px;
   border: 2px solid #bdbdbd;
   box-shadow: 5px 5px 5px #bdbdbd;
 `;
@@ -36,9 +33,17 @@ export const ColWrap = styled.div`
 `;
 
 export const Title = styled.div`
+  margin-bottom: 60px;
   font-size: 36px;
   font-weight: 700;
   text-align: center;
+`;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 20px;
 `;
 
 export const Label = styled.div`

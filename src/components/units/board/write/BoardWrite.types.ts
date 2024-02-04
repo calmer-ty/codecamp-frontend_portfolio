@@ -38,8 +38,7 @@ export interface IBoardWriteUIProps {
   // React Hook Form
   register: UseFormRegister<IFormValues>;
   handleSubmit: UseFormHandleSubmit<IFormValues>;
-  onSubmitHandler: (data: IFormValues) => void;
-  errors?: FieldErrors<IFormValues>;
+  errors: FieldErrors<IFormValues>;
 
   // Zipcode
   isOpen: boolean;

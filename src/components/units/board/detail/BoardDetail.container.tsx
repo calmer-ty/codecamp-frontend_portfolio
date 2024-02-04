@@ -13,6 +13,7 @@ import type {
 } from "../../../../commons/types/generated/types";
 // UI
 import BoardDetailUI from "./BoardDetail.presenter";
+import { FETCH_BOARDS } from "../list/BoardList.queries";
 
 export default function BoardDetail(): JSX.Element {
   const router = useRouter();
@@ -25,8 +26,6 @@ export default function BoardDetail(): JSX.Element {
       variables: { boardId: router.query.boardId },
     }
   );
-
-  console.log(data);
 
   const [deleteBoard] = useMutation<
     Pick<IMutation, "deleteBoard">,
@@ -65,6 +64,11 @@ export default function BoardDetail(): JSX.Element {
     try {
       await deleteBoard({
         variables: { boardId: data?.fetchBoard._id },
+        refetchQueries: [
+          {
+            query: FETCH_BOARDS,
+          },
+        ],
       });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
