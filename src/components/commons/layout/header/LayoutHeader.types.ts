@@ -5,7 +5,5 @@ export interface ILayoutHeaderProps {
   accessToken: string;
   onClickLogo: () => void;
   onClickMoveToLogin: () => void;
-}
-export interface IMemberItem {
-  isLogin: boolean;
+  onClickMoveToJoin: () => void;
 }

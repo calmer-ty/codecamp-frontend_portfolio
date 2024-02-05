@@ -1,5 +1,13 @@
 import styled from "@emotion/styled";
-import type { IMemberItem } from "./LayoutHeader.types";
+
+export const RowWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const ColWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,14 +24,29 @@ export const Logo = styled.div`
   height: 36px;
   font-size: 50px;
   font-weight: bold;
-  /* background: url("/images/layout/header/logo.png") no-repeat center/contain; */
 `;
 
-export const MemberItem = styled.button`
+export const UserInfoModal = styled.div`
+  cursor: pointer;
+`;
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  font-weight: bold;
+`;
+
+export const LoginBtn = styled.button`
   width: 92px;
   height: 44px;
   border-radius: 10px;
   font-weight: bold;
-  background-color: ${(props: IMemberItem) => (props.isLogin ? "#284b63" : "")};
-  color: ${(props: IMemberItem) => (props.isLogin ? "#ffffff" : "")};
+  background-color: #284b63;
+  color: #ffffff;
+`;
+export const JoinBtn = styled.button`
+  width: 92px;
+  height: 44px;
+  border-radius: 10px;
+  font-weight: bold;
 `;

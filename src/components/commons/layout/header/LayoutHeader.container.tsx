@@ -19,12 +19,16 @@ export default function LayoutHeader(): JSX.Element {
   const onClickMoveToLogin = (): void => {
     void router.push("/member/login");
   };
+  const onClickMoveToJoin = (): void => {
+    void router.push("/member/join");
+  };
   return (
     <LayoutHeaderUI
       data={data}
       accessToken={accessToken}
       onClickLogo={onClickLogo}
       onClickMoveToLogin={onClickMoveToLogin}
+      onClickMoveToJoin={onClickMoveToJoin}
     />
   );
 }

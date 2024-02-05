@@ -1,5 +1,5 @@
-import Login from "../../../src/components/units/member/login/MemberLogin.container";
+import MemberLogin from "../../../src/components/units/member/login/MemberLogin.container";
 
 export default function LoginPage(): JSX.Element {
-  return <Login />;
+  return <MemberLogin />;
 }

@@ -1,20 +1,22 @@
 import * as S from "./MemberLogin.styles";
-import type { IFormValues, ILoginUIProps } from "./MemberLogin.types";
+import type { IFormInputs, ILoginUIProps } from "./MemberLogin.types";
 
-export default function LoginUI(props: ILoginUIProps): JSX.Element {
+export default function MemberLoginUI(props: ILoginUIProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
         <S.Logo>Logo</S.Logo>
         <S.Form
-          onSubmit={props.handleSubmit((data: IFormValues): void => {
+          onSubmit={props.handleSubmit((data: IFormInputs): void => {
             console.log(data);
           })}
         >
           <S.LoginInput
             type="text"
             placeholder="이메일을 입력해주세요."
-            {...props.register("email", { required: "This is required." })}
+            {...props.register("email", {
+              required: "This is required.",
+            })}
           />
           <S.Error>{props.errors.email?.message}</S.Error>
           <S.LoginInput

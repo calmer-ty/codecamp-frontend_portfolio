@@ -3,14 +3,15 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
-import type { IFormValues } from "./MemberLogin.types";
-import LoginUI from "./MemberLogin.presenter";
+import { LOGIN_USER } from "./MemberLogin.queries";
+import MemberLoginUI from "./MemberLogin.presenter";
+import type { IFormInputs } from "./MemberLogin.types";
 import type {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../../../commons/types/generated/types";
-import { LOGIN_USER } from "./MemberLogin.queries";
-export default function Login(): JSX.Element {
+
+export default function MemberLogin(): JSX.Element {
   const router = useRouter();
 
   // FROM
@@ -19,7 +20,7 @@ export default function Login(): JSX.Element {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<IFormValues>();
+  } = useForm<IFormInputs>();
 
   const inputs = {
     email: watch().email,
@@ -60,11 +61,12 @@ export default function Login(): JSX.Element {
     }
   };
 
+  console.log(errors);
   return (
-    <LoginUI
+    <MemberLoginUI
       register={register}
-      errors={errors}
       handleSubmit={handleSubmit}
+      errors={errors}
       onClickLogin={onClickLogin}
     />
   );

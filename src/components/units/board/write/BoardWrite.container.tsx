@@ -183,6 +183,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
 
+  console.log(errors);
   return (
     <BoardWriteUI
       register={register}
