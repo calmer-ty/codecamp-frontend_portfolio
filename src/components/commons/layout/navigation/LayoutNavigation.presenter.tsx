@@ -1,9 +1,8 @@
 import { Fragment } from "react";
 import * as S from "./LayoutNavigation.styles";
-import type { MouseEvent } from "react";
 
 export interface LayoutNavigationUIProps {
-  onClickMenu: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickMenu: (page: string) => () => void;
 }
 
 export default function LayoutNavigationUI(
@@ -12,8 +11,8 @@ export default function LayoutNavigationUI(
   const NAVIGATION_MENUS = [
     { name: "Firebase", page: "/boards_firebase" },
     { name: "자유게시판", page: "/boards" },
-    { name: "중고마켓", page: "/markets" },
-    { name: "마이페이지", page: "/mypages" },
+    { name: "중고마켓", page: "/market/new" },
+    { name: "마이페이지", page: "/myPage" },
     { name: "랜덤강아지", page: "/randomDogImg" },
     { name: "OpenApi", page: "/openApi" },
   ];
@@ -23,7 +22,7 @@ export default function LayoutNavigationUI(
       <S.Container>
         {NAVIGATION_MENUS.map((el) => (
           <Fragment key={el.page}>
-            <S.MenuItem id={el.page} key={el.page} onClick={props.onClickMenu}>
+            <S.MenuItem onClick={props.onClickMenu(el.page)}>
               {el.name}
             </S.MenuItem>
           </Fragment>
