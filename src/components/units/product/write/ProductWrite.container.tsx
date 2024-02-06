@@ -30,7 +30,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     name: watch().name,
     remarks: watch().remarks,
     contents: watch().contents,
-    price: watch().price,
+    price: Number(watch().price),
     tags: watch().tags,
   };
 
@@ -76,6 +76,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             },
           },
         });
+        console.log(result);
         void router.push(`/boards/${result.data?.createUseditem._id}`);
       } catch (error) {
         if (error instanceof Error) alert(error.message);
@@ -163,7 +164,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
 
-  console.log(errors);
   return (
     <ProductWriteUI
       register={register}

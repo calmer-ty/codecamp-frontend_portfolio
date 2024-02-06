@@ -9,7 +9,8 @@ export const UploadInput = styled.input`
   display: none;
 `;
 export const UploadImg = styled.img`
-  width: 78px;
-  height: 78px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   cursor: pointer;
 `;

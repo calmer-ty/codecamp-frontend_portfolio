@@ -19,16 +19,13 @@ export const Container = styled.div`
   box-shadow: 5px 5px 5px #bdbdbd;
 `;
 
-export const RowWrap = styled.div`
+export const FlexRow = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   width: 100%;
 `;
-export const ColWrap = styled.div`
+export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
 `;
 
@@ -59,20 +56,10 @@ export const Error = styled.div`
   color: red;
 `;
 export const ProductInput = styled.input`
-  width: 1000px;
   height: 52px;
   padding: 0 12px;
 `;
 
-export const ZipcodeWrap = styled.div`
-  display: flex;
-`;
-export const Zipcode = styled.input`
-  width: 77px;
-  height: 52px;
-  padding: 0 12px;
-  text-align: center;
-`;
 export const SearchBtn = styled.button`
   width: 124px;
   height: 52px;
@@ -81,24 +68,14 @@ export const SearchBtn = styled.button`
   color: white;
 `;
 export const Address = styled.input`
-  width: 996px;
   height: 52px;
-  margin-top: 20px;
-  padding: 0 12px;
-`;
-
-export const Youtube = styled.input`
-  width: 996px;
-  height: 46px;
+  margin-bottom: 16px;
   padding: 0 12px;
 `;
 
 export const ImgWrap = styled.div`
   display: flex;
   column-gap: 24px;
-`;
-export const RadioWrap = styled.div`
-  display: flex;
 `;
 export const RadioLabel = styled.div`
   margin-left: 8px;

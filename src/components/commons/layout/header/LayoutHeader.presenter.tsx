@@ -1,17 +1,16 @@
 import * as S from "./LayoutHeader.styles";
-import { Dropdown, Space } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Avatar, Dropdown, Space } from "antd";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import type { ILayoutHeaderProps } from "./LayoutHeader.types";
 
 import type { MenuProps } from "antd";
-import Avatar01 from "../../icons/avatars/01";
 
 export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
   const items: MenuProps["items"] = [
     {
       label: (
         <S.RowWrap>
-          <Avatar01 />
+          <Avatar size={60} icon={<UserOutlined />} />
           <S.UserInfo>
             <div>{props.data?.fetchUserLoggedIn.name}</div>
             <div>100,000 P</div>
@@ -51,7 +50,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
                 }}
               >
                 <Space>
-                  <Avatar01 />
+                  <Avatar size={60} icon={<UserOutlined />} />
                   <S.RowWrap>{props.data?.fetchUserLoggedIn.name} 님</S.RowWrap>
                   <DownOutlined />
                 </Space>

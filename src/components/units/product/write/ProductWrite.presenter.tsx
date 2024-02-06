@@ -15,7 +15,7 @@ export default function ProductWriteUI(
               console.log(data);
             })}
           >
-            <S.ColWrap>
+            <S.FlexColumn>
               <S.Label>상품명</S.Label>
               <S.ProductInput
                 type="text"
@@ -27,11 +27,11 @@ export default function ProductWriteUI(
                 })}
               />
               <S.Error>{props.errors?.name?.message}</S.Error>
-            </S.ColWrap>
-            <S.ColWrap>
+            </S.FlexColumn>
+            <S.FlexColumn>
               <S.Label>상품 한줄요약</S.Label>
               <S.ProductInput
-                type="password"
+                type="text"
                 placeholder="비밀번호를 작성해주세요."
                 {...props.register("remarks", {
                   required: props.isEdit ? "" : "This is required.",
@@ -46,9 +46,9 @@ export default function ProductWriteUI(
                 })}
               />
               <S.Error>{props.errors?.remarks?.message}</S.Error>
-            </S.ColWrap>
+            </S.FlexColumn>
 
-            <S.ColWrap>
+            <S.FlexColumn>
               <S.Label>상품설명</S.Label>
               <S.ProductInput
                 type="text"
@@ -59,11 +59,12 @@ export default function ProductWriteUI(
                 })}
               />
               <S.Error>{props.errors?.contents?.message}</S.Error>
-            </S.ColWrap>
+            </S.FlexColumn>
 
-            <S.ColWrap>
+            <S.FlexColumn>
               <S.Label>판매가격</S.Label>
               <S.ProductInput
+                type="text"
                 placeholder="내용을 작성해주세요."
                 defaultValue={props.data?.fetchBoard.contents}
                 {...props.register("price", {
@@ -71,9 +72,9 @@ export default function ProductWriteUI(
                 })}
               />
               <S.Error>{props.errors?.price?.message}</S.Error>
-            </S.ColWrap>
+            </S.FlexColumn>
 
-            <S.ColWrap>
+            <S.FlexColumn>
               <S.Label>태그입력</S.Label>
               <S.ProductInput
                 placeholder="내용을 작성해주세요."
@@ -83,50 +84,47 @@ export default function ProductWriteUI(
                 })}
               />
               <S.Error>{props.errors?.tags?.message}</S.Error>
-            </S.ColWrap>
+            </S.FlexColumn>
 
-            <S.ColWrap>
-              <S.Label>주소</S.Label>
-              <S.ZipcodeWrap>
-                <S.Zipcode
-                  readOnly
-                  value={
-                    props.zipcode !== ""
-                      ? props.zipcode
-                      : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
-                  }
-                  {...props.register("zipcode", {
-                    required: props.isEdit ? "" : "This is required.",
-                  })}
-                />
-                <S.SearchBtn onClick={props.onClickAddressSearch}>
-                  우편번호 검색
-                </S.SearchBtn>
-              </S.ZipcodeWrap>
-              <S.Address
-                readOnly
-                defaultValue={
-                  // 주소 값이 비어있지 않다면 = 즉 주소 값이 있다면 새로 받아진 주소 값을 넣어줌.
-                  // 그렇지 않다면 패치한 값, 가지고 있던 주소 값을 넣어준다.
-                  props.address !== ""
-                    ? props.address
-                    : props.data?.fetchBoard.boardAddress?.address ?? ""
-                }
-                {...props.register("address", {
-                  required: props.isEdit ? "" : "This is required.",
-                })}
-              />
-              <S.Address
-                defaultValue={
-                  props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
-                }
-                {...props.register("addressDetail", {
-                  required: props.isEdit ? "" : "This is required.",
-                })}
-              />
-            </S.ColWrap>
+            <S.FlexRow>
+              <S.FlexColumn style={{ width: "40%" }}>
+                <S.Label>거래위치</S.Label>
+                <div>Map</div>
+              </S.FlexColumn>
+              <S.FlexColumn style={{ width: "60%" }}>
+                <S.FlexColumn>
+                  <S.Label>GPS</S.Label>
+                  <S.FlexRow>
+                    <input type="text" />
+                    <input type="text" />
+                  </S.FlexRow>
+                </S.FlexColumn>
+                <S.FlexColumn>
+                  <S.Label>주소</S.Label>
+                  <S.Address
+                    readOnly
+                    defaultValue={
+                      props.address !== ""
+                        ? props.address
+                        : props.data?.fetchBoard.boardAddress?.address ?? ""
+                    }
+                    {...props.register("address", {
+                      required: props.isEdit ? "" : "This is required.",
+                    })}
+                  />
+                  <S.Address
+                    defaultValue={
+                      props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
+                    }
+                    {...props.register("addressDetail", {
+                      required: props.isEdit ? "" : "This is required.",
+                    })}
+                  />
+                </S.FlexColumn>
+              </S.FlexColumn>
+            </S.FlexRow>
 
-            <S.ColWrap>
+            <S.FlexColumn>
               <S.Label>사진 첨부</S.Label>
               <S.ImgWrap>
                 {props.fileUrls.map((el, index) => {
@@ -140,30 +138,31 @@ export default function ProductWriteUI(
                   );
                 })}
               </S.ImgWrap>
-            </S.ColWrap>
+            </S.FlexColumn>
 
-            {/* <S.ColWrap>
-              <S.Label>메인 설정</S.Label>
-              <S.RadioWrap>
+            <S.FlexColumn>
+              <S.Label>메인 사진 설정</S.Label>
+              <S.FlexRow>
                 <S.RadioBtn
                   type="radio"
                   {...props.register("mainSetting", {
                     required: props.isEdit ? "" : "This is required.",
                   })}
                 />
-                <S.RadioLabel>유튜브</S.RadioLabel>
+                <S.RadioLabel>사진1</S.RadioLabel>
                 <S.RadioBtn
                   type="radio"
                   {...props.register("mainSetting", {
                     required: props.isEdit ? "" : "This is required.",
                   })}
                 />
-                <S.RadioLabel>사진</S.RadioLabel>
-              </S.RadioWrap>
-            </S.ColWrap> */}
+                <S.RadioLabel>사진2</S.RadioLabel>
+              </S.FlexRow>
+            </S.FlexColumn>
 
             <S.SubmitBtn
               // onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
+              onClick={props.onClickSubmit}
               isActive={props.isEdit ? true : props.isActive}
             >
               {props.isEdit ? "수정" : "등록"}하기
