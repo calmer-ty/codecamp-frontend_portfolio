@@ -5,6 +5,7 @@ interface IInputProps {
   register: UseFormRegisterReturn;
   type?: "text" | "password";
   placeholder?: string;
+  value?: string;
   defaultValue?: string;
   readOnly?: boolean;
 }
@@ -16,5 +17,14 @@ const Input = styled.input`
 `;
 
 export default function Input01(props: IInputProps): JSX.Element {
-  return <Input type={props.type ?? "text"} {...props.register} />;
+  return (
+    <Input
+      type={props.type ?? "text"}
+      {...props.register}
+      value={props.value}
+      defaultValue={props.defaultValue}
+      placeholder={props.placeholder}
+      readOnly={props.readOnly}
+    />
+  );
 }

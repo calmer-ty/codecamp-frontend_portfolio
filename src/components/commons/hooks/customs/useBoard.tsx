@@ -1,11 +1,16 @@
-import { useRouter } from "next/router";
 import { useMutationCreateBoard } from "../mutations/useMutationCreateBoard";
 import { useMutationUpdateBoard } from "../mutations/useMutationUpdateBoard";
 import type { IFormData } from "../../../units/board/write/BoardWrite.types";
 import type { IUpdateBoardInput } from "../../../../commons/types/generated/types";
+import { Modal } from "antd";
+import { FETCH_BOARD } from "../../../units/board/detail/BoardDetail.queries";
+import { useQueryIdChecker } from "./useQueryIdChecker";
+import { useMoveToPage } from "./useMoveToPage";
 
 export const useBoard = () => {
-  const router = useRouter();
+  const { id } = useQueryIdChecker("boardId");
+  const { onClickMoveToPage } = useMoveToPage();
+
   const [createBoard] = useMutationCreateBoard();
   const [updateBoard] = useMutationUpdateBoard();
 
@@ -26,7 +31,8 @@ export const useBoard = () => {
           },
         },
       });
-      void router.push(`/boards/${result.data?.createBoard._id}`);
+      // void router.push(`/boards/${result.data?.createBoard._id}`);
+      onClickMoveToPage(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -36,6 +42,11 @@ export const useBoard = () => {
     // const currentFiles = JSON.stringify(fileUrls);
     // const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
     // const isChangedFiles = currentFiles !== defaultFiles;
+
+    if (data.password === "") {
+      Modal.error({ content: "비밀번호를 입력해주세요." });
+      return;
+    }
 
     const updateBoardInput: IUpdateBoardInput = {};
     if (data.title !== "") updateBoardInput.title = data.title;
@@ -57,19 +68,25 @@ export const useBoard = () => {
     // if (isChangedFiles) updateBoardInput.images = fileUrls;
 
     // boardId의 타입이 문자가 아닐 때 함수 실행 종료
-    if (typeof router.query.boardId !== "string") {
+    if (typeof id !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
     }
     try {
       const result = await updateBoard({
         variables: {
-          boardId: router.query.boardId,
+          boardId: id,
           password: data.password,
           updateBoardInput,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: { boardId: id },
+          },
+        ],
       });
-      void router.push(`/boards/${result.data?.updateBoard._id}`);
+      onClickMoveToPage(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

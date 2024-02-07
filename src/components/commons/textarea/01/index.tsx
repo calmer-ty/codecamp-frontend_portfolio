@@ -15,5 +15,11 @@ const Textarea = styled.textarea`
 `;
 
 export default function Textarea01(props: ITextareaProps): JSX.Element {
-  return <Textarea {...props.register} />;
+  return (
+    <Textarea
+      {...props.register}
+      placeholder={props.placeholder}
+      defaultValue={props.defaultValue}
+    />
+  );
 }

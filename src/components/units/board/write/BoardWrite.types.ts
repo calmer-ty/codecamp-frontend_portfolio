@@ -14,10 +14,5 @@ export interface IFormData {
 
 export interface IBoardWriteProps {
   isEdit: boolean;
-  isActive: boolean;
   data?: Pick<IQuery, "fetchBoard">;
 }
-
-// export interface ISubmitButtonProps {
-//   isActive: boolean;
-// }

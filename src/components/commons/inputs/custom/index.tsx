@@ -22,6 +22,10 @@ export default function InputCustom(props: IInputProps): JSX.Element {
       style={{ width: `${props.width}px` }}
       type={props.type ?? "text"}
       {...props.register}
+      value={props.value}
+      defaultValue={props.defaultValue}
+      placeholder={props.placeholder}
+      readOnly={props.readOnly}
     />
   );
 }
