@@ -5,7 +5,7 @@ import type {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../src/commons/types/generated/types";
-import BoardWrite from "../../../../src/components/units/board/write/BoardWrite.container";
+import BoardWrite from "../../../../src/components/units/board/write/BoardWrite.index";
 
 // edit 페이지만 데이터를 불러와야하기 때문에 edit만 fetch gql를 추가해준다
 const FETCH_BOARD = gql`
