@@ -4,7 +4,7 @@ import type {
   IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
 
-export const UPDATE_BOARD = gql`
+const UPDATE_BOARD = gql`
   mutation updateBoard(
     $updateBoardInput: UpdateBoardInput!
     $password: String

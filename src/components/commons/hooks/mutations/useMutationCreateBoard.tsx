@@ -4,7 +4,7 @@ import type {
   IMutationCreateBoardArgs,
 } from "../../../../commons/types/generated/types";
 
-export const CREATE_BOARD = gql`
+const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
       _id

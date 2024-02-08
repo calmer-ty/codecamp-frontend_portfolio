@@ -16,8 +16,6 @@ export const useMoveToPage = () => {
     void router.push(path);
   };
 
-  //   const set
-
   return {
     // visitedPage,
     onClickMoveToPage,

@@ -3,12 +3,12 @@ import type { UseFormRegisterReturn } from "react-hook-form";
 
 interface IInputProps {
   register: UseFormRegisterReturn;
+  width: number;
   type?: "text" | "password";
   placeholder?: string;
   value?: string;
   defaultValue?: string;
   readOnly?: boolean;
-  width: number;
 }
 
 const Input = styled.input`
@@ -17,6 +17,7 @@ const Input = styled.input`
 `;
 
 export default function InputCustom(props: IInputProps): JSX.Element {
+  console.log(props.defaultValue);
   return (
     <Input
       style={{ width: `${props.width}px` }}

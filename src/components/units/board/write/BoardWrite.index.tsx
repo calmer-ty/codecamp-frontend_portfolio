@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-// import Upload01 from "../../../commons/uploads/01/Upload01.container";
+import Upload01 from "../../../commons/uploads/01/Upload01.container";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteProps, IFormData } from "./BoardWrite.types";
 import type { Address } from "react-daum-postcode";
@@ -10,8 +10,8 @@ import { schema } from "../../../../commons/libraries/validation";
 
 // 커스텀 훅
 import { useBoard } from "../../../commons/hooks/customs/useBoard";
-import InputCustom from "../../../commons/inputs/custom";
 // 커스텀 컴포넌트
+import InputCustom from "../../../commons/inputs/custom";
 import Error01 from "../../../commons/errors/01";
 import Input01 from "../../../commons/inputs/01";
 import Label01 from "../../../commons/labels/01";
@@ -22,18 +22,18 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const { register, handleSubmit, formState } = useForm<IFormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
-    defaultValues: {
-      writer: props.data?.fetchBoard.writer ?? "",
-      title: props.data?.fetchBoard.title ?? "",
-      contents: props.data?.fetchBoard.contents ?? "",
-      addressDetail: props.data?.fetchBoard.boardAddress?.addressDetail ?? "",
-      youtubeUrl: props.data?.fetchBoard.youtubeUrl ?? "",
-    },
+    // defaultValues: {
+    //   writer: props.data?.fetchBoard.writer ?? "",
+    //   title: props.data?.fetchBoard.title ?? "",
+    //   contents: props.data?.fetchBoard.contents ?? "",
+    //   addressDetail: props.data?.fetchBoard.boardAddress?.addressDetail ?? "",
+    //   youtubeUrl: props.data?.fetchBoard.youtubeUrl ?? "",
+    // },
   });
 
   const { onClickSubmit, onClickUpdate } = useBoard();
-  // const { onChangeFileUrls } = useUploadFiles();
 
+  // 주소 검색창
   const [isOpen, setIsOpen] = useState(false);
 
   const [zipcode, setZipcode] = useState("");
@@ -48,6 +48,19 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     setZipcode(data.zonecode);
     setIsOpen((prev) => !prev);
   };
+
+  // 파일 전송
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
+  const onChangeFileUrls = (fileUrl: string, index: number): void => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images !== undefined && images !== null) setFileUrls([...images]);
+  }, [props.data]);
 
   return (
     <>
@@ -65,6 +78,8 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                 <InputCustom
                   width={480}
                   placeholder="이름을 입력해주세요."
+                  value={props.data?.fetchBoard.writer ?? ""}
+                  defaultValue={props.data?.fetchBoard.writer ?? ""}
                   readOnly={Boolean(props.data?.fetchBoard.writer)}
                   register={register("writer")}
                 />
@@ -96,6 +111,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               <Input01
                 placeholder="제목을 입력해주세요."
                 register={register("title")}
+                value={props.data?.fetchBoard.title ?? ""}
               />
               <Error01 text={formState.errors.title?.message} />
             </S.ColWrap>
@@ -142,7 +158,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                 defaultValue={
                   props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
                 }
-                readOnly
                 register={register("addressDetail")}
               />
               <Error01 text={formState.errors.addressDetail?.message} />
@@ -158,7 +173,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
             <S.ColWrap>
               <Label01 text="사진 첨부" />
-              {/* <S.ImgWrap>
+              <S.ImgWrap>
                 {fileUrls.map((el, index) => {
                   return (
                     <Upload01
@@ -169,7 +184,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                     />
                   );
                 })}
-              </S.ImgWrap> */}
+              </S.ImgWrap>
             </S.ColWrap>
 
             <S.ColWrap>

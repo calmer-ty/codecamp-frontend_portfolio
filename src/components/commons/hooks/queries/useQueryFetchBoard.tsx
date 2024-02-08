@@ -4,7 +4,7 @@ import type {
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
 
-const FETCH_BOARD = gql`
+export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       _id
@@ -12,12 +12,15 @@ const FETCH_BOARD = gql`
       title
       contents
       youtubeUrl
+      likeCount
+      dislikeCount
       boardAddress {
         zipcode
         address
         addressDetail
       }
       images
+      createdAt
     }
   }
 `;
@@ -30,3 +33,4 @@ export const useQueryFetchBoard = (variables: IQueryFetchBoardArgs) => {
 
   return result;
 };
+console.log(FETCH_BOARD);

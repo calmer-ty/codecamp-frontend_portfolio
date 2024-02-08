@@ -33,16 +33,13 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #bdbdbd;
-  padding-bottom: 20px;
 `;
 
 export const Avatar = styled.img`
   display: block;
 `;
 
-export const Writer = styled.div`
-  font-size: 24px;
-`;
+export const Writer = styled.div``;
 
 export const CreatedAt = styled.div``;
 
