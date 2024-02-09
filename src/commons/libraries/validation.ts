@@ -22,10 +22,10 @@ export const checkValidation = (file?: File): boolean => {
 };
 
 export const schemaBoardWrite = yup.object({
-  writer: yup.string().required("작성자를 입력해주세요."),
-  password: yup.string().required("비밀번호를 입력해주세요."),
-  title: yup.string().required("제목을 입력해주세요."),
-  contents: yup.string().required("내용을 입력해주세요."),
+  writer: yup.string().required("작성자 입력은 필수입니다."),
+  password: yup.string().required("비밀번호 입력은 필수입니다."),
+  title: yup.string().required("제목 입력은 필수입니다."),
+  contents: yup.string().required("내용 입력은 필수입니다."),
   zipcode: yup.string(),
   address: yup.string(),
   addressDetail: yup.string(),
@@ -36,12 +36,12 @@ export const schemaBoardWrite = yup.object({
 export const schemaMemberLogin = yup.object({
   email: yup
     .string()
-    .required("이메일을 입력해주세요.")
+    .required("이메일 입력은 필수입니다.")
     .email("이메일 형식에 맞지 않습니다."),
-  name: yup.string().required("이름을 입력해주세요."),
+  name: yup.string().required("이름 입력은 필수입니다."),
   password: yup
     .string()
-    .required("비밀번호를 입력해주세요.")
+    .required("비밀번호 입력은 필수입니다.")
     .min(4, "비밀번호는 4자리 이상이여야 합니다")
     .max(16, "비밀번호는 16자리 이하이여야 합니다"),
   passwordCheck: yup
@@ -49,4 +49,11 @@ export const schemaMemberLogin = yup.object({
     .required("비밀번호를 재입력해주세요.")
     .min(4, "비밀번호는 4자리 이상이여야 합니다")
     .max(16, "비밀번호는 16자리 이하이여야 합니다"),
+});
+
+export const schemaProductWrite = yup.object({
+  name: yup.string().required("상품명 입력은 필수입니다."),
+  remarks: yup.string().required("상품요약 입력은 필수입니다."),
+  contents: yup.string().required("상품내용 입력은 필수입니다."),
+  price: yup.number().required("상품가격 입력은 필수입니다."),
 });

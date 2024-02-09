@@ -1,21 +1,12 @@
 import * as S from "./ProductList.styles";
-// import { getDate } from "../../../../commons/libraries/utils";
+import { getDate } from "../../../../commons/libraries/utils";
 
 import type { ProductListUIProps } from "./ProductList.types";
 import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
 import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.index";
-// import { v4 as uuidv4 } from "uuid";
-import { Divider, List, Typography } from "antd";
+import { v4 as uuidv4 } from "uuid";
 
-// const SECRET_STRING = "!@#$";
-
-const data = [
-  "Racing car sprays burning fuel into crowd.",
-  "Japanese princess to wed commoner.",
-  "Australian walks 100km after outback crash.",
-  "Man charged over missing wedding girl.",
-  "Los Angeles battles huge wildfires.",
-];
+const SECRET_STRING = "!@#$";
 
 export default function ProductListUI(props: ProductListUIProps): JSX.Element {
   return (
@@ -26,7 +17,7 @@ export default function ProductListUI(props: ProductListUIProps): JSX.Element {
           refetch={props.refetch}
           refetchBoardsCount={props.refetchBoardsCount}
         />
-        {/* <S.Table>
+        <S.Table>
           <S.Header>
             <S.HeaderItem>번호</S.HeaderItem>
             <S.HeaderItemTitle>제목</S.HeaderItemTitle>
@@ -45,9 +36,7 @@ export default function ProductListUI(props: ProductListUIProps): JSX.Element {
                     props.keyword,
                     `${SECRET_STRING}${props.keyword}${SECRET_STRING}`
                   )
-                  // 입력된 키워드 값의 문자열을 시크릿코드를 붙여 변경해주고
                   .split(SECRET_STRING)
-                  // 시크릿 코드 기준으로 잘라 배열로 변환한다.
                   .map((el) => (
                     <S.KeywordToken
                       key={uuidv4()}
@@ -61,26 +50,13 @@ export default function ProductListUI(props: ProductListUIProps): JSX.Element {
               <S.ListItem>{getDate(el.createdAt)}</S.ListItem>
             </S.List>
           ))}
-        </S.Table> */}
-
-        <Divider orientation="left">Default Size</Divider>
-        <List
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
-          bordered
-          dataSource={data}
-          renderItem={(item) => (
-            <List.Item>
-              <Typography.Text mark>[ITEM]</Typography.Text> {item}
-            </List.Item>
-          )}
-        />
+        </S.Table>
 
         {/* Pagination */}
         <Pagination01 refetch={props.refetch} count={props.count} />
         <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
           <S.MoveBtnIcon src="/images/board/list/ic_create.png" />
-          게시물 등록하기
+          상품 등록하기
         </S.MoveBtn>
       </S.Container>
     </S.Wrapper>
