@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 
 interface IErrorProps {
-  text?: any;
+  text?: string;
 }
 
 const Error = styled.div`
-  height: 21px;
-  margin-top: 7px;
+  height: 20px;
+  margin-top: 5px;
+  padding: 0 10px;
   font-size: 16px;
   color: red;
 `;

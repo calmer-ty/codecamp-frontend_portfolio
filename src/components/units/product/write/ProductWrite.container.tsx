@@ -51,11 +51,9 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   //   IMutationUpdateBoardArgs
   // >(UPDATE_BOARD);
 
-  // 모든 input 값에 입력 값이 있다면.. 등록하기 버튼의 색을 바꾸어 주는 함수
-  let isActive = false;
-  if (inputs.name !== "" && inputs.remarks !== "" && inputs.price !== null) {
-    isActive = true;
-  }
+  // if (inputs.name !== "" && inputs.remarks !== "" && inputs.price !== null) {
+  //   isActive = true;
+  // }
 
   // 게시판 등록 기능
   const onClickSubmit = async (): Promise<void> => {
@@ -76,7 +74,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             },
           },
         });
-        console.log(result);
         void router.push(`/boards/${result.data?.createUseditem._id}`);
       } catch (error) {
         if (error instanceof Error) alert(error.message);
@@ -171,7 +168,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
       errors={errors}
       onClickSubmit={onClickSubmit}
       // onClickUpdate={onClickUpdate}
-      isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
       // Zipcode

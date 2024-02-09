@@ -5,7 +5,7 @@ import type { IBoardWriteProps, IFormData } from "./BoardWrite.types";
 
 // yup Check
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../../../../commons/libraries/validation";
+import { schemaBoardWrite } from "../../../../commons/libraries/validation";
 
 // Custom Component
 import InputCustom from "../../../commons/inputs/custom";
@@ -28,7 +28,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const { data } = useQueryFetchBoard({ boardId: id });
 
   const { register, handleSubmit, formState } = useForm<IFormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaBoardWrite),
     mode: "onChange",
     defaultValues: {
       writer: data?.fetchBoard.writer ?? "#######error######",
@@ -39,7 +39,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
         data?.fetchBoard.boardAddress?.addressDetail ?? "#######error######",
     },
   });
-  console.log(data);
 
   const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls();
   const {

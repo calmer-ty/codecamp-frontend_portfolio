@@ -8,7 +8,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 384px;
 `;
 export const Form = styled.form`
   display: flex;
@@ -24,20 +23,6 @@ export const Title = styled.div`
 export const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
-`;
-export const InputTitle = styled.div`
-  margin-bottom: 12px;
-`;
-export const JoinInput = styled.input`
-  height: 64px;
-  padding-left: 16px;
-  border-radius: 16px;
-`;
-export const Error = styled.div`
-  height: 20px;
-  color: #f00;
-  margin-top: 4px;
-  margin-left: 16px;
 `;
 export const SubmitBtn = styled.button`
   width: 100%;

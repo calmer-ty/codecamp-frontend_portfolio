@@ -12,12 +12,12 @@ import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./ProductList.queries";
 // UI
 import ProductListUI from "./ProductList.presenter";
 
-export default function BoardList(): JSX.Element {
+export default function ProductList(): JSX.Element {
   // Router
   const router = useRouter();
 
   const onClickMoveToBoardNew = (): void => {
-    void router.push("/boards/new");
+    void router.push("/products/new");
   };
 
   // Boards API

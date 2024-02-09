@@ -29,7 +29,6 @@ export interface IProductWriteProps {
 // UI
 export interface IProductWriteUIProps {
   isEdit: boolean;
-  isActive: boolean;
   data?: Pick<IQuery, "fetchBoard">;
   onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
   // onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;

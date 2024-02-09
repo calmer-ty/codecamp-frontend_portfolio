@@ -3,7 +3,7 @@ import * as S from "./ProductList.styles";
 
 import type { ProductListUIProps } from "./ProductList.types";
 import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
-import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.container";
+import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.index";
 // import { v4 as uuidv4 } from "uuid";
 import { Divider, List, Typography } from "antd";
 

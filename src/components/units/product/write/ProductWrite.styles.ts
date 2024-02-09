@@ -50,8 +50,9 @@ export const Label = styled.div`
   font-weight: bold;
 `;
 export const Error = styled.div`
-  height: 21px;
-  margin-top: 7px;
+  height: 20px;
+  padding: 0 10px;
+  margin: 5px 0;
   font-size: 16px;
   color: red;
 `;
