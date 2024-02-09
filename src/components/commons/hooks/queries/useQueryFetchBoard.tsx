@@ -14,13 +14,13 @@ export const FETCH_BOARD = gql`
       youtubeUrl
       likeCount
       dislikeCount
+      createdAt
+      images
       boardAddress {
         zipcode
         address
         addressDetail
       }
-      images
-      createdAt
     }
   }
 `;

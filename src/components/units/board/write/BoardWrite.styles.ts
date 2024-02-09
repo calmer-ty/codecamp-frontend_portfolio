@@ -26,7 +26,7 @@ export const ColWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // width: 100%;
+  width: 100%;
 `;
 
 export const Title = styled.div`
@@ -43,7 +43,12 @@ export const Form = styled.form`
   row-gap: 20px;
 `;
 
-export const ZipcodeWrap = styled.div`
+export const AddressWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+`;
+export const AddressSearch = styled.div`
   display: flex;
   column-gap: 20px;
 `;

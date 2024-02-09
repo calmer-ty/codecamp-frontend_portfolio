@@ -1,66 +1,61 @@
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Upload01 from "../../../commons/uploads/01/Upload01.container";
+import { useEffect } from "react";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteProps, IFormData } from "./BoardWrite.types";
-import type { Address } from "react-daum-postcode";
 
+// yup Check
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../../../commons/libraries/validation";
 
-// 커스텀 훅
-import { useBoard } from "../../../commons/hooks/customs/useBoard";
-// 커스텀 컴포넌트
+// Custom Component
 import InputCustom from "../../../commons/inputs/custom";
 import Error01 from "../../../commons/errors/01";
 import Input01 from "../../../commons/inputs/01";
 import Label01 from "../../../commons/labels/01";
 import Textarea01 from "../../../commons/textarea/01";
 import Radio01 from "../../../commons/radio/01";
+import Upload01 from "../../../commons/uploads/01/Upload01.index";
+
+// Custom Hooks
+import { useBoard } from "../../../commons/hooks/customs/useBoard";
+import { useFileUrls } from "../../../commons/hooks/customs/useFileUrls";
+import { useQueryFetchBoard } from "../../../commons/hooks/queries/useQueryFetchBoard";
+import { useQueryIdChecker } from "../../../commons/hooks/customs/useQueryIdChecker";
+import { useAddressSearch } from "../../../commons/hooks/customs/useAddressSearch";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
+  const { id } = useQueryIdChecker("boardId");
+  const { data } = useQueryFetchBoard({ boardId: id });
+
   const { register, handleSubmit, formState } = useForm<IFormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
-    // defaultValues: {
-    //   writer: props.data?.fetchBoard.writer ?? "",
-    //   title: props.data?.fetchBoard.title ?? "",
-    //   contents: props.data?.fetchBoard.contents ?? "",
-    //   addressDetail: props.data?.fetchBoard.boardAddress?.addressDetail ?? "",
-    //   youtubeUrl: props.data?.fetchBoard.youtubeUrl ?? "",
-    // },
+    defaultValues: {
+      writer: data?.fetchBoard.writer ?? "#######error######",
+      title: data?.fetchBoard.title ?? "#######error######",
+      contents: data?.fetchBoard.contents ?? "#######error######",
+      youtubeUrl: data?.fetchBoard.youtubeUrl ?? "#######error######",
+      addressDetail:
+        data?.fetchBoard.boardAddress?.addressDetail ?? "#######error######",
+    },
   });
+  console.log(data);
 
-  const { onClickSubmit, onClickUpdate } = useBoard();
+  const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls();
+  const {
+    isOpen,
+    address,
+    zipcode,
+    onClickAddressSearch,
+    onCompleteAddressSearch,
+  } = useAddressSearch();
 
-  // 주소 검색창
-  const [isOpen, setIsOpen] = useState(false);
+  const { onClickSubmit, onClickUpdate } = useBoard(fileUrls, address, zipcode);
 
-  const [zipcode, setZipcode] = useState("");
-  const [address, setAddress] = useState("");
-
-  const onClickAddressSearch = (): void => {
-    setIsOpen((prev) => !prev);
-  };
-  const onCompleteAddressSearch = (data: Address): void => {
-    console.log(data);
-    setAddress(data.address);
-    setZipcode(data.zonecode);
-    setIsOpen((prev) => !prev);
-  };
-
-  // 파일 전송
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
-
-  const onChangeFileUrls = (fileUrl: string, index: number): void => {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
-  };
   useEffect(() => {
-    const images = props.data?.fetchBoard.images;
+    const images = data?.fetchBoard.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
-  }, [props.data]);
+  }, [data]);
 
   return (
     <>
@@ -78,9 +73,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                 <InputCustom
                   width={480}
                   placeholder="이름을 입력해주세요."
-                  value={props.data?.fetchBoard.writer ?? ""}
-                  defaultValue={props.data?.fetchBoard.writer ?? ""}
-                  readOnly={Boolean(props.data?.fetchBoard.writer)}
+                  readOnly={props.isEdit}
                   register={register("writer")}
                 />
                 <Error01 text={formState.errors.writer?.message} />
@@ -111,7 +104,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               <Input01
                 placeholder="제목을 입력해주세요."
                 register={register("title")}
-                value={props.data?.fetchBoard.title ?? ""}
               />
               <Error01 text={formState.errors.title?.message} />
             </S.ColWrap>
@@ -125,42 +117,39 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               <Error01 text={formState.errors.contents?.message} />
             </S.ColWrap>
 
-            <S.ColWrap>
+            <S.ColWrap style={{ rowGap: "20px" }}>
               <Label01 text="주소" />
-              <S.ZipcodeWrap>
-                <InputCustom
-                  width={80}
+              <S.AddressWrap>
+                <S.AddressSearch>
+                  <InputCustom
+                    width={80}
+                    value={
+                      zipcode !== ""
+                        ? zipcode
+                        : data?.fetchBoard.boardAddress?.zipcode ?? ""
+                    }
+                    readOnly
+                  />
+                  <S.SearchBtn onClick={onClickAddressSearch}>
+                    우편번호 검색
+                  </S.SearchBtn>
+                </S.AddressSearch>
+
+                <Input01
                   value={
-                    zipcode !== ""
-                      ? zipcode
-                      : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
+                    address !== ""
+                      ? address
+                      : data?.fetchBoard.boardAddress?.address ?? ""
                   }
                   readOnly
-                  register={register("zipcode")}
                 />
-                <S.SearchBtn onClick={onClickAddressSearch}>
-                  우편번호 검색
-                </S.SearchBtn>
-              </S.ZipcodeWrap>
-              <Error01 text={formState.errors.zipcode?.message} />
-
-              <Input01
-                value={
-                  address !== ""
-                    ? address
-                    : props.data?.fetchBoard.boardAddress?.address ?? ""
-                }
-                readOnly
-                register={register("address")}
-              />
-              <Error01 text={formState.errors.address?.message} />
-              <Input01
-                defaultValue={
-                  props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
-                }
-                register={register("addressDetail")}
-              />
-              <Error01 text={formState.errors.addressDetail?.message} />
+                <Input01
+                  defaultValue={
+                    data?.fetchBoard.boardAddress?.addressDetail ?? ""
+                  }
+                  register={register("addressDetail")}
+                />
+              </S.AddressWrap>
             </S.ColWrap>
 
             <S.ColWrap>
@@ -174,16 +163,14 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             <S.ColWrap>
               <Label01 text="사진 첨부" />
               <S.ImgWrap>
-                {fileUrls.map((el, index) => {
-                  return (
-                    <Upload01
-                      key={`${el}_${index}`}
-                      index={index}
-                      fileUrl={el}
-                      onChangeFileUrls={onChangeFileUrls}
-                    />
-                  );
-                })}
+                {fileUrls.map((el, index) => (
+                  <Upload01
+                    key={`${el}_${index}`}
+                    index={index}
+                    fileUrl={el}
+                    onChangeFileUrls={onChangeFileUrls}
+                  />
+                ))}
               </S.ImgWrap>
             </S.ColWrap>
 
@@ -199,7 +186,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
             <S.SubmitBtn
               style={{
-                backgroundColor: formState.isValid ? "#FFD600" : "#BDBDBD",
+                backgroundColor: formState.isValid ? "#FFD600" : "lightgray",
               }}
             >
               {props.isEdit ? "수정" : "등록"}하기

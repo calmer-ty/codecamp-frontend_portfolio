@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 interface IInputProps {
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
   width: number;
   type?: "text" | "password";
   placeholder?: string;
@@ -17,7 +17,6 @@ const Input = styled.input`
 `;
 
 export default function InputCustom(props: IInputProps): JSX.Element {
-  console.log(props.defaultValue);
   return (
     <Input
       style={{ width: `${props.width}px` }}

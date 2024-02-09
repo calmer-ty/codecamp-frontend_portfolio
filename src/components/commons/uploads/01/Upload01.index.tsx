@@ -64,6 +64,7 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
       ) : (
         <S.UploadBtn
           // 참조한 UploadInput을 클릭 이벤트로 넣어준다
+          type="button"
           onClick={onClickUpload}
         >
           <>+</>

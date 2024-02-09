@@ -1,14 +1,15 @@
 import * as S from "./BoardList.styles";
-import { useState } from "react";
-
-import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
-import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.container";
 import { v4 as uuidv4 } from "uuid";
 
-// 커스텀 훅
-import { useQueryFetchBoards } from "../../../commons/hooks/queries/useQueryFetchBoards";
+// Custom hooks
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { useQueryFetchBoards } from "../../../commons/hooks/queries/useQueryFetchBoards";
 import { useQueryFetchBoardsCount } from "../../../commons/hooks/queries/useQueryFetchBoardsCount";
+import { useKeyword } from "../../../commons/hooks/customs/useKeryword";
+
+// Component
+import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
+import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.index";
 
 import { getDate } from "../../../../commons/libraries/utils";
 
@@ -21,11 +22,8 @@ export default function BoardListUI(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
 
   // 검색 기능
-  const [keyword, setKeyword] = useState("");
+  const { keyword, onChangeKeyword } = useKeyword();
 
-  const onChangeKeyword = (value: string): void => {
-    setKeyword(value);
-  };
   return (
     <S.Wrapper>
       <S.Container>
@@ -62,7 +60,6 @@ export default function BoardListUI(): JSX.Element {
             </S.List>
           ))}
         </S.Table>
-        {/* Pagination */}
         <Pagination01
           count={dataBoardsCount?.fetchBoardsCount}
           refetch={refetch}

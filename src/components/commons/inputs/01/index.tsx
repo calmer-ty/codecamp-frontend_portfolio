@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 interface IInputProps {
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
   type?: "text" | "password";
   placeholder?: string;
   value?: string;

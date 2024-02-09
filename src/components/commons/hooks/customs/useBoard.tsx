@@ -1,15 +1,22 @@
 import { useRouter } from "next/router";
+
 import { useMutationCreateBoard } from "../mutations/useMutationCreateBoard";
 import { useMutationUpdateBoard } from "../mutations/useMutationUpdateBoard";
 import { useMutationDeleteBoard } from "../mutations/useMutationDeleteBoard";
+
 import { FETCH_BOARD } from "../../../commons/hooks/queries/useQueryFetchBoard";
 import { FETCH_BOARDS } from "../../../commons/hooks/queries/useQueryFetchBoards";
 
-import type { IFormData } from "../../../units/board/write/BoardWrite.types";
-import type { IUpdateBoardInput } from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 
-export const useBoard = () => {
+import type { IFormData } from "../../../units/board/write/BoardWrite.types";
+import type { IUpdateBoardInput } from "../../../../commons/types/generated/types";
+
+export const useBoard = (
+  images?: string[],
+  address?: string,
+  zipcode?: string
+) => {
   const router = useRouter();
   const boardId = router.query.boardId;
 
@@ -18,59 +25,57 @@ export const useBoard = () => {
   const [deleteBoard] = useMutationDeleteBoard();
 
   const onClickSubmit = async (data: IFormData): Promise<void> => {
-    const { zipcode, address, addressDetail, setting, ...inputs } = data;
+    const { addressDetail, setting, ...inputs } = data;
 
     try {
       const result = await createBoard({
         variables: {
           createBoardInput: {
             ...inputs,
+            images,
             boardAddress: {
               zipcode,
               address,
               addressDetail,
             },
-            // images: fileUrls,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARDS,
+          },
+        ],
       });
-      console.log(result);
       void router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
-    // const currentFiles = JSON.stringify(fileUrls);
-    // const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
-    // const isChangedFiles = currentFiles !== defaultFiles;
-
-    if (data.password === "") {
-      Modal.error({ content: "비밀번호를 입력해주세요." });
-      return;
-    }
+    // console.log(data);
+    // if (data.title !== "") {
+    //   Modal.error({ content: "내용이 수정되지 않았습니다." });
+    //   return;
+    // }
+    const currentFiles = JSON.stringify(images);
+    const defaultFiles = JSON.stringify(images);
+    const isChangedFiles = currentFiles !== defaultFiles;
 
     const updateBoardInput: IUpdateBoardInput = {};
+
     if (data.title !== "") updateBoardInput.title = data.title;
     if (data.contents !== "") updateBoardInput.contents = data.contents;
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
-    if (
-      data.zipcode !== "" ||
-      data.address !== "" ||
-      data.addressDetail !== ""
-    ) {
+    if (zipcode !== "" || address !== "" || data.addressDetail !== "") {
       updateBoardInput.boardAddress = {};
-      if (data.zipcode !== "")
-        updateBoardInput.boardAddress.zipcode = data.zipcode;
-      if (data.address !== "")
-        updateBoardInput.boardAddress.address = data.address;
+      if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address !== "") updateBoardInput.boardAddress.address = address;
       if (data.addressDetail !== "")
         updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
-    // if (isChangedFiles) updateBoardInput.images = fileUrls;
+    if (isChangedFiles) updateBoardInput.images = images;
 
-    // boardId의 타입이 문자가 아닐 때 함수 실행 종료
     if (typeof boardId !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
@@ -91,7 +96,7 @@ export const useBoard = () => {
       });
       void router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
@@ -111,7 +116,7 @@ export const useBoard = () => {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
 
     Modal.error({ content: "게시물이 삭제되었습니다." });
