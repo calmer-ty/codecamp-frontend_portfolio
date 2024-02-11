@@ -21,9 +21,15 @@ export const checkValidation = (file?: File): boolean => {
   return true;
 };
 
+const passwordSchema = yup
+  .string()
+  .required("비밀번호 입력은 필수입니다.")
+  .min(4, "비밀번호는 4자리 이상이여야 합니다")
+  .max(16, "비밀번호는 16자리 이하이여야 합니다");
+
 export const schemaBoardWrite = yup.object({
   writer: yup.string().required("작성자 입력은 필수입니다."),
-  password: yup.string().required("비밀번호 입력은 필수입니다."),
+  password: passwordSchema,
   title: yup.string().required("제목 입력은 필수입니다."),
   contents: yup.string().required("내용 입력은 필수입니다."),
 });
@@ -34,16 +40,8 @@ export const schemaMemberLogin = yup.object({
     .required("이메일 입력은 필수입니다.")
     .email("이메일 형식에 맞지 않습니다."),
   name: yup.string().required("이름 입력은 필수입니다."),
-  password: yup
-    .string()
-    .required("비밀번호 입력은 필수입니다.")
-    .min(4, "비밀번호는 4자리 이상이여야 합니다")
-    .max(16, "비밀번호는 16자리 이하이여야 합니다"),
-  passwordCheck: yup
-    .string()
-    .required("비밀번호를 재입력해주세요.")
-    .min(4, "비밀번호는 4자리 이상이여야 합니다")
-    .max(16, "비밀번호는 16자리 이하이여야 합니다"),
+  password: passwordSchema,
+  passwordCheck: passwordSchema,
 });
 
 export const schemaProductWrite = yup.object({

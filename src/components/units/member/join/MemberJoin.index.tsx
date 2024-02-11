@@ -7,9 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaMemberLogin } from "../../../../commons/libraries/validation";
 
 // Component
-import Label01 from "../../../commons/labels/01";
-import Error01 from "../../../commons/errors/01";
-import Input02 from "../../../commons/inputs/02";
+import Label01 from "../../../commons/element/labels/01";
+import Error01 from "../../../commons/element/errors/01";
+import Input02 from "../../../commons/element/inputs/02";
 
 // Custom Hooks
 import { useUser } from "../../../commons/hooks/customs/useUser";

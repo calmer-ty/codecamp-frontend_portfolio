@@ -20,7 +20,6 @@ import BoardWriteUI from "./BoardWrite.presenter";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaBoardWrite } from "../../../../commons/libraries/validation";
-import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
@@ -48,6 +47,15 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   // 게시판 등록 기능
   const onClickSubmit = async (data: IFormData): Promise<void> => {
+    // if (
+    //   data.writer !== "" &&
+    //   data.title !== "" &&
+    //   data.contents !== "" &&
+    //   data.password.length >= 4 &&
+    //   data.password.length <= 16
+    // ) {
+    //   return;
+    // }
     const { zipcode, address, addressDetail, ...inputs } = data;
     try {
       const result = await createBoard({
@@ -75,13 +83,36 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     const { zipcode, address, addressDetail, ...inputs } = data;
 
     if (data.contents === props.data?.fetchBoard.contents) {
-      Modal.error({ content: "내용이 수정되지 않았습니다." });
+      alert("내용이 수정되지 않았습니다.");
       return;
     }
 
     const currentFiles = JSON.stringify(fileUrls);
     const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
     const isChangedFiles = currentFiles !== defaultFiles;
+    // if (
+    //   data.title !== "" &&
+    //   data.contents !== "" &&
+    //   data.youtubeUrl !== "" &&
+    //   data.zipcode === "" &&
+    //   data.address === "" &&
+    //   data.addressDetail === "" &&
+    //   !isChangedFiles
+    // ) {
+    //   alert("수정한 내용이 없습니다.");
+    //   return;
+    // }
+    // if (data.password === "") {
+    //   alert("비밀번호를 입력해주세요.");
+    //   return;
+    // }
+    // if (data) {
+    //   return;
+    // }
+
+    // if (data.title !== "") {
+    //   console.log("타이틀 없나봄");
+    // }
 
     const updateBoardInput: IUpdateBoardInput = {};
     if (inputs.title !== "") updateBoardInput.title = inputs.title;
