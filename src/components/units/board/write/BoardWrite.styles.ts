@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import type { ISubmitButtonProps } from "./BoardWrite.types";
+// Library
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
@@ -19,6 +21,7 @@ export const Container = styled.div`
 
 export const RowWrap = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   width: 100%;
 `;
@@ -43,14 +46,40 @@ export const Form = styled.form`
   row-gap: 20px;
 `;
 
-export const AddressWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
+export const Label = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
 `;
-export const AddressSearch = styled.div`
+export const Error = styled.div`
+  height: 21px;
+  margin-top: 7px;
+  font-size: 16px;
+  color: red;
+`;
+export const Writer = styled.input`
+  width: 486px;
+  height: 52px;
+  padding: 0 12px;
+`;
+export const Password = styled.input`
+  width: 486px;
+  height: 52px;
+  padding: 0 12px;
+`;
+export const Subject = styled.input`
+  width: 996px;
+  height: 52px;
+  padding: 0 12px;
+`;
+export const Contents = styled.textarea`
+  width: 996px;
+  height: 480px;
+  padding: 12px;
+`;
+
+export const ZipcodeWrap = styled.div`
   display: flex;
-  column-gap: 20px;
 `;
 export const Zipcode = styled.input`
   width: 77px;
@@ -61,8 +90,21 @@ export const Zipcode = styled.input`
 export const SearchBtn = styled.button`
   width: 124px;
   height: 52px;
+  margin-left: 16px;
   background-color: black;
   color: white;
+`;
+export const Address = styled.input`
+  width: 996px;
+  height: 52px;
+  margin-top: 20px;
+  padding: 0 12px;
+`;
+
+export const Youtube = styled.input`
+  width: 996px;
+  height: 46px;
+  padding: 0 12px;
 `;
 
 export const ImgWrap = styled.div`
@@ -77,12 +119,17 @@ export const RadioLabel = styled.div`
   margin-right: 20px;
   font-weight: 500;
 `;
+export const RadioBtn = styled.input`
+  display: inline-block;
+`;
 
 export const SubmitBtn = styled.button`
   width: 179px;
   height: 52px;
   margin-top: 40px;
-  font-weight: bold;
+  background-color: ${(props: ISubmitButtonProps) =>
+    props.isActive ? "#FFD600" : "#BDBDBD"};
+  font-weight: 500;
 `;
 
 export const AddressModal = styled(Modal)``;

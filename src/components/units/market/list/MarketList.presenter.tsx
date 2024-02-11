@@ -1,14 +1,14 @@
-import * as S from "./ProductList.styles";
+import * as S from "./MarketList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
-import type { ProductListUIProps } from "./ProductList.types";
+import type { MarketListUIProps } from "./MarketList.types";
 import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
 import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.index";
 import { v4 as uuidv4 } from "uuid";
 
 const SECRET_STRING = "!@#$";
 
-export default function ProductListUI(props: ProductListUIProps): JSX.Element {
+export default function MarketListUI(props: MarketListUIProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
@@ -24,14 +24,14 @@ export default function ProductListUI(props: ProductListUIProps): JSX.Element {
             <S.HeaderItem>작성자</S.HeaderItem>
             <S.HeaderItem>날짜</S.HeaderItem>
           </S.Header>
-          {props.data?.fetchBoards.map((el) => (
+          {props.data?.fetchUseditems.map((el) => (
             <S.List key={el._id}>
               <S.ListItem>{String(el._id).slice(-4).toUpperCase()}</S.ListItem>
               <S.ListItemTitle
                 id={el._id}
                 onClick={props.onClickMoveToBoardDetail}
               >
-                {el.title
+                {el.name
                   .replaceAll(
                     props.keyword,
                     `${SECRET_STRING}${props.keyword}${SECRET_STRING}`
@@ -46,13 +46,12 @@ export default function ProductListUI(props: ProductListUIProps): JSX.Element {
                     </S.KeywordToken>
                   ))}
               </S.ListItemTitle>
-              <S.ListItem>{el.writer}</S.ListItem>
+              {/* <S.ListItem>{el.seller}</S.ListItem> */}
               <S.ListItem>{getDate(el.createdAt)}</S.ListItem>
             </S.List>
           ))}
         </S.Table>
 
-        {/* Pagination */}
         <Pagination01 refetch={props.refetch} count={props.count} />
         <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
           <S.MoveBtnIcon src="/images/board/list/ic_create.png" />

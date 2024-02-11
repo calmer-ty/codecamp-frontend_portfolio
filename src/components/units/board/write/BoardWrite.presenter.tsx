@@ -1,8 +1,9 @@
-import Upload01 from "../../../commons/uploads/01/Upload01.container";
+import Upload01 from "../../../commons/uploads/01/Upload01.index";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteUIProps, IFormValues } from "./BoardWrite.types";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
+  console.log(props.data?.fetchBoard);
   return (
     <>
       <S.Wrapper>

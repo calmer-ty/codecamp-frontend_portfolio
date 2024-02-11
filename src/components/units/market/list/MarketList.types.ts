@@ -1,19 +1,19 @@
 import type { MouseEvent } from "react";
 import type {
   IQuery,
-  IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
+  IQueryFetchUseditemsArgs,
 } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
-export interface ProductListUIProps {
+export interface MarketListUIProps {
   onClickMoveToBoardNew: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickMoveToBoardDetail: (event: MouseEvent<HTMLDivElement>) => void;
 
-  data?: Pick<IQuery, "fetchBoards"> | undefined;
+  data: Pick<IQuery, "fetchUseditems"> | undefined;
   refetch: (
-    variables?: Partial<IQueryFetchBoardsArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
+    variables?: Partial<IQueryFetchUseditemsArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchUseditems">>>;
   count?: number;
 
   // 검색

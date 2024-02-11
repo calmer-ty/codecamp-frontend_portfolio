@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import type { IKeywordTokenProps } from "./ProductList.types";
+import type { IKeywordTokenProps } from "./MarketList.types";
 
 export const Wrapper = styled.div`
   display: flex;

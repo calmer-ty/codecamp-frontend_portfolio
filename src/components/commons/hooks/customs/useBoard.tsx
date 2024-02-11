@@ -9,7 +9,7 @@ import { FETCH_BOARDS } from "../../../commons/hooks/queries/useQueryFetchBoards
 
 import { Modal } from "antd";
 
-import type { IFormData } from "../../../units/board/write/BoardWrite.types";
+import type { IFormData } from "../../../units/board/write_after/BoardWrite.types";
 import type { IUpdateBoardInput } from "../../../../commons/types/generated/types";
 
 export const useBoard = (

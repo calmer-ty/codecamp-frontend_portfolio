@@ -4,27 +4,27 @@ import { useState } from "react";
 import type { MouseEvent } from "react";
 import type {
   IQuery,
-  IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
+  IQueryFetchUseditemsArgs,
 } from "../../../../commons/types/generated/types";
 // QUERIES
-import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./ProductList.queries";
+import { FETCH_USED_ITEMS, FETCH_BOARDS_COUNT } from "./MarketList.queries";
 // UI
-import ProductListUI from "./ProductList.presenter";
+import MarketListUI from "./MarketList.presenter";
 
-export default function ProductList(): JSX.Element {
+export default function MarketList(): JSX.Element {
   // Router
   const router = useRouter();
 
   const onClickMoveToBoardNew = (): void => {
-    void router.push("/products/new");
+    void router.push("/markets/new");
   };
 
   // Boards API
   const { data, refetch } = useQuery<
-    Pick<IQuery, "fetchBoards">,
-    IQueryFetchBoardsArgs
-  >(FETCH_BOARDS);
+    Pick<IQuery, "fetchUseditems">,
+    IQueryFetchUseditemsArgs
+  >(FETCH_USED_ITEMS);
 
   const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
@@ -49,7 +49,7 @@ export default function ProductList(): JSX.Element {
 
   return (
     <>
-      <ProductListUI
+      <MarketListUI
         data={data}
         refetch={refetch}
         count={dataBoardsCount?.fetchBoardsCount}

@@ -1,17 +1,17 @@
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import * as S from "./ProductWrite.styles";
+import * as S from "./MarketWrite.styles";
 import type {
   IMutation,
   IMutationCreateUseditemArgs,
   IMutationUpdateUseditemArgs,
   IUpdateUseditemInput,
 } from "../../../../commons/types/generated/types";
-import type { IFormData, IProductWriteProps } from "./ProductWrite.types";
+import type { IFormData, IMarketWriteProps } from "./MarketWrite.types";
 
 // API
-import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./ProductWrite.queries";
+import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./MarketWrite.queries";
 import { useEffect, useState } from "react";
 // Library
 import type { Address } from "react-daum-postcode";
@@ -24,27 +24,17 @@ import { schemaProductWrite } from "../../../../commons/libraries/validation";
 import Input01 from "../../../commons/inputs/01";
 import Error01 from "../../../commons/errors/01";
 
-export default function ProductWrite(props: IProductWriteProps): JSX.Element {
+export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
   const router = useRouter();
   // FROM
-  const { register, handleSubmit, watch, formState } = useForm<IFormData>({
+  const { register, handleSubmit, formState } = useForm<IFormData>({
     resolver: yupResolver(schemaProductWrite),
     mode: "onChange",
   });
 
-  // 입력값 변수
-  const inputs = {
-    name: watch().name,
-    remarks: watch().remarks,
-    contents: watch().contents,
-    price: Number(watch().price),
-    tags: watch().tags,
-  };
-
   // 리랜더링을 위한 state 선언
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
-  const addressDetail = watch().addressDetail;
 
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
@@ -61,6 +51,9 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   // 게시판 등록 기능
   const onClickSubmit = async (data: IFormData): Promise<void> => {
     console.log(data);
+
+    const { mainSetting, tags, zipcode, address, addressDetail, ...inputs } =
+      data;
     try {
       const result = await createProduct({
         variables: {
@@ -86,18 +79,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     const currentFiles = JSON.stringify(fileUrls);
     const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
     const isChangedFiles = currentFiles !== defaultFiles;
-    if (
-      inputs.name !== "" &&
-      inputs.remarks !== "" &&
-      inputs.price !== null &&
-      zipcode === "" &&
-      address === "" &&
-      addressDetail === "" &&
-      !isChangedFiles
-    ) {
-      alert("수정한 내용이 없습니다.");
-      return;
-    }
+
+    const { addressDetail, ...inputs } = data;
 
     const updateUseditemInput: IUpdateUseditemInput = {};
     if (inputs.name !== "") updateUseditemInput.name = inputs.name;
@@ -183,15 +166,9 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             <Label01 text="상품설명" />
             <Input01
               placeholder="상품을 한 줄 요약해주세요."
-              register={register("remarks")}
-            />
-            {/* <S.ProductInput
-              type="text"
-              placeholder="상품을 설명해주세요."
-              defaultValue={props.data?.fetchBoard.title}
               register={register("contents")}
-            /> */}
-            <S.Error>{formState.errors?.contents?.message}</S.Error>
+            />
+            <Error01 text={formState.errors?.contents?.message} />
           </S.FlexColumn>
 
           <S.FlexColumn>
@@ -200,13 +177,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
               placeholder="상품을 한 줄 요약해주세요."
               register={register("price")}
             />
-            {/* <S.ProductInput
-              type="text"
-              placeholder="판매 가격을 입력해주세요."
-              defaultValue={props.data?.fetchBoard.contents}
-              {...register("price")}
-            /> */}
-            <S.Error>{formState.errors?.price?.message}</S.Error>
+            <Error01 text={formState.errors?.price?.message} />
           </S.FlexColumn>
 
           <S.FlexColumn>
@@ -215,11 +186,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
               placeholder="#태그  #태그  #태그"
               register={register("tags")}
             />
-            {/* <S.ProductInput
-              placeholder="내용을 작성해주세요."
-              defaultValue={props.data?.fetchBoard.contents}
-              {...register("tags")}
-            /> */}
             <S.Error>{formState.errors?.tags?.message}</S.Error>
           </S.FlexColumn>
 
@@ -238,25 +204,15 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
               </S.FlexColumn>
               <S.FlexColumn>
                 <Label01 text="주소" />
-                <S.Address
+                <S.SearchBtn type="button" onClick={onClickAddressSearch}>
+                  우편번호 검색
+                </S.SearchBtn>
+                <Input01
+                  value={address}
                   readOnly
-                  defaultValue={
-                    address !== ""
-                      ? address
-                      : props.data?.fetchBoard.boardAddress?.address ?? ""
-                  }
-                  {...register("address", {
-                    required: props.isEdit ? "" : "This is required.",
-                  })}
+                  register={register("address")}
                 />
-                <S.Address
-                  defaultValue={
-                    props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
-                  }
-                  {...register("addressDetail", {
-                    required: props.isEdit ? "" : "This is required.",
-                  })}
-                />
+                <Input01 readOnly register={register("addressDetail")} />
               </S.FlexColumn>
             </S.FlexColumn>
           </S.FlexRow>

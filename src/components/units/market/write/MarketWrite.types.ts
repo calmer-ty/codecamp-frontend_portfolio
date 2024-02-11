@@ -6,14 +6,14 @@ export interface IFormData {
   remarks: string;
   contents: string;
   price: number;
-  tags: string[];
-  // zipcode: string;
-  // address: string;
-  // addressDetail: string;
+  zipcode?: string;
+  address?: string;
+  addressDetail?: string;
+  tags?: string[];
   mainSetting?: string;
 }
 
-export interface IProductWriteProps {
+export interface IMarketWriteProps {
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
 }

@@ -3,7 +3,7 @@ import type { UseFormRegisterReturn } from "react-hook-form";
 
 interface IInputProps {
   register?: UseFormRegisterReturn;
-  width: number;
+  width?: number;
   type?: "text" | "password";
   placeholder?: string;
   value?: string;
