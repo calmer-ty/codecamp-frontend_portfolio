@@ -2,7 +2,7 @@ import * as S from "./MarketList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 import type { MarketListUIProps } from "./MarketList.types";
-import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
+import Pagination01 from "../../../commons/paginations/01/Pagination01.index";
 import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.index";
 import { v4 as uuidv4 } from "uuid";
 

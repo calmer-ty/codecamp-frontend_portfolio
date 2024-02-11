@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as S from "./LayoutBanner.styles";
 
-export default function LayoutBannerUI(): JSX.Element {
+export default function LayoutBanner(): JSX.Element {
   const settings = {
     dots: true,
     infinite: true,

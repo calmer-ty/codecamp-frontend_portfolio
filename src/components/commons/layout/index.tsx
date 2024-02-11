@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import LayoutHeader from "./header/LayoutHeader.container";
-import LayoutNavigation from "./navigation/LayoutNavigation.container";
+import LayoutNavigation from "./navigation/LayoutNavigation.index";
 
 interface ILayoutProps {
   children: JSX.Element;
