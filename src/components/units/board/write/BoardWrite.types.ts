@@ -1,4 +1,3 @@
-import type { MouseEvent } from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import type {
   FieldErrors,
@@ -9,16 +8,16 @@ import type {
 import type { Address } from "react-daum-postcode";
 
 // container
-export interface IFormValues {
+export interface IFormData {
   writer: string;
   password: string;
   title: string;
   contents: string;
-  address: string;
-  addressDetail: string;
-  zipcode: string;
-  youtubeUrl: string;
-  mainSetting: string;
+  zipcode?: string;
+  address?: string;
+  addressDetail?: string;
+  youtubeUrl?: string;
+  mainSetting?: string;
 }
 
 export interface IBoardWriteProps {
@@ -28,17 +27,16 @@ export interface IBoardWriteProps {
 
 // UI
 export interface IBoardWriteUIProps {
-  onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
-  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickSubmit: (data: IFormData) => Promise<void>;
+  onClickUpdate: (data: IFormData) => Promise<void>;
 
   isEdit: boolean;
-  isActive: boolean;
   data: Pick<IQuery, "fetchBoard"> | undefined;
 
   // React Hook Form
-  register: UseFormRegister<IFormValues>;
-  handleSubmit: UseFormHandleSubmit<IFormValues>;
-  errors: FieldErrors<IFormValues>;
+  register: UseFormRegister<IFormData>;
+  handleSubmit: UseFormHandleSubmit<IFormData>;
+  errors: FieldErrors<IFormData>;
 
   // Zipcode
   isOpen: boolean;
@@ -50,8 +48,4 @@ export interface IBoardWriteUIProps {
   // Upload
   fileUrls: string[];
   onChangeFileUrls: (fileUrl: string, index: number) => void;
-}
-
-export interface ISubmitButtonProps {
-  isActive: boolean;
 }

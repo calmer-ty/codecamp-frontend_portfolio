@@ -1,18 +1,17 @@
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
 import * as S from "./BoardWrite.styles";
-import type { IBoardWriteUIProps, IFormValues } from "./BoardWrite.types";
+import type { IBoardWriteUIProps } from "./BoardWrite.types";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
-  console.log(props.data?.fetchBoard);
   return (
     <>
       <S.Wrapper>
         <S.Container>
           <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
           <S.Form
-            onSubmit={props.handleSubmit((data: IFormValues): void => {
-              console.log(data);
-            })}
+            onSubmit={props.handleSubmit(
+              props.isEdit ? props.onClickUpdate : props.onClickSubmit
+            )}
           >
             <S.RowWrap>
               <S.ColWrap>
@@ -22,9 +21,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                   placeholder="이름을 작성해주세요."
                   defaultValue={props.data?.fetchBoard.writer ?? ""}
                   readOnly={Boolean(props.data?.fetchBoard.writer)}
-                  {...props.register("writer", {
-                    required: props.isEdit ? "" : "This is required.",
-                  })}
+                  {...props.register("writer")}
                 />
                 <S.Error>{props.errors?.writer?.message}</S.Error>
               </S.ColWrap>
@@ -84,9 +81,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                       ? props.zipcode
                       : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
                   }
-                  {...props.register("zipcode", {
-                    required: props.isEdit ? "" : "This is required.",
-                  })}
+                  {...props.register("zipcode")}
                 />
                 <S.SearchBtn onClick={props.onClickAddressSearch}>
                   우편번호 검색
@@ -146,29 +141,14 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.ColWrap>
               <S.Label>메인 설정</S.Label>
               <S.RadioWrap>
-                <S.RadioBtn
-                  type="radio"
-                  {...props.register("mainSetting", {
-                    required: props.isEdit ? "" : "This is required.",
-                  })}
-                />
+                <S.RadioBtn type="radio" {...props.register("mainSetting")} />
                 <S.RadioLabel>유튜브</S.RadioLabel>
-                <S.RadioBtn
-                  type="radio"
-                  {...props.register("mainSetting", {
-                    required: props.isEdit ? "" : "This is required.",
-                  })}
-                />
+                <S.RadioBtn type="radio" {...props.register("mainSetting")} />
                 <S.RadioLabel>사진</S.RadioLabel>
               </S.RadioWrap>
             </S.ColWrap>
 
-            <S.SubmitBtn
-              onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
-              isActive={props.isEdit ? true : props.isActive}
-            >
-              {props.isEdit ? "수정" : "등록"}하기
-            </S.SubmitBtn>
+            <S.SubmitBtn>{props.isEdit ? "수정" : "등록"}하기</S.SubmitBtn>
           </S.Form>
         </S.Container>
 

@@ -41,11 +41,11 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   // DATA API
-  const [createProduct] = useMutation<
+  const [createMarket] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
   >(CREATE_USED_ITEM);
-  const [updateProduct] = useMutation<
+  const [updateMarket] = useMutation<
     Pick<IMutation, "updateUseditem">,
     IMutationUpdateUseditemArgs
   >(UPDATE_USED_ITEM);
@@ -57,7 +57,7 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
     const { mainSetting, tags, zipcode, address, addressDetail, ...inputs } =
       data;
     try {
-      const result = await createProduct({
+      const result = await createMarket({
         variables: {
           createUseditemInput: {
             ...inputs,
@@ -105,7 +105,7 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
     }
 
     try {
-      const result = await updateProduct({
+      const result = await updateMarket({
         variables: {
           useditemId: router.query.useditemId,
           updateUseditemInput,

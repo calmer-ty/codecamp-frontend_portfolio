@@ -10,7 +10,7 @@ export interface IFormData {
   address?: string;
   addressDetail?: string;
   tags?: string[];
-  mainSetting?: string;
+  mainSetting?: boolean;
 }
 
 export interface IMarketWriteProps {

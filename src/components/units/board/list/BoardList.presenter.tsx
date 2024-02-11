@@ -3,7 +3,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 
 import type { BoardListUIProps } from "./BoardList.types";
 import Pagination01 from "../../../commons/paginations/01/Pagination01.index";
-import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.index";
+import Searchbar01 from "../../../commons/searchbars/01/Searchbar01.index";
 import { v4 as uuidv4 } from "uuid";
 
 const SECRET_STRING = "!@#$";

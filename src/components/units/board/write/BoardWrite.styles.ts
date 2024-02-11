@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import type { ISubmitButtonProps } from "./BoardWrite.types";
 // Library
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
@@ -127,9 +126,7 @@ export const SubmitBtn = styled.button`
   width: 179px;
   height: 52px;
   margin-top: 40px;
-  background-color: ${(props: ISubmitButtonProps) =>
-    props.isActive ? "#FFD600" : "#BDBDBD"};
-  font-weight: 500;
+  font-weight: bold;
 `;
 
 export const AddressModal = styled(Modal)``;

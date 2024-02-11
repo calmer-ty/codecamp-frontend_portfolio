@@ -26,11 +26,6 @@ export const schemaBoardWrite = yup.object({
   password: yup.string().required("비밀번호 입력은 필수입니다."),
   title: yup.string().required("제목 입력은 필수입니다."),
   contents: yup.string().required("내용 입력은 필수입니다."),
-  zipcode: yup.string(),
-  address: yup.string(),
-  addressDetail: yup.string(),
-  youtubeUrl: yup.string(),
-  mainSetting: yup.string(),
 });
 
 export const schemaMemberLogin = yup.object({
