@@ -3,7 +3,6 @@ import type {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
-import type { MouseEvent } from "react";
 
 export interface IPageProps {
   isActive: boolean;
@@ -19,11 +18,11 @@ export interface IPagination01Props {
   count?: number;
 }
 
-export interface IPagination01UIProps {
-  startPage: number;
-  activedPage: number;
-  lastPage: number;
-  onClickPrevPage: () => void;
-  onClickNextPage: () => void;
-  onClickPage: (event: MouseEvent<HTMLButtonElement>) => void;
-}
+// export interface IPagination01UIProps {
+//   startPage: number;
+//   activedPage: number;
+//   lastPage: number;
+//   onClickPrevPage: () => void;
+//   onClickNextPage: () => void;
+//   onClickPage: (event: MouseEvent<HTMLButtonElement>) => void;
+// }

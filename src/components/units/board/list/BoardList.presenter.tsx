@@ -2,8 +2,8 @@ import * as S from "./BoardList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 import type { BoardListUIProps } from "./BoardList.types";
-import Pagination01 from "../../../commons/paginations/01/Pagination01.container";
-import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.container";
+import Pagination01 from "../../../commons/paginations/01/Pagination01.index";
+import Searchbar01 from "../../../commons/searchbars/01/SearchBar01.index";
 import { v4 as uuidv4 } from "uuid";
 
 const SECRET_STRING = "!@#$";
@@ -18,16 +18,19 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
           refetchBoardsCount={props.refetchBoardsCount}
         />
         <S.Table>
-          <S.Header>
-            <S.HeaderItem>번호</S.HeaderItem>
-            <S.HeaderItemTitle>제목</S.HeaderItemTitle>
-            <S.HeaderItem>작성자</S.HeaderItem>
-            <S.HeaderItem>날짜</S.HeaderItem>
-          </S.Header>
+          <S.HeaderWrap>
+            <S.ListItem style={{ width: "15%" }}>번호</S.ListItem>
+            <S.ListItem style={{ width: "50%" }}>제목</S.ListItem>
+            <S.ListItem style={{ width: "20%" }}>작성자</S.ListItem>
+            <S.ListItem style={{ width: "15%" }}>날짜</S.ListItem>
+          </S.HeaderWrap>
           {props.data?.fetchBoards.map((el) => (
             <S.List key={el._id}>
-              <S.ListItem>{String(el._id).slice(-4).toUpperCase()}</S.ListItem>
+              <S.ListItem style={{ width: "15%" }}>
+                {String(el._id).slice(-4).toUpperCase()}
+              </S.ListItem>
               <S.ListItemTitle
+                style={{ width: "50%" }}
                 id={el._id}
                 onClick={props.onClickMoveToBoardDetail}
               >
@@ -48,8 +51,10 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
                     </S.KeywordToken>
                   ))}
               </S.ListItemTitle>
-              <S.ListItem>{el.writer}</S.ListItem>
-              <S.ListItem>{getDate(el.createdAt)}</S.ListItem>
+              <S.ListItem style={{ width: "20%" }}>{el.writer}</S.ListItem>
+              <S.ListItem style={{ width: "15%" }}>
+                {getDate(el.createdAt)}
+              </S.ListItem>
             </S.List>
           ))}
         </S.Table>

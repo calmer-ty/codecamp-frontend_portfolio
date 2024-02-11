@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { MouseEvent } from "react";
-import PaginationUI from "./Pagination01.presenter";
+import * as S from "./Pagination01.styles";
 import type { IPagination01Props } from "./Pagination01.types";
 
 export default function Pagination01(props: IPagination01Props): JSX.Element {
@@ -29,13 +29,33 @@ export default function Pagination01(props: IPagination01Props): JSX.Element {
   };
 
   return (
-    <PaginationUI
-      startPage={startPage}
-      activedPage={activedPage}
-      lastPage={lastPage}
-      onClickPage={onClickPage}
-      onClickPrevPage={onClickPrevPage}
-      onClickNextPage={onClickNextPage}
-    />
+    <S.Wrapper>
+      <S.PageBtn onClick={onClickPrevPage} isDisabled={startPage <= 1}>
+        {"<"}
+      </S.PageBtn>
+      {new Array(10)
+        .fill(1)
+        .filter((_, index) => {
+          const currentPage = startPage + index;
+          return currentPage <= lastPage;
+        })
+        .map((_, index) => (
+          <S.Page
+            key={startPage + index}
+            id={String(startPage + index)}
+            onClick={onClickPage}
+            isActive={startPage + index === activedPage}
+          >
+            {startPage + index}
+          </S.Page>
+        ))}
+
+      <S.PageBtn
+        onClick={onClickNextPage}
+        isDisabled={lastPage - startPage < 10}
+      >
+        {">"}
+      </S.PageBtn>
+    </S.Wrapper>
   );
 }

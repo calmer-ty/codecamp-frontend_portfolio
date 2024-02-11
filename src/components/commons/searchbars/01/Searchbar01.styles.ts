@@ -1,16 +1,10 @@
 import { SearchOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 700px;
-  height: 52px;
-  margin-bottom: 40px;
-`;
-export const SearchInputWrap = styled.div`
+export const Searchbar = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
+  height: 52px;
 `;
 export const SearchInput = styled.input`
   width: 100%;

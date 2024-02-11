@@ -13,7 +13,6 @@ import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.queries";
 import BoardListUI from "./BoardList.presenter";
 
 export default function BoardList(): JSX.Element {
-  // Router
   const router = useRouter();
 
   const onClickMoveToBoardNew = (): void => {

@@ -11,7 +11,6 @@ interface IInputProps {
 }
 
 const Input = styled.input`
-  /* width: 1000px; */
   height: 52px;
   padding: 0 16px;
 `;

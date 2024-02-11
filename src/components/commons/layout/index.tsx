@@ -12,7 +12,6 @@ const LayoutBody = styled.div`
 export default function Layout(props: ILayoutProps): JSX.Element {
   return (
     <>
-      {/* {isLogState === true && <LayoutHeader />} */}
       <LayoutHeader />
       <LayoutNavigation />
       <LayoutBody>{props.children}</LayoutBody>
