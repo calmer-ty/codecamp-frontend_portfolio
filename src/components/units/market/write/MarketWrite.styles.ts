@@ -41,6 +41,15 @@ export const Form = styled.form`
   row-gap: 20px;
 `;
 
+export const Input = styled.input`
+  height: 52px;
+  padding: 0 16px;
+`;
+export const Textarea = styled.textarea`
+  height: 320px;
+  padding: 16px;
+`;
+
 export const Label = styled.div`
   font-size: 16px;
   font-weight: 500;
@@ -53,10 +62,6 @@ export const Error = styled.div`
   margin: 5px 0;
   font-size: 16px;
   color: red;
-`;
-export const ProductInput = styled.input`
-  height: 52px;
-  padding: 0 12px;
 `;
 
 export const SearchBtn = styled.button`

@@ -1,7 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import * as S from "./MarketWrite.styles";
 import type {
   IMutation,
   IMutationCreateUseditemArgs,
@@ -16,15 +15,12 @@ import { useEffect, useState } from "react";
 // Library
 import type { Address } from "react-daum-postcode";
 
-import Upload01 from "../../../commons/uploads/01/Upload01.index";
-import Label01 from "../../../commons/element/labels/01";
-import Input01 from "../../../commons/element/inputs/01";
-import Error01 from "../../../commons/element/errors/01";
 import { Modal } from "antd";
 
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
+import MarketWriteUI from "./MarketWrite.presenter";
 
 export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
   const router = useRouter();
@@ -141,121 +137,21 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
   }, [props.data]);
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Title>상품 {props.isEdit ? "수정" : "등록"}하기</S.Title>
-        <S.Form
-          onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickSubmit)}
-        >
-          <S.FlexColumn>
-            <Label01 text="상품명" />
-            <Input01
-              placeholder="상품명을 작성해주세요."
-              register={register("name")}
-            />
-            <Error01 text={formState.errors?.name?.message} />
-          </S.FlexColumn>
-          <S.FlexColumn>
-            <Label01 text="한줄요약" />
-            <Input01
-              placeholder="상품을 한 줄 요약해주세요."
-              register={register("remarks")}
-            />
-            <Error01 text={formState.errors?.remarks?.message} />
-          </S.FlexColumn>
-
-          <S.FlexColumn>
-            <Label01 text="상품설명" />
-            <Input01
-              placeholder="상품을 한 줄 요약해주세요."
-              register={register("contents")}
-            />
-            <Error01 text={formState.errors?.contents?.message} />
-          </S.FlexColumn>
-
-          <S.FlexColumn>
-            <Label01 text="판매 가격" />
-            <Input01
-              placeholder="상품을 한 줄 요약해주세요."
-              register={register("price")}
-            />
-            <Error01 text={formState.errors?.price?.message} />
-          </S.FlexColumn>
-
-          <S.FlexColumn>
-            <Label01 text="태그입력" />
-            <Input01
-              placeholder="#태그  #태그  #태그"
-              register={register("tags")}
-            />
-            <S.Error>{formState.errors?.tags?.message}</S.Error>
-          </S.FlexColumn>
-
-          <S.FlexRow>
-            <S.FlexColumn style={{ width: "40%" }}>
-              <Label01 text="거래위치" />
-              <div>Map</div>
-            </S.FlexColumn>
-            <S.FlexColumn style={{ width: "60%" }}>
-              <S.FlexColumn>
-                <S.Label>GPS</S.Label>
-                <S.FlexRow>
-                  <input type="text" />
-                  <input type="text" />
-                </S.FlexRow>
-              </S.FlexColumn>
-              <S.FlexColumn>
-                <Label01 text="주소" />
-                <S.SearchBtn type="button" onClick={onClickAddressSearch}>
-                  우편번호 검색
-                </S.SearchBtn>
-                <Input01
-                  value={address}
-                  readOnly
-                  register={register("address")}
-                />
-                <Input01 readOnly register={register("addressDetail")} />
-              </S.FlexColumn>
-            </S.FlexColumn>
-          </S.FlexRow>
-
-          <S.FlexColumn>
-            <Label01 text="사진첨부" />
-            <S.ImgWrap>
-              {fileUrls.map((el, index) => (
-                <Upload01
-                  key={`${el}_${index}`}
-                  index={index}
-                  fileUrl={el}
-                  onChangeFileUrls={onChangeFileUrls}
-                />
-              ))}
-            </S.ImgWrap>
-          </S.FlexColumn>
-
-          <S.FlexColumn>
-            <Label01 text="메인사진 설정" />
-            <S.FlexRow>
-              <S.RadioBtn type="radio" {...register("mainSetting")} />
-              <S.RadioLabel>사진1</S.RadioLabel>
-              <S.RadioBtn type="radio" {...register("mainSetting")} />
-              <S.RadioLabel>사진2</S.RadioLabel>
-            </S.FlexRow>
-          </S.FlexColumn>
-
-          <S.SubmitBtn>{props.isEdit ? "수정" : "등록"}하기</S.SubmitBtn>
-        </S.Form>
-      </S.Container>
-
-      {isOpen !== undefined && (
-        <S.AddressModal
-          open={isOpen}
-          onOk={onClickAddressSearch}
-          onCancel={onClickAddressSearch}
-        >
-          <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
-        </S.AddressModal>
-      )}
-    </S.Wrapper>
+    <MarketWriteUI
+      isEdit={props.isEdit}
+      data={props.data}
+      register={register}
+      handleSubmit={handleSubmit}
+      formState={formState}
+      onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
+      zipcode={zipcode}
+      address={address}
+      isOpen={isOpen}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeFileUrls={onChangeFileUrls}
+      fileUrls={fileUrls}
+    />
   );
 }

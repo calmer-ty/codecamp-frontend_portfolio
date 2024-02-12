@@ -47,6 +47,6 @@ export const schemaMemberLogin = yup.object({
 export const schemaProductWrite = yup.object({
   name: yup.string().required("상품명 입력은 필수입니다."),
   remarks: yup.string().required("상품요약 입력은 필수입니다."),
-  contents: yup.string().required("상품내용 입력은 필수입니다."),
+  contents: yup.string().required("상품설명 입력은 필수입니다."),
   price: yup.number().required("상품가격 입력은 필수입니다."),
 });

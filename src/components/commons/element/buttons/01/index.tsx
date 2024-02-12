@@ -10,7 +10,6 @@ const buttonStyle = {
 };
 
 export default function Button01(props: IButtonProps): JSX.Element {
-  console.log(props);
   return (
     <button
       style={{

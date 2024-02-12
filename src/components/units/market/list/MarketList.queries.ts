@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_USED_ITEMS = gql`
+export const FETCH_USEDITEMS = gql`
   query fetchUseditems($isSoldout: Boolean, $search: String, $page: Int) {
     fetchUseditems(isSoldout: $isSoldout, search: $search, page: $page) {
       _id
@@ -10,8 +10,9 @@ export const FETCH_USED_ITEMS = gql`
   }
 `;
 
-export const FETCH_BOARDS_COUNT = gql`
-  query fetchBoardsCount($search: String) {
-    fetchBoardsCount(search: $search)
+// fetchUseditemsCountIBought;
+export const FETCH_USEDITEMS_COUNT_I_BOUGHT = gql`
+  query {
+    fetchUseditemsCountIBought
   }
 `;

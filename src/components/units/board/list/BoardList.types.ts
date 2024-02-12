@@ -1,27 +1,24 @@
-import type { MouseEvent } from "react";
-import type {
-  IQuery,
-  IQueryFetchBoardsArgs,
-  IQueryFetchBoardsCountArgs,
-} from "../../../../commons/types/generated/types";
+import type { ChangeEvent } from "react";
+import type { IQuery } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
 export interface BoardListUIProps {
-  onClickMoveToBoardNew: (event: MouseEvent<HTMLButtonElement>) => void;
-  onClickMoveToBoardDetail: (event: MouseEvent<HTMLDivElement>) => void;
+  onClickMoveToPage: (path: string) => () => void;
 
   data?: Pick<IQuery, "fetchBoards"> | undefined;
-  refetch: (
-    variables?: Partial<IQueryFetchBoardsArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  count?: number;
+  // refetch: (
+  //   variables?: Partial<any> | undefined
+  // ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
+  // count?: number;
 
   // 검색
   keyword: string;
-  onChangeKeyword: (value: string) => void;
-  refetchBoardsCount: (
-    variables?: Partial<IQueryFetchBoardsCountArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  refetchCount: (
+    variables?: Partial<any> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
+
+  paginationArgs: any;
 }
 
 export interface IKeywordTokenProps {

@@ -35,6 +35,23 @@ export default function BoardDetail(): JSX.Element {
     IMutationDeleteBoardArgs
   >(DELETE_BOARD);
 
+  // 게시물 리스트 페이지로 이동
+  // const onClickMoveToBoardList = (): void => {
+  //   if (typeof router.query.boardId !== "string") {
+  //     alert("시스템에 문제가 있습니다.");
+  //     return;
+  //   }
+  //   void router.push("/boards");
+  // };
+  // 게시물 수정 페이지로 이동
+  // const onClickMoveToBoardEdit = (): void => {
+  //   if (typeof router.query.boardId !== "string") {
+  //     alert("시스템에 문제가 있습니다.");
+  //     return;
+  //   }
+
+  //   void router.push(`/boards/${router.query.boardId}/edit`);
+  // };
   // 게시물 삭제
   const onClickDeleteBoardDetail = async (): Promise<void> => {
     if (typeof data?.fetchBoard._id !== "string") {
@@ -63,7 +80,10 @@ export default function BoardDetail(): JSX.Element {
     <BoardDetailUI
       data={data}
       onClickMoveToPage={onClickMoveToPage}
+      // onClickMoveToBoardList={onClickMoveToBoardList}
+      // onClickMoveToBoardEdit={onClickMoveToBoardEdit}
       onClickDeleteBoardDetail={onClickDeleteBoardDetail}
+      // 좋아요 기능
       onClickLike={onClickLike}
       onClickDislike={onClickDislike}
     />

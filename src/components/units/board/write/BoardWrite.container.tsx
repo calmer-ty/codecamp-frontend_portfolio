@@ -54,12 +54,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
         variables: {
           createBoardInput: {
             ...inputs,
+            images: fileUrls,
             boardAddress: {
               zipcode,
               address,
               addressDetail,
             },
-            images: fileUrls,
           },
         },
       });

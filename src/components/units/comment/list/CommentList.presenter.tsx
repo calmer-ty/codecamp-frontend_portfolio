@@ -1,8 +1,8 @@
 import * as S from "./CommentList.styles";
-
-import CommentItem from "../../../commons/commentItem/CommentItem.index";
-import InfiniteScroll from "react-infinite-scroller";
 import type { IQuery } from "../../../../commons/types/generated/types";
+
+import CommentItem from "../../../commons/comments/board/CommentItem.index";
+import InfiniteScroll from "react-infinite-scroller";
 
 interface CommentListUIProps {
   data?: Pick<IQuery, "fetchBoardComments"> | undefined;

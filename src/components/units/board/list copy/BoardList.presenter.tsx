@@ -5,7 +5,6 @@ import type { BoardListUIProps } from "./BoardList.types";
 import Pagination01 from "../../../commons/paginations/01/Pagination01.index";
 import Searchbar01 from "../../../commons/searchbars/01/Searchbar01.index";
 import { v4 as uuidv4 } from "uuid";
-import Button02 from "../../../commons/element/buttons/02";
 
 const SECRET_STRING = "!@#$";
 
@@ -13,7 +12,11 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
-        <Searchbar01 onChangeSearch={props.onChangeSearch} />
+        <Searchbar01
+          onChangeKeyword={props.onChangeKeyword}
+          refetch={props.refetch}
+          refetchBoardsCount={props.refetchBoardsCount}
+        />
         <S.Table>
           <S.HeaderWrap>
             <S.ListItem style={{ width: "15%" }}>번호</S.ListItem>
@@ -28,7 +31,8 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
               </S.ListItem>
               <S.ListItemTitle
                 style={{ width: "50%" }}
-                onClick={props.onClickMoveToPage(`/boards/${el._id}`)}
+                id={el._id}
+                onClick={props.onClickMoveToBoardDetail}
               >
                 {el.title
                   .replaceAll(
@@ -54,8 +58,12 @@ export default function BoardListUI(props: BoardListUIProps): JSX.Element {
             </S.List>
           ))}
         </S.Table>
-        <Pagination01 {...props.paginationArgs} />
-        <Button02 text="게시물 등록하기" path="/boards/new" />
+        {/* Pagination */}
+        <Pagination01 refetch={props.refetch} count={props.count} />
+        <S.MoveBtn onClick={props.onClickMoveToBoardNew}>
+          <S.MoveBtnIcon src="/images/board/list/ic_create.png" />
+          게시물 등록하기
+        </S.MoveBtn>
       </S.Container>
     </S.Wrapper>
   );

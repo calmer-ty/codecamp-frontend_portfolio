@@ -7,16 +7,17 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 export const Container = styled.div`
-  position: relative;
-  width: 1200px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 1200px;
   row-gap: 40px;
-  /* align-items: center; */
 `;
 export const Table = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
 `;

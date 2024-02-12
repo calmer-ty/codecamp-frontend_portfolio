@@ -15,7 +15,6 @@ export const Container = styled.div`
   width: 1200px;
   padding: 100px;
   border: 2px solid #bdbdbd;
-  /* border-radius: 16px; */
   box-shadow: 5px 5px 5px #bdbdbd;
 `;
 
@@ -57,7 +56,6 @@ export const Contents = styled.textarea`
   width: 996px;
   height: 480px;
   padding: 12px;
-  /* border-radius: 12px; */
 `;
 
 export const AddressWrap = styled.div`
@@ -66,22 +64,16 @@ export const AddressWrap = styled.div`
   row-gap: 20px;
 `;
 
-export const ZipCodeWrap = styled.div`
-  display: flex;
-  column-gap: 20px;
-`;
 export const Zipcode = styled.input`
   width: 77px;
   height: 52px;
   padding: 0 12px;
-  /* border-radius: 12px; */
   text-align: center;
 `;
 
 export const SearchBtn = styled.button`
   width: 124px;
   height: 52px;
-  margin-left: 16px;
   background-color: black;
   color: white;
 `;

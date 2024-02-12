@@ -1,7 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import type { MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -12,12 +9,13 @@ import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.queries";
 // UI
 import BoardListUI from "./BoardList.presenter";
 
-export default function BoardList(): JSX.Element {
-  const router = useRouter();
+// Custom Hooks
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { useSearchbar } from "../../../commons/hooks/customs/useSearch";
+import { usePagination } from "../../../commons/hooks/customs/usePagination";
 
-  const onClickMoveToBoardNew = (): void => {
-    void router.push("/boards/new");
-  };
+export default function BoardList(): JSX.Element {
+  const { onClickMoveToPage } = useMoveToPage();
 
   // Boards API
   const { data, refetch } = useQuery<
@@ -25,39 +23,33 @@ export default function BoardList(): JSX.Element {
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
 
-  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
+  const { data: dataBoardsCount, refetch: refetchCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
     // 보드 카운트를 검색할 때마다 리패치 한다
   >(FETCH_BOARDS_COUNT);
 
-  const onClickMoveToBoardDetail = (
-    event: MouseEvent<HTMLDivElement>
-  ): void => {
-    // 이벤트 타겟은 여러 기능으로 사용되기 떄문에 타입을 정의해주어야 한다 => 이벤트 버블링으로 인해 currentTarget으로 사용하면 id를 지정해줄 수 있다
-    void router.push(`/boards/${event.currentTarget.id}`);
-  };
+  const paginationArgs = usePagination({
+    refetch,
+    count: dataBoardsCount?.fetchBoardsCount,
+  });
 
   // 검색 기능
-  const [keyword, setKeyword] = useState("");
-
-  const onChangeKeyword = (value: string): void => {
-    setKeyword(value);
-  };
-  // 키워드가 바뀔 때마다 리랜더링 하는 함수를 검색 컴포넌트로 보내준다
+  const { keyword, onChangeSearch } = useSearchbar({
+    refetch,
+    refetchCount,
+  });
 
   return (
     <>
       <BoardListUI
         data={data}
-        refetch={refetch}
-        count={dataBoardsCount?.fetchBoardsCount}
-        onClickMoveToBoardNew={onClickMoveToBoardNew}
-        onClickMoveToBoardDetail={onClickMoveToBoardDetail}
+        onClickMoveToPage={onClickMoveToPage}
         // 검색
         keyword={keyword}
-        onChangeKeyword={onChangeKeyword}
-        refetchBoardsCount={refetchBoardsCount}
+        onChangeSearch={onChangeSearch}
+        refetchCount={refetchCount}
+        paginationArgs={paginationArgs}
       />
     </>
   );

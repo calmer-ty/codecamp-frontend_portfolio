@@ -61,7 +61,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
             <S.FlexColumn>
               <Label01 text="주소" />
               <S.AddressWrap>
-                <S.ZipCodeWrap>
+                <S.FlexRow
+                  style={{ justifyContent: "flex-start", columnGap: "20px" }}
+                >
                   <S.Zipcode
                     readOnly
                     value={
@@ -74,7 +76,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
                   <S.SearchBtn onClick={props.onClickAddressSearch}>
                     우편번호 검색
                   </S.SearchBtn>
-                </S.ZipCodeWrap>
+                </S.FlexRow>
                 <S.Input
                   value={
                     props.address !== ""

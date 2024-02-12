@@ -3,15 +3,15 @@ import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
 
 import type { ChangeEvent, MouseEvent } from "react";
-import { FETCH_COMMENTS } from "../../units/comment/list/CommentList.queries";
+import { FETCH_COMMENTS } from "../../../units/comment/list/CommentList.queries";
 import type {
   IBoardComment,
   IMutation,
   IMutationDeleteBoardCommentArgs,
-} from "../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
+import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "./CommentItem.styles";
-import CommentWrite from "../../units/comment/write/CommentWrite.container";
-import { getDate } from "../../../commons/libraries/utils";
+import CommentWrite from "../../../units/comment/write/CommentWrite.container";
 
 interface CommentItemProps {
   el: IBoardComment;
