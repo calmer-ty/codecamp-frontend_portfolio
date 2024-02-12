@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import * as S from "./LayoutNavigation.styles";
+import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
 
 const NAVIGATION_MENUS = [
   { name: "Firebase", page: "/boards_firebase" },
@@ -10,16 +10,12 @@ const NAVIGATION_MENUS = [
   { name: "OpenApi", page: "/openApi" },
 ];
 export default function LayoutNavigation(): JSX.Element {
-  const router = useRouter();
-
-  const onClickMenu = (page: string) => (): void => {
-    void router.push(page);
-  };
+  const { onClickMoveToPage } = useMoveToPage();
   return (
     <S.Wrapper>
       <S.Container>
         {NAVIGATION_MENUS.map((el) => (
-          <S.MenuItem key={el.page} onClick={onClickMenu(el.page)}>
+          <S.MenuItem key={el.page} onClick={onClickMoveToPage(el.page)}>
             {el.name}
           </S.MenuItem>
         ))}

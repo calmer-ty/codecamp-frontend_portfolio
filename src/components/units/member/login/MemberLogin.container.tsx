@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { useRecoilState } from "recoil";
@@ -10,10 +9,12 @@ import type {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../../../commons/types/generated/types";
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { useRouter } from "next/router";
 
 export default function MemberLogin(): JSX.Element {
   const router = useRouter();
-
+  const { visitedPage } = useMoveToPage();
   // FROM
   const {
     register,
@@ -40,7 +41,6 @@ export default function MemberLogin(): JSX.Element {
           ...inputs,
         },
       });
-
       const accessToken = result.data?.loginUser.accessToken;
 
       if (
@@ -55,13 +55,12 @@ export default function MemberLogin(): JSX.Element {
       setAccessToken(accessToken);
       localStorage.setItem("accessToken", accessToken);
 
-      void router.push("/");
+      void router.push(visitedPage);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
   };
 
-  console.log(errors);
   return (
     <MemberLoginUI
       register={register}

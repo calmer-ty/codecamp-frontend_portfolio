@@ -8,7 +8,7 @@ export const useAuth = () => {
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
       Modal.error({ content: "로그인 후 이용 가능합니다." });
-      void router.push("/markets");
+      void router.push("/member/login");
     }
   }, []);
 };

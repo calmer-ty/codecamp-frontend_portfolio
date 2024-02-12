@@ -15,6 +15,8 @@ export const useMoveToPage = () => {
     void router.push(path);
   };
 
+  console.log("visitedPage: " + visitedPage);
+
   return {
     visitedPage,
     onClickMoveToPage,
