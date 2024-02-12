@@ -9,7 +9,6 @@ export const useUser = () => {
   const [createUser] = useCreateUser();
 
   const onClickJoin = async (data: IFormData): Promise<void> => {
-    console.log(data);
     const { passwordCheck, ...inputs } = data;
     try {
       const result = await createUser({
