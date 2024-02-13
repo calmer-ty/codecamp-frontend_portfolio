@@ -21,12 +21,12 @@ export interface IFormData {
 
 export interface IMarketWriteProps {
   isEdit: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
+  data?: Pick<IQuery, "fetchUseditem">;
 }
 
 export interface IMarketWriteUIProps {
   isEdit: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
+  data?: Pick<IQuery, "fetchUseditem">;
   zipcode: string;
   address: string;
   register: UseFormRegister<IFormData>;

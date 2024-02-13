@@ -1,17 +1,15 @@
-import styled from "@emotion/styled";
-
-interface IErrorProps {
+interface IDivProps {
   text?: string;
 }
 
-const Error = styled.div`
-  height: 20px;
-  margin-top: 4px;
-  padding: 0 12px;
-  font-size: 16px;
-  color: red;
-`;
+const divStyle = {
+  height: "20px",
+  marginTop: "4px",
+  padding: "0 12px",
+  fontSize: "16px",
+  color: "red",
+};
 
-export default function Error01(props: IErrorProps): JSX.Element {
-  return <Error>{props.text}</Error>;
+export default function Error01(props: IDivProps): JSX.Element {
+  return <div style={divStyle}>{props.text}</div>;
 }

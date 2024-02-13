@@ -10,18 +10,20 @@ import Button02 from "../../../commons/element/buttons/02";
 const SECRET_STRING = "!@#$";
 
 export default function MarketListUI(props: MarketListUIProps): JSX.Element {
+  // console.log(props.dataBestItem?.fetchBoardsOfTheBest);
   return (
     <S.Wrapper>
       <S.Container>
+        <S.Header>
+          {/* {props.dataBestItem?.fetchBoardsOfTheBest?.map((el, index) => {
+            console.log(el);
+            return <div key={el?._id}>{index}</div>;
+          })} */}
+          임시
+        </S.Header>
         <Searchbar01 onChangeSearch={props.onChangeSearch} />
         <S.Table>
-          <S.Header>
-            <S.HeaderItem>번호</S.HeaderItem>
-            <S.HeaderItemTitle>제목</S.HeaderItemTitle>
-            <S.HeaderItem>작성자</S.HeaderItem>
-            <S.HeaderItem>날짜</S.HeaderItem>
-          </S.Header>
-          {props.data?.fetchUseditems.map((el) => (
+          {props.data?.fetchUseditems?.map((el) => (
             <S.List key={el._id}>
               <S.ListItem>{String(el._id).slice(-4).toUpperCase()}</S.ListItem>
               <S.ListItemTitle

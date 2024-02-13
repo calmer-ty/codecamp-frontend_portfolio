@@ -24,15 +24,19 @@ export const Table = styled.div`
 `;
 export const Header = styled.div`
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  height: 300px;
+  /* justify-content: space-between;
   align-items: center;
   height: 52px;
   font-size: 18px;
   font-weight: 700;
-  text-align: center;
+  text-align: center; */
 `;
 export const HeaderItem = styled.div`
-  width: 100px;
+  width: 282px;
+  height: 390px;
+  background-color: #cdcdcd;
 `;
 export const HeaderItemTitle = styled.div`
   width: 400px;

@@ -10,9 +10,12 @@ export const FETCH_USEDITEMS = gql`
   }
 `;
 
-// fetchUseditemsCountIBought;
-export const FETCH_USEDITEMS_COUNT_I_BOUGHT = gql`
+export const FETCH_BEST_USEDITEM = gql`
   query {
-    fetchUseditemsCountIBought
+    fetchUseditemsOfTheBest {
+      _id
+      # name
+      # price
+    }
   }
 `;

@@ -25,7 +25,7 @@ export const FETCH_BOARD = gql`
   }
 `;
 
-export const useQueryFetchBoard = (variables: IQueryFetchBoardArgs) => {
+export const useFetchBoard = (variables: IQueryFetchBoardArgs) => {
   const result = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
     FETCH_BOARD,
     { variables }

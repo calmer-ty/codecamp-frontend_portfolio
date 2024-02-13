@@ -21,6 +21,9 @@ export interface MarketListUIProps {
   // refetchBoardsCount: (
   //   variables?: Partial<IQueryFetchBoardsCountArgs> | undefined
   // ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
+
+  // best
+  // dataBestItem: Pick<IQuery, "fetchBoardsOfTheBest"> | undefined;
 }
 
 export interface IKeywordTokenProps {

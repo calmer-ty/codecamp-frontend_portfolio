@@ -21,6 +21,7 @@ export default function MarketWriteUI(props: IMarketWriteUIProps): JSX.Element {
             <Label01 text="상품명" />
             <Input01
               placeholder="상품명을 작성해주세요."
+              defaultValue={props.data?.fetchUseditem.name ?? ""}
               register={props.register("name")}
             />
             <Error01 text={props.formState.errors?.name?.message} />
@@ -29,6 +30,7 @@ export default function MarketWriteUI(props: IMarketWriteUIProps): JSX.Element {
             <Label01 text="한줄요약" />
             <Input01
               placeholder="상품 한줄요약을 작성해주세요."
+              defaultValue={props.data?.fetchUseditem.remarks ?? ""}
               register={props.register("remarks")}
             />
             <Error01 text={props.formState.errors?.remarks?.message} />
@@ -38,6 +40,7 @@ export default function MarketWriteUI(props: IMarketWriteUIProps): JSX.Element {
             <Label01 text="상품설명" />
             <S.Textarea
               placeholder="상품설명을 작성해주세요."
+              defaultValue={props.data?.fetchUseditem.contents ?? ""}
               {...props.register("contents")}
             />
             <Error01 text={props.formState.errors?.contents?.message} />
@@ -47,6 +50,7 @@ export default function MarketWriteUI(props: IMarketWriteUIProps): JSX.Element {
             <Label01 text="판매 가격" />
             <Input01
               placeholder="상품가격을 작성해주세요."
+              defaultValue={props.data?.fetchUseditem.price ?? ""}
               register={props.register("price")}
             />
             <Error01 text={props.formState.errors?.price?.message} />
@@ -87,7 +91,8 @@ export default function MarketWriteUI(props: IMarketWriteUIProps): JSX.Element {
                     value={
                       props.address !== ""
                         ? props.address
-                        : props.data?.fetchBoard.boardAddress?.address ?? ""
+                        : props.data?.fetchUseditem.useditemAddress?.address ??
+                          ""
                     }
                     readOnly
                     {...props.register("address")}

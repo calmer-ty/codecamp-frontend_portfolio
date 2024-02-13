@@ -25,12 +25,16 @@ export default function MarketList(): JSX.Element {
     // 보드 카운트를 검색할 때마다 리패치 한다
   >(FETCH_BOARDS_COUNT);
 
+  // const { data: dataBestItem } =
+  //   useQuery<Pick<IQuery, "fetchBoardsOfTheBest">>(FETCH_BEST_USEDITEM);
+
   const { onClickMoveToPage } = useMoveToPage();
 
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,
     refetchCount,
   });
+
   return (
     <>
       <MarketListUI
@@ -40,6 +44,8 @@ export default function MarketList(): JSX.Element {
         // 검색
         keyword={keyword}
         onChangeSearch={onChangeSearch}
+        // best
+        // dataBestItem={dataBestItem}
       />
     </>
   );

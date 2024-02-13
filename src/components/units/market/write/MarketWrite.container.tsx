@@ -66,7 +66,7 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
           },
         },
       });
-      void router.push(`/boards/${result.data?.createUseditem._id}`);
+      void router.push(`/markets/${result.data?.createUseditem._id}`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
@@ -75,7 +75,7 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
   // 게시판 수정 기능
   const onClickUpdate = async (data: IFormData): Promise<void> => {
     const currentFiles = JSON.stringify(fileUrls);
-    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
+    const defaultFiles = JSON.stringify(props.data?.fetchUseditem.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
     const { addressDetail, ...inputs } = data;
@@ -107,7 +107,7 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
           updateUseditemInput,
         },
       });
-      void router.push(`/boards/${result.data?.updateUseditem._id}`);
+      void router.push(`/markets/${result.data?.updateUseditem._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -132,7 +132,7 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
   };
 
   useEffect(() => {
-    const images = props.data?.fetchBoard.images;
+    const images = props.data?.fetchUseditem.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
 
