@@ -9,8 +9,8 @@ import { FETCH_USEDITEMS } from "./MarketList.queries";
 // UI
 import MarketListUI from "./MarketList.presenter";
 import { useSearchbar } from "../../../commons/hooks/customs/useSearch";
-import { FETCH_BOARDS_COUNT } from "../../board/list/BoardList.queries";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { FETCH_BOARDS_COUNT } from "../../../commons/hooks/queries/useFetchBoardCount";
 
 export default function MarketList(): JSX.Element {
   // Boards API

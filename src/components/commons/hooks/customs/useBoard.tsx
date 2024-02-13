@@ -46,8 +46,8 @@ export const useBoard =
               contents: data.contents,
               youtubeUrl: data.youtubeUrl,
               boardAddress: {
-                zipcode: zipcode,
-                address: address,
+                zipcode,
+                address,
                 addressDetail: data.addressDetail,
               },
               images: fileUrls,
