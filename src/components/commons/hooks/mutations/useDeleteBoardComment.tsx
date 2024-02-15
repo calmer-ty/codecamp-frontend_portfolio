@@ -4,7 +4,7 @@ import type {
   IMutationDeleteBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
 
-export const DELETE_COMMENT = gql`
+const DELETE_COMMENT = gql`
   mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
     deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
   }

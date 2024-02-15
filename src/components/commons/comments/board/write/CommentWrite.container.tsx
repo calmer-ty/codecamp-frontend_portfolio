@@ -1,21 +1,16 @@
 import { useState } from "react";
-import { useMutation } from "@apollo/client";
 
-import { CREATE_COMMENT, UPDATE_COMMENT } from "./CommentWrite.queries";
 import CommentWriteUI from "./CommentWrite.presenter";
 
 import type { ChangeEvent } from "react";
-import type {
-  IMutation,
-  IMutationCreateBoardCommentArgs,
-  IMutationUpdateBoardCommentArgs,
-  IUpdateBoardCommentInput,
-} from "../../../../../commons/types/generated/types";
+import type { IUpdateBoardCommentInput } from "../../../../../commons/types/generated/types";
 import type { ICommentWriteProps } from "./CommentWrite.types";
 
 // Custom Hooks
 import { useIdCheck } from "../../../hooks/customs/useIdCheck";
 import { FETCH_COMMENTS } from "../../../hooks/queries/useFetchBoardComment";
+import { useCreateBoardComment } from "../../../hooks/mutations/useCreateBoardComment";
+import { useUpdateBoardComment } from "../../../hooks/mutations/useUpdateBoardComment";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   // Var
@@ -27,14 +22,8 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(1);
 
-  const [createComment] = useMutation<
-    Pick<IMutation, "createBoardComment">,
-    IMutationCreateBoardCommentArgs
-  >(CREATE_COMMENT);
-  const [updateComment] = useMutation<
-    Pick<IMutation, "updateBoardComment">,
-    IMutationUpdateBoardCommentArgs
-  >(UPDATE_COMMENT);
+  const [createComment] = useCreateBoardComment();
+  const [updateComment] = useUpdateBoardComment();
 
   // Function
   const onChangeInputs = (event: ChangeEvent<HTMLInputElement>): void => {

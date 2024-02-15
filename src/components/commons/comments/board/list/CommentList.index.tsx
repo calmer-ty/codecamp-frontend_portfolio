@@ -7,7 +7,7 @@ import { useDeleteBoardComment } from "../../../hooks/mutations/useDeleteBoardCo
 
 import * as S from "./CommentList.styles";
 import CommentWrite from "../write/CommentWrite.container";
-import { Avatar } from "antd";
+import { Avatar, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import type { ChangeEvent, MouseEvent } from "react";
@@ -49,7 +49,7 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
       });
       setIsOpenDeleteModal(false);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
