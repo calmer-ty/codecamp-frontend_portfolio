@@ -13,8 +13,6 @@ import { useCreateBoardComment } from "../../../hooks/mutations/useCreateBoardCo
 import { useUpdateBoardComment } from "../../../hooks/mutations/useUpdateBoardComment";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
-  // Var
-  // const router = useRouter();
   const [inputs, setInputs] = useState({
     writer: "",
     password: "",

@@ -1,12 +1,20 @@
 import * as S from "./MarketDetail.styles";
-import { getDate } from "../../../../commons/libraries/utils";
-import type { MarketDetailUIProps } from "./MarketDetail.types";
+import CommentWrite from "../../../commons/comments/board/write/CommentWrite.container";
+import CommentList from "../../../commons/comments/board/list/CommentList.index";
+
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+
+import InfiniteScroll from "react-infinite-scroller";
+import { useInfiniteScroll } from "../../../commons/hooks/customs/useInfiniteScroll";
+
+import { getDate } from "../../../../commons/libraries/utils";
+import type { MarketDetailUIProps } from "./MarketDetail.types";
 
 export default function MarketDetailUI(
   props: MarketDetailUIProps
 ): JSX.Element {
+  const { data: dataScroll, onLoadMore } = useInfiniteScroll();
   return (
     <>
       <S.Wrapper>
@@ -86,6 +94,14 @@ export default function MarketDetailUI(
             삭제하기
           </S.MoveBtn>
         </S.MoveBtnWrap>
+        <>
+          <CommentWrite />
+          <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+            {dataScroll?.fetchBoardComments.map((el, _) => (
+              <CommentList key={el._id} el={el}></CommentList>
+            )) ?? <></>}
+          </InfiniteScroll>
+        </>
       </S.Wrapper>
     </>
   );
