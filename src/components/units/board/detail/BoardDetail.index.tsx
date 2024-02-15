@@ -1,3 +1,7 @@
+import * as S from "./BoardDetail.styles";
+import CommentList from "../../../commons/comments/board/list/CommentList.index";
+import CommentWrite from "../../../commons/comments/board/write/CommentWrite.container";
+
 // Custon Hooks
 import { useBoardRate } from "../../../commons/hooks/customs/useBoardRate";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
@@ -5,7 +9,9 @@ import { useFetchBoard } from "../../../commons/hooks/queries/useFetchBoard";
 import { useBoard } from "../../../commons/hooks/customs/useBoard";
 import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
 
-import * as S from "./BoardDetail.styles";
+import InfiniteScroll from "react-infinite-scroller";
+import { useInfiniteScroll } from "../../../commons/hooks/customs/useInfiniteScroll";
+
 import { getDate } from "../../../../commons/libraries/utils";
 
 export default function BoardDetail(): JSX.Element {
@@ -19,6 +25,8 @@ export default function BoardDetail(): JSX.Element {
   const { onClickLike, onClickDislike } = useBoardRate();
   const { onClickMoveToPage } = useMoveToPage();
   const { onClickDelete } = useBoard();
+
+  const { data: dataScroll, onLoadMore } = useInfiniteScroll();
   return (
     <S.Wrapper>
       <S.CardWrap>
@@ -89,6 +97,15 @@ export default function BoardDetail(): JSX.Element {
         </S.MoveBtn>
         <S.MoveBtn onClick={onClickDelete}>삭제하기</S.MoveBtn>
       </S.MoveBtnWrap>
+
+      <>
+        <CommentWrite />
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+          {dataScroll?.fetchBoardComments.map((el, _) => (
+            <CommentList key={el._id} el={el}></CommentList>
+          )) ?? <></>}
+        </InfiniteScroll>
+      </>
     </S.Wrapper>
   );
 }

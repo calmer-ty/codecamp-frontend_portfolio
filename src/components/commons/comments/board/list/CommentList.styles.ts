@@ -2,12 +2,10 @@ import styled from "@emotion/styled";
 import { Modal, Rate } from "antd";
 
 // Layout
-export const RowWrapper = styled.div`
+export const FlexRow = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: row;
 `;
-export const ColumnWrapper = styled.div`
+export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -16,26 +14,23 @@ export const ColumnWrapper = styled.div`
 export const ListItem = styled.div`
   display: flex;
   flex-direction: column;
+  width: 1200px;
   position: relative;
   padding: 20px 0;
   border-bottom: 1px solid #bdbdbd;
 `;
-export const Title = styled.div`
+
+export const ItemTop = styled.div`
   display: flex;
-  flex-direction: row;
   margin-bottom: 4px;
-`;
-export const Avatar = styled.img`
-  padding: 4px;
-  margin-right: 12px;
 `;
 export const Writer = styled.div`
   margin-right: 16px;
 `;
-export const Contents = styled.div``;
-
+export const Contents = styled.div`
+  margin-bottom: 20px;
+`;
 export const CreateDate = styled.div`
-  margin: 20px 0 0 60px;
   font-size: 12px;
   color: #bdbdbd;
 `;

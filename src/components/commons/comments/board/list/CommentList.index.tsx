@@ -1,24 +1,25 @@
 import { useState } from "react";
 
 // Custom Hooks
-import { FETCH_COMMENTS } from "../../hooks/queries/useFetchBoardComment";
-import { useIdCheck } from "../../hooks/customs/useIdCheck";
-import { useDeleteBoardComment } from "../../hooks/mutations/useDeleteBoardComment";
+import { FETCH_COMMENTS } from "../../../hooks/queries/useFetchBoardComment";
+import { useIdCheck } from "../../../hooks/customs/useIdCheck";
+import { useDeleteBoardComment } from "../../../hooks/mutations/useDeleteBoardComment";
 
-import * as S from "./CommentItem.styles";
-import CommentWrite from "../../../units/comment/write/CommentWrite.container";
+import * as S from "./CommentList.styles";
+import CommentWrite from "../write/CommentWrite.container";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import type { ChangeEvent, MouseEvent } from "react";
-import type { IBoardComment } from "../../../../commons/types/generated/types";
+import type { IBoardComment } from "../../../../../commons/types/generated/types";
 
-import { getDate } from "../../../../commons/libraries/utils";
+import { getDate } from "../../../../../commons/libraries/utils";
+
 interface CommentItemProps {
   el: IBoardComment;
 }
 
-export default function CommentItem(props: CommentItemProps): JSX.Element {
+export default function CommentList(props: CommentItemProps): JSX.Element {
   const { id } = useIdCheck("boardId");
   const [isEdit, setIsEdit] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
@@ -83,17 +84,21 @@ export default function CommentItem(props: CommentItemProps): JSX.Element {
 
       {!isEdit ? (
         <S.ListItem key={props.el._id} id={props.el._id}>
-          <S.RowWrapper>
-            <Avatar size={48} icon={<UserOutlined />} />
-            <S.ColumnWrapper>
-              <S.RowWrapper>
+          <S.FlexRow>
+            <Avatar
+              size={40}
+              icon={<UserOutlined />}
+              style={{ marginRight: "16px" }}
+            />
+            <S.FlexColumn>
+              <S.ItemTop>
                 <S.Writer>{props.el.writer}</S.Writer>
                 <S.RateScore value={props.el.rating} disabled={true} />
-              </S.RowWrapper>
+              </S.ItemTop>
               <S.Contents>{props.el.contents}</S.Contents>
-            </S.ColumnWrapper>
-          </S.RowWrapper>
-          <S.CreateDate>{getDate(props.el.createdAt)}</S.CreateDate>
+              <S.CreateDate>{getDate(props.el.createdAt)}</S.CreateDate>
+            </S.FlexColumn>
+          </S.FlexRow>
           <S.ButtonWrapper>
             <S.EditButton onClick={onClickUpdate} />
             <S.DeleteButton

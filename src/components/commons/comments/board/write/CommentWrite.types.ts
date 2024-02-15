@@ -1,5 +1,5 @@
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
-import type { IBoardComment } from "../../../../commons/types/generated/types";
+import type { IBoardComment } from "../../../../../commons/types/generated/types";
 
 export interface ICommentWriteProps {
   // CommentItem Props

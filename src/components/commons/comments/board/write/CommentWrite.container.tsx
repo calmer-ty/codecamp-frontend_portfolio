@@ -10,12 +10,12 @@ import type {
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
   IUpdateBoardCommentInput,
-} from "../../../../commons/types/generated/types";
+} from "../../../../../commons/types/generated/types";
 import type { ICommentWriteProps } from "./CommentWrite.types";
 
 // Custom Hooks
-import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
-import { FETCH_COMMENTS } from "../../../commons/hooks/queries/useFetchBoardComment";
+import { useIdCheck } from "../../../hooks/customs/useIdCheck";
+import { FETCH_COMMENTS } from "../../../hooks/queries/useFetchBoardComment";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   // Var

@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+// import { Modal } from "antd";
 import { useRouter } from "next/router";
 
 export const useIdCheck = (id: any) => {
@@ -6,7 +6,7 @@ export const useIdCheck = (id: any) => {
   const queryId = router.query[id];
 
   if (typeof queryId !== "string") {
-    Modal.error({ content: "시스템에 문제가 있습니다." });
+    // Modal.error({ content: "시스템에 문제가 있습니다." });
     return { id: "" };
   }
 
