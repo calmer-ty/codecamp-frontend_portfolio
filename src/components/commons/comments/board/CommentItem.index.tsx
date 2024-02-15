@@ -1,30 +1,25 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
-import { gql, useMutation } from "@apollo/client";
 
-import type { ChangeEvent, MouseEvent } from "react";
-import { FETCH_COMMENTS } from "../../../units/comment/list/CommentList.queries";
-import type {
-  IBoardComment,
-  IMutation,
-  IMutationDeleteBoardCommentArgs,
-} from "../../../../commons/types/generated/types";
-import { getDate } from "../../../../commons/libraries/utils";
+// Custom Hooks
+import { FETCH_COMMENTS } from "../../hooks/queries/useFetchBoardComment";
+import { useIdCheck } from "../../hooks/customs/useIdCheck";
+import { useDeleteBoardComment } from "../../hooks/mutations/useDeleteBoardComment";
+
 import * as S from "./CommentItem.styles";
 import CommentWrite from "../../../units/comment/write/CommentWrite.container";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
+import type { ChangeEvent, MouseEvent } from "react";
+import type { IBoardComment } from "../../../../commons/types/generated/types";
+
+import { getDate } from "../../../../commons/libraries/utils";
 interface CommentItemProps {
   el: IBoardComment;
 }
 
-export const DELETE_COMMENT = gql`
-  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
-    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
-  }
-`;
-
 export default function CommentItem(props: CommentItemProps): JSX.Element {
-  const router = useRouter();
+  const { id } = useIdCheck("boardId");
   const [isEdit, setIsEdit] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
@@ -35,11 +30,7 @@ export default function CommentItem(props: CommentItemProps): JSX.Element {
     setPassword(event.target.value);
   };
 
-  // Delete
-  const [deleteComment] = useMutation<
-    Pick<IMutation, "deleteBoardComment">,
-    IMutationDeleteBoardCommentArgs
-  >(DELETE_COMMENT);
+  const [deleteComment] = useDeleteBoardComment();
 
   const onClickDelete = async (): Promise<void> => {
     try {
@@ -51,7 +42,7 @@ export default function CommentItem(props: CommentItemProps): JSX.Element {
         refetchQueries: [
           {
             query: FETCH_COMMENTS,
-            variables: { boardId: router.query.boardId },
+            variables: { boardId: id },
           },
         ],
       });
@@ -93,7 +84,7 @@ export default function CommentItem(props: CommentItemProps): JSX.Element {
       {!isEdit ? (
         <S.ListItem key={props.el._id} id={props.el._id}>
           <S.RowWrapper>
-            <S.Avatar src="/images/boardComment/list/ic_profile.png" />
+            <Avatar size={48} icon={<UserOutlined />} />
             <S.ColumnWrapper>
               <S.RowWrapper>
                 <S.Writer>{props.el.writer}</S.Writer>

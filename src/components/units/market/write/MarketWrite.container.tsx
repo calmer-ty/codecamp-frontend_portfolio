@@ -22,6 +22,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
 import MarketWriteUI from "./MarketWrite.presenter";
 
+import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
+
 export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
   const router = useRouter();
   // FROM
@@ -48,8 +50,6 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
 
   // 게시판 등록 기능
   const onClickSubmit = async (data: IFormData): Promise<void> => {
-    console.log(data);
-
     const { mainSetting, tags, zipcode, address, addressDetail, ...inputs } =
       data;
     try {
@@ -94,16 +94,12 @@ export default function MarketWrite(props: IMarketWriteProps): JSX.Element {
     }
     if (isChangedFiles) updateUseditemInput.images = fileUrls;
 
-    // boardId의 타입이 문자가 아닐 때 함수 실행 종료
-    if (typeof router.query.useditemId !== "string") {
-      alert("시스템에 문제가 있습니다.");
-      return;
-    }
+    const { id } = useIdCheck("useditemId");
 
     try {
       const result = await updateMarket({
         variables: {
-          useditemId: router.query.useditemId,
+          useditemId: id,
           updateUseditemInput,
         },
       });

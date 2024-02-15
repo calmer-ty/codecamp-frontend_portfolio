@@ -15,6 +15,7 @@ import MarketDetailUI from "./MarketDetail.presenter";
 // Custon Hooks
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { FETCH_USEDITEMS } from "../list/MarketList.queries";
+import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
 
 export default function MarketDetail(): JSX.Element {
   const router = useRouter();
@@ -36,14 +37,15 @@ export default function MarketDetail(): JSX.Element {
 
   // 게시물 삭제
   const onClickDeleteMarketDetail = async (): Promise<void> => {
-    if (typeof data?.fetchUseditem._id !== "string") {
+    const { id } = useIdCheck("useditemId");
+
+    if (typeof id !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
     }
-
     try {
       await deleteMarket({
-        variables: { useditemId: data?.fetchUseditem._id },
+        variables: { useditemId: id },
         refetchQueries: [
           {
             query: FETCH_USEDITEMS,

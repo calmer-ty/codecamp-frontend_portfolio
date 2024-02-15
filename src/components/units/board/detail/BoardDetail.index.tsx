@@ -1,24 +1,20 @@
-import { useRouter } from "next/router";
-
 // Custon Hooks
 import { useBoardRate } from "../../../commons/hooks/customs/useBoardRate";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { useFetchBoard } from "../../../commons/hooks/queries/useFetchBoard";
 import { useBoard } from "../../../commons/hooks/customs/useBoard";
+import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
 
 import * as S from "./BoardDetail.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
-export default function BoardDetailUI(): JSX.Element {
-  const router = useRouter();
-  // 아래 조건 시 빈 화면
-  if (typeof router.query.boardId !== "string") return <></>;
+export default function BoardDetail(): JSX.Element {
+  const { id } = useIdCheck("boardId");
+  if (typeof id !== "string") return <></>;
 
   const { data } = useFetchBoard({
-    boardId: router.query.boardId,
+    boardId: id,
   });
-
-  console.log(data);
 
   const { onClickLike, onClickDislike } = useBoardRate();
   const { onClickMoveToPage } = useMoveToPage();

@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 
 import { CREATE_COMMENT, UPDATE_COMMENT } from "./CommentWrite.queries";
-import { FETCH_COMMENTS } from "../list/CommentList.queries";
 import CommentWriteUI from "./CommentWrite.presenter";
 
 import type { ChangeEvent } from "react";
@@ -15,15 +13,19 @@ import type {
 } from "../../../../commons/types/generated/types";
 import type { ICommentWriteProps } from "./CommentWrite.types";
 
+// Custom Hooks
+import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
+import { FETCH_COMMENTS } from "../../../commons/hooks/queries/useFetchBoardComment";
+
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   // Var
-  const router = useRouter();
+  // const router = useRouter();
   const [inputs, setInputs] = useState({
     writer: "",
     password: "",
   });
   const [contents, setContents] = useState("");
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
 
   const [createComment] = useMutation<
     Pick<IMutation, "createBoardComment">,
@@ -46,12 +48,10 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   };
 
   // Write
+  const { id } = useIdCheck("boardId");
+
   const onClickWrite = async (): Promise<void> => {
     try {
-      if (typeof router.query.boardId !== "string") {
-        alert("시스템에 문제가 있습니다.");
-        return;
-      }
       await createComment({
         variables: {
           createBoardCommentInput: {
@@ -59,12 +59,12 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
             contents,
             rating,
           },
-          boardId: router.query.boardId,
+          boardId: id,
         },
         refetchQueries: [
           {
             query: FETCH_COMMENTS,
-            variables: { boardId: router.query.boardId },
+            variables: { boardId: id },
           },
         ],
       });
@@ -108,7 +108,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
         refetchQueries: [
           {
             query: FETCH_COMMENTS,
-            variables: { boardId: router.query.boardId },
+            variables: { boardId: id },
           },
         ],
       });
