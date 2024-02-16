@@ -32,11 +32,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   } = useAddressSearch();
   const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls();
 
-  // const boardArgs = {
-  //   fileUrls,
-  //   address,
-  //   zipcode,
-  // };
   const { onClickSubmit, onClickUpdate } = useBoard(fileUrls, address, zipcode);
 
   useEffect(() => {

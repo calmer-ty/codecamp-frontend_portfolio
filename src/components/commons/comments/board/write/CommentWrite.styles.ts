@@ -14,15 +14,14 @@ export const Container = styled.div`
   width: 1200px;
   margin: 40px 0;
 `;
-export const RowWrap = styled.div`
+export const Form = styled.form``;
+
+export const InputWrap = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   column-gap: 24px;
 `;
-export const Form = styled.form``;
-
-// title
 export const Title = styled.div`
   display: flex;
   align-items: center;

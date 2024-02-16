@@ -1,4 +1,4 @@
-import { useFetchBoardComments } from "../queries/useFetchBoardComment";
+import { useFetchBoardComments } from "../queries/useFetchBoardComments";
 
 export const useInfiniteScroll = () => {
   const { data, fetchMore } = useFetchBoardComments();
@@ -14,10 +14,7 @@ export const useInfiniteScroll = () => {
           return { fetchBoardComments: [...prev.fetchBoardComments] };
 
         return {
-          fetchBoardComments: [
-            ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
-          ],
+          fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
         };
       },
     });

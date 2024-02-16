@@ -36,24 +36,22 @@ export const CreateDate = styled.div`
 `;
 
 // BTN
-export const ButtonWrapper = styled.div`
+export const BtnWrap = styled.div`
   display: flex;
+  column-gap: 10px;
   position: absolute;
   top: 20px;
   right: 0;
-  column-gap: 10px;
 `;
-export const EditButton = styled.button`
+export const EditBtn = styled.button`
   width: 18px;
   height: 18px;
-  background: url("/images/boardComment/list/ic_edit.png") no-repeat
-    center/contain;
+  background: url("/images/boardComment/list/ic_edit.png") no-repeat center/contain;
 `;
-export const DeleteButton = styled.button`
+export const DeleteBtn = styled.button`
   width: 18px;
   height: 18px;
-  background: url("/images/boardComment/list/ic_exit.png") no-repeat
-    center/contain;
+  background: url("/images/boardComment/list/ic_exit.png") no-repeat center/contain;
 `;
 
 // Library

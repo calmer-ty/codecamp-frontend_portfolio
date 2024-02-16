@@ -1,95 +1,42 @@
-import { useState } from "react";
-
-// Custom Hooks
-import { FETCH_COMMENTS } from "../../../hooks/queries/useFetchBoardComment";
-import { useIdCheck } from "../../../hooks/customs/useIdCheck";
-import { useDeleteBoardComment } from "../../../hooks/mutations/useDeleteBoardComment";
-
 import * as S from "./CommentList.styles";
-import CommentWrite from "../write/CommentWrite.container";
-import { Avatar, Modal } from "antd";
+import CommentWrite from "../write/CommentWrite.index";
+import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
-import type { ChangeEvent, MouseEvent } from "react";
-import type { IBoardComment } from "../../../../../commons/types/generated/types";
-
 import { getDate } from "../../../../../commons/libraries/utils";
+
+// Custom Hooks
+import { useBoardComment } from "../../../hooks/customs/useBoardComment";
+import { useToggle } from "../../../hooks/customs/useToggle";
+
+import type { IBoardComment } from "../../../../../commons/types/generated/types";
 
 interface CommentItemProps {
   el: IBoardComment;
 }
 
 export default function CommentList(props: CommentItemProps): JSX.Element {
-  const { id } = useIdCheck("boardId");
-  const [isEdit, setIsEdit] = useState(false);
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isOpen, onToggleModal] = useToggle(false);
+  const [isEdit, onToggleEdit] = useToggle(false);
 
-  const [password, setPassword] = useState("");
-  const [boardCommentId, setBoardCommentId] = useState("");
+  const { onClickDelete, onChangeDeletePassword } = useBoardComment({
+    boardCommentId: props.el._id,
+    onToggleEdit,
+  });
 
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-  };
-
-  const [deleteComment] = useDeleteBoardComment();
-
-  const onClickDelete = async (): Promise<void> => {
-    try {
-      await deleteComment({
-        variables: {
-          boardCommentId,
-          password,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_COMMENTS,
-            variables: { boardId: id },
-          },
-        ],
-      });
-      setIsOpenDeleteModal(false);
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
-  };
-
-  const onClickOpenDeleteModal = (
-    event: MouseEvent<HTMLButtonElement>
-  ): void => {
-    setIsOpenDeleteModal(true);
-    setBoardCommentId(event.currentTarget.id);
-  };
-  const onClickCloseDeleteModal = (): void => {
-    setIsOpenDeleteModal(false);
-  };
-
-  // Update
-  const onClickUpdate = (): void => {
-    setIsEdit(true);
-  };
-
-  // UI
   return (
     <>
-      {isOpenDeleteModal && (
-        <S.CommentDeleteModal
-          visible={true}
-          onOk={onClickDelete}
-          onCancel={onClickCloseDeleteModal}
-        >
+      {isOpen && (
+        <S.CommentDeleteModal visible={true} onOk={onClickDelete} onCancel={onToggleModal}>
           <span>비밀번호 입력: </span>
-          <input type="password" onChange={onChangePassword} />
+          <input type="password" onChange={onChangeDeletePassword} />
         </S.CommentDeleteModal>
       )}
 
       {!isEdit ? (
-        <S.ListItem key={props.el._id} id={props.el._id}>
+        <S.ListItem key={props.el._id}>
           <S.FlexRow>
-            <Avatar
-              size={40}
-              icon={<UserOutlined />}
-              style={{ marginRight: "16px" }}
-            />
+            <Avatar size={40} icon={<UserOutlined />} style={{ marginRight: "16px" }} />
             <S.FlexColumn>
               <S.ItemTop>
                 <S.Writer>{props.el.writer}</S.Writer>
@@ -99,16 +46,13 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
               <S.CreateDate>{getDate(props.el.createdAt)}</S.CreateDate>
             </S.FlexColumn>
           </S.FlexRow>
-          <S.ButtonWrapper>
-            <S.EditButton onClick={onClickUpdate} />
-            <S.DeleteButton
-              onClick={onClickOpenDeleteModal}
-              id={props.el._id}
-            />
-          </S.ButtonWrapper>
+          <S.BtnWrap>
+            <S.EditBtn onClick={onToggleEdit} />
+            <S.DeleteBtn onClick={onToggleModal} />
+          </S.BtnWrap>
         </S.ListItem>
       ) : (
-        <CommentWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
+        <CommentWrite isEdit={true} onToggleEdit={onToggleEdit} el={props.el} />
       )}
     </>
   );

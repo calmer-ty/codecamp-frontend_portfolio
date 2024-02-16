@@ -1,6 +1,6 @@
 import * as S from "./BoardDetail.styles";
 import CommentList from "../../../commons/comments/board/list/CommentList.index";
-import CommentWrite from "../../../commons/comments/board/write/CommentWrite.container";
+import CommentWrite from "../../../commons/comments/board/write/CommentWrite.index";
 
 // Custon Hooks
 import { useBoardRate } from "../../../commons/hooks/customs/useBoardRate";
@@ -54,34 +54,17 @@ export default function BoardDetail(): JSX.Element {
           <S.ImgWrap>
             {data?.fetchBoard.images
               ?.filter((el) => el)
-              .map((el) => (
-                <S.ImgItem
-                  key={el}
-                  src={`http://storage.googleapis.com/${el}`}
-                />
-              ))}
+              .map((el) => <S.ImgItem key={el} src={`http://storage.googleapis.com/${el}`} />)}
           </S.ImgWrap>
           <S.Contents>{data?.fetchBoard?.contents}</S.Contents>
-          <S.Youtube
-            url={data?.fetchBoard?.youtubeUrl ?? ""}
-            width={486}
-            height={240}
-            muted
-            playing
-          />
+          <S.Youtube url={data?.fetchBoard?.youtubeUrl ?? ""} width={486} height={240} muted playing />
           <S.LikeWrap>
             <S.LikeItem>
-              <S.LikeIcon
-                onClick={onClickLike}
-                style={{ fontSize: "30px", cursor: "pointer" }}
-              />
+              <S.LikeIcon onClick={onClickLike} style={{ fontSize: "30px", cursor: "pointer" }} />
               <S.LikeScore>{data?.fetchBoard.likeCount}</S.LikeScore>
             </S.LikeItem>
             <S.LikeItem>
-              <S.DislikeIcon
-                onClick={onClickDislike}
-                style={{ fontSize: "30px", cursor: "pointer" }}
-              />
+              <S.DislikeIcon onClick={onClickDislike} style={{ fontSize: "30px", cursor: "pointer" }} />
               <S.LikeScore>{data?.fetchBoard.dislikeCount}</S.LikeScore>
             </S.LikeItem>
           </S.LikeWrap>
@@ -90,20 +73,14 @@ export default function BoardDetail(): JSX.Element {
 
       <S.MoveBtnWrap>
         <S.MoveBtn onClick={onClickMoveToPage("/boards")}>목록으로</S.MoveBtn>
-        <S.MoveBtn
-          onClick={onClickMoveToPage(`/boards/${data?.fetchBoard._id}/edit`)}
-        >
-          수정하기
-        </S.MoveBtn>
+        <S.MoveBtn onClick={onClickMoveToPage(`/boards/${data?.fetchBoard._id}/edit`)}>수정하기</S.MoveBtn>
         <S.MoveBtn onClick={onClickDelete}>삭제하기</S.MoveBtn>
       </S.MoveBtnWrap>
 
       <>
         <CommentWrite />
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-          {dataScroll?.fetchBoardComments.map((el, _) => (
-            <CommentList key={el._id} el={el}></CommentList>
-          )) ?? <></>}
+          {dataScroll?.fetchBoardComments.map((el, _) => <CommentList key={el._id} el={el}></CommentList>) ?? <></>}
         </InfiniteScroll>
       </>
     </S.Wrapper>
