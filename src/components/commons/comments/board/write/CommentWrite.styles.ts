@@ -20,6 +20,7 @@ export const RowWrap = styled.div`
   margin-bottom: 20px;
   column-gap: 24px;
 `;
+export const Form = styled.form``;
 
 // title
 export const Title = styled.div`
