@@ -5,7 +5,7 @@ import { getDate } from "../../../../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
 
 import type { IMarketListBodyProps } from "../MarketList.types";
-import Button02 from "../../../../commons/element/buttons/02";
+import LinkBtn02 from "../../../../commons/element/buttons/link02";
 
 export default function MarketListBody(props: IMarketListBodyProps) {
   const SECRET_STRING = "!@#$";
@@ -30,7 +30,9 @@ export default function MarketListBody(props: IMarketListBodyProps) {
           <S.ListItem>{getDate(el.createdAt)}</S.ListItem>
         </S.List>
       ))}
-      <Button02 text="상품 등록하기" path="/markets/new" />
+      <Link href={"/markets/new"}>
+        <LinkBtn02 text="상품 등록하기" />
+      </Link>
     </S.Body>
   );
 }
