@@ -70,13 +70,11 @@ export default function BoardDetail(): JSX.Element {
           </S.LikeWrap>
         </S.Body>
       </S.CardWrap>
-
       <S.MoveBtnWrap>
         <S.MoveBtn onClick={onClickMoveToPage("/boards")}>목록으로</S.MoveBtn>
         <S.MoveBtn onClick={onClickMoveToPage(`/boards/${data?.fetchBoard._id}/edit`)}>수정하기</S.MoveBtn>
         <S.MoveBtn onClick={onClickDelete}>삭제하기</S.MoveBtn>
       </S.MoveBtnWrap>
-
       <>
         <CommentWrite />
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>

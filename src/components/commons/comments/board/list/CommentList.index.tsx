@@ -21,7 +21,6 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
 
   const { onClickDelete, onChangeDeletePassword } = useBoardComment({
     boardCommentId: props.el._id,
-    onToggleEdit,
   });
 
   return (

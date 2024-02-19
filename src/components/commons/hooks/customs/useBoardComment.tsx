@@ -14,8 +14,8 @@ import type { IFormData } from "../../comments/board/write/CommentWrite.types";
 import type { IUpdateBoardCommentInput } from "../../../../commons/types/generated/types";
 
 interface IUseBoardCommentArgs {
-  boardCommentId: string;
   rating?: number;
+  boardCommentId?: string;
   setRating?: Dispatch<SetStateAction<number | undefined>>;
   onToggleEdit?: () => void;
 }
@@ -53,8 +53,10 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
   };
 
   const onClickSubmit = async (data: IFormData): Promise<void> => {
-    console.log(data);
-    if (typeof args?.rating !== "number") return;
+    if (args?.rating === undefined) {
+      alert("별점을 선택해주세요.");
+      return;
+    }
     try {
       await createComment({
         variables: {
@@ -62,7 +64,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
             writer: data.writer,
             password: data.password,
             contents: data.contents,
-            rating: args.rating,
+            rating: args?.rating,
           },
           boardId: id,
         },
@@ -94,6 +96,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
 
     try {
       const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+      if (typeof args.boardCommentId !== "string") return;
       if (data.contents !== "") updateBoardCommentInput.contents = data.contents;
       if (data.rating !== args?.rating) updateBoardCommentInput.rating = args.rating;
       await updateComment({
