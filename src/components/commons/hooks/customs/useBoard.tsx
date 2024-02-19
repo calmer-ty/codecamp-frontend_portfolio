@@ -1,10 +1,7 @@
 import { useRouter } from "next/router";
 
 // Custom Hooks
-import {
-  FETCH_BOARD,
-  useFetchBoard,
-} from "../../../commons/hooks/queries/useFetchBoard";
+import { FETCH_BOARD, useFetchBoard } from "../../../commons/hooks/queries/useFetchBoard";
 import { FETCH_BOARDS } from "../../../commons/hooks/queries/useFetchBoards";
 import { useCreateBoard } from "../mutations/useCreateBoard";
 import { useUpdateBoard } from "../mutations/useUpdateBoard";
@@ -16,11 +13,7 @@ import type { IFormData } from "../../../units/board/write/BoardWrite.types";
 
 import { Modal } from "antd";
 
-export const useBoard = (
-  fileUrls?: string[],
-  zipcode?: string,
-  address?: string
-) => {
+export const useBoard = (fileUrls?: string[], zipcode?: string, address?: string) => {
   const router = useRouter();
   const { id } = useIdCheck("boardId");
 
@@ -74,16 +67,11 @@ export const useBoard = (
     if (data.title !== "") updateBoardInput.title = data.title;
     if (data.contents !== "") updateBoardInput.contents = data.contents;
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
-    if (
-      data.zipcode !== "" ||
-      data.address !== "" ||
-      data.addressDetail !== ""
-    ) {
+    if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
       updateBoardInput.boardAddress = {};
       if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
       if (data.address !== "") updateBoardInput.boardAddress.address = address;
-      if (data.addressDetail !== "")
-        updateBoardInput.boardAddress.addressDetail = data.addressDetail;
+      if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
     if (isChangedFiles) updateBoardInput.images = fileUrls;
 

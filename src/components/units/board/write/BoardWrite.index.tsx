@@ -23,13 +23,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     resolver: yupResolver(schemaBoardWrite),
     mode: "onChange",
   });
-  const {
-    zipcode,
-    isOpen,
-    address,
-    onClickAddressSearch,
-    onCompleteAddressSearch,
-  } = useAddressSearch();
+  const { isOpen, zipcode, address, onClickAddressSearch, onCompleteAddressSearch } = useAddressSearch();
   const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls();
 
   const { onClickSubmit, onClickUpdate } = useBoard(fileUrls, address, zipcode);
@@ -43,11 +37,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       <S.Wrapper>
         <S.Container>
           <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
-          <S.Form
-            onSubmit={handleSubmit(
-              props.isEdit ? onClickUpdate : onClickSubmit
-            )}
-          >
+          <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickSubmit)}>
             <S.FlexRow>
               <S.InputWrap>
                 <Label01 text="작성자" />
@@ -61,11 +51,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               </S.InputWrap>
               <S.InputWrap>
                 <Label01 text="비밀번호" />
-                <Input01
-                  type="password"
-                  placeholder="비밀번호를 작성해주세요."
-                  register={register("password")}
-                />
+                <Input01 type="password" placeholder="비밀번호를 작성해주세요." register={register("password")} />
                 <Error01 text={formState.errors?.password?.message} />
               </S.InputWrap>
             </S.FlexRow>
@@ -93,16 +79,10 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             <S.FlexColumn>
               <Label01 text="주소" />
               <S.AddressWrap>
-                <S.FlexRow
-                  style={{ justifyContent: "flex-start", columnGap: "20px" }}
-                >
+                <S.FlexRow style={{ justifyContent: "flex-start", columnGap: "20px" }}>
                   <S.Zipcode
                     readOnly
-                    value={
-                      zipcode !== ""
-                        ? zipcode
-                        : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
-                    }
+                    value={zipcode !== "" ? zipcode : props.data?.fetchBoard.boardAddress?.zipcode ?? ""}
                     {...register("zipcode")}
                   />
                   <S.SearchBtn type="button" onClick={onClickAddressSearch}>
@@ -110,18 +90,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                   </S.SearchBtn>
                 </S.FlexRow>
                 <S.Input
-                  value={
-                    address !== ""
-                      ? address
-                      : props.data?.fetchBoard.boardAddress?.address ?? ""
-                  }
+                  value={address !== "" ? address : props.data?.fetchBoard.boardAddress?.address ?? ""}
                   readOnly
                   {...register("address")}
                 />
                 <Input01
-                  defaultValue={
-                    props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
-                  }
+                  defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail ?? ""}
                   register={register("addressDetail")}
                 />
               </S.AddressWrap>
@@ -141,12 +115,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               <S.ImgWrap>
                 {fileUrls.map((el, index) => {
                   return (
-                    <Upload01
-                      key={`${el}_${index}`}
-                      index={index}
-                      fileUrl={el}
-                      onChangeFileUrls={onChangeFileUrls}
-                    />
+                    <Upload01 key={`${el}_${index}`} index={index} fileUrl={el} onChangeFileUrls={onChangeFileUrls} />
                   );
                 })}
               </S.ImgWrap>
@@ -162,19 +131,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               </S.RadioWrap>
             </S.FlexColumn>
 
-            <Button01
-              isActive={formState.isValid}
-              text={props.isEdit ? "수정하기" : "등록하기"}
-            />
+            <Button01 isActive={formState.isValid} text={props.isEdit ? "수정하기" : "등록하기"} />
           </S.Form>
         </S.Container>
 
         {isOpen && (
-          <S.AddressModal
-            open={isOpen}
-            onOk={onClickAddressSearch}
-            onCancel={onClickAddressSearch}
-          >
+          <S.AddressModal open={isOpen} onOk={onClickAddressSearch} onCancel={onClickAddressSearch}>
             <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
           </S.AddressModal>
         )}

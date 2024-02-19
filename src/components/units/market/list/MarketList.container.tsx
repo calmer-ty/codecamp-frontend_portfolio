@@ -5,19 +5,16 @@ import type {
   IQueryFetchUseditemsArgs,
 } from "../../../../commons/types/generated/types";
 // QUERIES
-import { FETCH_USEDITEMS } from "./MarketList.queries";
 // UI
 import MarketListUI from "./MarketList.presenter";
 import { useSearchbar } from "../../../commons/hooks/customs/useSearch";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { FETCH_BOARDS_COUNT } from "../../../commons/hooks/queries/useFetchBoardCount";
+import { FETCH_USEDITEMS } from "../../../commons/hooks/queries/useFetchMarkets";
 
 export default function MarketList(): JSX.Element {
   // Boards API
-  const { data, refetch } = useQuery<
-    Pick<IQuery, "fetchUseditems">,
-    IQueryFetchUseditemsArgs
-  >(FETCH_USEDITEMS);
+  const { data, refetch } = useQuery<Pick<IQuery, "fetchUseditems">, IQueryFetchUseditemsArgs>(FETCH_USEDITEMS);
 
   const { refetch: refetchCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,

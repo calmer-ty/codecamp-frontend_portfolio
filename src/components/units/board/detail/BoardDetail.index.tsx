@@ -16,7 +16,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 
 export default function BoardDetail(): JSX.Element {
   const { id } = useIdCheck("boardId");
-  if (typeof id !== "string") return <></>;
+  // if (typeof id !== "string") return <></>;
 
   const { data } = useFetchBoard({
     boardId: id,
