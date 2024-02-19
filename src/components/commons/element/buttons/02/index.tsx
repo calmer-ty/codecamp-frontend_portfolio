@@ -2,8 +2,6 @@ import { useMoveToPage } from "../../../hooks/customs/useMoveToPage";
 
 interface IButtonArgs {
   text: string;
-  // onClickMoveToPage?: (path: string) => () => void;
-  // onClick: (path: string) => () => void;
   path: string;
 }
 

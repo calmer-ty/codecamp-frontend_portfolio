@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const Container = styled.div`
+export const Container = styled.article`
   display: flex;
   flex-direction: column;
   width: 1200px;
@@ -21,13 +21,14 @@ export const FlexRow = styled.div`
   display: flex;
   width: 100%;
 `;
-export const FlexColumn = styled.div`
+
+export const InputWrap = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h2`
   margin-bottom: 60px;
   font-size: 36px;
   font-weight: 700;
@@ -64,6 +65,21 @@ export const Error = styled.div`
   color: red;
 `;
 
+export const MapWrap = styled.section`
+  display: flex;
+  width: 100%;
+`;
+export const Map = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+`;
+export const MapInfo = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  row-gap: 20px;
+`;
 export const SearchBtn = styled.button`
   width: 124px;
   height: 52px;
@@ -77,7 +93,7 @@ export const Address = styled.input`
   padding: 0 12px;
 `;
 
-export const ImgWrap = styled.div`
+export const ImgWrap = styled.section`
   display: flex;
   column-gap: 24px;
 `;
