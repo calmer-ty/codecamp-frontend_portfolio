@@ -14,9 +14,9 @@ export const CardWrap = styled.div`
   width: 800px;
 `;
 
-export const FlexRow = styled.div`
+export const GPSWrap = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: flex-end;
 `;
 export const FlexColumn = styled.div`
   display: flex;

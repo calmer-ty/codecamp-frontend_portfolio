@@ -11,6 +11,7 @@ import { Modal } from "antd";
 
 import type { IFormData } from "../../../units/market/write/MarketWrite.types";
 import type { IUpdateUseditemInput } from "../../../../commons/types/generated/types";
+import { FETCH_USEDITEM } from "../queries/useFetchMarket";
 
 export const useMarket = (fileUrls?: string[], zipcode?: string, address?: string) => {
   const router = useRouter();
@@ -69,15 +70,20 @@ export const useMarket = (fileUrls?: string[], zipcode?: string, address?: strin
     }
     if (isChangedFiles) updateUseditemInput.images = fileUrls;
 
-    const { id } = useIdCheck("useditemId");
-
     try {
       const result = await updateMarket({
         variables: {
           useditemId: id,
           updateUseditemInput,
         },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEM,
+            variables: { useditemId: id },
+          },
+        ],
       });
+      console.log("일단 수정 성공");
       void router.push(`/markets/${result.data?.updateUseditem._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);

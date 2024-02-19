@@ -25,6 +25,7 @@ export default function MarketDetail(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
   const { onClickDelete } = useMarket();
 
+  console.log(data?.fetchUseditem);
   return (
     <>
       <S.Wrapper>
@@ -37,7 +38,7 @@ export default function MarketDetail(): JSX.Element {
                 <S.CreatedAt>Date: {getDate(data?.fetchUseditem?.createdAt)}</S.CreatedAt>
               </S.FlexColumn>
             </S.SellerWrap>
-            <S.FlexRow style={{ justifyContent: "flex-end" }}>
+            <S.GPSWrap>
               <S.LinkBtn src="/images/board/detail/ic_link.png"></S.LinkBtn>
               <S.AddressInfo
                 title={`${data?.fetchUseditem?.useditemAddress?.address ?? ""} ${
@@ -46,7 +47,7 @@ export default function MarketDetail(): JSX.Element {
               >
                 <img src="/images/board/detail/ic_location.png"></img>
               </S.AddressInfo>
-            </S.FlexRow>
+            </S.GPSWrap>
           </S.Header>
           <S.Body>
             <S.BodyTop>
@@ -54,7 +55,7 @@ export default function MarketDetail(): JSX.Element {
                 <S.TitleText>
                   <S.Remark>{data?.fetchUseditem?.remarks}</S.Remark>
                   <S.Name>{data?.fetchUseditem?.name}</S.Name>
-                  <S.Price>240,000원</S.Price>
+                  <S.Price>{data?.fetchUseditem.price}원</S.Price>
                 </S.TitleText>
                 <S.PickedCount>{data?.fetchUseditem.pickedCount}</S.PickedCount>
               </S.TitleWrap>

@@ -8,6 +8,7 @@ export const FETCH_USEDITEM = gql`
       name
       remarks
       contents
+      price
       createdAt
       pickedCount
       images
