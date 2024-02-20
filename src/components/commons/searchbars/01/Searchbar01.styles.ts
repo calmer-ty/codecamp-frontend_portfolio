@@ -1,7 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
-export const Searchbar = styled.div`
+export const Searchbar = styled.article`
   position: relative;
   width: 100%;
   height: 52px;

@@ -60,7 +60,7 @@ export const BtnWrap = styled.div`
   margin: 101px 0 87px 0;
   column-gap: 24px;
 `;
-export const MoveBtn = styled.a`
+export const LinkBtn = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;

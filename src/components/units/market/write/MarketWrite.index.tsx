@@ -81,7 +81,7 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
           <S.InputWrap>
             <Label01 text="태그입력" />
             <Input01 placeholder="#태그  #태그  #태그" register={register("tags")} />
-            <S.Error>{formState.errors?.tags?.message}</S.Error>
+            <Error01 text={formState.errors?.tags?.message} />
           </S.InputWrap>
 
           <S.MapWrap>
@@ -91,7 +91,7 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
             </S.Map>
             <S.MapInfo style={{ width: "60%", rowGap: "20px" }}>
               <S.InputWrap>
-                <S.Label>GPS</S.Label>
+                <Label01 text="GPS" />
                 <S.FlexRow>
                   <S.Input type="text" />
                   <S.SearchBtn type="button" onClick={onClickAddressSearch}>

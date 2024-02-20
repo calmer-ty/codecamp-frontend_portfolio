@@ -8,7 +8,7 @@ export const Body = styled.section`
   row-gap: 20px;
   width: 100%;
 `;
-export const Table = styled.section`
+export const Table = styled.article`
   display: flex;
   flex-direction: column;
   width: 100%;

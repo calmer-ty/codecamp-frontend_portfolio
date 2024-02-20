@@ -29,12 +29,10 @@ export default function MarketDetail(): JSX.Element {
           <MarketDetailBody data={data} onClickDelete={onClickDelete} />
         </S.CardWrap>
 
-        <>
-          <CommentWrite />
-          <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-            {dataScroll?.fetchBoardComments.map((el, _) => <CommentList key={el._id} el={el}></CommentList>) ?? <></>}
-          </InfiniteScroll>
-        </>
+        <CommentWrite />
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+          {dataScroll?.fetchBoardComments.map((el, _) => <CommentList key={el._id} el={el}></CommentList>) ?? <></>}
+        </InfiniteScroll>
       </S.Wrapper>
     </>
   );

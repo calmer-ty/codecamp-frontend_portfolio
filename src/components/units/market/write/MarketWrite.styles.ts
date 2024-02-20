@@ -51,20 +51,6 @@ export const Textarea = styled.textarea`
   padding: 16px;
 `;
 
-export const Label = styled.div`
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 16px;
-  font-weight: bold;
-`;
-export const Error = styled.div`
-  height: 20px;
-  padding: 0 10px;
-  margin: 5px 0;
-  font-size: 16px;
-  color: red;
-`;
-
 export const MapWrap = styled.section`
   display: flex;
   width: 100%;
