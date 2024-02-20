@@ -32,10 +32,7 @@ export default function MarketDetailBody(props: IMarketDetailBodyProps) {
         <Link href={"/markets"}>
           <S.LinkBtn>목록으로</S.LinkBtn>
         </Link>
-        <Link href={`/markets/${props.data?.fetchUseditem._id}/edit`}>
-          <S.LinkBtn>수정하기</S.LinkBtn>
-        </Link>
-        <S.LinkBtn onClick={props.onClickDelete}>삭제하기</S.LinkBtn>
+        <S.LinkBtn>구매하기</S.LinkBtn>
       </S.BtnWrap>
     </S.Body>
   );

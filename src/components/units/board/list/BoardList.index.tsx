@@ -8,6 +8,7 @@ import { useFetchBoardsCount } from "../../../commons/hooks/queries/useFetchBoar
 
 import BoardListHeader from "./header/BoardListHeader.index";
 import BoardListBody from "./body/BoardListBody.index";
+import BoardListFooter from "./footer/BoardListFooter.index";
 import Pagination01 from "../../../commons/paginations/01/Pagination01.index";
 
 export default function BoardList(): JSX.Element {
@@ -30,7 +31,9 @@ export default function BoardList(): JSX.Element {
       <S.Container>
         <BoardListHeader onChangeSearch={onChangeSearch} />
         <BoardListBody data={data} keyword={keyword} />
-        <Pagination01 {...paginationArgs} />
+        <BoardListFooter>
+          <Pagination01 {...paginationArgs} />
+        </BoardListFooter>
       </S.Container>
     </S.Wrapper>
   );

@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { visitedPageState } from "../../../../commons/stores";
 
 export const useMoveToPage = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [visitedPage, setVisitedPage] = useRecoilState(visitedPageState);
 
   const onClickMoveToPage = (path: string) => () => {
@@ -12,8 +12,9 @@ export const useMoveToPage = () => {
       return;
     }
     setVisitedPage(path);
-    void router.push(path);
+    // void router.push(path);
   };
+  console.log(visitedPage);
 
   return {
     visitedPage,

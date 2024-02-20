@@ -5,8 +5,8 @@ export const Body = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 100%;
   row-gap: 20px;
+  width: 100%;
 `;
 export const Table = styled.table`
   width: 100%;
@@ -51,10 +51,10 @@ export const LinkBtn = styled.a`
   width: 170px;
   height: 52px;
   column-gap: 4px;
+  font-weight: bold;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
-  background-color: #fff;
-  font-weight: bold;
+  cursor: pointer;
 `;
 export const MoveBtnIcon = styled.img`
   margin-right: 8px;

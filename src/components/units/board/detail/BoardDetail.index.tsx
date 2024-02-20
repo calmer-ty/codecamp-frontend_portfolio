@@ -11,6 +11,7 @@ import { useInfiniteScroll } from "../../../commons/hooks/customs/useInfiniteScr
 
 import BoardDetailHeader from "./header/BoardDetailHeader.index";
 import BoardDetailBody from "./body/BoardDetailBody.index";
+import BoardDetailFooter from "./footer/BoardDetailFooter.index";
 
 export default function BoardDetail(): JSX.Element {
   const { id } = useIdCheck("boardId");
@@ -25,7 +26,7 @@ export default function BoardDetail(): JSX.Element {
         <BoardDetailHeader data={data} />
         <BoardDetailBody data={data} />
       </S.CardWrap>
-
+      <BoardDetailFooter data={data} />
       <CommentWrite />
       <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
         {dataScroll?.fetchBoardComments.map((el, _) => <CommentList key={el._id} el={el}></CommentList>) ?? <></>}

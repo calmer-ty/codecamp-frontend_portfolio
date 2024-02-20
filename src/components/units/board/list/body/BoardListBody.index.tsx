@@ -46,13 +46,6 @@ export default function BoardListBody(props: IBoardDetailBodyProps): JSX.Element
           ))}
         </tbody>
       </S.Table>
-
-      <Link href={"/boards/new"}>
-        <S.LinkBtn>
-          <img src="/images/board/list/ic_create.png" />
-          게시물 등록하기
-        </S.LinkBtn>
-      </Link>
     </S.Body>
   );
 }

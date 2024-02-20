@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-export const CardWrap = styled.div`
+export const CardWrap = styled.section`
   display: flex;
   flex-direction: column;
   width: 1200px;

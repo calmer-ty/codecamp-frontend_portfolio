@@ -1,5 +1,7 @@
 import * as S from "./LayoutNavigation.styles";
+import Link from "next/link";
 import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
+import { Fragment } from "react";
 
 const NAVIGATION_MENUS = [
   { name: "Firebase", page: "/boards_firebase" },
@@ -15,9 +17,11 @@ export default function LayoutNavigation(): JSX.Element {
     <S.Wrapper>
       <S.Container>
         {NAVIGATION_MENUS.map((el) => (
-          <S.MenuItem key={el.page} onClick={onClickMoveToPage(el.page)}>
-            {el.name}
-          </S.MenuItem>
+          <Fragment key={el.page}>
+            <Link href={el.page}>
+              <S.MenuItem onClick={onClickMoveToPage(el.page)}>{el.name}</S.MenuItem>
+            </Link>
+          </Fragment>
         ))}
       </S.Container>
     </S.Wrapper>

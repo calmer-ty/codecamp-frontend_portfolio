@@ -12,3 +12,6 @@ export interface IBoardDetailBodyProps {
   data: Pick<IQuery, "fetchBoards"> | undefined;
   keyword: string;
 }
+export interface IBoardDetailFooterProps {
+  children: JSX.Element;
+}
