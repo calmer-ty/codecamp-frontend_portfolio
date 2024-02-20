@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import type { IPageBtnProps, IPageProps } from "./Pagination01.types";
 
-export const Wrapper = styled.div`
+export const Pagination = styled.article`
   display: flex;
 `;
 export const Page = styled.button`
@@ -15,8 +15,7 @@ export const Page = styled.button`
 `;
 export const PageBtn = styled.button`
   opacity: ${(props: IPageBtnProps) => (props.isDisabled ? "0" : "1")};
-  cursor: ${(props: IPageBtnProps) =>
-    props.isDisabled ? "initial" : "pointer"};
+  cursor: ${(props: IPageBtnProps) => (props.isDisabled ? "initial" : "pointer")};
   :hover {
     color: #ffd600;
   }

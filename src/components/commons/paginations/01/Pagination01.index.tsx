@@ -3,11 +3,8 @@ import type { IPagination01Props } from "./Pagination01.types";
 
 export default function Pagination01(props: IPagination01Props): JSX.Element {
   return (
-    <S.Wrapper>
-      <S.PageBtn
-        onClick={props.onClickPrevPage}
-        isDisabled={props.startPage <= 1}
-      >
+    <S.Pagination>
+      <S.PageBtn onClick={props.onClickPrevPage} isDisabled={props.startPage <= 1}>
         {"<"}
       </S.PageBtn>
       {new Array(10)
@@ -27,12 +24,9 @@ export default function Pagination01(props: IPagination01Props): JSX.Element {
           </S.Page>
         ))}
 
-      <S.PageBtn
-        onClick={props.onClickNextPage}
-        isDisabled={props.lastPage - props.startPage < 10}
-      >
+      <S.PageBtn onClick={props.onClickNextPage} isDisabled={props.lastPage - props.startPage < 10}>
         {">"}
       </S.PageBtn>
-    </S.Wrapper>
+    </S.Pagination>
   );
 }

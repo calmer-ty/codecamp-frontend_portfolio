@@ -33,7 +33,8 @@ export default function MarketListBody(props: IMarketListBodyProps) {
       </S.Table>
       <Link href={"/markets/new"}>
         <S.LinkBtn>
-          <img src="/images/board/list/ic_create.png"></img>상품 등록하기
+          <img src="/images/board/list/ic_create.png" />
+          상품 등록하기
         </S.LinkBtn>
       </Link>
     </S.Body>

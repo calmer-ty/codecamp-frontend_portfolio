@@ -44,6 +44,7 @@ export const LinkBtn = styled.a`
   align-items: center;
   width: 170px;
   height: 52px;
+  column-gap: 4px;
   font-weight: bold;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
