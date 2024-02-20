@@ -51,16 +51,16 @@ export const Textarea = styled.textarea`
   padding: 16px;
 `;
 
-export const MapWrap = styled.section`
+export const AreaWrap = styled.section`
   display: flex;
   width: 100%;
 `;
-export const Map = styled.section`
+export const Map = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
 `;
-export const MapInfo = styled.section`
+export const MapInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -79,7 +79,7 @@ export const Address = styled.input`
   padding: 0 12px;
 `;
 
-export const ImgWrap = styled.section`
+export const ImgWrap = styled.div`
   display: flex;
   column-gap: 24px;
 `;

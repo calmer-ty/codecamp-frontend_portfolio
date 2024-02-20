@@ -18,6 +18,10 @@ import { schemaProductWrite } from "../../../../commons/libraries/validation";
 
 import type { IFormData, IMarketWriteProps } from "./MarketWrite.types";
 
+declare const window: typeof globalThis & {
+  kakao: any;
+};
+
 export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
   const { register, handleSubmit, formState } = useForm<IFormData>({
     resolver: yupResolver(schemaProductWrite),
@@ -34,8 +38,22 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
 
+  useEffect(() => {
+    const container = document.getElementById("map");
+    const options = {
+      center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+      level: 3,
+    };
+    const map = new window.kakao.maps.Map(container, options);
+    console.log(map);
+  }, []);
+
   return (
     <S.Wrapper>
+      <script
+        type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86e8d7dcdac578c6f87227c9b54397f1"
+      ></script>
       <S.Container>
         <S.Title>상품 {props.isEdit ? "수정" : "등록"}하기</S.Title>
         <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
@@ -84,10 +102,10 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
             <Error01 text={formState.errors?.tags?.message} />
           </S.InputWrap>
 
-          <S.MapWrap>
+          <S.AreaWrap>
             <S.Map>
               <Label01 text="거래위치" />
-              <div>Map</div>
+              <div id="map" style={{ width: "500px", height: "400px" }}></div>
             </S.Map>
             <S.MapInfo style={{ width: "60%", rowGap: "20px" }}>
               <S.InputWrap>
@@ -112,7 +130,7 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
                 </S.InputWrap>
               </S.InputWrap>
             </S.MapInfo>
-          </S.MapWrap>
+          </S.AreaWrap>
 
           <S.InputWrap>
             <Label01 text="사진첨부" />
