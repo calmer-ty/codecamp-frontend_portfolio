@@ -13,7 +13,7 @@ export default function MarketListBody(props: IMarketListBodyProps) {
       <S.Table>
         <tbody>
           {props.data?.fetchUseditems?.map((el) => (
-            <tr key={el._id}>
+            <S.List key={el._id}>
               <S.ListItem>{String(el._id).slice(-4).toUpperCase()}</S.ListItem>
               <S.ListItem>
                 <Link href={`/markets/${el._id}`}>
@@ -31,7 +31,7 @@ export default function MarketListBody(props: IMarketListBodyProps) {
               </S.ListItem>
               <S.ListItem>{el.seller}</S.ListItem>
               <S.ListItem>{getDate(el.createdAt)}</S.ListItem>
-            </tr>
+            </S.List>
           ))}
         </tbody>
       </S.Table>

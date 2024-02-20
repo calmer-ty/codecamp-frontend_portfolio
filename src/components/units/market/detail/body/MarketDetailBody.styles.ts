@@ -32,7 +32,7 @@ export const Price = styled.span`
   font-size: 36px;
   font-weight: bold;
 `;
-export const ImgWrap = styled.section``;
+export const ImgWrap = styled.div``;
 export const ImgItem = styled.img`
   width: 100%;
   margin-bottom: 20px;
@@ -54,7 +54,7 @@ export const Map = styled.div`
   height: 360px;
   background-color: #bdbdbd;
 `;
-export const BtnWrap = styled.div`
+export const BtnWrap = styled.section`
   display: flex;
   justify-content: center;
   margin: 101px 0 87px 0;

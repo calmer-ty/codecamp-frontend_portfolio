@@ -2,19 +2,17 @@ import styled from "@emotion/styled";
 // Library
 import { Rate } from "antd";
 
-// Layout
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-export const Container = styled.div`
+export const CommentWrite = styled.article`
   display: flex;
   flex-direction: column;
   width: 1200px;
-  margin: 40px 0;
+  padding: 40px 0;
+  border-top: 1px solid #bdbdbd;
 `;
-export const Form = styled.form``;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const InputWrap = styled.div`
   display: flex;
@@ -22,7 +20,7 @@ export const InputWrap = styled.div`
   margin-bottom: 20px;
   column-gap: 24px;
 `;
-export const Title = styled.div`
+export const Title = styled.h2`
   display: flex;
   align-items: center;
   margin-bottom: 40px;
@@ -61,7 +59,7 @@ export const ContentsBottom = styled.div`
   align-items: center;
   border-top: 1px solid #f2f2f2;
 `;
-export const ContentsLength = styled.div`
+export const ContentsLength = styled.span`
   margin: 0 20px;
   color: #bdbdbd;
 `;

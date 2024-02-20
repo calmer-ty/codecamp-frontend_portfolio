@@ -12,6 +12,7 @@ export const Table = styled.table`
   width: 100%;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
+  border-collapse: collapse;
 `;
 export const THeadItem = styled.th`
   height: 52px;
@@ -21,9 +22,11 @@ export const THeadItem = styled.th`
   color: #4f4f4f;
 `;
 
-export const ListItem = styled.td`
+export const List = styled.tr`
   height: 52px;
   border-top: 1px solid #bdbdbd;
+`;
+export const ListItem = styled.td`
   text-align: center;
   color: #4f4f4f;
 `;

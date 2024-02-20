@@ -22,7 +22,7 @@ export default function BoardListBody(props: IBoardDetailBodyProps): JSX.Element
         </thead>
         <tbody>
           {props.data?.fetchBoards.map((el) => (
-            <tr key={el._id}>
+            <S.List key={el._id}>
               <S.ListItem style={{ width: "15%" }}>{String(el._id).slice(-4).toUpperCase()}</S.ListItem>
               <S.ListItem>
                 <Link href={`/boards/${el._id}`}>
@@ -42,7 +42,7 @@ export default function BoardListBody(props: IBoardDetailBodyProps): JSX.Element
               </S.ListItem>
               <S.ListItem style={{ width: "20%" }}>{el.writer}</S.ListItem>
               <S.ListItem style={{ width: "15%" }}>{getDate(el.createdAt)}</S.ListItem>
-            </tr>
+            </S.List>
           ))}
         </tbody>
       </S.Table>
