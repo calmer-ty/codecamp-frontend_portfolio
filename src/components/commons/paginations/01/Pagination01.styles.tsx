@@ -5,7 +5,6 @@ export const Pagination = styled.article`
   display: flex;
 `;
 export const Page = styled.button`
-  /* opacity: ${(props: IPageProps) => (props.isActive ? "1" : "0")}; */
   margin: 0px 10px;
   font-weight: ${(props: IPageProps) => (props.isActive ? "bold" : "normal")};
   color: ${(props: IPageProps) => (props.isActive ? "#FFD600" : "#4F4F4F")};

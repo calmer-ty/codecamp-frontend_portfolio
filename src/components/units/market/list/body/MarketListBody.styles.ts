@@ -8,24 +8,14 @@ export const Body = styled.section`
   row-gap: 20px;
   width: 100%;
 `;
-export const Table = styled.article`
-  display: flex;
-  flex-direction: column;
+export const Table = styled.table`
   width: 100%;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
 `;
-
-export const List = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const ListItem = styled.td`
   height: 52px;
   border-top: 1px solid #bdbdbd;
-`;
-
-export const ListItem = styled.span`
-  width: 100px;
   text-align: center;
   color: #4f4f4f;
 `;
