@@ -5,21 +5,17 @@ export const useIdCheck = (id: string) => {
   const router = useRouter();
   const queryId = router.query[id];
 
-  if (typeof queryId !== "string") {
-    console.log("시스템에 문제가 있습니다.");
+  if (queryId === undefined) {
+    // console.log("id를 못찾았습니다");
     return { id: "" };
   }
   if (typeof queryId === "string") {
+    // console.log("id를 찾았습니다");
     return { id: queryId };
   }
+  if (typeof queryId === "object") return { id: queryId[0] };
 
   return {
-    router,
     id: "",
   };
-
-  // if (typeof queryId !== "string") return { id: "" };
-  // if (typeof queryId === "string") return { id: queryId };
-  // if (typeof queryId === "object") return { id: queryId[0] };
-  // return { id: "" };
 };

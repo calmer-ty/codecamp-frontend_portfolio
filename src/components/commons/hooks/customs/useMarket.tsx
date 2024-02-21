@@ -13,7 +13,7 @@ import type { IFormData } from "../../../units/market/write/MarketWrite.types";
 import type { IUpdateUseditemInput } from "../../../../commons/types/generated/types";
 import { FETCH_USEDITEM } from "../queries/useFetchMarket";
 
-export const useMarket = (fileUrls?: string[], zipcode?: string, address?: string) => {
+export const useMarket = (fileUrls?: string[], latlng?: any, address?: string) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
 
@@ -31,7 +31,8 @@ export const useMarket = (fileUrls?: string[], zipcode?: string, address?: strin
             contents: data.contents,
             price: data.price,
             useditemAddress: {
-              zipcode,
+              lat: latlng.Ma,
+              lng: latlng.La,
               address,
               addressDetail: data.addressDetail,
             },
@@ -62,9 +63,8 @@ export const useMarket = (fileUrls?: string[], zipcode?: string, address?: strin
     if (inputs.remarks !== "") updateUseditemInput.remarks = inputs.remarks;
     if (inputs.contents !== "") updateUseditemInput.contents = inputs.contents;
     if (inputs.price !== null) updateUseditemInput.price = inputs.price;
-    if (zipcode !== "" || address !== "" || addressDetail !== "") {
+    if (address !== "" || addressDetail !== "") {
       updateUseditemInput.useditemAddress = {};
-      if (zipcode !== "") updateUseditemInput.useditemAddress.zipcode = zipcode;
       if (address !== "") updateUseditemInput.useditemAddress.address = address;
       if (addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = addressDetail;
     }

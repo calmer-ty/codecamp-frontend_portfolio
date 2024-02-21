@@ -10,17 +10,13 @@ import Button01 from "../../../commons/element/buttons/01";
 
 // Custom Hooks
 import { useMarket } from "../../../commons/hooks/customs/useMarket";
-import { useAddressSearch } from "../../../commons/hooks/customs/useAddressSearch";
 import { useFileUrls } from "../../../commons/hooks/customs/useFileUrls";
+import useMapSelection from "../../../commons/hooks/customs/useMapSelect";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
 
 import type { IFormData, IMarketWriteProps } from "./MarketWrite.types";
-
-declare const window: typeof globalThis & {
-  kakao: any;
-};
 
 export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
   const { register, handleSubmit, formState } = useForm<IFormData>({
@@ -28,32 +24,17 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
     mode: "onChange",
   });
 
-  const { isOpen, zipcode, address, onClickAddressSearch, onCompleteAddressSearch } = useAddressSearch();
   const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls();
-
-  const { onClickCreate, onClickUpdate } = useMarket(fileUrls, zipcode, address);
+  const { latlng, address } = useMapSelection();
+  const { onClickCreate, onClickUpdate } = useMarket(fileUrls, latlng);
 
   useEffect(() => {
     const images = props.data?.fetchUseditem.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
 
-  useEffect(() => {
-    const container = document.getElementById("map");
-    const options = {
-      center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3,
-    };
-    const map = new window.kakao.maps.Map(container, options);
-    console.log(map);
-  }, []);
-
   return (
     <S.Wrapper>
-      <script
-        type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86e8d7dcdac578c6f87227c9b54397f1"
-      ></script>
       <S.Container>
         <S.Title>상품 {props.isEdit ? "수정" : "등록"}하기</S.Title>
         <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
@@ -105,28 +86,21 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
           <S.AreaWrap>
             <S.Map>
               <Label01 text="거래위치" />
-              <div id="map" style={{ width: "500px", height: "400px" }}></div>
+              <div id="map" style={{ width: "100%", height: "250px" }}></div>
             </S.Map>
-            <S.MapInfo style={{ width: "60%", rowGap: "20px" }}>
+            <S.MapInfo>
               <S.InputWrap>
                 <Label01 text="GPS" />
                 <S.FlexRow>
                   <S.Input type="text" />
-                  <S.SearchBtn type="button" onClick={onClickAddressSearch}>
-                    우편번호 검색
-                  </S.SearchBtn>
                   <S.Input type="text" />
                 </S.FlexRow>
               </S.InputWrap>
               <S.InputWrap>
                 <Label01 text="주소" />
                 <S.InputWrap style={{ rowGap: "20px" }}>
-                  <S.Input
-                    value={address !== "" ? address : props.data?.fetchUseditem.useditemAddress?.address ?? ""}
-                    readOnly
-                    {...register("address")}
-                  />
-                  <Input01 readOnly register={register("addressDetail")} />
+                  <S.Input value={address} readOnly />
+                  <Input01 register={register("addressDetail")} />
                 </S.InputWrap>
               </S.InputWrap>
             </S.MapInfo>
@@ -155,11 +129,11 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
         </S.Form>
       </S.Container>
 
-      {isOpen !== undefined && (
+      {/* {isOpen !== undefined && (
         <S.AddressModal open={isOpen} onOk={onClickAddressSearch} onCancel={onClickAddressSearch}>
           <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
         </S.AddressModal>
-      )}
+      )} */}
     </S.Wrapper>
   );
 }

@@ -1,8 +1,14 @@
 import Link from "next/link";
+
 import * as S from "./MarketDetailBody.styles";
+
 import type { IMarketDetailBodyProps } from "../MarketDetail.types";
+import useMapView from "../../../../commons/hooks/customs/useMapView";
+import { useMarket } from "../../../../commons/hooks/customs/useMarket";
 
 export default function MarketDetailBody(props: IMarketDetailBodyProps) {
+  useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
+  const { onClickDelete } = useMarket();
   return (
     <S.Body>
       <S.BodyTop>
@@ -26,13 +32,14 @@ export default function MarketDetailBody(props: IMarketDetailBodyProps) {
       </S.BodyTop>
 
       <S.BodyBottom>
-        <S.Map>Map</S.Map>
+        Map<div id="map" style={{ width: "100%", height: "250px" }}></div>
       </S.BodyBottom>
       <S.BtnWrap>
         <Link href={"/markets"}>
           <S.LinkBtn>목록으로</S.LinkBtn>
         </Link>
         <S.LinkBtn>구매하기</S.LinkBtn>
+        <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
       </S.BtnWrap>
     </S.Body>
   );

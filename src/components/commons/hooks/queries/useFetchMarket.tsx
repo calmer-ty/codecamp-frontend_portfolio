@@ -16,6 +16,8 @@ export const FETCH_USEDITEM = gql`
         zipcode
         address
         addressDetail
+        lat
+        lng
       }
     }
   }

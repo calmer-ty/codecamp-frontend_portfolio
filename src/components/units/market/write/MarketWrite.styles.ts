@@ -53,6 +53,7 @@ export const Textarea = styled.textarea`
 
 export const AreaWrap = styled.section`
   display: flex;
+  justify-content: space-between;
   width: 100%;
 `;
 export const Map = styled.div`
@@ -60,10 +61,12 @@ export const Map = styled.div`
   flex-direction: column;
   width: 40%;
 `;
+
 export const MapInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  justify-content: space-between;
+  width: 55%;
   row-gap: 20px;
 `;
 export const SearchBtn = styled.button`
