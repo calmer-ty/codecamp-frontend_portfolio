@@ -45,11 +45,20 @@ export const useBoard = (fileUrls?: string[], zipcode?: string, address?: string
             images: fileUrls,
           },
         },
-        refetchQueries: [
-          {
-            query: FETCH_BOARDS,
-          },
-        ],
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_BOARDS,
+        //   },
+        // ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchBoards: (prev) => {
+                return [data?.createBoard, ...prev];
+              },
+            },
+          });
+        },
       });
       void router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
@@ -104,11 +113,22 @@ export const useBoard = (fileUrls?: string[], zipcode?: string, address?: string
     try {
       await deleteBoard({
         variables: { boardId: id },
-        refetchQueries: [
-          {
-            query: FETCH_BOARDS,
-          },
-        ],
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_BOARDS,
+        //   },
+        // ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchBoards: (prev: Array<{ __ref: string }>, { readField }) => {
+                const deletedId = data?.deleteBoard;
+                const filteredPrev = prev.filter((el) => readField("_id", el) !== deletedId);
+                return [...filteredPrev];
+              },
+            },
+          });
+        },
       });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

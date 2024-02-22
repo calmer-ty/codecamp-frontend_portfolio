@@ -23,12 +23,12 @@ export default function useMapSelection(lat: any, lng: any) {
         const map = new window.kakao.maps.Map(container, options);
         // 지도 레벨
         // map.setLevel(3, { anchor: markerPosition });
-        map.setLevel(3, { animate: true });
-        map.setLevel(3, {
-          animate: {
-            duration: 500,
-          },
-        });
+        // map.setLevel(3, { animate: true });
+        // map.setLevel(3, {
+        //   animate: {
+        //     duration: 500,
+        //   },
+        // });
 
         // 맵 마커 이미지
         const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
