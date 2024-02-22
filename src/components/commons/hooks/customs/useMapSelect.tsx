@@ -5,8 +5,8 @@ export declare const window: typeof globalThis & {
 };
 
 export default function useMapSelect() {
-  const [latlng, setLatlng] = useState();
-  const [address, setAddress] = useState();
+  const [latlng, setLatlng] = useState<any>();
+  const [address, setAddress] = useState<any>();
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=86e8d7dcdac578c6f87227c9b54397f1";
@@ -50,7 +50,7 @@ export default function useMapSelect() {
           // 좌표에 따른 주소
           const geocoder = new window.kakao.maps.services.Geocoder();
           const coord = new window.kakao.maps.LatLng(latlng.Ma, latlng.La);
-          const callback = function (result, status) {
+          const callback = function (result: any, status: any) {
             const mapAddress = result[0].address.address_name;
             if (status === window.kakao.maps.services.Status.OK) {
               setAddress(mapAddress);
