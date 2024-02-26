@@ -40,10 +40,7 @@ export const schemaBoardComment = yup.object({
 });
 
 export const schemaMemberLogin = yup.object({
-  email: yup
-    .string()
-    .required("이메일 입력은 필수입니다.")
-    .email("이메일 형식에 맞지 않습니다."),
+  email: yup.string().required("이메일 입력은 필수입니다.").email("이메일 형식에 맞지 않습니다."),
   name: yup.string().required("이름 입력은 필수입니다."),
   password: passwordSchema,
   passwordCheck: passwordSchema,
