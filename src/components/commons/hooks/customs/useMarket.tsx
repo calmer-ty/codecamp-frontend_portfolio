@@ -19,7 +19,7 @@ interface IUseMarketArgs {
   address?: string;
 }
 
-export const useMarket = (args: IUseMarketArgs) => {
+export const useMarket = (args?: IUseMarketArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
 
@@ -28,6 +28,7 @@ export const useMarket = (args: IUseMarketArgs) => {
   const [deleteMarket] = useDeleteMarket();
 
   const onClickCreate = async (data: IFormData): Promise<void> => {
+    if (typeof args === "undefined") return;
     try {
       const result = await createMarket({
         variables: {
@@ -58,6 +59,7 @@ export const useMarket = (args: IUseMarketArgs) => {
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
+    if (typeof args === "undefined") return;
     const currentFiles = JSON.stringify(args.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;

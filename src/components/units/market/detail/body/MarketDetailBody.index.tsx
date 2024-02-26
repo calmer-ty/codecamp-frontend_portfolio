@@ -1,6 +1,6 @@
 import Link from "next/link";
-
 import * as S from "./MarketDetailBody.styles";
+import Dompurufy from "dompurify";
 
 import type { IMarketDetailBodyProps } from "../MarketDetail.types";
 import useMapView from "../../../../commons/hooks/customs/useMapView";
@@ -26,13 +26,19 @@ export default function MarketDetailBody(props: IMarketDetailBodyProps) {
             .map((el) => <S.ImgItem key={el} src={`http://storage.googleapis.com/${el}`} />)}
         </S.ImgWrap>
         <S.FlexColumn>
-          <S.Contents>{props.data?.fetchUseditem?.contents}</S.Contents>
+          {typeof window !== "undefined" && (
+            <S.Contents
+              dangerouslySetInnerHTML={{
+                __html: Dompurufy.sanitize(String(props.data?.fetchUseditem.contents)),
+              }}
+            />
+          )}
           <p>#tags #tags #tags</p>
         </S.FlexColumn>
       </S.BodyTop>
 
       <S.BodyBottom>
-        Map<div id="map" style={{ width: "100%", height: "250px" }}></div>
+        <div id="map" style={{ width: "100%", height: "250px" }}></div>
       </S.BodyBottom>
       <S.BtnWrap>
         <Link href={"/markets"}>
