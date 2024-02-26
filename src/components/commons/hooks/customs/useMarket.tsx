@@ -13,7 +13,13 @@ import type { IFormData } from "../../../units/market/write/MarketWrite.types";
 import type { IUpdateUseditemInput } from "../../../../commons/types/generated/types";
 import { FETCH_USEDITEM } from "../queries/useFetchMarket";
 
-export const useMarket = (fileUrls?: string[], latlng?: any, address?: string) => {
+interface IUseMarketArgs {
+  fileUrls?: string[];
+  latlng?: any;
+  address?: string;
+}
+
+export const useMarket = (args: IUseMarketArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
 
@@ -31,12 +37,12 @@ export const useMarket = (fileUrls?: string[], latlng?: any, address?: string) =
             contents: data.contents,
             price: data.price,
             useditemAddress: {
-              lat: latlng.Ma,
-              lng: latlng.La,
-              address,
+              lat: args.latlng.Ma,
+              lng: args.latlng.La,
+              address: args.address,
               addressDetail: data.addressDetail,
             },
-            images: fileUrls,
+            images: args.fileUrls,
           },
         },
         refetchQueries: [
@@ -52,7 +58,7 @@ export const useMarket = (fileUrls?: string[], latlng?: any, address?: string) =
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
-    const currentFiles = JSON.stringify(fileUrls);
+    const currentFiles = JSON.stringify(args.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
@@ -63,12 +69,12 @@ export const useMarket = (fileUrls?: string[], latlng?: any, address?: string) =
     if (inputs.remarks !== "") updateUseditemInput.remarks = inputs.remarks;
     if (inputs.contents !== "") updateUseditemInput.contents = inputs.contents;
     if (inputs.price !== null) updateUseditemInput.price = inputs.price;
-    if (address !== "" || addressDetail !== "") {
+    if (args.address !== "" || addressDetail !== "") {
       updateUseditemInput.useditemAddress = {};
-      if (address !== "") updateUseditemInput.useditemAddress.address = address;
+      if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
       if (addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = addressDetail;
     }
-    if (isChangedFiles) updateUseditemInput.images = fileUrls;
+    if (isChangedFiles) updateUseditemInput.images = args.fileUrls;
 
     try {
       const result = await updateMarket({

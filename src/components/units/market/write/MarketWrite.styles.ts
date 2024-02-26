@@ -1,6 +1,9 @@
+import dynamic from "next/dynamic";
 import styled from "@emotion/styled";
-import { Modal } from "antd";
-import DaumPostcodeEmbed from "react-daum-postcode";
+import "react-quill/dist/quill.snow.css";
+const ReactQuill = dynamic(async () => await import("react-quill"), {
+  ssr: false,
+});
 
 // emotion은 태그로 쓰이기 때문에 대문자로 사용한다
 export const Wrapper = styled.div`
@@ -45,10 +48,6 @@ export const Form = styled.form`
 export const Input = styled.input`
   height: 52px;
   padding: 0 16px;
-`;
-export const Textarea = styled.textarea`
-  height: 320px;
-  padding: 16px;
 `;
 
 export const AreaWrap = styled.section`
@@ -102,5 +101,7 @@ export const SubmitBtn = styled.button`
   font-weight: 500;
 `;
 
-export const AddressModal = styled(Modal)``;
-export const AddressSearchInput = styled(DaumPostcodeEmbed)``;
+export const Contents = styled(ReactQuill)`
+  height: 300px;
+  margin-bottom: 44px;
+`;

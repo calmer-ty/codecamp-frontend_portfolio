@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { IMarketWriteProps } from "../../../units/market/write/MarketWrite.types";
 
-export const useFileUrls = () => {
+export const useFileUrls = (props: IMarketWriteProps) => {
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선
@@ -12,6 +13,11 @@ export const useFileUrls = () => {
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
   };
+
+  useEffect(() => {
+    const images = props.data?.fetchUseditem.images;
+    if (images !== undefined && images !== null) setFileUrls([...images]);
+  }, [props.data]);
 
   return {
     fileUrls,

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as S from "./MarketWrite.styles";
-
+import type { IFormData, IMarketWriteProps } from "./MarketWrite.types";
+// Component
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
 import Label01 from "../../../commons/element/labels/01";
 import Input01 from "../../../commons/element/inputs/01";
@@ -16,22 +16,21 @@ import useMapSelection from "../../../commons/hooks/customs/useMapSelect";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
 
-import type { IFormData, IMarketWriteProps } from "./MarketWrite.types";
-
 export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
-  const { register, handleSubmit, formState } = useForm<IFormData>({
+  const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormData>({
     resolver: yupResolver(schemaProductWrite),
     mode: "onChange",
   });
 
-  const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls();
-  const { latlng, address } = useMapSelection();
-  const { onClickCreate, onClickUpdate } = useMarket(fileUrls, latlng);
+  const onChangeContents = (value: string) => {
+    console.log(value);
+    setValue("contents", value === "<p><br></p>" ? "" : value);
+    void trigger("contents");
+  };
 
-  useEffect(() => {
-    const images = props.data?.fetchUseditem.images;
-    if (images !== undefined && images !== null) setFileUrls([...images]);
-  }, [props.data]);
+  const { fileUrls, onChangeFileUrls } = useFileUrls(props);
+  const { latlng, address } = useMapSelection();
+  const { onClickCreate, onClickUpdate } = useMarket({ fileUrls, latlng });
 
   return (
     <S.Wrapper>
@@ -59,10 +58,10 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
 
           <S.InputWrap>
             <Label01 text="상품설명" />
-            <S.Textarea
+            <S.Contents
               placeholder="상품설명을 작성해주세요."
               defaultValue={props.data?.fetchUseditem.contents ?? ""}
-              {...register("contents")}
+              onChange={onChangeContents}
             />
             <Error01 text={formState.errors?.contents?.message} />
           </S.InputWrap>
@@ -128,12 +127,6 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
           <Button01 text={props.isEdit ? "수정하기" : "등록하기"} isActive={formState.isValid} />
         </S.Form>
       </S.Container>
-
-      {/* {isOpen !== undefined && (
-        <S.AddressModal open={isOpen} onOk={onClickAddressSearch} onCancel={onClickAddressSearch}>
-          <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
-        </S.AddressModal>
-      )} */}
     </S.Wrapper>
   );
 }
