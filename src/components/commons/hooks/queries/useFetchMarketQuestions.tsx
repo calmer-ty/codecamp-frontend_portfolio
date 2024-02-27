@@ -15,7 +15,7 @@ export const FETCH_USED_ITEM_QUESTIONS = gql`
   }
 `;
 
-export const useQuestionScroll = () => {
+export const useFetchMarketQuestions = () => {
   const { id } = useIdCheck("useditemId");
   const result = useQuery<Pick<IQuery, "fetchUseditemQuestions">, IQueryFetchUseditemQuestionsArgs>(
     FETCH_USED_ITEM_QUESTIONS,

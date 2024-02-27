@@ -1,3 +1,5 @@
+import { useFetchMarketQuestions } from "../queries/useFetchMarketQuestions";
+
 export const useCommentScroll = () => {
   const { data, fetchMore } = useFetchMarketQuestions();
   // 댓글 무한 스크롤
@@ -5,14 +7,14 @@ export const useCommentScroll = () => {
     if (data === undefined) return;
     void fetchMore({
       variables: {
-        page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
+        page: Math.ceil(data?.fetchUseditemQuestions.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (fetchMoreResult?.fetchBoardComments === undefined)
-          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        if (fetchMoreResult?.fetchUseditemQuestions === undefined)
+          return { fetchUseditemQuestions: [...prev.fetchUseditemQuestions] };
 
         return {
-          fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
+          fetchUseditemQuestions: [...prev.fetchUseditemQuestions, ...fetchMoreResult.fetchUseditemQuestions],
         };
       },
     });
