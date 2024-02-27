@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import type { IMarketWriteProps } from "../../../units/market/write/MarketWrite.types";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
-export const useFileUrls = (props: IMarketWriteProps) => {
+interface IUseFileUrls {
+  data?: Pick<IQuery, any>;
+}
+
+export const useFileUrls = (props: IUseFileUrls) => {
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선

@@ -5,8 +5,8 @@ export declare const window: typeof globalThis & {
 };
 
 export default function useMapSelect() {
-  const [latlng, setLatlng] = useState<any>();
-  const [address, setAddress] = useState<any>();
+  const [latlng, setLatlng] = useState<any>("");
+  const [address, setAddress] = useState<any>("");
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -23,13 +23,6 @@ export default function useMapSelect() {
           level: 3,
         };
         const map = new window.kakao.maps.Map(container, options);
-        // 지도 레벨
-        // map.setLevel(3, { animate: true });
-        // map.setLevel(3, {
-        //   animate: {
-        //     duration: 500,
-        //   },
-        // });
 
         // 맵 마커 이미지
         const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
@@ -48,6 +41,7 @@ export default function useMapSelect() {
           const latlng = mouseEvent.latLng;
           marker.setPosition(latlng);
           setLatlng(latlng);
+
           // 좌표에 따른 주소
           const geocoder = new window.kakao.maps.services.Geocoder();
           const coord = new window.kakao.maps.LatLng(latlng.Ma, latlng.La);
