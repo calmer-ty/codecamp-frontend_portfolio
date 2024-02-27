@@ -1,37 +1,37 @@
 import { useForm } from "react-hook-form";
-//
 import * as S from "./QuestionWrite.styles";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaBoardComment } from "../../../../../commons/libraries/validation";
+import { schemaMarketQuestion } from "../../../../../commons/libraries/validation";
 // Custom Hooks
-import { useBoardComment } from "../../../hooks/customs/useBoardComment";
+import { useMarketQuestion } from "../../../hooks/customs/useMarketQuestion";
+
 import InputCustom from "../../../element/inputs/custom";
 // Type
-import type { ICommentWriteProps, IFormData } from "./QuestionWrite.types";
+import type { IQuestionWriteProps, IFormData } from "./QuestionWrite.types";
 
-export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
+export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
   const { register, handleSubmit, watch } = useForm<IFormData>({
     mode: "onChange",
-    resolver: yupResolver(schemaBoardComment),
+    resolver: yupResolver(schemaMarketQuestion),
   });
 
-  const { onClickSubmit, onClickUpdate } = useBoardComment({
+  const { onClickCreate, onClickUpdate } = useMarketQuestion({
     boardCommentId: props.el?._id,
     onToggleEdit: props.onToggleEdit,
   });
 
   return (
-    <S.CommentWrite>
+    <S.QuestionWrite>
       {props.isEdit === false && (
         <S.Title>
           <S.TitleImg src="/images/comment/write/ic_logo.png" />
           댓글
         </S.Title>
       )}
-      <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickSubmit)}>
+      <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
-          <InputCustom width={180} placeholder="작성자" value={props.el?.writer ?? ""} register={register("writer")} />
+          {/* <InputCustom width={180} placeholder="작성자" value={props.el?.writer ?? ""} register={register("writer")} /> */}
           <InputCustom
             type="password"
             width={180}
@@ -60,6 +60,6 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
           </S.ContentsBottom>
         </S.ContentsWrap>
       </S.Form>
-    </S.CommentWrite>
+    </S.QuestionWrite>
   );
 }

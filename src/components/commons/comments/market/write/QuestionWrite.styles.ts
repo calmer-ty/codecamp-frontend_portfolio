@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 // Library
 import { Rate } from "antd";
 
-export const CommentWrite = styled.article`
+export const QuestionWrite = styled.article`
   display: flex;
   flex-direction: column;
   width: 1200px;

@@ -20,8 +20,8 @@ interface IUseBoardCommentArgs {
   onToggleEdit?: () => void;
 }
 
-export const useBoardComment = (args: IUseBoardCommentArgs) => {
-  const { id } = useIdCheck("boardId");
+export const useMarketQuestion = (args: IUseBoardCommentArgs) => {
+  const { id } = useIdCheck("useditem");
   const [deletePassword, setDeletePassword] = useState("");
 
   const [createComment] = useCreateBoardComment();

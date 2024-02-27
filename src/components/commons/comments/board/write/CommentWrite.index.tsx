@@ -19,7 +19,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
     resolver: yupResolver(schemaBoardComment),
   });
 
-  const { onClickSubmit, onClickUpdate } = useBoardComment({
+  const { onClickCreate, onClickUpdate } = useBoardComment({
     rating,
     setRating,
     boardCommentId: props.el?._id,
@@ -34,7 +34,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
           댓글
         </S.Title>
       )}
-      <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickSubmit)}>
+      <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
           <InputCustom width={180} placeholder="작성자" value={props.el?.writer ?? ""} register={register("writer")} />
           <InputCustom

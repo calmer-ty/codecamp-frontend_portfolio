@@ -1,4 +1,4 @@
-import type { IBoardComment } from "../../../../../commons/types/generated/types";
+import type { IUseditemQuestion } from "../../../../../commons/types/generated/types";
 
 export interface IFormData {
   writer: string;
@@ -6,8 +6,8 @@ export interface IFormData {
   contents: string;
   rating?: number;
 }
-export interface ICommentWriteProps {
+export interface IQuestionWriteProps {
   isEdit?: boolean;
-  el?: IBoardComment;
+  el?: IUseditemQuestion;
   onToggleEdit?: () => void;
 }

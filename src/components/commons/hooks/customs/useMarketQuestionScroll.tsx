@@ -1,7 +1,8 @@
 import { useFetchMarketQuestions } from "../queries/useFetchMarketQuestions";
 
-export const useCommentScroll = () => {
+export const useMarketQuestionScroll = () => {
   const { data, fetchMore } = useFetchMarketQuestions();
+  console.log(data);
   // 댓글 무한 스크롤
   const onLoadMore = (): void => {
     if (data === undefined) return;

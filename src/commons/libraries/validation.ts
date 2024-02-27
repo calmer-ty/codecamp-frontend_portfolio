@@ -38,6 +38,11 @@ export const schemaBoardComment = yup.object({
   password: passwordSchema,
   contents: yup.string().required("내용 입력은 필수입니다."),
 });
+export const schemaMarketQuestion = yup.object({
+  writer: yup.string().required("작성자 입력은 필수입니다."),
+  password: passwordSchema,
+  contents: yup.string().required("내용 입력은 필수입니다."),
+});
 
 export const schemaMemberLogin = yup.object({
   email: yup.string().required("이메일 입력은 필수입니다.").email("이메일 형식에 맞지 않습니다."),

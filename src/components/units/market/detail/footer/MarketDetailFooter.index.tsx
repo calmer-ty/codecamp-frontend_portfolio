@@ -1,19 +1,19 @@
 import * as S from "./MarketDetailFooter.styles";
 
 import InfiniteScroll from "react-infinite-scroller";
-import { useCommentScroll } from "../../../../commons/hooks/customs/useBoardCommentScroll";
+import { useMarketQuestionScroll } from "../../../../commons/hooks/customs/useMarketQuestionScroll";
 
-import CommentWrite from "../../../../commons/comments/board/write/CommentWrite.index";
-import CommentList from "../../../../commons/comments/board/list/CommentList.index";
+import QuestionWrite from "../../../../commons/comments/market/write/QuestionWrite.index";
+import QuestionList from "../../../../commons/comments/market/list/QuestionList.index";
 
 export default function MarketDetailFooter() {
-  const { data: dataScroll, onLoadMore } = useCommentScroll();
+  const { data: dataScroll, onLoadMore } = useMarketQuestionScroll();
 
   return (
     <S.Footer>
-      <CommentWrite />
+      <QuestionWrite />
       <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-        {dataScroll?.fetchBoardComments.map((el, _) => <CommentList key={el._id} el={el}></CommentList>) ?? <></>}
+        {dataScroll?.fetchUseditemQuestions.map((el, _) => <QuestionList key={el._id} el={el}></QuestionList>) ?? <></>}
       </InfiniteScroll>
     </S.Footer>
   );
