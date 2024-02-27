@@ -1,13 +1,13 @@
 import * as S from "./MarketDetailFooter.styles";
 
 import InfiniteScroll from "react-infinite-scroller";
-import { useInfiniteScroll } from "../../../../commons/hooks/customs/useInfiniteScroll";
+import { useCommentScroll } from "../../../../commons/hooks/customs/useBoardCommentScroll";
 
 import CommentWrite from "../../../../commons/comments/board/write/CommentWrite.index";
 import CommentList from "../../../../commons/comments/board/list/CommentList.index";
 
 export default function MarketDetailFooter() {
-  const { data: dataScroll, onLoadMore } = useInfiniteScroll();
+  const { data: dataScroll, onLoadMore } = useCommentScroll();
 
   return (
     <S.Footer>

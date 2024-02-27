@@ -1,7 +1,5 @@
-import { useFetchBoardComments } from "../queries/useFetchBoardComments";
-
-export const useInfiniteScroll = () => {
-  const { data, fetchMore } = useFetchBoardComments();
+export const useCommentScroll = () => {
+  const { data, fetchMore } = useFetchMarketQuestions();
   // 댓글 무한 스크롤
   const onLoadMore = (): void => {
     if (data === undefined) return;
