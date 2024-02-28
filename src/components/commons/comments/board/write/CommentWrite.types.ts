@@ -7,7 +7,7 @@ export interface IFormData {
   rating?: number;
 }
 export interface ICommentWriteProps {
-  isEdit?: boolean;
+  isEdit: boolean;
   el?: IBoardComment;
   onToggleEdit?: () => void;
 }

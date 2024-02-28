@@ -4,7 +4,7 @@ export interface IFormData {
   contents: string;
 }
 export interface IQuestionWriteProps {
-  isEdit?: boolean;
+  isEdit: boolean;
   el?: IUseditemQuestion;
   onToggleEdit?: () => void;
 }

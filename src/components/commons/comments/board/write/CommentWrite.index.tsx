@@ -10,6 +10,7 @@ import { useBoardComment } from "../../../hooks/customs/useBoardComment";
 import InputCustom from "../../../element/inputs/custom";
 // Component
 import Textarea01 from "../../../element/textarea/01";
+import TitleComment from "../../../element/title/comment";
 // Type
 import type { ICommentWriteProps, IFormData } from "./CommentWrite.types";
 
@@ -31,12 +32,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
 
   return (
     <S.CommentWrite>
-      {props.isEdit === false && (
-        <S.Title>
-          <S.TitleImg src="/images/comment/write/ic_logo.png" />
-          댓글
-        </S.Title>
-      )}
+      {props.isEdit === false && <TitleComment text="댓글" />}
       <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
           <InputCustom

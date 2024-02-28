@@ -28,6 +28,7 @@ export const Writer = styled.div`
   margin-right: 16px;
 `;
 export const Contents = styled.div`
+  margin-top: 6px;
   margin-bottom: 20px;
 `;
 export const CreateDate = styled.div`
