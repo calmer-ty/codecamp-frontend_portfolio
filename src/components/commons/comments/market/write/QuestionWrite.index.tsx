@@ -8,6 +8,7 @@ import { useMarketQuestion } from "../../../hooks/customs/useMarketQuestion";
 
 // Type
 import type { IQuestionWriteProps, IFormData } from "./QuestionWrite.types";
+import Textarea01 from "../../../element/textarea/01";
 
 export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
   const { register, handleSubmit, watch } = useForm<IFormData>({
@@ -20,8 +21,6 @@ export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
     onToggleEdit: props.onToggleEdit,
   });
 
-  console.log(props.isEdit);
-
   return (
     <S.QuestionWrite>
       {props.isEdit === false && (
@@ -31,25 +30,15 @@ export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
         </S.Title>
       )}
       <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickCreate)}>
-        <S.ContentsWrap>
-          <S.Contents
-            id="contents"
-            maxLength={100}
-            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
-            defaultValue={props.isEdit === true ? props.el?.contents : watch().contents}
-            {...register("contents")}
-          />
-          <S.ContentsBottom>
-            <S.ContentsLength>
-              {typeof watch().contents === "string" ? watch().contents.length : 0}
-              /100
-            </S.ContentsLength>
-            <S.BtnWrap>
-              {props.isEdit === true ? <S.CancelBtn onClick={props.onToggleEdit}>취소</S.CancelBtn> : ""}
-              <S.SubmitBtn>{props.isEdit === true ? "수정하기" : "등록하기"}</S.SubmitBtn>
-            </S.BtnWrap>
-          </S.ContentsBottom>
-        </S.ContentsWrap>
+        <Textarea01
+          placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+          isEdit={props.isEdit}
+          length={100}
+          register={register("contents")}
+          word={typeof watch().contents === "string" ? watch().contents.length : 0}
+          onToggleEdit={props.onToggleEdit}
+          btnName={props.isEdit === true ? "수정하기" : "등록하기"}
+        />
       </S.Form>
     </S.QuestionWrite>
   );

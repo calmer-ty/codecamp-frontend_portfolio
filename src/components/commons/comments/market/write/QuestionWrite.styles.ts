@@ -44,7 +44,6 @@ export const RateScore = styled(Rate)``;
 export const ContentsWrap = styled.div`
   position: relative;
   width: 1200px;
-  /* height: 161px; */
   border: 1px solid #bdbdbd;
 `;
 export const Contents = styled.textarea`

@@ -65,13 +65,14 @@ export const useMarketQuestion = (args: IUseMarketQuestionArgs) => {
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
+    console.log(data);
     if (data.contents === "") {
       Modal.error({ content: "수정한 내용이 없습니다." });
       return;
     }
 
     try {
-      const updateUseditemQuestionInput: IUpdateUseditemQuestionInput = {};
+      const updateUseditemQuestionInput: IUpdateUseditemQuestionInput = { contents: data.contents };
       if (typeof args.useditemQuestionId !== "string") return;
       if (data.contents !== "") updateUseditemQuestionInput.contents = data.contents;
       await updateQuestion({
