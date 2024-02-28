@@ -6,7 +6,6 @@ import { schemaMarketQuestion } from "../../../../../commons/libraries/validatio
 // Custom Hooks
 import { useMarketQuestion } from "../../../hooks/customs/useMarketQuestion";
 
-import InputCustom from "../../../element/inputs/custom";
 // Type
 import type { IQuestionWriteProps, IFormData } from "./QuestionWrite.types";
 
@@ -17,29 +16,21 @@ export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
   });
 
   const { onClickCreate, onClickUpdate } = useMarketQuestion({
-    boardCommentId: props.el?._id,
+    useditemQuestionId: props.el?._id,
     onToggleEdit: props.onToggleEdit,
   });
+
+  console.log(props.isEdit);
 
   return (
     <S.QuestionWrite>
       {props.isEdit === false && (
         <S.Title>
           <S.TitleImg src="/images/comment/write/ic_logo.png" />
-          댓글
+          문의
         </S.Title>
       )}
       <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickCreate)}>
-        <S.InputWrap>
-          {/* <InputCustom width={180} placeholder="작성자" value={props.el?.writer ?? ""} register={register("writer")} /> */}
-          <InputCustom
-            type="password"
-            width={180}
-            placeholder="비밀번호"
-            defaultValue={""}
-            register={register("password")}
-          />
-        </S.InputWrap>
         <S.ContentsWrap>
           <S.Contents
             id="contents"

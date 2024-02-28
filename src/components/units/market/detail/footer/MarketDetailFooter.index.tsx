@@ -7,13 +7,13 @@ import QuestionWrite from "../../../../commons/comments/market/write/QuestionWri
 import QuestionList from "../../../../commons/comments/market/list/QuestionList.index";
 
 export default function MarketDetailFooter() {
-  const { data: dataScroll, onLoadMore } = useMarketQuestionScroll();
+  const { data, onLoadMore } = useMarketQuestionScroll();
 
   return (
     <S.Footer>
-      <QuestionWrite />
+      <QuestionWrite isEdit={false} />
       <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-        {dataScroll?.fetchUseditemQuestions.map((el, _) => <QuestionList key={el._id} el={el}></QuestionList>) ?? <></>}
+        {data?.fetchUseditemQuestions.map((el, _) => <QuestionList key={el._id} el={el}></QuestionList>) ?? <></>}
       </InfiniteScroll>
     </S.Footer>
   );

@@ -54,8 +54,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
 
   const onClickCreate = async (data: IFormData): Promise<void> => {
     if (args?.rating === undefined) {
-      alert("별점을 선택해주세요.");
-      return;
+      args.rating = 0;
     }
     try {
       await createComment({
@@ -64,7 +63,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
             writer: data.writer,
             password: data.password,
             contents: data.contents,
-            rating: args?.rating,
+            rating: args.rating,
           },
           boardId: id,
         },

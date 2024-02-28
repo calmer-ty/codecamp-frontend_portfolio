@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import type { IMutation, IMutationUpdateUseditemArgs } from "../../../../commons/types/generated/types";
 
-export const UPDATE_USEDITEM = gql`
+const UPDATE_MARKET = gql`
   mutation updateUseditem($updateUseditemInput: UpdateUseditemInput!, $useditemId: ID!) {
     updateUseditem(updateUseditemInput: $updateUseditemInput, useditemId: $useditemId) {
       _id
@@ -10,6 +10,6 @@ export const UPDATE_USEDITEM = gql`
 `;
 
 export const useUpdateMarket = () => {
-  const result = useMutation<Pick<IMutation, "updateUseditem">, IMutationUpdateUseditemArgs>(UPDATE_USEDITEM);
+  const result = useMutation<Pick<IMutation, "updateUseditem">, IMutationUpdateUseditemArgs>(UPDATE_MARKET);
   return result;
 };

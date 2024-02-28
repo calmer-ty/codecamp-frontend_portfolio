@@ -12,6 +12,7 @@ import InputCustom from "../../../element/inputs/custom";
 import type { ICommentWriteProps, IFormData } from "./CommentWrite.types";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
+  console.log(props);
   const [rating, setRating] = useState(props.el?.rating);
 
   const { register, handleSubmit, watch } = useForm<IFormData>({
@@ -36,7 +37,12 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
       )}
       <S.Form onSubmit={handleSubmit(props.isEdit === true ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
-          <InputCustom width={180} placeholder="작성자" value={props.el?.writer ?? ""} register={register("writer")} />
+          <InputCustom
+            width={180}
+            placeholder="작성자"
+            defaultValue={props.el?.writer ?? ""}
+            register={register("writer")}
+          />
           <InputCustom
             type="password"
             width={180}

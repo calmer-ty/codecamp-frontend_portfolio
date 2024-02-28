@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
 
 interface IUseFileUrls {
@@ -18,10 +18,10 @@ export const useFileUrls = (props: IUseFileUrls) => {
     setFileUrls(newFileUrls);
   };
 
-  useEffect(() => {
-    const images = props.data?.fetchUseditem.images;
-    if (images !== undefined && images !== null) setFileUrls([...images]);
-  }, [props.data]);
+  // useEffect(() => {
+  //   const images = props.data?.fetchUseditem.images;
+  //   if (images !== undefined && images !== null) setFileUrls([...images]);
+  // }, [props.data]);
 
   return {
     fileUrls,

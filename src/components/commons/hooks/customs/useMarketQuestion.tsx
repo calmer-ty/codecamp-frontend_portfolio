@@ -1,49 +1,39 @@
-import { useState } from "react";
-
-import { useCreateBoardComment } from "../mutations/useCreateBoardComment";
-import { useUpdateBoardComment } from "../mutations/useUpdateBoardComment";
-import { useDeleteBoardComment } from "../mutations/useDeleteBoardComment";
-
-import { FETCH_COMMENTS } from "../queries/useFetchBoardComments";
-
-import { Modal } from "antd";
 import { useIdCheck } from "./useIdCheck";
 
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
-import type { IFormData } from "../../comments/board/write/CommentWrite.types";
-import type { IUpdateBoardCommentInput } from "../../../../commons/types/generated/types";
+import { FETCH_USEDITEM_QUESTIONS } from "../queries/useFetchMarketQuestions";
+import { useCreateMarketQuestion } from "../mutations/useCreateMarketQuestion";
+import { useUpdateMarketQuestion } from "../mutations/useUpdateMarketQuestion";
+import { useDeleteMarketQuestion } from "../mutations/useDeleteMarketQuestion";
 
-interface IUseBoardCommentArgs {
-  rating?: number;
-  boardCommentId?: string;
-  setRating?: Dispatch<SetStateAction<number | undefined>>;
+import { Modal } from "antd";
+
+import type { IFormData } from "../../comments/market/write/QuestionWrite.types";
+import type { IUpdateUseditemQuestionInput } from "../../../../commons/types/generated/types";
+
+interface IUseMarketQuestionArgs {
+  useditemQuestionId?: string;
   onToggleEdit?: () => void;
 }
 
-export const useMarketQuestion = (args: IUseBoardCommentArgs) => {
-  const { id } = useIdCheck("useditem");
-  const [deletePassword, setDeletePassword] = useState("");
+export const useMarketQuestion = (args: IUseMarketQuestionArgs) => {
+  const { id } = useIdCheck("useditemId");
 
-  const [createComment] = useCreateBoardComment();
-  const [updateComment] = useUpdateBoardComment();
-  const [deleteComment] = useDeleteBoardComment();
-
-  const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>): void => {
-    setDeletePassword(event.target.value);
-  };
+  const [createQuestion] = useCreateMarketQuestion();
+  const [updateQuestion] = useUpdateMarketQuestion();
+  const [deleteQuestion] = useDeleteMarketQuestion();
 
   const onClickDelete = async (): Promise<void> => {
-    if (typeof args?.boardCommentId !== "string") return;
+    if (typeof args?.useditemQuestionId !== "string") return;
+
     try {
-      await deleteComment({
+      await deleteQuestion({
         variables: {
-          boardCommentId: args.boardCommentId,
-          password: deletePassword,
+          useditemQuestionId: args.useditemQuestionId,
         },
         refetchQueries: [
           {
-            query: FETCH_COMMENTS,
-            variables: { boardId: id },
+            query: FETCH_USEDITEM_QUESTIONS,
+            variables: { useditemId: id },
           },
         ],
       });
@@ -53,35 +43,25 @@ export const useMarketQuestion = (args: IUseBoardCommentArgs) => {
   };
 
   const onClickCreate = async (data: IFormData): Promise<void> => {
-    if (args?.rating === undefined) {
-      alert("별점을 선택해주세요.");
-      return;
-    }
     try {
-      await createComment({
+      await createQuestion({
         variables: {
-          createBoardCommentInput: {
-            writer: data.writer,
-            password: data.password,
+          createUseditemQuestionInput: {
             contents: data.contents,
-            rating: args?.rating,
           },
-          boardId: id,
+          useditemId: id,
         },
         refetchQueries: [
           {
-            query: FETCH_COMMENTS,
-            variables: { boardId: id },
+            query: FETCH_USEDITEM_QUESTIONS,
+            variables: { useditemId: id },
           },
         ],
       });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
-    data.writer = "";
-    data.password = "";
     data.contents = "";
-    args.setRating?.(1);
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
@@ -89,26 +69,20 @@ export const useMarketQuestion = (args: IUseBoardCommentArgs) => {
       Modal.error({ content: "수정한 내용이 없습니다." });
       return;
     }
-    if (data.password === "") {
-      Modal.error({ content: "비밀번호를 입력해주세요." });
-      return;
-    }
 
     try {
-      const updateBoardCommentInput: IUpdateBoardCommentInput = {};
-      if (typeof args.boardCommentId !== "string") return;
-      if (data.contents !== "") updateBoardCommentInput.contents = data.contents;
-      if (data.rating !== args?.rating) updateBoardCommentInput.rating = args.rating;
-      await updateComment({
+      const updateUseditemQuestionInput: IUpdateUseditemQuestionInput = {};
+      if (typeof args.useditemQuestionId !== "string") return;
+      if (data.contents !== "") updateUseditemQuestionInput.contents = data.contents;
+      await updateQuestion({
         variables: {
-          updateBoardCommentInput,
-          password: data.password,
-          boardCommentId: args.boardCommentId,
+          updateUseditemQuestionInput,
+          useditemQuestionId: args.useditemQuestionId,
         },
         refetchQueries: [
           {
-            query: FETCH_COMMENTS,
-            variables: { boardId: id },
+            query: FETCH_USEDITEM_QUESTIONS,
+            variables: { useditemId: id },
           },
         ],
       });
@@ -122,6 +96,5 @@ export const useMarketQuestion = (args: IUseBoardCommentArgs) => {
     onClickCreate,
     onClickUpdate,
     onClickDelete,
-    onChangeDeletePassword,
   };
 };

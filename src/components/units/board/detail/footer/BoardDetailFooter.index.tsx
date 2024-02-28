@@ -13,7 +13,7 @@ import type { IBoardDetailProps } from "../BoardDetail.types";
 
 export default function BoardDetailFooter(props: IBoardDetailProps): JSX.Element {
   const { onClickDelete } = useBoard();
-  const { data: dataScroll, onLoadMore } = useBoardCommentScroll();
+  const { data, onLoadMore } = useBoardCommentScroll();
 
   return (
     <S.Footer>
@@ -26,9 +26,9 @@ export default function BoardDetailFooter(props: IBoardDetailProps): JSX.Element
         </Link>
         <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
       </S.LinkWrap>
-      <CommentWrite />
+      <CommentWrite isEdit={false} />
       <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-        {dataScroll?.fetchBoardComments.map((el, _) => <CommentList key={el._id} el={el}></CommentList>) ?? <></>}
+        {data?.fetchBoardComments.map((el, _) => <CommentList key={el._id} el={el}></CommentList>) ?? <></>}
       </InfiniteScroll>
     </S.Footer>
   );
