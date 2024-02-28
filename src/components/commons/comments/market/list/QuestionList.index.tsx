@@ -22,8 +22,6 @@ export default function QuestionList(props: IQuestionListProps): JSX.Element {
     useditemQuestionId: props.el._id,
   });
 
-  console.log(props);
-
   return (
     <>
       {!isEdit ? (
