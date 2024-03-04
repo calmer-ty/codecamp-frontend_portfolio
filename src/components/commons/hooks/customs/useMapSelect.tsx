@@ -10,7 +10,7 @@ export default function useMapSelect() {
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=86e8d7dcdac578c6f87227c9b54397f1&libraries=services";
+      "//dapi.kakao.com/v2/maps/sdk.js?appkey=86e8d7dcdac578c6f87227c9b54397f1&libraries=services&autoload=false";
 
     document.head.appendChild(script);
 

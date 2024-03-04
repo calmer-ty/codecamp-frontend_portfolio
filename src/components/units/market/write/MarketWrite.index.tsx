@@ -23,7 +23,6 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
   });
 
   const onChangeContents = (value: string) => {
-    console.log(value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     void trigger("contents");
   };

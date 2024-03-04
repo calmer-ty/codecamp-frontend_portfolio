@@ -6,7 +6,12 @@ export const FETCH_USEDITEMS = gql`
     fetchUseditems(isSoldout: $isSoldout, search: $search, page: $page) {
       _id
       name
+      remarks
+      price
       createdAt
+      seller {
+        name
+      }
     }
   }
 `;

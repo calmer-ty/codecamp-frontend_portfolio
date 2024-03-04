@@ -1,20 +1,24 @@
 import Link from "next/link";
 import * as S from "./MarketListBody.styles";
 
-import { getDate } from "../../../../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
 
 import type { IMarketListBodyProps } from "../MarketList.types";
+// import { useState } from "react";
 
 export default function MarketListBody(props: IMarketListBodyProps) {
   const SECRET_STRING = "!@#$";
+
+  // const [value, setValue] = useState();
+
   return (
     <S.Body>
       <S.Table>
         <tbody>
           {props.data?.fetchUseditems?.map((el) => (
             <S.List key={el._id}>
-              <S.ListItem>{String(el._id).slice(-4).toUpperCase()}</S.ListItem>
+              {/* <div> */}
+              <S.ListItem style={{ width: "160px", height: "160px", backgroundColor: "#ccc" }}>사진0</S.ListItem>
               <S.ListItem>
                 <Link href={`/markets/${el._id}`}>
                   <S.ListItemTitle>
@@ -28,9 +32,16 @@ export default function MarketListBody(props: IMarketListBodyProps) {
                       ))}
                   </S.ListItemTitle>
                 </Link>
+                <div>{el.remarks}</div>
+                <div>{el.remarks}</div>
+                <div>{el.seller.name ?? ""}</div>
               </S.ListItem>
-              <S.ListItem>{el.seller}</S.ListItem>
-              <S.ListItem>{getDate(el.createdAt)}</S.ListItem>
+              {/* </div> */}
+              {/* <S.ListItem></S.ListItem> */}
+              <S.ListPrice>
+                <S.TagIcon style={{ fontSize: "40px" }} />
+                <S.PriceText>{el.price?.toLocaleString()}원</S.PriceText>
+              </S.ListPrice>
             </S.List>
           ))}
         </tbody>
