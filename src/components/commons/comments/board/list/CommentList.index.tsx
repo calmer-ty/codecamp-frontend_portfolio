@@ -23,6 +23,8 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
     boardCommentId: props.el._id,
   });
 
+  console.log(props);
+
   return (
     <>
       {isOpen && (

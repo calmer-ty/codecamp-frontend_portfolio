@@ -9,19 +9,20 @@ import { FETCH_COMMENTS } from "../queries/useFetchBoardComments";
 import { Modal } from "antd";
 import { useIdCheck } from "./useIdCheck";
 
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import type { ChangeEvent } from "react";
 import type { IFormData } from "../../comments/board/write/CommentWrite.types";
 import type { IUpdateBoardCommentInput } from "../../../../commons/types/generated/types";
 
 interface IUseBoardCommentArgs {
   rating?: number;
   boardCommentId?: string;
-  setRating?: Dispatch<SetStateAction<number | undefined>>;
   onToggleEdit?: () => void;
 }
 
 export const useBoardComment = (args: IUseBoardCommentArgs) => {
   const { id } = useIdCheck("boardId");
+  console.log(args.rating);
+  const [rating, setRating] = useState(args.rating);
   const [deletePassword, setDeletePassword] = useState("");
 
   const [createComment] = useCreateBoardComment();
@@ -53,9 +54,6 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
   };
 
   const onClickCreate = async (data: IFormData): Promise<void> => {
-    if (args?.rating === undefined) {
-      args.rating = 0;
-    }
     try {
       await createComment({
         variables: {
@@ -63,7 +61,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
             writer: data.writer,
             password: data.password,
             contents: data.contents,
-            rating: args.rating,
+            rating: rating ?? 0,
           },
           boardId: id,
         },
@@ -77,10 +75,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
-    data.writer = "";
-    data.password = "";
-    data.contents = "";
-    args.setRating?.(1);
+    setRating(0);
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
@@ -122,5 +117,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
     onClickUpdate,
     onClickDelete,
     onChangeDeletePassword,
+    rating,
+    setRating,
   };
 };

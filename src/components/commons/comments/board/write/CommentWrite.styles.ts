@@ -1,13 +1,14 @@
 import styled from "@emotion/styled";
 // Library
 import { Rate } from "antd";
+import type { ICommentWriteProps } from "./CommentWrite.types";
 
 export const CommentWrite = styled.article`
   display: flex;
   flex-direction: column;
   width: 1200px;
   padding: 40px 0;
-  border-top: 1px solid #bdbdbd;
+  border-top: ${(props: ICommentWriteProps) => (props.isEdit ? "" : "1px solid #bdbdbd")};
 `;
 export const Form = styled.form`
   display: flex;
