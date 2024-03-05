@@ -8,7 +8,7 @@ export interface IFormData {
   price: number;
   images?: string[];
   zipcode?: string;
-  address?: string;
+  address: string;
   addressDetail?: string;
   tags?: string[];
 }

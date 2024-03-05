@@ -4,6 +4,7 @@ interface IInputProps {
   type?: "text" | "password";
   placeholder?: string;
   defaultValue?: string | number;
+  value?: string | number;
   register?: UseFormRegisterReturn;
   readOnly?: boolean;
 }
@@ -19,6 +20,7 @@ export default function Input01(props: IInputProps): JSX.Element {
       style={inputStyle}
       type={props.type ?? "text"}
       placeholder={props.placeholder}
+      value={props.value}
       defaultValue={props.defaultValue}
       readOnly={props.readOnly}
       {...props.register}

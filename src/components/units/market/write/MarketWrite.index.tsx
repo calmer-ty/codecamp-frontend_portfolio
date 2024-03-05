@@ -43,7 +43,7 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
               defaultValue={props.data?.fetchUseditem.name ?? ""}
               register={register("name")}
             />
-            <Error01 text={formState.errors?.name?.message} />
+            <Error01 text={formState.errors.name?.message} />
           </S.InputWrap>
           <S.InputWrap>
             <Label01 text="한줄요약" />
@@ -52,7 +52,7 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
               defaultValue={props.data?.fetchUseditem.remarks ?? ""}
               register={register("remarks")}
             />
-            <Error01 text={formState.errors?.remarks?.message} />
+            <Error01 text={formState.errors.remarks?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
@@ -62,7 +62,7 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
               defaultValue={props.data?.fetchUseditem.contents ?? ""}
               onChange={onChangeContents}
             />
-            <Error01 text={formState.errors?.contents?.message} />
+            <Error01 text={formState.errors.contents?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
@@ -72,13 +72,13 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
               defaultValue={props.data?.fetchUseditem.price ?? ""}
               register={register("price")}
             />
-            <Error01 text={formState.errors?.price?.message} />
+            <Error01 text={formState.errors.price?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
             <Label01 text="태그입력" />
             <Input01 placeholder="#태그  #태그  #태그" register={register("tags")} />
-            <Error01 text={formState.errors?.tags?.message} />
+            <Error01 text={formState.errors.tags?.message} />
           </S.InputWrap>
 
           <S.AreaWrap>
@@ -88,16 +88,12 @@ export default function MarketWriteUI(props: IMarketWriteProps): JSX.Element {
             </S.Map>
             <S.MapInfo>
               <S.InputWrap>
-                <Label01 text="GPS" />
-                <S.FlexRow>
-                  <S.Input type="text" />
-                  <S.Input type="text" />
-                </S.FlexRow>
-              </S.InputWrap>
-              <S.InputWrap>
                 <Label01 text="주소" />
                 <S.InputWrap style={{ rowGap: "20px" }}>
-                  <S.Input value={address} readOnly />
+                  <S.InputWrap>
+                    <Input01 value={address} register={register("address")} />
+                    <Error01 text={formState.errors.address?.message} />
+                  </S.InputWrap>
                   <Input01 register={register("addressDetail")} />
                 </S.InputWrap>
               </S.InputWrap>

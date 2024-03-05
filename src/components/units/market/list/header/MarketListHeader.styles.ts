@@ -41,6 +41,10 @@ export const ItemTitle = styled.a`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
+  :hover {
+    color: blue;
+  }
 `;
 export const ItemRemark = styled.span`
   width: 100%;

@@ -9,6 +9,8 @@ export const FETCH_USEDITEMS = gql`
       remarks
       price
       createdAt
+      images
+      pickedCount
       seller {
         name
       }

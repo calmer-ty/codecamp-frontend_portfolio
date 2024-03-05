@@ -7,6 +7,8 @@ import useMapView from "../../../../commons/hooks/customs/useMapView";
 import { useMarket } from "../../../../commons/hooks/customs/useMarket";
 import { useFetchMarket } from "../../../../commons/hooks/queries/useFetchMarket";
 import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
+import HeartIcon01 from "../../../../commons/icon/heart/01";
+import HeartIcon02 from "../../../../commons/icon/heart/02";
 
 declare const window: typeof globalThis & {
   IMP: any;
@@ -63,7 +65,12 @@ export default function MarketDetailBody(props: IMarketDetailBodyProps) {
             <S.Name>{props.data?.fetchUseditem?.name}</S.Name>
             <S.Price>{props.data?.fetchUseditem.price}원</S.Price>
           </S.TitleText>
-          <S.PickedCount>{props.data?.fetchUseditem.pickedCount}</S.PickedCount>
+          <S.Pick>
+            <HeartIcon01 size={20} />
+            <HeartIcon02 size={20} />
+
+            <S.PickScore>{props.data?.fetchUseditem.pickedCount}</S.PickScore>
+          </S.Pick>
         </S.BodyHeader>
         <S.ImgWrap>
           {props.data?.fetchUseditem.images

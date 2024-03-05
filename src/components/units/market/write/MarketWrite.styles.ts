@@ -5,7 +5,6 @@ const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
 
-// emotion은 태그로 쓰이기 때문에 대문자로 사용한다
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -21,6 +20,10 @@ export const Container = styled.article`
 `;
 
 export const FlexRow = styled.div`
+  display: flex;
+  width: 100%;
+`;
+export const FlexColumn = styled.div`
   display: flex;
   width: 100%;
 `;
@@ -50,7 +53,7 @@ export const Input = styled.input`
   padding: 0 16px;
 `;
 
-export const AreaWrap = styled.section`
+export const AreaWrap = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;

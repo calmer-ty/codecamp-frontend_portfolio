@@ -10,7 +10,7 @@ export const Body = styled.div`
 `;
 export const ListWrap = styled.main`
   overflow-y: scroll;
-  height: 100%;
+  height: calc(191 * 10px);
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
 `;
@@ -34,7 +34,7 @@ export const InfoTop = styled.div`
   color: #4f4f4f;
 `;
 
-export const ItemImg = styled.div`
+export const ItemImg = styled.img`
   width: 160px;
   height: 160px;
   background-color: #ccc;
@@ -43,6 +43,7 @@ export const ItemImg = styled.div`
 export const ItemTitle = styled.a`
   margin-bottom: 4px;
   font-size: 24px;
+  font-weight: bold;
   color: #4f4f4f;
   cursor: pointer;
   :hover {

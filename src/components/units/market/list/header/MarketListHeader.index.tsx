@@ -1,4 +1,7 @@
+import Link from "next/link";
+// Hooks
 import { useFetchMarketsBest } from "../../../../commons/hooks/queries/useFetchMarketsBest";
+// Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 // Style
 import * as S from "./MarketListHeader.styles";
@@ -11,8 +14,10 @@ export default function MarketListHeader(): JSX.Element {
       <S.ListWrap>
         {data?.fetchUseditemsOfTheBest.map((el) => (
           <S.List key={el._id}>
-            <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} alt="" />
-            <S.ItemTitle>{el.name}</S.ItemTitle>
+            <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
+            <Link href={`/markets/${el._id}`}>
+              <S.ItemTitle>{el.name}</S.ItemTitle>
+            </Link>
             <S.ItemRemark>{el.remarks}</S.ItemRemark>
             <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
 

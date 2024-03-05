@@ -19,6 +19,7 @@ export default function MarketListBody() {
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,
   });
+  console.log(data);
   return (
     <S.Body>
       <Searchbar01 onChangeSearch={onChangeSearch} />
@@ -26,7 +27,7 @@ export default function MarketListBody() {
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
           {data?.fetchUseditems?.map((el) => (
             <S.List key={el._id}>
-              <S.ItemImg>사진02</S.ItemImg>
+              <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
               <S.ItemInfo>
                 <S.InfoTop>
                   <Link href={`/markets/${el._id}`}>
@@ -42,7 +43,7 @@ export default function MarketListBody() {
                     </S.ItemTitle>
                   </Link>
                   <S.ListRemark>{el.remarks}</S.ListRemark>
-                  <div>{el.remarks}</div>
+                  <div>#태그란 입니다: {el.tags}</div>
                 </S.InfoTop>
                 <S.InfoBottom>
                   <S.FlexRow>
