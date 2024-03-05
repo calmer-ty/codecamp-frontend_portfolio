@@ -6,7 +6,7 @@ import { Fragment } from "react";
 const NAVIGATION_MENUS = [
   { name: "Firebase", page: "/boards_firebase" },
   { name: "자유게시판", page: "/boards" },
-  { name: "중고마켓", page: "/markets" },
+  { name: "중고마켓", page: "/products" },
   { name: "마이페이지", page: "/myPage" },
   { name: "랜덤강아지", page: "/randomDogImg" },
   { name: "OpenApi", page: "/openApi" },

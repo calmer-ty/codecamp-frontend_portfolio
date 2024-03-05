@@ -38,7 +38,7 @@ export const schemaBoardComment = yup.object({
   password: passwordSchema,
   contents: yup.string().required("내용 입력은 필수입니다."),
 });
-export const schemaMarketQuestion = yup.object({
+export const schemaProductQuestion = yup.object({
   contents: yup.string().required("내용 입력은 필수입니다."),
 });
 

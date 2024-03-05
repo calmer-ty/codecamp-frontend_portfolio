@@ -1,7 +1,7 @@
-import { useFetchMarketQuestions } from "../queries/useFetchMarketQuestions";
+import { useFetchProductQuestions } from "../queries/useFetchProductQuestions";
 
 export const useScrollQuestion = () => {
-  const { data, fetchMore } = useFetchMarketQuestions();
+  const { data, fetchMore } = useFetchProductQuestions();
   const onLoadMore = (): void => {
     if (data === undefined) return;
     void fetchMore({
