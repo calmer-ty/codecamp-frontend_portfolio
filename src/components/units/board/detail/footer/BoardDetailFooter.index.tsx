@@ -2,7 +2,7 @@ import * as S from "./BoardDetailFooter.styles";
 import Link from "next/link";
 
 import { useBoard } from "../../../../commons/hooks/customs/useBoard";
-import { useBoardCommentScroll } from "../../../../commons/hooks/customs/useBoardCommentScroll";
+import { useScrollComment } from "../../../../commons/hooks/customs/useScrollComment";
 
 import InfiniteScroll from "react-infinite-scroller";
 
@@ -13,7 +13,7 @@ import type { IBoardDetailProps } from "../BoardDetail.types";
 
 export default function BoardDetailFooter(props: IBoardDetailProps): JSX.Element {
   const { onClickDelete } = useBoard();
-  const { data, onLoadMore } = useBoardCommentScroll();
+  const { data, onLoadMore } = useScrollComment();
 
   return (
     <S.Footer>

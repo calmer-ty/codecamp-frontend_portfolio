@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 
-export const RowWrap = styled.div`
+export const FlexRow = styled.div`
   display: flex;
   align-items: center;
 `;
-export const ColWrap = styled.div`
+export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -24,6 +24,7 @@ export const Logo = styled.div`
   height: 36px;
   font-size: 50px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const UserInfoModal = styled.div`
@@ -36,17 +37,25 @@ export const UserInfo = styled.div`
   font-weight: bold;
 `;
 
-export const LoginBtn = styled.button`
+export const LoginBtn = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 92px;
   height: 44px;
   border-radius: 10px;
   font-weight: bold;
   background-color: #284b63;
   color: #ffffff;
+  cursor: pointer;
 `;
-export const JoinBtn = styled.button`
+export const JoinBtn = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 92px;
   height: 44px;
   border-radius: 10px;
   font-weight: bold;
+  cursor: pointer;
 `;

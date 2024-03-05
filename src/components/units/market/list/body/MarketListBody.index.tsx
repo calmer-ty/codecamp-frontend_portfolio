@@ -1,51 +1,66 @@
 import Link from "next/link";
-import * as S from "./MarketListBody.styles";
-
-import { v4 as uuidv4 } from "uuid";
-
+// Scroll
+import InfiniteScroll from "react-infinite-scroller";
+import { useScrollMarketList } from "../../../../commons/hooks/customs/useScrollMarketList";
+// Component
+import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
+import UserIcon01 from "../../../../commons/icon/user/01";
+import HeartIcon01 from "../../../../commons/icon/heart/01";
+// Type
 import type { IMarketListBodyProps } from "../MarketList.types";
-// import { useState } from "react";
+// Etc
+import { v4 as uuidv4 } from "uuid";
+// Style
+import * as S from "./MarketListBody.styles";
+const SECRET_STRING = "!@#$";
 
 export default function MarketListBody(props: IMarketListBodyProps) {
-  const SECRET_STRING = "!@#$";
-
-  // const [value, setValue] = useState();
-
+  const { data, onLoadMore } = useScrollMarketList();
+  console.log(data);
   return (
     <S.Body>
-      <S.Table>
-        <tbody>
-          {props.data?.fetchUseditems?.map((el) => (
+      <Searchbar01 onChangeSearch={props.onChangeSearch} />
+      <S.ListWrap>
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+          {data?.fetchUseditems?.map((el) => (
             <S.List key={el._id}>
-              {/* <div> */}
-              <S.ListItem style={{ width: "160px", height: "160px", backgroundColor: "#ccc" }}>사진0</S.ListItem>
-              <S.ListItem>
-                <Link href={`/markets/${el._id}`}>
-                  <S.ListItemTitle>
-                    {el.name
-                      .replaceAll(props.keyword, `${SECRET_STRING}${props.keyword}${SECRET_STRING}`)
-                      .split(SECRET_STRING)
-                      .map((el) => (
-                        <S.KeywordToken key={uuidv4()} isMatched={props.keyword === el}>
-                          {el}
-                        </S.KeywordToken>
-                      ))}
-                  </S.ListItemTitle>
-                </Link>
-                <div>{el.remarks}</div>
-                <div>{el.remarks}</div>
-                <div>{el.seller.name ?? ""}</div>
-              </S.ListItem>
-              {/* </div> */}
-              {/* <S.ListItem></S.ListItem> */}
-              <S.ListPrice>
+              <S.ItemImg>사진02</S.ItemImg>
+              <S.ItemInfo>
+                <S.InfoTop>
+                  <Link href={`/markets/${el._id}`}>
+                    <S.ItemTitle>
+                      {el.name
+                        .replaceAll(props.keyword, `${SECRET_STRING}${props.keyword}${SECRET_STRING}`)
+                        .split(SECRET_STRING)
+                        .map((el) => (
+                          <S.KeywordToken key={uuidv4()} isMatched={props.keyword === el}>
+                            {el}
+                          </S.KeywordToken>
+                        ))}
+                    </S.ItemTitle>
+                  </Link>
+                  <S.ListRemark>{el.remarks}</S.ListRemark>
+                  <div>{el.remarks}</div>
+                </S.InfoTop>
+                <S.InfoBottom>
+                  <S.FlexRow>
+                    <UserIcon01 size={16} padding={4} />
+                    <div>{el.seller?.name ?? ""}</div>
+                  </S.FlexRow>
+                  <S.FlexRow>
+                    <HeartIcon01 size={20} />
+                    <div>{el.pickedCount}</div>
+                  </S.FlexRow>
+                </S.InfoBottom>
+              </S.ItemInfo>
+              <S.ItemPrice>
                 <S.TagIcon style={{ fontSize: "40px" }} />
                 <S.PriceText>{el.price?.toLocaleString()}원</S.PriceText>
-              </S.ListPrice>
+              </S.ItemPrice>
             </S.List>
-          ))}
-        </tbody>
-      </S.Table>
+          )) ?? <></>}
+        </InfiniteScroll>
+      </S.ListWrap>
     </S.Body>
   );
 }

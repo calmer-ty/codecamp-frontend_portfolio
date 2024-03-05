@@ -6,10 +6,12 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #bdbdbd;
+  padding-bottom: 20px;
 `;
 export const FlexRow = styled.section`
   display: flex;
   align-items: center;
+  column-gap: 12px;
 `;
 export const FlexColumn = styled.section`
   display: flex;

@@ -2,12 +2,13 @@ import * as S from "./BoardDetailHeader.styles";
 
 import { getDate } from "../../../../../commons/libraries/utils";
 import type { IBoardDetailProps } from "../BoardDetail.types";
+import UserIcon01 from "../../../../commons/icon/user/01";
 
 export default function BoardDetailHeader(props: IBoardDetailProps): JSX.Element {
   return (
     <S.Header>
       <S.FlexRow>
-        <S.Avatar src="/images/board/detail/ic_profile.png"></S.Avatar>
+        <UserIcon01 size={32} padding={8} />
         <S.FlexColumn>
           <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
           <S.CreatedAt>{getDate(props.data?.fetchBoard?.createdAt)}</S.CreatedAt>

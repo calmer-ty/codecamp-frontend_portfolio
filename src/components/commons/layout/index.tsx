@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import LayoutHeader from "./header/LayoutHeader.container";
+import LayoutHeader from "./header/LayoutHeader.index";
 import LayoutNavigation from "./navigation/LayoutNavigation.index";
 
 interface ILayoutProps {

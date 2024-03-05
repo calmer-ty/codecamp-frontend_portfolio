@@ -16,8 +16,8 @@ export default function MarketList(): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
-        <MarketListHeader onChangeSearch={onChangeSearch} />
-        <MarketListBody data={data} keyword={keyword} />
+        <MarketListHeader />
+        <MarketListBody data={data} keyword={keyword} onChangeSearch={onChangeSearch} />
         <MarketListFooter />
       </S.Container>
     </S.Wrapper>

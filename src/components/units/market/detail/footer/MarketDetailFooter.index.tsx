@@ -1,13 +1,13 @@
 import * as S from "./MarketDetailFooter.styles";
 
 import InfiniteScroll from "react-infinite-scroller";
-import { useMarketQuestionScroll } from "../../../../commons/hooks/customs/useMarketQuestionScroll";
+import { useScrollQuestion } from "../../../../commons/hooks/customs/useScrollQuestion";
 
 import QuestionWrite from "../../../../commons/comments/market/write/QuestionWrite.index";
 import QuestionList from "../../../../commons/comments/market/list/QuestionList.index";
 
 export default function MarketDetailFooter() {
-  const { data, onLoadMore } = useMarketQuestionScroll();
+  const { data, onLoadMore } = useScrollQuestion();
 
   return (
     <S.Footer>
