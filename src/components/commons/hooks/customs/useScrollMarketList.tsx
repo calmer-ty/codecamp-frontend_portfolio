@@ -1,7 +1,7 @@
 import { useFetchMarkets } from "../queries/useFetchMarkets";
 
 export const useScrollMarketList = () => {
-  const { data, fetchMore } = useFetchMarkets();
+  const { data, fetchMore, refetch } = useFetchMarkets();
   // 댓글 무한 스크롤
   const onLoadMore = (): void => {
     if (data === undefined) return;
@@ -21,5 +21,6 @@ export const useScrollMarketList = () => {
   return {
     data,
     onLoadMore,
+    refetch,
   };
 };

@@ -1,25 +1,27 @@
 import Link from "next/link";
+// Hooks
+import { useScrollMarketList } from "../../../../commons/hooks/customs/useScrollMarketList";
+import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
 // Scroll
 import InfiniteScroll from "react-infinite-scroller";
-import { useScrollMarketList } from "../../../../commons/hooks/customs/useScrollMarketList";
 // Component
 import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
 import UserIcon01 from "../../../../commons/icon/user/01";
 import HeartIcon01 from "../../../../commons/icon/heart/01";
-// Type
-import type { IMarketListBodyProps } from "../MarketList.types";
 // Etc
 import { v4 as uuidv4 } from "uuid";
 // Style
 import * as S from "./MarketListBody.styles";
 const SECRET_STRING = "!@#$";
 
-export default function MarketListBody(props: IMarketListBodyProps) {
-  const { data, onLoadMore } = useScrollMarketList();
-  console.log(data);
+export default function MarketListBody() {
+  const { data, refetch, onLoadMore } = useScrollMarketList();
+  const { keyword, onChangeSearch } = useSearchbar({
+    refetch,
+  });
   return (
     <S.Body>
-      <Searchbar01 onChangeSearch={props.onChangeSearch} />
+      <Searchbar01 onChangeSearch={onChangeSearch} />
       <S.ListWrap>
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
           {data?.fetchUseditems?.map((el) => (
@@ -30,10 +32,10 @@ export default function MarketListBody(props: IMarketListBodyProps) {
                   <Link href={`/markets/${el._id}`}>
                     <S.ItemTitle>
                       {el.name
-                        .replaceAll(props.keyword, `${SECRET_STRING}${props.keyword}${SECRET_STRING}`)
+                        .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
                         .split(SECRET_STRING)
                         .map((el) => (
-                          <S.KeywordToken key={uuidv4()} isMatched={props.keyword === el}>
+                          <S.KeywordToken key={uuidv4()} isMatched={keyword === el}>
                             {el}
                           </S.KeywordToken>
                         ))}
