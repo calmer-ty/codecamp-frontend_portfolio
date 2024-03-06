@@ -1,11 +1,12 @@
-import { type ChangeEvent, useRef } from "react";
-import * as S from "./Upload01.styles";
-import type {
-  IMutation,
-  IMutationUploadFileArgs,
-} from "../../../../commons/types/generated/types";
-import { gql, useMutation } from "@apollo/client";
+import { useRef } from "react";
+// Hooks
+import { useUploadFile } from "../../hooks/mutations/useUploadFile";
+// Component
 import { Modal } from "antd";
+// Style
+import * as S from "./Upload01.styles";
+// Type
+import type { ChangeEvent } from "react";
 import checkValidationImg from "./Upload01.validation";
 
 interface IUpload01Props {
@@ -14,19 +15,8 @@ interface IUpload01Props {
   onChangeFileUrls: (fileUrl: string, index: number) => void;
 }
 
-export const UPLOAD_FILE = gql`
-  mutation uploadFile($file: Upload!) {
-    uploadFile(file: $file) {
-      url
-    }
-  }
-`;
-
 export default function Upload01(props: IUpload01Props): JSX.Element {
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
+  const [uploadFile] = useUploadFile();
 
   // 참조 기능
   const fileRef = useRef<HTMLInputElement>(null);
@@ -34,9 +24,7 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
     fileRef.current?.click();
   };
 
-  const onChangeFile = async (
-    event: ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = event?.target.files?.[0];
 
     // 파일 업로드 조건을 걸어준다

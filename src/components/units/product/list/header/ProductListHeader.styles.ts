@@ -24,6 +24,10 @@ export const List = styled.article`
   height: 390px;
   padding: 20px;
   box-shadow: 2px 2px 3px #cdcdcd;
+  :hover {
+    background-color: #dedede;
+    box-shadow: none;
+  }
 `;
 
 export const ItemImg = styled.img`

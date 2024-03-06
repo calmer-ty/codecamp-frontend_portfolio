@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState } from "react";
 // Hooks
 import { useScrollProductList } from "../../../../commons/hooks/customs/useScrollProductList";
 import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
@@ -14,24 +13,16 @@ import { v4 as uuidv4 } from "uuid";
 // Style
 import * as S from "./ProductListBody.styles";
 // Type
-import type { MouseEvent } from "react";
+import type { IProductListProps } from "../ProductList.types";
+
 const SECRET_STRING = "!@#$";
 
-export default function ProductListBody() {
+export default function ProductListBody(props: IProductListProps) {
   const { data, refetch, onLoadMore } = useScrollProductList();
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,
   });
-  const [productIds, setProductIds] = useState([""]);
 
-  const onClickIdCheck = (event: MouseEvent<HTMLAnchorElement>) => {
-    const currentId = event.currentTarget.id;
-    // setProductIds((prev) => {
-    //   console.log(prev);
-    // });
-    setProductIds((prev) => [currentId, ...prev]);
-  };
-  console.log(productIds);
   return (
     <S.Body>
       <Searchbar01 onChangeSearch={onChangeSearch} />
@@ -39,11 +30,18 @@ export default function ProductListBody() {
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
           {data?.fetchUseditems?.map((el) => (
             <S.List key={el._id}>
-              <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
+              <Link href={`/products/${el._id}`}>
+                <a>
+                  <S.ItemImg
+                    onClick={props.onClickTodayView(el)}
+                    src={`http://storage.googleapis.com/${el.images?.[0]}`}
+                  />
+                </a>
+              </Link>
               <S.ItemInfo>
                 <S.InfoTop>
                   <Link href={`/products/${el._id}`}>
-                    <S.ItemTitle id={el._id} onClick={onClickIdCheck}>
+                    <S.ItemTitle onClick={props.onClickTodayView(el)}>
                       {el.name
                         .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
                         .split(SECRET_STRING)

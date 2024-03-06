@@ -5,8 +5,10 @@ import { useFetchProductsBest } from "../../../../commons/hooks/queries/useFetch
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 // Style
 import * as S from "./ProductListHeader.styles";
+// Type
+import type { IProductListProps } from "../ProductList.types";
 
-export default function ProductListHeader(): JSX.Element {
+export default function ProductListHeader(props: IProductListProps): JSX.Element {
   const { data } = useFetchProductsBest();
   return (
     <S.Header>
@@ -15,12 +17,12 @@ export default function ProductListHeader(): JSX.Element {
         {data?.fetchUseditemsOfTheBest.map((el) => (
           <S.List key={el._id}>
             <Link href={`/products/${el._id}`}>
-              <a>
+              <a onClick={props.onClickTodayView(el)}>
                 <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
               </a>
             </Link>
             <Link href={`/products/${el._id}`}>
-              <S.ItemTitle>{el.name}</S.ItemTitle>
+              <S.ItemTitle onClick={props.onClickTodayView(el)}>{el.name}</S.ItemTitle>
             </Link>
             <S.ItemRemark>{el.remarks}</S.ItemRemark>
             <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>

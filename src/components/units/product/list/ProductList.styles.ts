@@ -22,7 +22,7 @@ export const TodayView = styled.article`
   justify-content: center;
   row-gap: 20px;
   position: fixed;
-  top: 800px;
+  top: 700px;
   right: 0;
   width: 196px;
   height: 506px;
