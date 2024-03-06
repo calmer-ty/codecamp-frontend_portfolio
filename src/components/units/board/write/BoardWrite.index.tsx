@@ -24,7 +24,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     mode: "onChange",
   });
   const { isOpen, zipcode, address, onClickAddressSearch, onCompleteAddressSearch } = useAddressSearch();
-  const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls(props);
+  const { fileUrls, setFileUrls, onChangeFileUrls } = useFileUrls();
 
   const { onClickSubmit, onClickUpdate } = useBoard(fileUrls, address, zipcode);
 

@@ -14,7 +14,11 @@ export default function ProductListHeader(): JSX.Element {
       <S.ListWrap>
         {data?.fetchUseditemsOfTheBest.map((el) => (
           <S.List key={el._id}>
-            <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
+            <Link href={`/products/${el._id}`}>
+              <a>
+                <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
+              </a>
+            </Link>
             <Link href={`/products/${el._id}`}>
               <S.ItemTitle>{el.name}</S.ItemTitle>
             </Link>

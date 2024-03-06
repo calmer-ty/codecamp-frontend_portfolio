@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState } from "react";
 // Hooks
 import { useScrollProductList } from "../../../../commons/hooks/customs/useScrollProductList";
 import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
@@ -12,6 +13,8 @@ import HeartIcon01 from "../../../../commons/icon/heart/01";
 import { v4 as uuidv4 } from "uuid";
 // Style
 import * as S from "./ProductListBody.styles";
+// Type
+import type { MouseEvent } from "react";
 const SECRET_STRING = "!@#$";
 
 export default function ProductListBody() {
@@ -19,7 +22,16 @@ export default function ProductListBody() {
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,
   });
-  console.log(data);
+  const [productIds, setProductIds] = useState([""]);
+
+  const onClickIdCheck = (event: MouseEvent<HTMLAnchorElement>) => {
+    const currentId = event.currentTarget.id;
+    // setProductIds((prev) => {
+    //   console.log(prev);
+    // });
+    setProductIds((prev) => [currentId, ...prev]);
+  };
+  console.log(productIds);
   return (
     <S.Body>
       <Searchbar01 onChangeSearch={onChangeSearch} />
@@ -31,7 +43,7 @@ export default function ProductListBody() {
               <S.ItemInfo>
                 <S.InfoTop>
                   <Link href={`/products/${el._id}`}>
-                    <S.ItemTitle>
+                    <S.ItemTitle id={el._id} onClick={onClickIdCheck}>
                       {el.name
                         .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
                         .split(SECRET_STRING)

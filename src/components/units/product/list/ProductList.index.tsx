@@ -3,6 +3,7 @@ import * as S from "./ProductList.styles";
 import ProductListHeader from "./header/ProductListHeader.index";
 import ProductListBody from "./body/ProductListBody.index";
 import ProductListFooter from "./footer/ProductListFooter.index";
+// import { useState } from "react";
 
 export default function ProductList(): JSX.Element {
   return (
