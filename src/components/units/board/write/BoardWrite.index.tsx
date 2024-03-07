@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaBoardWrite } from "../../../../commons/libraries/validation";
-
-import type { IBoardWriteProps, IFormData } from "./BoardWrite.types";
-
-// Custom Hooks
+// Hooks
 import { useBoard } from "../../../commons/hooks/customs/useBoard";
 import { useAddressSearch } from "../../../commons/hooks/customs/useAddressSearch";
-
-import * as S from "./BoardWrite.styles";
+// Component
 import Button01 from "../../../commons/element/buttons/01";
 import Error01 from "../../../commons/element/errors/01";
 import Input01 from "../../../commons/element/inputs/01";
 import Label01 from "../../../commons/element/labels/01";
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
+// Style
+import * as S from "./BoardWrite.styles";
+// Type
+import type { IBoardWriteProps, IFormData } from "./BoardWrite.types";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const { register, handleSubmit, formState } = useForm<IFormData>({
@@ -35,12 +35,13 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     setFileUrls(newFileUrls);
     console.log(newFileUrls);
   };
-
-  const { onClickSubmit, onClickUpdate } = useBoard(fileUrls, address, zipcode);
   useEffect(() => {
     const images = props.data?.fetchBoard.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
+
+  const { onClickSubmit, onClickUpdate } = useBoard({ fileUrls, address, zipcode });
+
   return (
     <>
       <S.Wrapper>

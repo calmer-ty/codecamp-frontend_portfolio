@@ -118,7 +118,7 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
         <div id="map" style={{ width: "100%", height: "250px" }}></div>
       </S.BodyBottom>
       <S.BtnWrap>
-        <Link href={"/Products"}>
+        <Link href={"/products"}>
           <S.LinkBtn>목록으로</S.LinkBtn>
         </Link>
         <S.LinkBtn onClick={onClickPayment}>구매하기</S.LinkBtn>

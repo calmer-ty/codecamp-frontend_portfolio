@@ -28,6 +28,7 @@ export const useProduct = (args?: IUseProductArgs) => {
   const [deleteProduct] = useDeleteProduct();
 
   const onClickCreate = async (data: IFormData): Promise<void> => {
+    console.log(data);
     if (typeof args === "undefined") return;
     try {
       const result = await createProduct({
@@ -37,6 +38,7 @@ export const useProduct = (args?: IUseProductArgs) => {
             remarks: data.remarks,
             contents: data.contents,
             price: data.price,
+            tags: data.tags,
             useditemAddress: {
               lat: args.latlng.Ma,
               lng: args.latlng.La,
@@ -52,7 +54,7 @@ export const useProduct = (args?: IUseProductArgs) => {
           },
         ],
       });
-      void router.push(`/Products/${result.data?.createUseditem._id}`);
+      void router.push(`/products/${result.data?.createUseditem._id}`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
@@ -91,8 +93,7 @@ export const useProduct = (args?: IUseProductArgs) => {
           },
         ],
       });
-      console.log("일단 수정 성공");
-      void router.push(`/Products/${result.data?.updateUseditem._id}`);
+      void router.push(`/products/${result.data?.updateUseditem._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -109,7 +110,7 @@ export const useProduct = (args?: IUseProductArgs) => {
         ],
       });
       Modal.error({ content: "게시물이 삭제되었습니다." });
-      void router.push("/Products");
+      void router.push("/products");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

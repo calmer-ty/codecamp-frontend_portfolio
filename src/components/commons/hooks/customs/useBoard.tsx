@@ -1,19 +1,24 @@
 import { useRouter } from "next/router";
-
-// Custom Hooks
+// Hooks
 import { FETCH_BOARD, useFetchBoard } from "../../../commons/hooks/queries/useFetchBoard";
 import { FETCH_BOARDS } from "../../../commons/hooks/queries/useFetchBoards";
 import { useCreateBoard } from "../mutations/useCreateBoard";
 import { useUpdateBoard } from "../mutations/useUpdateBoard";
 import { useDeleteBoard } from "../mutations/useDeleteBoard";
 import { useIdCheck } from "./useIdCheck";
-
+// Component
+import { Modal } from "antd";
+// Type
 import type { IUpdateBoardInput } from "../../../../commons/types/generated/types";
 import type { IFormData } from "../../../units/board/write/BoardWrite.types";
 
-import { Modal } from "antd";
+interface IUseBoardArgs {
+  fileUrls?: string[];
+  address: string;
+  zipcode: string;
+}
 
-export const useBoard = (fileUrls?: string[], zipcode?: string, address?: string) => {
+export const useBoard = (args: IUseBoardArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("boardId");
 
@@ -38,11 +43,11 @@ export const useBoard = (fileUrls?: string[], zipcode?: string, address?: string
             contents: data.contents,
             youtubeUrl: data.youtubeUrl,
             boardAddress: {
-              zipcode,
-              address,
+              zipcode: args.zipcode,
+              address: args.address,
               addressDetail: data.addressDetail,
             },
-            images: fileUrls,
+            images: args.fileUrls,
           },
         },
         // refetchQueries: [
@@ -67,7 +72,7 @@ export const useBoard = (fileUrls?: string[], zipcode?: string, address?: string
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
-    const currentFiles = JSON.stringify(fileUrls);
+    const currentFiles = JSON.stringify(args.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
@@ -78,11 +83,11 @@ export const useBoard = (fileUrls?: string[], zipcode?: string, address?: string
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
     if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
       updateBoardInput.boardAddress = {};
-      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
-      if (data.address !== "") updateBoardInput.boardAddress.address = address;
+      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = args.zipcode;
+      if (data.address !== "") updateBoardInput.boardAddress.address = args.address;
       if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
-    if (isChangedFiles) updateBoardInput.images = fileUrls;
+    if (isChangedFiles) updateBoardInput.images = args.fileUrls;
 
     if (defaultData?.fetchBoard.contents === data.contents) {
       Modal.error({ content: "내용이 수정되지 않았습니다." });

@@ -7,6 +7,7 @@ interface IInputProps {
   value?: string | number;
   register?: UseFormRegisterReturn;
   readOnly?: boolean;
+  onChange?: any;
 }
 
 const inputStyle = {
@@ -23,6 +24,7 @@ export default function Input01(props: IInputProps): JSX.Element {
       value={props.value}
       defaultValue={props.defaultValue}
       readOnly={props.readOnly}
+      onChange={props.onChange}
       {...props.register}
     />
   );
