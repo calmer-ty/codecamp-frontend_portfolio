@@ -13,11 +13,10 @@ import { v4 as uuidv4 } from "uuid";
 // Style
 import * as S from "./ProductListBody.styles";
 // Type
-import type { IProductListProps } from "../ProductList.types";
 
 const SECRET_STRING = "!@#$";
 
-export default function ProductListBody(props: IProductListProps) {
+export default function ProductListBody() {
   const { data, refetch, onLoadMore } = useScrollProductList();
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,
@@ -32,16 +31,13 @@ export default function ProductListBody(props: IProductListProps) {
             <S.List key={el._id}>
               <Link href={`/products/${el._id}`}>
                 <a>
-                  <S.ItemImg
-                    onClick={props.onClickTodayView(el)}
-                    src={`http://storage.googleapis.com/${el.images?.[0]}`}
-                  />
+                  <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
                 </a>
               </Link>
               <S.ItemInfo>
                 <S.InfoTop>
                   <Link href={`/products/${el._id}`}>
-                    <S.ItemTitle onClick={props.onClickTodayView(el)}>
+                    <S.ItemTitle>
                       {el.name
                         .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
                         .split(SECRET_STRING)

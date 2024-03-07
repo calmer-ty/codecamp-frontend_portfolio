@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
   position: relative;
 `;
-export const Container = styled.article`
+export const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,14 +22,23 @@ export const TodayView = styled.article`
   justify-content: center;
   row-gap: 20px;
   position: fixed;
-  top: 700px;
+  top: 500px;
   right: 0;
   width: 196px;
   height: 506px;
   background-color: #ccc;
 `;
+// View Item
 export const ViewItem = styled.div`
   width: 156px;
   height: 200px;
-  background-color: blue;
+  background-color: #aaa;
+`;
+export const Picked = styled.div``;
+export const ItemImg = styled.img`
+  width: 60px;
+  height: 60px;
+`;
+export const ItemName = styled.p`
+  font-size: 12px;
 `;

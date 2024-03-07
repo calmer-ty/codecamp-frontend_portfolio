@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Picked01 } from "../../../../commons/element/picked/column";
 
 export const Header = styled.section`
   display: flex;
@@ -59,9 +60,7 @@ export const ItemPrice = styled.span`
   font-size: 18px;
   font-weight: bold;
 `;
-export const Like = styled.div`
-  display: flex;
-  flex-direction: column;
+export const Picked = styled.div`
   position: absolute;
   right: 20px;
   bottom: 20px;

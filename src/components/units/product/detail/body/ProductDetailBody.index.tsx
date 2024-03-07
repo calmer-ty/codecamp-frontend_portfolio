@@ -1,25 +1,50 @@
 import Link from "next/link";
-import * as S from "./ProductDetailBody.styles";
 import Dompurufy from "dompurify";
-
-import type { IProductDetailBodyProps } from "../ProductDetail.types";
+import { useEffect } from "react";
+// Hooks
 import useMapView from "../../../../commons/hooks/customs/useMapView";
 import { useProduct } from "../../../../commons/hooks/customs/useProduct";
 import { useFetchProduct } from "../../../../commons/hooks/queries/useFetchProduct";
 import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
+// Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import HeartIcon02 from "../../../../commons/icon/heart/02";
+// Style
+import * as S from "./ProductDetailBody.styles";
+// Type
+import type { IProductDetailBodyProps } from "../ProductDetail.types";
+import type { IUseditem } from "../../../../../commons/types/generated/types";
 
 declare const window: typeof globalThis & {
   IMP: any;
 };
+const TODAY_VIEW_PRODUCT = 2;
 
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
-  useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
   const { onClickDelete } = useProduct();
+  useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
 
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
+
+  // 해당 페이지 정보 로컬 스토리지 저장
+  useEffect(() => {
+    if (data === undefined) return;
+    const todayView = JSON.parse(localStorage.getItem("todayView") ?? "[]");
+    // 2. 이미 담겼는지 확인
+    const temp = todayView.filter((el: IUseditem) => el?._id === data?.fetchUseditem._id);
+    if (temp.length >= 1) {
+      return;
+    }
+    // 3. 클릭한 상품 추가하기
+    todayView.unshift(data?.fetchUseditem);
+    // 로컬스토리지 push 조건
+    if (todayView.length > TODAY_VIEW_PRODUCT) {
+      todayView.pop();
+    }
+    // 4. 오늘 본 상품 변경
+    localStorage.setItem("todayView", JSON.stringify(todayView));
+  }, [data]);
 
   // 결제
   const onClickPayment = (): void => {
