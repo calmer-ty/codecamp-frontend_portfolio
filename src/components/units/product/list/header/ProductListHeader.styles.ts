@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Picked01 } from "../../../../commons/element/picked/column";
 
 export const Header = styled.section`
   display: flex;

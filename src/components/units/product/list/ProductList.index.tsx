@@ -35,9 +35,9 @@ export default function ProductList(): JSX.Element {
             </S.Picked>
             <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
             <S.ItemName>{el.name}</S.ItemName>
-            <S.ItemName>{el.remarks}</S.ItemName>
-            <S.ItemName>{el.price}</S.ItemName>
-            <S.ItemName># 태그란입니다</S.ItemName>
+            <S.ItemRemark>{el.remarks}</S.ItemRemark>
+            <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
+            <p># 태그란입니다</p>
           </S.ViewItem>
         ))}
       </S.TodayView>
