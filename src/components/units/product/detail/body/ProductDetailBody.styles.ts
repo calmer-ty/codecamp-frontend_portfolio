@@ -52,10 +52,7 @@ export const FlexColumn = styled.div`
   row-gap: 40px;
 `;
 export const Contents = styled.p``;
-export const Tags = styled.p`
-  display: flex;
-  column-gap: 10px;
-`;
+
 // BodyBottom
 export const BodyBottom = styled.section`
   padding: 80px 0;

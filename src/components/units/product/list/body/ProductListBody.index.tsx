@@ -8,13 +8,11 @@ import InfiniteScroll from "react-infinite-scroller";
 import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
 import UserIcon01 from "../../../../commons/icon/user/01";
 import HeartIcon01 from "../../../../commons/icon/heart/01";
-// Etc
-import { v4 as uuidv4 } from "uuid";
+import TagsView01 from "../../../../commons/tags/view/01";
 // Style
 import * as S from "./ProductListBody.styles";
-import TagsView01 from "../../../../commons/tags/view/01";
-// Type
-
+// Etc
+import { v4 as uuidv4 } from "uuid";
 const SECRET_STRING = "!@#$";
 
 export default function ProductListBody() {
@@ -55,7 +53,7 @@ export default function ProductListBody() {
                 <S.InfoBottom>
                   <S.FlexRow>
                     <UserIcon01 size={16} padding={4} />
-                    <div>{el.seller?.name ?? ""}</div>
+                    <div>{el.seller?.name}</div>
                   </S.FlexRow>
                   <S.FlexRow>
                     <HeartIcon01 size={20} />
