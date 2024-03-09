@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import type { InputRef } from "antd";
-import { Flex, Input, Tag, theme, Tooltip } from "antd";
+import { Input, Tag, theme, Tooltip } from "antd";
+import styled from "@emotion/styled";
 
 const tagInputStyle: React.CSSProperties = {
   width: 64,
@@ -10,17 +11,23 @@ const tagInputStyle: React.CSSProperties = {
   verticalAlign: "top",
 };
 
-export default function Tags01() {
+const Tags = styled.article`
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #767676;
+`;
+
+export default function TagsWrite01() {
   const { token } = theme.useToken();
-  const [tags, setTags] = useState<string[]>(["태그 입력란", "Tag 2", "Tag 3"]);
+  const [tags, setTags] = useState<string[]>(["Tag 1", "Tag 2", "Tag 3"]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [editInputIndex, setEditInputIndex] = useState(-1);
   const [editInputValue, setEditInputValue] = useState("");
   const inputRef = useRef<InputRef>(null);
   const editInputRef = useRef<InputRef>(null);
-
-  console.log(tags);
 
   useEffect(() => {
     if (inputVisible) {
@@ -73,12 +80,7 @@ export default function Tags01() {
   };
 
   return (
-    <Flex
-      gap="4px 0"
-      wrap="wrap"
-      style={{ border: "1px solid #767676", height: "52px", padding: "0 16px", alignItems: "center" }}
-      id={JSON.stringify(tags)}
-    >
+    <Tags>
       {tags.map<React.ReactNode>((tag, index) => {
         if (editInputIndex === index) {
           return (
@@ -98,7 +100,7 @@ export default function Tags01() {
         const tagElem = (
           <Tag
             key={tag}
-            closable={index !== 0}
+            closable={true}
             style={{ userSelect: "none" }}
             onClose={() => {
               handleClose(tag);
@@ -141,6 +143,6 @@ export default function Tags01() {
           New Tag
         </Tag>
       )}
-    </Flex>
+    </Tags>
   );
 }

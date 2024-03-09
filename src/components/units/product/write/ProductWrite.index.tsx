@@ -7,7 +7,7 @@ import Label01 from "../../../commons/element/labels/01";
 import Input01 from "../../../commons/element/inputs/01";
 import Error01 from "../../../commons/element/errors/01";
 import Button01 from "../../../commons/element/buttons/01";
-import Tags01 from "../../../commons/tags/01";
+import TagsWrite01 from "../../../commons/tags/write/01";
 // Custom Hooks
 import { useProduct } from "../../../commons/hooks/customs/useProduct";
 import useMapSelection from "../../../commons/hooks/customs/useMapSelect";
@@ -26,7 +26,6 @@ export default function ProductWriteUI(props: IProductWriteProps): JSX.Element {
   const { latlng, address } = useMapSelection();
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
-    console.log(value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     void trigger("contents");
   };
@@ -45,8 +44,15 @@ export default function ProductWriteUI(props: IProductWriteProps): JSX.Element {
     const images = props.data?.fetchUseditem.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
+  // Tags
+  const { props: tagsProps } = TagsWrite01();
+  const tags: string[] = [];
+  tagsProps.children[0].forEach((data: any) => {
+    tags.push(String(data.key));
+  });
   // 상품 뮤테이션 Hook
-  const { onClickCreate, onClickUpdate } = useProduct({ fileUrls, latlng });
+  const { onClickCreate, onClickUpdate } = useProduct({ fileUrls, latlng, tags });
+  // Tags
 
   return (
     <S.Wrapper>
@@ -94,7 +100,7 @@ export default function ProductWriteUI(props: IProductWriteProps): JSX.Element {
 
           <S.InputWrap>
             <Label01 text="태그입력" />
-            <Tags01 />
+            <TagsWrite01 />
             <Error01 text={formState.errors.tags?.message} />
           </S.InputWrap>
 

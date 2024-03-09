@@ -10,6 +10,7 @@ export const FETCH_USEDITEMS = gql`
       price
       createdAt
       images
+      tags
       pickedCount
       seller {
         name

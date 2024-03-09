@@ -14,6 +14,7 @@ import * as S from "./ProductDetailBody.styles";
 // Type
 import type { IProductDetailBodyProps } from "../ProductDetail.types";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
+import TagsView01 from "../../../../commons/tags/view/01";
 
 declare const window: typeof globalThis & {
   IMP: any;
@@ -106,11 +107,11 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
           {typeof window !== "undefined" && (
             <S.Contents
               dangerouslySetInnerHTML={{
-                __html: Dompurufy.sanitize(String(props.data?.fetchUseditem.contents)),
+                __html: Dompurufy.sanitize(props.data?.fetchUseditem.contents ?? ""),
               }}
             />
           )}
-          <p>#tags #tags #tags</p>
+          <TagsView01 tags={props.data?.fetchUseditem.tags} />
         </S.FlexColumn>
       </S.BodyTop>
 

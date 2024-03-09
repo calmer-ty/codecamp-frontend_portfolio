@@ -6,17 +6,18 @@ import { FETCH_USEDITEMS } from "../queries/useFetchProducts";
 import { useCreateProduct } from "../mutations/useCreateProduct";
 import { useUpdateProduct } from "../mutations/useUpdateProduct";
 import { useDeleteProduct } from "../mutations/useDeleteProduct";
-
+import { FETCH_USEDITEM } from "../queries/useFetchProduct";
+// Component
 import { Modal } from "antd";
 
 import type { IFormData } from "../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../commons/types/generated/types";
-import { FETCH_USEDITEM } from "../queries/useFetchProduct";
 
 interface IUseProductArgs {
   fileUrls?: string[];
   latlng?: any;
   address?: string;
+  tags?: string[];
 }
 
 export const useProduct = (args?: IUseProductArgs) => {
@@ -38,7 +39,7 @@ export const useProduct = (args?: IUseProductArgs) => {
             remarks: data.remarks,
             contents: data.contents,
             price: data.price,
-            tags: data.tags,
+            tags: args.tags,
             useditemAddress: {
               lat: args.latlng.Ma,
               lng: args.latlng.La,
@@ -62,9 +63,14 @@ export const useProduct = (args?: IUseProductArgs) => {
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
     if (typeof args === "undefined") return;
+    // files
     const currentFiles = JSON.stringify(args.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
+    // tags
+    const currentTags = JSON.stringify(args.tags);
+    const defaultTags = JSON.stringify(data.tags);
+    const isChangedTags = currentTags !== defaultTags;
 
     const { addressDetail, ...inputs } = data;
 
@@ -79,6 +85,7 @@ export const useProduct = (args?: IUseProductArgs) => {
       if (addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = addressDetail;
     }
     if (isChangedFiles) updateUseditemInput.images = args.fileUrls;
+    if (isChangedTags) updateUseditemInput.tags = args.tags;
 
     try {
       const result = await updateProduct({

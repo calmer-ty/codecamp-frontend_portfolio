@@ -12,6 +12,7 @@ export const FETCH_USEDITEM = gql`
       createdAt
       pickedCount
       images
+      tags
       useditemAddress {
         zipcode
         address

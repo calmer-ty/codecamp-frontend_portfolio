@@ -66,9 +66,13 @@ export const PriceText = styled.span`
   font-weight: bold;
 `;
 
-export const ListRemark = styled.span`
+export const ListRemark = styled.p`
   margin-bottom: 8px;
   color: #4f4f4f;
+`;
+export const ListTags = styled.p`
+  display: flex;
+  column-gap: 10px;
 `;
 
 export const InfoBottom = styled.div`

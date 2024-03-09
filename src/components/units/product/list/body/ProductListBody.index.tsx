@@ -12,6 +12,7 @@ import HeartIcon01 from "../../../../commons/icon/heart/01";
 import { v4 as uuidv4 } from "uuid";
 // Style
 import * as S from "./ProductListBody.styles";
+import TagsView01 from "../../../../commons/tags/view/01";
 // Type
 
 const SECRET_STRING = "!@#$";
@@ -49,7 +50,7 @@ export default function ProductListBody() {
                     </S.ItemTitle>
                   </Link>
                   <S.ListRemark>{el.remarks}</S.ListRemark>
-                  <div>#태그란 입니다: {el.tags}</div>
+                  <TagsView01 tags={el.tags} />
                 </S.InfoTop>
                 <S.InfoBottom>
                   <S.FlexRow>

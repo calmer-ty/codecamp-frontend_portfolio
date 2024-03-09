@@ -6,6 +6,7 @@ import ProductListBody from "./body/ProductListBody.index";
 import ProductListFooter from "./footer/ProductListFooter.index";
 // Component
 import HeartIcon01 from "../../../commons/icon/heart/01";
+import TagsView01 from "../../../commons/tags/view/01";
 // Type
 import type { IUseditem } from "../../../../commons/types/generated/types";
 
@@ -15,8 +16,6 @@ export default function ProductList(): JSX.Element {
     const aaa: IUseditem[] = JSON.parse(localStorage.getItem("todayView") ?? "[]");
     setProduct(aaa);
   }, []);
-
-  console.log(product);
 
   return (
     <S.Wrapper>
@@ -37,7 +36,8 @@ export default function ProductList(): JSX.Element {
             <S.ItemName>{el.name}</S.ItemName>
             <S.ItemRemark>{el.remarks}</S.ItemRemark>
             <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
-            <p># 태그란입니다</p>
+            {/* <S.ItemTags>{el.tags?.map((tags) => <span key={tags}>#{tags}</span>)}</S.ItemTags> */}
+            <TagsView01 tags={el.tags} />
           </S.ViewItem>
         ))}
       </S.TodayView>
