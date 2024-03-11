@@ -9,6 +9,7 @@ import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
 import UserIcon01 from "../../../../commons/icon/user/01";
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import TagsView01 from "../../../../commons/tags/view/01";
+import DataOutputString01 from "../../../../commons/data/output/string/01";
 // Style
 import * as S from "./ProductListBody.styles";
 // Etc
@@ -35,6 +36,7 @@ export default function ProductListBody() {
               </Link>
               <S.ItemInfo>
                 <S.InfoTop>
+                  {/* 링크되는 제목 */}
                   <Link href={`/products/${el._id}`}>
                     <S.ItemTitle>
                       {el.name
@@ -47,22 +49,22 @@ export default function ProductListBody() {
                         ))}
                     </S.ItemTitle>
                   </Link>
-                  <S.ListRemark>{el.remarks}</S.ListRemark>
+                  <DataOutputString01 text={el.remarks} />
                   <TagsView01 tags={el.tags} />
                 </S.InfoTop>
                 <S.InfoBottom>
                   <S.FlexRow>
                     <UserIcon01 size={16} padding={4} />
-                    <div>{el.seller?.name}</div>
+                    <span>{el.seller?.name}</span>
                   </S.FlexRow>
                   <S.FlexRow>
                     <HeartIcon01 size={20} />
-                    <div>{el.pickedCount}</div>
+                    <span>{el.pickedCount}</span>
                   </S.FlexRow>
                 </S.InfoBottom>
               </S.ItemInfo>
               <S.ItemPrice>
-                <S.TagIcon style={{ fontSize: "40px" }} />
+                <S.TagIcon />
                 <S.PriceText>{el.price?.toLocaleString()}원</S.PriceText>
               </S.ItemPrice>
             </S.List>

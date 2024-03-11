@@ -2,31 +2,31 @@ import Link from "next/link";
 import Dompurufy from "dompurify";
 import { useEffect } from "react";
 // Hooks
-import useMapView from "../../../../commons/hooks/customs/useMapView";
+import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
 import { useProduct } from "../../../../commons/hooks/customs/useProduct";
 import { useFetchProduct } from "../../../../commons/hooks/queries/useFetchProduct";
-import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
+import { useProductPicked } from "../../../../commons/hooks/customs/useProductPicked";
+import useMapView from "../../../../commons/hooks/customs/useMapView";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import HeartIcon02 from "../../../../commons/icon/heart/02";
+import TagsView01 from "../../../../commons/tags/view/01";
 // Style
 import * as S from "./ProductDetailBody.styles";
 // Type
 import type { IProductDetailBodyProps } from "../ProductDetail.types";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
-import TagsView01 from "../../../../commons/tags/view/01";
 
-declare const window: typeof globalThis & {
-  IMP: any;
-};
 const TODAY_VIEW_PRODUCT = 2;
 
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
-  const { onClickDelete } = useProduct();
-  useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
-
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
+
+  const { onClickDelete, onClickPayment } = useProduct();
+  const { onClickPick, pick } = useProductPicked();
+
+  useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
 
   // 해당 페이지 정보 로컬 스토리지 저장
   useEffect(() => {
@@ -47,55 +47,26 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
     localStorage.setItem("todayView", JSON.stringify(todayView));
   }, [data]);
 
-  // 결제
-  const onClickPayment = (): void => {
-    const IMP = window.IMP;
-    IMP.init("imp80516171");
-
-    IMP.request_pay(
-      {
-        // param
-        pg: "kakaopay",
-        pay_method: "card",
-        //   merchant_uid: "ORD20180131-0000011",
-        name: data?.fetchUseditem.name,
-        amount: data?.fetchUseditem.price,
-        // buyer_email: "gildong@gmail.com",
-        // buyer_name: "홍길동",
-        // buyer_tel: "010-4242-4242",
-        // buyer_addr: "서울특별시 강남구 신사동",
-        // buyer_postcode: "01181",
-        m_redirect_url: "http://localhost:3000/section28/28-01-payment", // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
-      },
-      (rsp: any) => {
-        // callback
-        if (rsp.success === true) {
-          // 결제 성공 시 로직,
-          console.log(rsp);
-
-          //   백엔드에 결제 관련 데이터 넘겨주기 => 즉, 뮤테이션 실행하기
-          //   createPointTransactionOfLoading
-        } else {
-          // 결제 실패 시 로직,
-        }
-      }
-    );
-  };
   return (
     <S.Body>
       <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
       <S.BodyTop>
         <S.BodyHeader>
           <S.TitleText>
-            <S.Remark>{props.data?.fetchUseditem?.remarks}</S.Remark>
-            <S.Name>{props.data?.fetchUseditem?.name}</S.Name>
+            <S.Remark>{props.data?.fetchUseditem.remarks}</S.Remark>
+            <S.Name>{props.data?.fetchUseditem.name}</S.Name>
             <S.Price>{props.data?.fetchUseditem.price}원</S.Price>
           </S.TitleText>
           <S.Pick>
-            <HeartIcon01 size={20} />
-            <HeartIcon02 size={20} />
-
-            <S.PickScore>{props.data?.fetchUseditem.pickedCount}</S.PickScore>
+            <button onClick={onClickPick}>
+              {pick === 1 && <HeartIcon01 size={20} />}
+              {pick === 0 && <HeartIcon02 size={20} />}
+            </button>
+            <S.PickScore>
+              {typeof props.data?.fetchUseditem.pickedCount === "number"
+                ? props.data?.fetchUseditem.pickedCount + pick
+                : props.data?.fetchUseditem.pickedCount}
+            </S.PickScore>
           </S.Pick>
         </S.BodyHeader>
         <S.ImgWrap>

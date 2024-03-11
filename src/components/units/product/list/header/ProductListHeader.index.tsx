@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useFetchProductsBest } from "../../../../commons/hooks/queries/useFetchProductsBest";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
+import DataOutputString01 from "../../../../commons/data/output/string/01";
 // Style
 import * as S from "./ProductListHeader.styles";
 // Type
@@ -23,7 +24,7 @@ export default function ProductListHeader(): JSX.Element {
             <Link href={`/products/${el._id}`}>
               <S.ItemTitle>{el.name}</S.ItemTitle>
             </Link>
-            <S.ItemRemark>{el.remarks}</S.ItemRemark>
+            <DataOutputString01 text={el.remarks} />
             <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
             <S.Picked>
               <HeartIcon01 size={20} />

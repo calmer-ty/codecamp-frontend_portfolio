@@ -18,7 +18,6 @@ export const ListWrap = styled.main`
 export const List = styled.article`
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
   width: 282px;
   height: 390px;

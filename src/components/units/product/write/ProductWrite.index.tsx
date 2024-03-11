@@ -44,6 +44,7 @@ export default function ProductWriteUI(props: IProductWriteProps): JSX.Element {
     const images = props.data?.fetchUseditem.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
+
   // Tags
   const { props: tagsProps } = TagsWrite01();
   const tags: string[] = [];
@@ -52,7 +53,6 @@ export default function ProductWriteUI(props: IProductWriteProps): JSX.Element {
   });
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({ fileUrls, latlng, tags });
-  // Tags
 
   return (
     <S.Wrapper>

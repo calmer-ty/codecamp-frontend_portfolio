@@ -11,7 +11,7 @@ export default function ProductDetailHeader(props: IProductDetailHeaderProps) {
       <S.HeaderItem1>
         <Avatar size={60} icon={<UserOutlined />} />
         <S.FlexColumn>
-          <S.Seller>{props.data?.fetchUseditem?.name}</S.Seller>
+          <S.Seller>{props.data?.fetchUseditem?.seller?.name}</S.Seller>
           <S.CreatedAt>Date: {getDate(props.data?.fetchUseditem?.createdAt)}</S.CreatedAt>
         </S.FlexColumn>
       </S.HeaderItem1>
