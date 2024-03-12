@@ -1,19 +1,4 @@
-import type {
-  FieldErrors,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from "react-hook-form";
-
-export interface IFormInputs {
+export interface IFormData {
   email: string;
   password: string;
-}
-
-export interface ILoginUIProps {
-  onClickLogin: () => Promise<void>;
-
-  // Form
-  register: UseFormRegister<IFormInputs>;
-  handleSubmit: UseFormHandleSubmit<IFormInputs>;
-  errors: FieldErrors<IFormInputs>;
 }

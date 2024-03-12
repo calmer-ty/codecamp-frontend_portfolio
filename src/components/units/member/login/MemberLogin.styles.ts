@@ -16,27 +16,19 @@ export const Logo = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  row-gap: 20px;
+`;
+export const InputWrap = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 export const LoginInput = styled.input`
   height: 64px;
   border-radius: 16px;
   padding-left: 16px;
 `;
-export const Error = styled.div`
-  height: 20px;
-  margin-left: 16px;
-  margin-bottom: 20px;
-  color: #ff0000;
-`;
 export const LoginState = styled.div`
   display: flex;
   column-gap: 5px;
   align-items: center;
-`;
-export const SubmitBtn = styled.button`
-  height: 64px;
-  border-radius: 16px;
-  background-color: #4f4f4f;
-  color: #ffffff;
 `;

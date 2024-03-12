@@ -29,6 +29,7 @@ export default function ProductWriteUI(props: IProductWriteProps): JSX.Element {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     void trigger("contents");
   };
+
   // 파일 전송 기능
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
   // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선

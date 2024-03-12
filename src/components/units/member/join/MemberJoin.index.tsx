@@ -4,7 +4,7 @@ import type { IFormData } from "./MemberJoin.types";
 
 // Validation
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaMemberLogin } from "../../../../commons/libraries/validation";
+import { schemaMemberJoin } from "../../../../commons/libraries/validation";
 
 // Component
 import Label01 from "../../../commons/element/labels/01";
@@ -13,10 +13,11 @@ import Input02 from "../../../commons/element/inputs/02";
 
 // Custom Hooks
 import { useUser } from "../../../commons/hooks/customs/useUser";
+import Button03 from "../../../commons/element/buttons/03";
 
 export default function MemberJoin(): JSX.Element {
   const { register, handleSubmit, formState } = useForm<IFormData>({
-    resolver: yupResolver(schemaMemberLogin),
+    resolver: yupResolver(schemaMemberJoin),
     mode: "onChange",
   });
 
@@ -47,7 +48,7 @@ export default function MemberJoin(): JSX.Element {
             <Input02 type="password" register={register("passwordCheck")} />
             <Error01 text={formState.errors.passwordCheck?.message} />
           </S.InputWrap>
-          <S.SubmitBtn>회원가입하기</S.SubmitBtn>
+          <Button03 text="회원가입하기" />
         </S.Form>
       </S.Container>
     </S.Wrapper>
