@@ -1,19 +1,18 @@
-import * as S from "./MemberJoin.styles";
 import { useForm } from "react-hook-form";
-import type { IFormData } from "./MemberJoin.types";
-
 // Validation
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaMemberJoin } from "../../../../commons/libraries/validation";
-
 // Component
 import Label01 from "../../../commons/element/labels/01";
 import Error01 from "../../../commons/element/errors/01";
 import Input02 from "../../../commons/element/inputs/02";
-
 // Custom Hooks
 import { useUser } from "../../../commons/hooks/customs/useUser";
 import Button03 from "../../../commons/element/buttons/03";
+// Style
+import * as S from "./MemberJoin.styles";
+// Type
+import type { IFormData } from "./MemberJoin.types";
 
 export default function MemberJoin(): JSX.Element {
   const { register, handleSubmit, formState } = useForm<IFormData>({

@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
+// Validation
 import { schemaMemberLogin } from "../../../../commons/libraries/validation";
+import { yupResolver } from "@hookform/resolvers/yup";
 // Hooks
 import { useMember } from "../../../commons/hooks/customs/useMember";
 // Component
@@ -11,7 +13,6 @@ import Button03 from "../../../commons/element/buttons/03";
 import * as S from "./MemberLogin.styles";
 // Type
 import type { IFormData } from "./MemberLogin.types";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function MemberLogin(): JSX.Element {
   // FROM
@@ -19,12 +20,13 @@ export default function MemberLogin(): JSX.Element {
     resolver: yupResolver(schemaMemberLogin),
   });
 
-  const { onClickLogin } = useMember();
+  const { onClickLoginExample } = useMember();
   return (
     <S.Wrapper>
       <S.Container>
         <S.Logo>Logo</S.Logo>
-        <S.Form onSubmit={handleSubmit(onClickLogin)}>
+        {/* <S.Form onSubmit={handleSubmit(onClickLogin)}> */}
+        <S.Form onSubmit={handleSubmit(onClickLoginExample)}>
           <S.InputWrap>
             <Label01 text="이메일" />
             <Input02 register={register("email")} />
