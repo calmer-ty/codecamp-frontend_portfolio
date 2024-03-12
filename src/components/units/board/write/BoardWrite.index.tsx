@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaBoardWrite } from "../../../../commons/libraries/validation";
 // Hooks
-import { useBoard } from "../../../commons/hooks/customs/useBoard";
+import { useBoard } from "../../../commons/hooks/customs/board/useBoard";
 import { useAddressSearch } from "../../../commons/hooks/customs/useAddressSearch";
 // Component
 import Button01 from "../../../commons/element/buttons/01";

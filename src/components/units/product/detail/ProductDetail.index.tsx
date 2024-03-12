@@ -1,8 +1,8 @@
 import * as S from "./ProductDetail.styles";
 // Custom Hooks
 import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
-import { useFetchProduct } from "../../../commons/hooks/queries/useFetchProduct";
-import { useProduct } from "../../../commons/hooks/customs/useProduct";
+import { useFetchProduct } from "../../../commons/hooks/queries/product/useFetchProduct";
+import { useProduct } from "../../../commons/hooks/customs/product/useProduct";
 // UI
 import ProductDetailBody from "./body/ProductDetailBody.index";
 import ProductDetailHeader from "./header/ProductDetailHeader.index";

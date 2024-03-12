@@ -2,7 +2,7 @@ import * as S from "./QuestionList.styles";
 
 // Custom Hooks
 import { useToggle } from "../../../hooks/customs/useToggle";
-import { useProductQuestion } from "../../../hooks/customs/useProductQuestion";
+import { useProductQuestion } from "../../../hooks/customs/product/useProductQuestion";
 
 import QuestionWrite from "../write/QuestionWrite.index";
 import { Avatar } from "antd";

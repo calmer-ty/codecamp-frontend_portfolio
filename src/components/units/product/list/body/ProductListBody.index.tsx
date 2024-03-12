@@ -1,6 +1,6 @@
 import Link from "next/link";
 // Hooks
-import { useScrollProductList } from "../../../../commons/hooks/customs/useScrollProductList";
+import { useScrollProductList } from "../../../../commons/hooks/customs/product/useScrollProductList";
 import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
 // Scroll
 import InfiniteScroll from "react-infinite-scroller";

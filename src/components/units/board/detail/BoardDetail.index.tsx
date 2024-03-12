@@ -1,7 +1,7 @@
 import * as S from "./BoardDetail.styles";
 
 // Custon Hooks
-import { useFetchBoard } from "../../../commons/hooks/queries/useFetchBoard";
+import { useFetchBoard } from "../../../commons/hooks/queries/board/useFetchBoard";
 import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
 
 import BoardDetailHeader from "./header/BoardDetailHeader.index";

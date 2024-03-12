@@ -4,7 +4,7 @@ import * as S from "./QuestionWrite.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductQuestion } from "../../../../../commons/libraries/validation";
 // Custom Hooks
-import { useProductQuestion } from "../../../hooks/customs/useProductQuestion";
+import { useProductQuestion } from "../../../hooks/customs/product/useProductQuestion";
 // Component
 import Textarea01 from "../../../element/textarea/01";
 import TitleComment from "../../../element/title/comment";

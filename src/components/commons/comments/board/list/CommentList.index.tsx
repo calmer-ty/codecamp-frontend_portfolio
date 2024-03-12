@@ -6,7 +6,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { getDate } from "../../../../../commons/libraries/utils";
 
 // Custom Hooks
-import { useBoardComment } from "../../../hooks/customs/useBoardComment";
+import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useToggle } from "../../../hooks/customs/useToggle";
 
 import type { IBoardComment } from "../../../../../commons/types/generated/types";

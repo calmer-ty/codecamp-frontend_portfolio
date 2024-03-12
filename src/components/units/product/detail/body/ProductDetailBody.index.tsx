@@ -3,9 +3,9 @@ import Dompurufy from "dompurify";
 import { useEffect } from "react";
 // Hooks
 import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
-import { useProduct } from "../../../../commons/hooks/customs/useProduct";
-import { useFetchProduct } from "../../../../commons/hooks/queries/useFetchProduct";
-import { useProductPicked } from "../../../../commons/hooks/customs/useProductPicked";
+import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
+import { useFetchProduct } from "../../../../commons/hooks/queries/product/useFetchProduct";
+import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
 import useMapView from "../../../../commons/hooks/customs/useMapView";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";

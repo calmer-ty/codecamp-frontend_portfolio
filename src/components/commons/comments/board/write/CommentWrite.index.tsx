@@ -5,7 +5,7 @@ import * as S from "./CommentWrite.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaBoardComment } from "../../../../../commons/libraries/validation";
 // Custom Hooks
-import { useBoardComment } from "../../../hooks/customs/useBoardComment";
+import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 // Component
 import Textarea01 from "../../../element/textarea/01";
 import TitleComment from "../../../element/title/comment";

@@ -1,8 +1,8 @@
 import * as S from "./BoardDetailFooter.styles";
 import Link from "next/link";
 
-import { useBoard } from "../../../../commons/hooks/customs/useBoard";
-import { useScrollComment } from "../../../../commons/hooks/customs/useScrollComment";
+import { useBoard } from "../../../../commons/hooks/customs/board/useBoard";
+import { useScrollComment } from "../../../../commons/hooks/customs/board/useScrollComment";
 
 import InfiniteScroll from "react-infinite-scroller";
 

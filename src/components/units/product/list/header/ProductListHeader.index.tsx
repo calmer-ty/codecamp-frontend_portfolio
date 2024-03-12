@@ -1,6 +1,6 @@
 import Link from "next/link";
 // Hooks
-import { useFetchProductsBest } from "../../../../commons/hooks/queries/useFetchProductsBest";
+import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import DataOutputString01 from "../../../../commons/data/output/string/01";

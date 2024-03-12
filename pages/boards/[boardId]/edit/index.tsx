@@ -1,5 +1,5 @@
 import BoardWrite from "../../../../src/components/units/board/write/BoardWrite.index";
-import { useFetchBoard } from "../../../../src/components/commons/hooks/queries/useFetchBoard";
+import { useFetchBoard } from "../../../../src/components/commons/hooks/queries/board/useFetchBoard";
 import { useIdCheck } from "../../../../src/components/commons/hooks/customs/useIdCheck";
 
 export default function BoardsEditPage(): JSX.Element {

@@ -1,7 +1,7 @@
 import * as S from "./ProductDetailFooter.styles";
 
 import InfiniteScroll from "react-infinite-scroller";
-import { useScrollQuestion } from "../../../../commons/hooks/customs/useScrollQuestion";
+import { useScrollQuestion } from "../../../../commons/hooks/customs/product/useScrollQuestion";
 
 import QuestionWrite from "../../../../commons/comments/product/write/QuestionWrite.index";
 import QuestionList from "../../../../commons/comments/product/list/QuestionList.index";

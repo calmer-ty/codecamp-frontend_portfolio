@@ -3,8 +3,8 @@ import * as S from "./BoardList.styles";
 // Custom Hooks
 import { useSearchbar } from "../../../commons/hooks/customs/useSearch";
 import { usePagination } from "../../../commons/hooks/customs/usePagination";
-import { useFetchBoards } from "../../../commons/hooks/queries/useFetchBoards";
-import { useFetchBoardsCount } from "../../../commons/hooks/queries/useFetchBoardCount";
+import { useFetchBoards } from "../../../commons/hooks/queries/board/useFetchBoards";
+import { useFetchBoardsCount } from "../../../commons/hooks/queries/board/useFetchBoardCount";
 
 import BoardListHeader from "./header/BoardListHeader.index";
 import BoardListBody from "./body/BoardListBody.index";

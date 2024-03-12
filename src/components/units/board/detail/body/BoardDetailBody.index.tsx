@@ -1,6 +1,6 @@
 import * as S from "./BoardDetailBody.styles";
 
-import { useBoardRate } from "../../../../commons/hooks/customs/useBoardRate";
+import { useBoardRate } from "../../../../commons/hooks/customs/board/useBoardRate";
 import type { IBoardDetailProps } from "../BoardDetail.types";
 
 export default function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
