@@ -17,9 +17,6 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
   useEffect(() => {
-    // void getAccessToken().then((newAccessToken) => {
-    //   setAccessToken(newAccessToken ?? "");
-    // });
     void restoreAccessToken.toPromise().then((newAccessToken) => {
       setAccessToken(newAccessToken ?? "");
       console.log(restoreAccessToken);

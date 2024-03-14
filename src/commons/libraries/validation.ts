@@ -42,11 +42,11 @@ export const schemaProductQuestion = yup.object({
   contents: yup.string().required("내용 입력은 필수입니다."),
 });
 
-export const schemaMemberLogin = yup.object({
+export const schemaUserLogin = yup.object({
   email: yup.string().required("이메일 입력은 필수입니다.").email("이메일 형식에 맞지 않습니다."),
   password: passwordSchema,
 });
-export const schemaMemberJoin = yup.object({
+export const schemaUserJoin = yup.object({
   email: yup.string().required("이메일 입력은 필수입니다.").email("이메일 형식에 맞지 않습니다."),
   name: yup.string().required("이름 입력은 필수입니다."),
   password: passwordSchema,

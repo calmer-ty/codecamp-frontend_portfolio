@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 // Validation
-import { schemaMemberLogin } from "../../../../commons/libraries/validation";
+import { schemaUserLogin } from "../../../../commons/libraries/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 // Hooks
 import { useUser } from "../../../commons/hooks/customs/useUser";
@@ -10,17 +10,17 @@ import Error01 from "../../../commons/element/errors/01";
 import Input02 from "../../../commons/element/inputs/02";
 import Button03 from "../../../commons/element/buttons/03";
 // Style
-import * as S from "./MemberLogin.styles";
+import * as S from "./UserLogin.styles";
 // Type
-import type { IFormData } from "./MemberLogin.types";
+import type { IFormDataUserLogin } from "./UserLogin.types";
 
-export default function MemberLogin(): JSX.Element {
+export default function UserLogin(): JSX.Element {
   // FROM
-  const { register, handleSubmit, formState } = useForm<IFormData>({
-    resolver: yupResolver(schemaMemberLogin),
+  const { register, handleSubmit, formState } = useForm<IFormDataUserLogin>({
+    resolver: yupResolver(schemaUserLogin),
   });
 
-  const { onClickLoginExample, onClickLogin } = useUser();
+  const { onClickLogin } = useUser();
   return (
     <S.Wrapper>
       <S.Container>

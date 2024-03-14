@@ -1,4 +1,4 @@
-export interface IFormData {
+export interface IFormDataUserJoin {
   email: string;
   name: string;
   password: string;

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 // Validation
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaMemberJoin } from "../../../../commons/libraries/validation";
+import { schemaUserJoin } from "../../../../commons/libraries/validation";
 // Component
 import Label01 from "../../../commons/element/labels/01";
 import Error01 from "../../../commons/element/errors/01";
@@ -10,13 +10,13 @@ import Input02 from "../../../commons/element/inputs/02";
 import { useUser } from "../../../commons/hooks/customs/useUser";
 import Button03 from "../../../commons/element/buttons/03";
 // Style
-import * as S from "./MemberJoin.styles";
+import * as S from "./UserJoin.styles";
 // Type
-import type { IFormData } from "./MemberJoin.types";
+import type { IFormDataUserJoin } from "./UserJoin.types";
 
-export default function MemberJoin(): JSX.Element {
-  const { register, handleSubmit, formState } = useForm<IFormData>({
-    resolver: yupResolver(schemaMemberJoin),
+export default function UserJoin(): JSX.Element {
+  const { register, handleSubmit, formState } = useForm<IFormDataUserJoin>({
+    resolver: yupResolver(schemaUserJoin),
     mode: "onChange",
   });
 
