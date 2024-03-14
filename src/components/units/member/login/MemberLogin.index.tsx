@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { schemaMemberLogin } from "../../../../commons/libraries/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 // Hooks
-import { useMember } from "../../../commons/hooks/customs/useMember";
+import { useUser } from "../../../commons/hooks/customs/useUser";
 // Component
 import Label01 from "../../../commons/element/labels/01";
 import Error01 from "../../../commons/element/errors/01";
@@ -20,13 +20,13 @@ export default function MemberLogin(): JSX.Element {
     resolver: yupResolver(schemaMemberLogin),
   });
 
-  const { onClickLoginExample } = useMember();
+  const { onClickLoginExample, onClickLogin } = useUser();
   return (
     <S.Wrapper>
       <S.Container>
         <S.Logo>Logo</S.Logo>
-        {/* <S.Form onSubmit={handleSubmit(onClickLogin)}> */}
-        <S.Form onSubmit={handleSubmit(onClickLoginExample)}>
+        <S.Form onSubmit={handleSubmit(onClickLogin)}>
+          {/* <S.Form onSubmit={handleSubmit(onClickLoginExample)}> */}
           <S.InputWrap>
             <Label01 text="이메일" />
             <Input02 register={register("email")} />

@@ -2,8 +2,8 @@ import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache, fromPromise } 
 import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../commons/stores";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { accessTokenState, restoreAccessTokenLoadable } from "../../../commons/stores";
 import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 
 interface IApolloSettingProps {
@@ -14,12 +14,15 @@ const GLOBAL_STATE = new InMemoryCache();
 
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  // const refreshToken = useRecoilValueLoadable();
+  const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
   useEffect(() => {
-    // const result = localStorage.getItem("accessToken");
-    void getAccessToken().then((newAccessToken) => {
+    // void getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken ?? "");
+    // });
+    void restoreAccessToken.toPromise().then((newAccessToken) => {
       setAccessToken(newAccessToken ?? "");
+      console.log(restoreAccessToken);
     });
   }, []);
 
