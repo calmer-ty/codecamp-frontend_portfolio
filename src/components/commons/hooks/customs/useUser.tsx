@@ -15,6 +15,7 @@ import type { IFormDataUserLogin } from "../../../units/user/login/UserLogin.typ
 export const useUser = () => {
   const router = useRouter();
   const { visitedPage } = useMoveToPage();
+  console.log(visitedPage);
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [createUser] = useCreateUser();
@@ -34,7 +35,7 @@ export const useUser = () => {
       Modal.success({
         content: `${result.data?.createUser.name}님 가입에 성공하셨습니다. 다시 로그인 해주세요!`,
       });
-      void router.push("/member/login");
+      void router.push("/user/login");
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
@@ -54,7 +55,7 @@ export const useUser = () => {
         return;
       }
       setAccessToken(accessToken);
-      void router.push(visitedPage);
+      void router.push(visitedPage === "" ? "/" : visitedPage);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

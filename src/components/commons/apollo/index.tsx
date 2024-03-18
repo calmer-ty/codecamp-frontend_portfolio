@@ -19,7 +19,6 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   useEffect(() => {
     void restoreAccessToken.toPromise().then((newAccessToken) => {
       setAccessToken(newAccessToken ?? "");
-      console.log(restoreAccessToken);
     });
   }, []);
 

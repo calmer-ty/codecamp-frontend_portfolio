@@ -12,9 +12,7 @@ export const useMoveToPage = () => {
       return;
     }
     setVisitedPage(path);
-    // void router.push(path);
   };
-  console.log(visitedPage);
 
   return {
     visitedPage,
