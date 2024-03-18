@@ -9,7 +9,8 @@ import { useLoginUserExample } from "../mutations/useLoginUserExample";
 import { Modal } from "antd";
 import { accessTokenState } from "../../../../commons/stores";
 
-import type { IFormData } from "../../../units/member/join/MemberJoin.types";
+import type { IFormDataUserJoin } from "../../../units/user/join/UserJoin.types";
+import type { IFormDataUserLogin } from "../../../units/user/login/UserLogin.types";
 
 export const useUser = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ export const useUser = () => {
   const [loginUser] = useLoginUser();
   const [loginUserExample] = useLoginUserExample();
 
-  const onClickJoin = async (data: IFormData): Promise<void> => {
+  const onClickJoin = async (data: IFormDataUserJoin): Promise<void> => {
     const { passwordCheck, ...inputs } = data;
     try {
       const result = await createUser({
@@ -38,7 +39,7 @@ export const useUser = () => {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
-  const onClickLogin = async (data: IFormData): Promise<void> => {
+  const onClickLogin = async (data: IFormDataUserLogin): Promise<void> => {
     try {
       const result = await loginUser({
         variables: {
@@ -52,17 +53,14 @@ export const useUser = () => {
         alert("로그인에 실패했습니다. 다시 시도해주세요.");
         return;
       }
-
       setAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken);
-
       void router.push(visitedPage);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
   };
 
-  const onClickLoginExample = async (data: IFormData): Promise<void> => {
+  const onClickLoginExample = async (data: IFormDataUserLogin): Promise<void> => {
     try {
       const result = await loginUserExample({
         variables: {
@@ -76,10 +74,7 @@ export const useUser = () => {
         alert("로그인에 실패했습니다. 다시 시도해주세요.");
         return;
       }
-
       setAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken);
-
       void router.push(visitedPage);
     } catch (error) {
       if (error instanceof Error) alert(error.message);

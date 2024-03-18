@@ -50,10 +50,10 @@ export default function LayoutHeader(): JSX.Element {
         </Link>
         {accessToken === "" ? (
           <S.FlexRow>
-            <Link href={"/member/join"}>
+            <Link href={"/user/join"}>
               <S.JoinBtn>회원가입</S.JoinBtn>
             </Link>
-            <Link href={"/member/login"}>
+            <Link href={"/user/login"}>
               <S.LoginBtn>로그인</S.LoginBtn>
             </Link>
           </S.FlexRow>

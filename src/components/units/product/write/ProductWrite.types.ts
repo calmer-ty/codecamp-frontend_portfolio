@@ -1,7 +1,7 @@
 import type { IQuery } from "../../../../commons/types/generated/types";
 
 // container
-export interface IFormData {
+export interface IFormDataProductWrite {
   name: string;
   remarks: string;
   contents: string;

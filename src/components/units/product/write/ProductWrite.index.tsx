@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import type { IFormData, IProductWriteProps } from "./ProductWrite.types";
 // Component
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
 import Label01 from "../../../commons/element/labels/01";
@@ -14,11 +13,13 @@ import useMapSelection from "../../../commons/hooks/customs/useMapSelect";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
+// Type
+import type { IFormDataProductWrite, IProductWriteProps } from "./ProductWrite.types";
 // Style
 import * as S from "./ProductWrite.styles";
 
-export default function ProductWriteUI(props: IProductWriteProps): JSX.Element {
-  const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormData>({
+export default function ProductWrite(props: IProductWriteProps): JSX.Element {
+  const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormDataProductWrite>({
     resolver: yupResolver(schemaProductWrite),
     mode: "onChange",
   });
