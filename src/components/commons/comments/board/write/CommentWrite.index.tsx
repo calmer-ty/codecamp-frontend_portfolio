@@ -25,8 +25,6 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
     onToggleEdit: props.onToggleEdit,
   });
 
-  console.log(props);
-
   return (
     <S.CommentWrite isEdit={props.isEdit}>
       <TitleComment text="댓글" />

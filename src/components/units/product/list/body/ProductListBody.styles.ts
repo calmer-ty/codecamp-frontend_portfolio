@@ -8,12 +8,12 @@ export const Body = styled.div`
   row-gap: 40px;
   width: 100%;
 `;
-export const ListWrap = styled.main`
-  overflow-y: scroll;
-  height: calc(191 * 10px);
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
-`;
+// export const ListWrap = styled.main`
+//   overflow-y: auto;
+//   height: calc(191 * 10px);
+//   border-top: 2px solid #000;
+//   border-bottom: 2px solid #000;
+// `;
 export const List = styled.article`
   display: flex;
   align-items: center;

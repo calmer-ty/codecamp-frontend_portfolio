@@ -15,7 +15,6 @@ import type { IFormDataUserLogin } from "../../../units/user/login/UserLogin.typ
 export const useUser = () => {
   const router = useRouter();
   const { visitedPage } = useMoveToPage();
-  console.log(visitedPage);
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [createUser] = useCreateUser();

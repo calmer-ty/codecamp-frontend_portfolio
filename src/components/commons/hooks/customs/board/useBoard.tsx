@@ -13,12 +13,12 @@ import type { IUpdateBoardInput } from "../../../../../commons/types/generated/t
 import type { IFormData } from "../../../../units/board/write/BoardWrite.types";
 
 interface IUseBoardArgs {
-  fileUrls?: string[];
+  fileUrls: string[];
   address: string;
   zipcode: string;
 }
 
-export const useBoard = (args: IUseBoardArgs) => {
+export const useBoard = (args?: IUseBoardArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("boardId");
 
@@ -31,8 +31,6 @@ export const useBoard = (args: IUseBoardArgs) => {
   });
 
   const onClickSubmit = async (data: IFormData): Promise<void> => {
-    console.log(data);
-
     try {
       const result = await createBoard({
         variables: {
@@ -43,11 +41,11 @@ export const useBoard = (args: IUseBoardArgs) => {
             contents: data.contents,
             youtubeUrl: data.youtubeUrl,
             boardAddress: {
-              zipcode: args.zipcode,
-              address: args.address,
+              zipcode: args?.zipcode,
+              address: args?.address,
               addressDetail: data.addressDetail,
             },
-            images: args.fileUrls,
+            images: args?.fileUrls,
           },
         },
         // refetchQueries: [
@@ -72,7 +70,7 @@ export const useBoard = (args: IUseBoardArgs) => {
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
-    const currentFiles = JSON.stringify(args.fileUrls);
+    const currentFiles = JSON.stringify(args?.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
@@ -83,11 +81,11 @@ export const useBoard = (args: IUseBoardArgs) => {
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
     if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
       updateBoardInput.boardAddress = {};
-      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = args.zipcode;
-      if (data.address !== "") updateBoardInput.boardAddress.address = args.address;
+      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = args?.zipcode;
+      if (data.address !== "") updateBoardInput.boardAddress.address = args?.address;
       if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
-    if (isChangedFiles) updateBoardInput.images = args.fileUrls;
+    if (isChangedFiles) updateBoardInput.images = args?.fileUrls;
 
     if (defaultData?.fetchBoard.contents === data.contents) {
       Modal.error({ content: "내용이 수정되지 않았습니다." });

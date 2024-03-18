@@ -12,9 +12,10 @@ import type { IUseditem } from "../../../../commons/types/generated/types";
 
 export default function ProductList(): JSX.Element {
   const [product, setProduct] = useState<IUseditem[]>([]);
+
   useEffect(() => {
-    const aaa: IUseditem[] = JSON.parse(localStorage.getItem("todayView") ?? "[]");
-    setProduct(aaa);
+    const todayView: IUseditem[] = JSON.parse(localStorage.getItem("todayView") ?? "[]");
+    setProduct(todayView);
   }, []);
 
   return (

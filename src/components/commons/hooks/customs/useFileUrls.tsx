@@ -16,7 +16,6 @@ export const useFileUrls = () => {
     const newFileUrls = [...fileUrls];
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
-    console.log(newFileUrls);
   };
 
   // useEffect(() => {

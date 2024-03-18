@@ -25,7 +25,6 @@ export const useProductPicked = () => {
         //   },
         // ],
       });
-      console.log(result.data?.toggleUseditemPick);
       setPick(result.data?.toggleUseditemPick ?? 0);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

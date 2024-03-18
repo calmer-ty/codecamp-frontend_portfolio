@@ -21,7 +21,6 @@ interface IUseBoardCommentArgs {
 
 export const useBoardComment = (args: IUseBoardCommentArgs) => {
   const { id } = useIdCheck("boardId");
-  console.log(args.rating);
   const [rating, setRating] = useState(args.rating);
   const [deletePassword, setDeletePassword] = useState("");
 

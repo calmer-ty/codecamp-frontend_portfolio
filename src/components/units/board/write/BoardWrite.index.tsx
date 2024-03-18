@@ -33,7 +33,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     const newFileUrls = [...fileUrls];
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
-    console.log(newFileUrls);
   };
   useEffect(() => {
     const images = props.data?.fetchBoard.images;
