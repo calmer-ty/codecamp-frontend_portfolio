@@ -12,7 +12,7 @@ export const FlexColumn = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 58px 0;
+  padding: 50px 40px;
 `;
 export const Container = styled.div`
   display: flex;

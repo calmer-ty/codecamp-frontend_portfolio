@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   overflow: hidden;
-  padding: 220px 150px;
+  padding: 0 120px;
 `;
 export const Container = styled.div`
   padding: 50px;
@@ -14,9 +14,15 @@ export const PageMainImg = styled.img`
   width: 40%;
   height: 350px;
   object-fit: contain;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const PageInfoWrap = styled.div`
   width: 60%;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const SliderItem = styled.div``;
 export const Title = styled.div`
@@ -29,4 +35,7 @@ export const Desc = styled.div`
 `;
 export const SliderItemInner = styled.div`
   display: flex;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
