@@ -10,6 +10,7 @@ import { globalStyles } from "../src/commons/styles/globalStyles";
 import { RecoilRoot } from "recoil";
 
 export default function App({ Component }: AppProps): JSX.Element {
+  console.log("========== App 렌더링 됩니다 ==========");
   return (
     <>
       <RecoilRoot>

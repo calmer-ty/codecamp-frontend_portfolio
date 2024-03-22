@@ -18,7 +18,6 @@ const SECRET_STRING = "!@#$";
 
 export default function ProductListBody() {
   const { data, onLoadMore, refetch } = useScrollProductList();
-  console.log(data);
 
   // 검색 기능
   const { keyword, onChangeSearch } = useSearchbar({

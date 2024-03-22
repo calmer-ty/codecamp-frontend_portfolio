@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { memo } from "react";
 import { accessTokenState } from "../../../../commons/stores";
 // Component
 import { DownOutlined } from "@ant-design/icons";
@@ -12,7 +13,8 @@ import type { MenuProps } from "antd";
 // Style
 import * as S from "./LayoutHeader.styles";
 
-export default function LayoutHeader(): JSX.Element {
+function LayoutHeader(): JSX.Element {
+  console.log("========== Layout Header가 렌더링 됩니다. ==========");
   const { data } = useFetchLoggedIn();
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -78,3 +80,4 @@ export default function LayoutHeader(): JSX.Element {
     </S.Wrapper>
   );
 }
+export default memo(LayoutHeader);

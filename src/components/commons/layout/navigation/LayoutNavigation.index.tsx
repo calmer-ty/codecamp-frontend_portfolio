@@ -1,7 +1,7 @@
-import * as S from "./LayoutNavigation.styles";
 import Link from "next/link";
-import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
-import { Fragment } from "react";
+import React, { Fragment, memo } from "react";
+// Style
+import * as S from "./LayoutNavigation.styles";
 
 const NAVIGATION_MENUS = [
   { name: "Firebase", page: "/boards_firebase" },
@@ -11,15 +11,16 @@ const NAVIGATION_MENUS = [
   { name: "랜덤강아지", page: "/randomDogImg" },
   { name: "OpenApi", page: "/openApi" },
 ];
-export default function LayoutNavigation(): JSX.Element {
-  const { onClickMoveToPage } = useMoveToPage();
+
+function LayoutNavigation(): JSX.Element {
+  console.log("NAVI 렌더링 됩니다");
   return (
     <S.Wrapper>
       <S.Container>
         {NAVIGATION_MENUS.map((el) => (
           <Fragment key={el.page}>
             <Link href={el.page}>
-              <S.MenuItem onClick={onClickMoveToPage(el.page)}>{el.name}</S.MenuItem>
+              <S.MenuItem>{el.name}</S.MenuItem>
             </Link>
           </Fragment>
         ))}
@@ -27,3 +28,5 @@ export default function LayoutNavigation(): JSX.Element {
     </S.Wrapper>
   );
 }
+
+export default memo(LayoutNavigation);
