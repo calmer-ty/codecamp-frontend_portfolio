@@ -3,8 +3,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as S from "../styles/landing";
+import { memo } from "react";
 
-export default function Home(): JSX.Element {
+function Home(): JSX.Element {
   const LANDING_MENUS = [
     {
       name: "자유게시판",
@@ -67,3 +68,4 @@ export default function Home(): JSX.Element {
     </>
   );
 }
+export default memo(Home);

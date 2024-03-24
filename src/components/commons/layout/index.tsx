@@ -10,7 +10,6 @@ const LayoutBody = styled.div`
 `;
 
 export default function Layout(props: ILayoutProps): JSX.Element {
-  console.log("========== Layout 렌더링 됩니다 ==========");
   return (
     <>
       <LayoutHeader />

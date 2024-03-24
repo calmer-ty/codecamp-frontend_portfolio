@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { Fragment, memo } from "react";
+import React, { Fragment } from "react";
 // Style
 import * as S from "./LayoutNavigation.styles";
 
@@ -12,8 +12,7 @@ const NAVIGATION_MENUS = [
   { name: "OpenApi", page: "/openApi" },
 ];
 
-function LayoutNavigation(): JSX.Element {
-  console.log("NAVI 렌더링 됩니다");
+export default function LayoutNavigation(): JSX.Element {
   return (
     <S.Wrapper>
       <S.Container>
@@ -28,5 +27,3 @@ function LayoutNavigation(): JSX.Element {
     </S.Wrapper>
   );
 }
-
-export default memo(LayoutNavigation);
