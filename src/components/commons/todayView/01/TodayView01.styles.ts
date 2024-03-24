@@ -9,11 +9,12 @@ export const TodayView = styled.article`
   position: fixed;
   top: 460px;
   right: 0;
-  width: 196px;
-  padding: 20px 0;
-  /* height: 506px; */
+  padding: 20px;
   border: 1px solid #bdbdbd;
   background-color: #ffffff;
+`;
+export const ViewTitle = styled.div`
+  font-size: 18px;
 `;
 // View Item
 export const ViewItem = styled.div`
@@ -22,9 +23,7 @@ export const ViewItem = styled.div`
   flex-direction: column;
   justify-content: center;
   row-gap: 4px;
-  width: 156px;
-  height: 220px;
-  padding: 10px;
+  padding: 25px 25px 10px;
   border: 1px solid #bdbdbd;
 `;
 export const Picked = styled.div`
@@ -39,16 +38,17 @@ export const ItemImg = styled.img`
   width: 60px;
   height: 60px;
   margin: 12px;
+  object-fit: contain;
 `;
-export const ItemName = styled.p`
+export const ItemName = styled.span`
   font-size: 12px;
   font-weight: bold;
 `;
-export const ItemRemark = styled.p`
+export const ItemRemark = styled.span`
   font-size: 12px;
   color: #4f4f4f;
 `;
-export const ItemPrice = styled.p`
+export const ItemPrice = styled.span`
   margin-top: 2px;
   font-weight: bold;
 `;

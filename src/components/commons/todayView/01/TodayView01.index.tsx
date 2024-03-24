@@ -16,7 +16,7 @@ function TodayView01(): JSX.Element {
   }, []);
   return (
     <S.TodayView>
-      <h3>오늘 본 상품</h3>
+      <S.ViewTitle>오늘 본 상품</S.ViewTitle>
       {product.map((el) => (
         <S.ViewItem key={el._id}>
           <S.Picked>
