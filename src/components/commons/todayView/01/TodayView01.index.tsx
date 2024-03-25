@@ -24,8 +24,8 @@ function TodayView01(): JSX.Element {
             <span>{el.pickedCount}</span>
           </S.Picked>
           <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
-          <S.ItemName>{el.name}</S.ItemName>
-          <S.ItemRemark>{el.remarks}</S.ItemRemark>
+          <S.ItemName title={el.name}>{el.name}</S.ItemName>
+          <S.ItemRemark title={el.remarks}>{el.remarks}</S.ItemRemark>
           <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
           <TagsView01 tags={el.tags} />
         </S.ViewItem>

@@ -7,11 +7,21 @@ interface IPProps {
 const pStyles = {
   display: "flex",
   columnGap: "6px",
+};
+const spanStyles = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
 };
 
 export default function TagsView01(props: IPProps) {
-  return <p style={pStyles}>{props.tags?.map((el) => <span key={el}>#{el}</span>)}</p>;
+  return (
+    <p style={pStyles}>
+      {props.tags?.map((el) => (
+        <span style={spanStyles} key={el}>
+          #{el}
+        </span>
+      ))}
+    </p>
+  );
 }

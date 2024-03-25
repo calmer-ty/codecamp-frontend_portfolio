@@ -28,7 +28,7 @@ export default function ProductListBody() {
     <S.Body>
       <Searchbar01 onChangeSearch={onChangeSearch} />
       <S.ListWrap>
-        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
           {data?.fetchUseditems?.map((el) => (
             <S.List key={el._id}>
               <Link href={`/products/${el._id}`}>
@@ -72,6 +72,7 @@ export default function ProductListBody() {
             </S.List>
           )) ?? <></>}
         </InfiniteScroll>
+        {/* </div> */}
       </S.ListWrap>
     </S.Body>
   );

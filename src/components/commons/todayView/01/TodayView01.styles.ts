@@ -23,7 +23,8 @@ export const ViewItem = styled.div`
   flex-direction: column;
   justify-content: center;
   row-gap: 4px;
-  padding: 25px 25px 10px;
+  width: 140px;
+  padding: 30px 25px 15px;
   border: 1px solid #bdbdbd;
 `;
 export const Picked = styled.div`
@@ -43,10 +44,18 @@ export const ItemImg = styled.img`
 export const ItemName = styled.span`
   font-size: 12px;
   font-weight: bold;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 export const ItemRemark = styled.span`
   font-size: 12px;
   color: #4f4f4f;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 export const ItemPrice = styled.span`
   margin-top: 2px;
