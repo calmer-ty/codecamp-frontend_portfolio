@@ -1,6 +1,6 @@
 import { useFetchProducts } from "../../queries/product/useFetchProducts";
 
-export const useScrollProductList = () => {
+export const useScrollProductsList = () => {
   const { data, fetchMore, refetch } = useFetchProducts();
   // 댓글 무한 스크롤
   const onLoadMore = (): void => {

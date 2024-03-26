@@ -1,7 +1,5 @@
 import Link from "next/link";
-// Hooks
-import { useScrollProductList } from "../../../../commons/hooks/customs/product/useScrollProductList";
-import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
+import { memo } from "react";
 // Scroll
 import InfiniteScroll from "react-infinite-scroller";
 // Component
@@ -12,24 +10,21 @@ import TagsView01 from "../../../../commons/tags/view/01";
 import DataOutputString01 from "../../../../commons/data/output/string/01";
 // Style
 import * as S from "./ProductListBody.styles";
+// Type
+import type { IProductListBodyProps } from "../ProductList.types";
 // Etc
 import { v4 as uuidv4 } from "uuid";
 const SECRET_STRING = "!@#$";
 
-export default function ProductListBody() {
-  const { data, onLoadMore, refetch } = useScrollProductList();
-
-  // 검색 기능
-  const { keyword, onChangeSearch } = useSearchbar({
-    refetch,
-  });
+function ProductListBody(props: IProductListBodyProps) {
+  console.log("== PD List Body 렌더링 ===");
 
   return (
     <S.Body>
-      <Searchbar01 onChangeSearch={onChangeSearch} />
+      <Searchbar01 onChangeSearch={props.onChangeSearch} />
       <S.ListWrap>
-        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
-          {data?.fetchUseditems?.map((el) => (
+        <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
+          {props.dataProductsList?.fetchUseditems?.map((el) => (
             <S.List key={el._id}>
               <Link href={`/products/${el._id}`}>
                 <a>
@@ -42,10 +37,10 @@ export default function ProductListBody() {
                   <Link href={`/products/${el._id}`}>
                     <S.ItemTitle>
                       {el.name
-                        .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
+                        .replaceAll(props.keyword, `${SECRET_STRING}${props.keyword}${SECRET_STRING}`)
                         .split(SECRET_STRING)
                         .map((el) => (
-                          <S.KeywordToken key={uuidv4()} isMatched={keyword === el}>
+                          <S.KeywordToken key={uuidv4()} isMatched={props.keyword === el}>
                             {el}
                           </S.KeywordToken>
                         ))}
@@ -72,8 +67,9 @@ export default function ProductListBody() {
             </S.List>
           )) ?? <></>}
         </InfiniteScroll>
-        {/* </div> */}
       </S.ListWrap>
     </S.Body>
   );
 }
+
+export default memo(ProductListBody);

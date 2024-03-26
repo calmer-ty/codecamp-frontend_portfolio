@@ -15,6 +15,7 @@ const GLOBAL_STATE = new InMemoryCache();
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
+  console.log(restoreAccessToken);
 
   useEffect(() => {
     void restoreAccessToken.toPromise().then((newAccessToken) => {
@@ -41,7 +42,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
                   Authorization: `Bearer ${newAccessToken}`, // 3-2. 토큰만 새걸로 바꿔치기
                 },
               });
-              forward(operation);
+              // forward(operation);
             })
 
             // 3-3. 방금 수정한 쿼리 재요청하기
