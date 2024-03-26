@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from "uuid";
 const SECRET_STRING = "!@#$";
 
 function ProductListBody(props: IProductListBodyProps) {
+  console.log("렌더링 됩니다");
   return (
     <S.Body>
       <Searchbar01 onChangeSearch={props.onChangeSearch} />

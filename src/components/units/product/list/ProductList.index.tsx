@@ -1,3 +1,4 @@
+import { memo } from "react";
 // UI
 import ProductListHeader from "./header/ProductListHeader.index";
 import ProductListBody from "./body/ProductListBody.index";
@@ -11,7 +12,7 @@ import TodayView01 from "../../../commons/todayView/01/TodayView01.index";
 // Style
 import * as S from "./ProductList.styles";
 
-export default function ProductList(): JSX.Element {
+function ProductList(): JSX.Element {
   const { data: dataProductsBest } = useFetchProductsBest();
   const { data: dataProductsList, onLoadMore, refetch } = useScrollProductsList();
   const { keyword, onChangeSearch } = useSearchbar({
@@ -35,3 +36,4 @@ export default function ProductList(): JSX.Element {
     </S.Wrapper>
   );
 }
+export default memo(ProductList);
