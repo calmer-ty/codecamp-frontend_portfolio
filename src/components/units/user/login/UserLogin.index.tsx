@@ -34,7 +34,7 @@ export default function UserLogin(): JSX.Element {
           </S.InputWrap>
           <S.InputWrap>
             <Label01 text="비밀번호" />
-            <Input02 register={register("password")} />
+            <Input02 type="password" register={register("password")} />
             <Error01 text={formState.errors.email?.message} />
           </S.InputWrap>
 

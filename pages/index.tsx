@@ -50,10 +50,10 @@ function Home(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         {/* NotoSans */}
-        <link
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Noto+Sans+KR:wght@100..900&display=swap"
           rel="stylesheet"
-        />
+        /> */}
       </Head>
       <S.Wrapper>
         <S.Container>

@@ -17,15 +17,13 @@ import { v4 as uuidv4 } from "uuid";
 const SECRET_STRING = "!@#$";
 
 function ProductListBody(props: IProductListBodyProps) {
-  console.log("== PD List Body 렌더링 ===");
-
   return (
     <S.Body>
       <Searchbar01 onChangeSearch={props.onChangeSearch} />
       <S.ListWrap>
         <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
           {props.dataProductsList?.fetchUseditems?.map((el) => (
-            <S.List key={el._id}>
+            <S.List key={uuidv4()}>
               <Link href={`/products/${el._id}`}>
                 <a>
                   <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />

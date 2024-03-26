@@ -9,7 +9,6 @@ import * as S from "./ProductListHeader.styles";
 import type { IProductListHeaderProps } from "../ProductList.types";
 
 function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
-  console.log("== PD List Header 렌더링 ===");
   return (
     <S.Header>
       <S.Title>베스트 상품</S.Title>

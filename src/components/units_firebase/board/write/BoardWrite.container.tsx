@@ -8,13 +8,7 @@ import { useState } from "react";
 import type { Address } from "react-daum-postcode";
 // UI
 import BoardWriteUI from "./BoardWrite.presenter";
-import {
-  collection,
-  addDoc,
-  getFirestore,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc, getFirestore, updateDoc, doc } from "firebase/firestore";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
 // import { v4 as uuid } from "uuid";
 
