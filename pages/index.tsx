@@ -6,9 +6,6 @@ import { memo } from "react";
 
 // Style
 import * as S from "../src/commons/styles/landing";
-// 테스트
-import { useApolloClient } from "@apollo/client";
-import { FETCH_USER_LOGGED_IN } from "../src/components/commons/hooks/queries/useFetchLoggedIn";
 
 function Home(): JSX.Element {
   const LANDING_MENUS = [
@@ -46,14 +43,6 @@ function Home(): JSX.Element {
     slidesToScroll: 1,
   };
 
-  // 아폴로 클라이언트 테스트
-  const client = useApolloClient();
-  const onClickApolloClient = async (): Promise<void> => {
-    const result = await client.query({
-      query: FETCH_USER_LOGGED_IN,
-    });
-    console.log(result);
-  };
   return (
     <>
       <Head>
@@ -63,7 +52,6 @@ function Home(): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <S.Wrapper>
-        <button onClick={onClickApolloClient}>onClickApolloClient</button>
         <S.Container>
           <Slider {...settings}>
             {LANDING_MENUS.map((el, index) => (

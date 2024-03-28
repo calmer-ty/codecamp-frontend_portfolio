@@ -69,7 +69,6 @@ export const useUser = () => {
         },
       });
       const accessToken = result.data?.loginUserExample.accessToken;
-      console.log(accessToken);
 
       // if (accessToken === undefined || data.email === "" || data.password === "") {
       if (accessToken === undefined) {
