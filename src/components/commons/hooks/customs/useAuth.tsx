@@ -15,5 +15,5 @@ export const useAuth = () => {
         void router.push("/user/login");
       }
     });
-  }, [restoreAccessToken]);
+  }, []);
 };
