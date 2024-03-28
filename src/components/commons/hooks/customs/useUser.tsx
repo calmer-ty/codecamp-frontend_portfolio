@@ -69,13 +69,15 @@ export const useUser = () => {
         },
       });
       const accessToken = result.data?.loginUserExample.accessToken;
+      console.log(accessToken);
 
-      if (accessToken === undefined || data.email === "" || data.password === "") {
+      // if (accessToken === undefined || data.email === "" || data.password === "") {
+      if (accessToken === undefined) {
         alert("로그인에 실패했습니다. 다시 시도해주세요.");
         return;
       }
       setAccessToken(accessToken);
-      void router.push(visitedPage);
+      void router.push(visitedPage ?? "/");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

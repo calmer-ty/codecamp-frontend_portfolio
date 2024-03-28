@@ -11,18 +11,6 @@ import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 import type { MenuProps } from "antd";
 // Style
 import * as S from "./LayoutHeader.styles";
-import { useApolloClient, gql } from "@apollo/client";
-
-// 테스트
-
-const FETCH_USER_LOGGED_IN = gql`
-  query {
-    fetchUserLoggedIn {
-      email
-      name
-    }
-  }
-`;
 
 export default function LayoutHeader(): JSX.Element {
   const { data } = useFetchLoggedIn();
@@ -54,22 +42,12 @@ export default function LayoutHeader(): JSX.Element {
     },
   ];
 
-  // 아폴로 클라이언트 테스트
-  const client = useApolloClient();
-  const onClickApolloClient = async (): Promise<void> => {
-    const result = await client.query({
-      query: FETCH_USER_LOGGED_IN,
-    });
-    console.log(result);
-  };
-
   return (
     <S.Wrapper>
       <S.Container>
         <Link href={"/"}>
           <S.Logo>Logo</S.Logo>
         </Link>
-        <button onClick={onClickApolloClient}>아폴로 클릭 테스트</button>
         {accessToken === "" ? (
           <S.FlexRow>
             <Link href={"/user/join"}>

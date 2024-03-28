@@ -13,6 +13,17 @@ import Button03 from "../../../commons/element/buttons/03";
 import * as S from "./UserLogin.styles";
 // Type
 import type { IFormDataUserLogin } from "./UserLogin.types";
+//
+import { gql, useApolloClient } from "@apollo/client";
+
+const FETCH_USER_LOGGED_IN = gql`
+  query {
+    fetchUserLoggedIn {
+      email
+      name
+    }
+  }
+`;
 
 export default function UserLogin(): JSX.Element {
   // FROM
@@ -21,6 +32,17 @@ export default function UserLogin(): JSX.Element {
   });
 
   const { onClickLoginExample } = useUser();
+
+  // 테스트
+
+  // 아폴로 클라이언트 테스트
+  const client = useApolloClient();
+  const onClickApolloClient = async (): Promise<void> => {
+    const result = await client.query({
+      query: FETCH_USER_LOGGED_IN,
+    });
+    console.log(result);
+  };
   return (
     <S.Wrapper>
       <S.Container>
@@ -43,6 +65,7 @@ export default function UserLogin(): JSX.Element {
             <span>로그인 상태 유지</span>
           </S.LoginState>
           <Button03 text="로그인하기" />
+          <button onClick={onClickApolloClient}></button>
         </S.Form>
       </S.Container>
     </S.Wrapper>
