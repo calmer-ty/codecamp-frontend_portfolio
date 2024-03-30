@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 
-import { useMoveToPage } from "./useMoveToPage";
 import { useCreateUser } from "../mutations/useCreateUser";
 import { useLoginUser } from "../mutations/useLoginUser";
 import { useLoginUserExample } from "../mutations/useLoginUserExample";
@@ -14,7 +13,6 @@ import type { IFormDataUserLogin } from "../../../units/user/login/UserLogin.typ
 
 export const useUser = () => {
   const router = useRouter();
-  const { visitedPage } = useMoveToPage();
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [createUser] = useCreateUser();
@@ -54,7 +52,7 @@ export const useUser = () => {
         return;
       }
       setAccessToken(accessToken);
-      void router.push(visitedPage === "" ? "/" : visitedPage);
+      void router.push("/");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -76,7 +74,7 @@ export const useUser = () => {
         return;
       }
       setAccessToken(accessToken);
-      void router.push(visitedPage ?? "/");
+      void router.push("/");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

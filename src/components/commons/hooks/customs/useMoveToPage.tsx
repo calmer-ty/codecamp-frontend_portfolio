@@ -5,6 +5,7 @@ import { visitedPageState } from "../../../../commons/stores";
 export const useMoveToPage = () => {
   // const router = useRouter();
   const [visitedPage, setVisitedPage] = useRecoilState(visitedPageState);
+  console.log(visitedPage);
 
   const onClickMoveToPage = (path: string) => () => {
     if (typeof path !== "string") {
