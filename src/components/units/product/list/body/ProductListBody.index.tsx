@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { memo } from "react";
 // Scroll
 import InfiniteScroll from "react-infinite-scroller";
 // Component
@@ -16,7 +15,7 @@ import type { IProductListBodyProps } from "../ProductList.types";
 import { v4 as uuidv4 } from "uuid";
 const SECRET_STRING = "!@#$";
 
-function ProductListBody(props: IProductListBodyProps) {
+export default function ProductListBody(props: IProductListBodyProps) {
   return (
     <S.Body>
       <Searchbar01 onChangeSearch={props.onChangeSearch} />
@@ -24,11 +23,11 @@ function ProductListBody(props: IProductListBodyProps) {
         <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
           {props.dataProductsList?.fetchUseditems?.map((el) => (
             <S.List key={uuidv4()}>
-              <Link href={`/products/${el._id}`}>
+              {/* <Link href={`/products/${el._id}`}>
                 <a>
                   <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
                 </a>
-              </Link>
+              </Link> */}
               <S.ItemInfo>
                 <S.InfoTop>
                   {/* 링크되는 제목 */}
@@ -69,5 +68,3 @@ function ProductListBody(props: IProductListBodyProps) {
     </S.Body>
   );
 }
-
-export default memo(ProductListBody);

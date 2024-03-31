@@ -8,6 +8,8 @@ export const useAuth = () => {
   const router = useRouter();
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
+  console.log(restoreAccessToken);
+
   useEffect(() => {
     void restoreAccessToken.toPromise().then((newAccessToken) => {
       if (newAccessToken === undefined) {

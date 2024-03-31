@@ -2,12 +2,11 @@ import Head from "next/head";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { memo } from "react";
 
 // Style
 import * as S from "../src/commons/styles/landing";
 
-function Home(): JSX.Element {
+export default function Home(): JSX.Element {
   const LANDING_MENUS = [
     {
       name: "자유게시판",
@@ -71,4 +70,3 @@ function Home(): JSX.Element {
     </>
   );
 }
-export default memo(Home);

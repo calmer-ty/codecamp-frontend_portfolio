@@ -1,5 +1,8 @@
+import { WithAuth } from "../../src/components/commons/hocs/withAuth";
 import ProductList from "../../src/components/units/product/list/ProductList.index";
 
-export default function ProductsPage(): JSX.Element {
+function ProductsPage(): JSX.Element {
   return <ProductList />;
 }
+
+export default WithAuth(ProductsPage);
