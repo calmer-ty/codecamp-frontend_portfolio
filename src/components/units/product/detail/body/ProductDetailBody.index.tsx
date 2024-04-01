@@ -11,6 +11,9 @@ import useMapView from "../../../../commons/hooks/customs/useMapView";
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import HeartIcon02 from "../../../../commons/icon/heart/02";
 import TagsView01 from "../../../../commons/tags/view/01";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // Style
 import * as S from "./ProductDetailBody.styles";
 // Type
@@ -18,6 +21,14 @@ import type { IProductDetailBodyProps } from "../ProductDetail.types";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
 
 const TODAY_VIEW_PRODUCT = 2;
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+};
 
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { id } = useIdCheck("useditemId");
@@ -69,11 +80,19 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
             </S.PickScore>
           </S.Pick>
         </S.BodyHeader>
-        <S.ImgWrap>
+        <Slider {...settings}>
           {props.data?.fetchUseditem.images
             ?.filter((el) => el)
-            .map((el) => <S.ImgItem key={el} src={`http://storage.googleapis.com/${el}`} />)}
-        </S.ImgWrap>
+            .map((el, index) => (
+              <S.ImgWrap key={index}>
+                <S.ImgItem src={`http://storage.googleapis.com/${el}`} />
+              </S.ImgWrap>
+            ))}
+        </Slider>
+        {/* <S.ImgWrap> */}
+        {/* {props.data?.fetchUseditem.images?.filter((el) => el).map((el) => <S.ImgItem key={el} src={`http://storage.googleapis.com/${el}`} />)} */}
+        {/* {props.data?.fetchUseditem.images?.filter((el) => el).map((el) => console.log(el))} */}
+        {/* </S.ImgWrap> */}
         <S.FlexColumn>
           {typeof window !== "undefined" && (
             <S.Contents

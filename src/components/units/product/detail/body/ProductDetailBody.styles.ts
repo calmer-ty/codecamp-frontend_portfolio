@@ -32,10 +32,14 @@ export const Price = styled.span`
   font-size: 36px;
   font-weight: bold;
 `;
-export const ImgWrap = styled.div``;
+export const ImgWrap = styled.div`
+  height: 390px;
+`;
 export const ImgItem = styled.img`
   width: 100%;
+  height: 100%;
   margin-bottom: 20px;
+  object-fit: contain;
 `;
 export const Pick = styled.div`
   display: flex;
