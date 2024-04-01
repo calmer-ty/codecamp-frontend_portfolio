@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { memo } from "react";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import DataOutputString01 from "../../../../commons/data/output/string/01";
@@ -8,7 +7,7 @@ import * as S from "./ProductListHeader.styles";
 // Type
 import type { IProductListHeaderProps } from "../ProductList.types";
 
-function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
+export default function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
   return (
     <S.Header>
       <S.Title>베스트 상품</S.Title>
@@ -35,4 +34,3 @@ function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
     </S.Header>
   );
 }
-export default memo(ProductListHeader);
