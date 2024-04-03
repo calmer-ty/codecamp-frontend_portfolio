@@ -1,10 +1,11 @@
+import { useEffect } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, fromPromise } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
+import { onError } from "@apollo/client/link/error";
+
+import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { accessTokenState, restoreAccessTokenLoadable } from "../../../commons/stores";
-import { useEffect } from "react";
-import { onError } from "@apollo/client/link/error";
-import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 
 // 서버 데이터
 const GLOBAL_STATE = new InMemoryCache();
@@ -23,6 +24,12 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
       setAccessToken(newAccessToken ?? "");
     });
   }, []);
+  // useEffect(() => {
+  //   // 2-1. 리코일 API(useRecoilValueLoadable) 사용 이전
+  //   void getAccessToken().then((newAccessToken): void => {
+  //     setAccessToken(newAccessToken ?? "");
+  //   });
+  // }, []);
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // operation: 쿼리
