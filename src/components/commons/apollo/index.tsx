@@ -18,18 +18,20 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
+  // console.log("apollo의 토큰 " + restoreAccessToken);
+
   useEffect(() => {
     void restoreAccessToken.toPromise().then((newAccessToken) => {
-      console.log(newAccessToken);
+      setAccessToken(newAccessToken ?? "");
+      console.log("apollo의 useEffect 프로미스 토큰 " + newAccessToken);
+    });
+  }, []);
+  useEffect(() => {
+    // 2-1. 리코일 API(useRecoilValueLoadable) 사용 이전
+    void getAccessToken().then((newAccessToken): void => {
       setAccessToken(newAccessToken ?? "");
     });
   }, []);
-  // useEffect(() => {
-  //   // 2-1. 리코일 API(useRecoilValueLoadable) 사용 이전
-  //   void getAccessToken().then((newAccessToken): void => {
-  //     setAccessToken(newAccessToken ?? "");
-  //   });
-  // }, []);
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // operation: 쿼리
