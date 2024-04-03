@@ -1,12 +1,17 @@
-import { FETCH_BOARD } from "../../queries/board/useFetchBoard";
+import { useRouter } from "next/router";
+import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
 
 import { useLikeBoard } from "../../mutations/board/useLikeBoard";
 import { useDislikeBoard } from "../../mutations/board/useDislikeBoard";
+import { useIdCheck } from "../useIdCheck";
 
 import { Modal } from "antd";
-import { useRouter } from "next/router";
 
 export const useBoardRate = () => {
+  const { id } = useIdCheck("boardId");
+  const { data } = useFetchBoard({
+    boardId: id,
+  });
   const router = useRouter();
 
   const [likeBoard] = useLikeBoard();
@@ -20,12 +25,31 @@ export const useBoardRate = () => {
     try {
       await likeBoard({
         variables: { boardId: router.query.boardId },
-        refetchQueries: [
-          {
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_BOARD,
+        //     variables: { boardId: router.query.boardId },
+        //   },
+        // ],
+        optimisticResponse: {
+          likeBoard: (data?.fetchBoard.likeCount ?? 0) + 1,
+        },
+        update: (cache, { data }) => {
+          // writeQuery => 내가 없던걸 추가
+          cache.writeQuery({
             query: FETCH_BOARD,
-            variables: { boardId: router.query.boardId },
-          },
-        ],
+            variables: {
+              boardId: id,
+            },
+            data: {
+              fetchBoard: {
+                _id: id,
+                __typename: "Board",
+                likeCount: data?.likeBoard,
+              },
+            },
+          });
+        },
       });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
