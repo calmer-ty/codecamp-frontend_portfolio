@@ -1,16 +1,74 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export declare const window: typeof globalThis & {
   kakao: any;
 };
 
 export default function useMap(lat: any, lng: any) {
-  console.log(lat, lng);
-  console.log(lat, lng);
-  if (lat === undefined) lat = 33.450701;
-  if (lng === undefined) lat = 126.570667;
   const [latlng, setLatlng] = useState<any>("");
   const [address, setAddress] = useState<any>("");
+
+  //   const initMap = useMemo(() => {
+  //     console.log("Init map function is memoized");
+  //     return () => {
+  //       console.log("Initializing map...");
+  //       window.kakao.maps.load(function () {
+  //         const container = document.getElementById("map");
+
+  //         const markerPosition = new window.kakao.maps.LatLng(lat, lng);
+  //         const options = {
+  //           center: markerPosition,
+  //           level: 3,
+  //         };
+  //         const map = new window.kakao.maps.Map(container, options);
+
+  //         const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
+  //         const imageSize = new window.kakao.maps.Size(64, 69);
+  //         const imageOption = { offset: new window.kakao.maps.Point(27, 69) };
+  //         const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+  //         const marker = new window.kakao.maps.Marker({
+  //           position: markerPosition,
+  //           image: markerImage,
+  //         });
+  //         marker.setMap(map);
+
+  //         window.kakao.maps.event.addListener(map, "click", function (mouseEvent: any) {
+  //           const latlng = mouseEvent.latLng;
+  //           marker.setPosition(latlng);
+  //           setLatlng(latlng);
+
+  //           const geocoder = new window.kakao.maps.services.Geocoder();
+  //           const coord = new window.kakao.maps.LatLng(latlng.Ma, latlng.La);
+  //           const callback = function (result: any, status: any) {
+  //             const mapAddress = result[0].address.address_name;
+  //             if (status === window.kakao.maps.services.Status.OK) {
+  //               setAddress(mapAddress);
+  //             }
+  //           };
+  //           geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+  //         });
+  //       });
+  //     };
+  //   }, [lat, lng]);
+
+  //   useEffect(() => {
+  //     const script = document.createElement("script");
+  //     script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=86e8d7dcdac578c6f87227c9b54397f1&libraries=services&autoload=false";
+
+  //     if (window.kakao !== undefined) {
+  //       initMap();
+  //     } else {
+  //       script.onload = () => {
+  //         initMap();
+  //       };
+  //       document.head.appendChild(script);
+  //     }
+
+  //     return () => {
+  //       document.head.removeChild(script);
+  //     };
+  //   }, [initMap]);
 
   useEffect(() => {
     const script = document.createElement("script");
