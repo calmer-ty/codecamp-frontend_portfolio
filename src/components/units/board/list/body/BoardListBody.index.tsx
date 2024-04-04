@@ -1,7 +1,6 @@
 import Link from "next/link";
 import * as S from "./BoardListBody.styles";
 
-import { v4 as uuidv4 } from "uuid";
 import { getDate } from "../../../../../commons/libraries/utils";
 
 import type { IBoardDetailBodyProps } from "../BoardList.types";
@@ -32,8 +31,8 @@ export default function BoardListBody(props: IBoardDetailBodyProps): JSX.Element
                       // 입력된 키워드 값의 문자열을 시크릿코드를 붙여 변경해주고
                       .split(SECRET_STRING)
                       // 시크릿 코드 기준으로 잘라 배열로 변환한다.
-                      .map((el) => (
-                        <S.KeywordToken key={uuidv4()} isMatched={props.keyword === el}>
+                      .map((el, index) => (
+                        <S.KeywordToken key={`${el}_${index}`} isMatched={props.keyword === el}>
                           {el}
                         </S.KeywordToken>
                       ))}

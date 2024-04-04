@@ -8,9 +8,9 @@ import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
 // Component
-import { Modal } from "antd";
+// import { Modal } from "antd";
 // Type
-import type { IFormData } from "../../../../units/product/write/ProductWrite.types";
+import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
 
 interface IUseProductArgs {
@@ -69,8 +69,9 @@ export const useProduct = (args?: IUseProductArgs) => {
   };
 
   // 판매 상품 등록
-  const onClickCreate = async (data: IFormData): Promise<void> => {
+  const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof args === "undefined") return;
+    const { Modal } = await import("antd");
     try {
       const result = await createProduct({
         variables: {
@@ -95,6 +96,7 @@ export const useProduct = (args?: IUseProductArgs) => {
           },
         ],
       });
+      Modal.success({ content: "상품이 등록되었습니다!" });
       void router.push(`/products/${result.data?.createUseditem._id}`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
@@ -102,8 +104,9 @@ export const useProduct = (args?: IUseProductArgs) => {
   };
 
   // 판매 상품 수정
-  const onClickUpdate = async (data: IFormData): Promise<void> => {
+  const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof args === "undefined") return;
+    const { Modal } = await import("antd");
     // files
     const currentFiles = JSON.stringify(args.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
@@ -141,14 +144,16 @@ export const useProduct = (args?: IUseProductArgs) => {
           },
         ],
       });
+      Modal.success({ content: "상품이 수정되었습니다!" });
       void router.push(`/products/${result.data?.updateUseditem._id}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
   // 판매 상품 삭제
   const onClickDelete = async (): Promise<void> => {
+    const { Modal } = await import("antd");
     try {
       await deleteProduct({
         variables: { useditemId: id },
@@ -158,10 +163,10 @@ export const useProduct = (args?: IUseProductArgs) => {
           },
         ],
       });
-      Modal.error({ content: "게시물이 삭제되었습니다." });
+      Modal.error({ content: "상품이 삭제되었습니다!" });
       void router.push("/products");
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 

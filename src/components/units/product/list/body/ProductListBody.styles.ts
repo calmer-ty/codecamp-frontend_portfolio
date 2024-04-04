@@ -10,7 +10,7 @@ export const Body = styled.div`
 `;
 export const ListWrap = styled.main`
   overflow-y: scroll;
-  height: calc(191 * 10px);
+  max-height: calc(194px * 10);
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
 `;

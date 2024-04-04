@@ -1,6 +1,9 @@
 import Link from "next/link";
 // Scroll
 import InfiniteScroll from "react-infinite-scroller";
+// Hooks
+import { useScrollProductsList } from "../../../../commons/hooks/customs/product/useScrollProductsList";
+import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
 // Component
 import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
 import UserIcon01 from "../../../../commons/icon/user/01";
@@ -9,19 +12,20 @@ import TagsView01 from "../../../../commons/tags/view/01";
 import DataOutputString01 from "../../../../commons/data/output/string/01";
 // Style
 import * as S from "./ProductListBody.styles";
-// Type
-import type { IProductListBodyProps } from "../ProductList.types";
-// Etc
-import { v4 as uuidv4 } from "uuid";
+
 const SECRET_STRING = "!@#$";
 
-export default function ProductListBody(props: IProductListBodyProps) {
+export default function ProductListBody() {
+  const { data, onLoadMore, refetch } = useScrollProductsList();
+  const { keyword, onChangeSearch } = useSearchbar({
+    refetch,
+  });
   return (
     <S.Body>
-      <Searchbar01 onChangeSearch={props.onChangeSearch} />
+      <Searchbar01 onChangeSearch={onChangeSearch} />
       <S.ListWrap>
-        <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
-          {props.dataProductsList?.fetchUseditems?.map((el, index) => (
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
+          {data?.fetchUseditems?.map((el, index) => (
             <S.List key={`${el._id}_${index}`}>
               <Link href={`/products/${el._id}`}>
                 <a>
@@ -30,14 +34,13 @@ export default function ProductListBody(props: IProductListBodyProps) {
               </Link>
               <S.ItemInfo>
                 <S.InfoTop>
-                  {/* 링크되는 제목 */}
                   <Link href={`/products/${el._id}`}>
                     <S.ItemTitle>
                       {el.name
-                        .replaceAll(props.keyword, `${SECRET_STRING}${props.keyword}${SECRET_STRING}`)
+                        .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
                         .split(SECRET_STRING)
                         .map((el, index) => (
-                          <S.KeywordToken key={`${el}_${uuidv4()}`} isMatched={props.keyword === el}>
+                          <S.KeywordToken key={`${el}_${index}`} isMatched={keyword === el}>
                             {el}
                           </S.KeywordToken>
                         ))}

@@ -4,20 +4,29 @@ export declare const window: typeof globalThis & {
   kakao: any;
 };
 
-export default function useMapSelect() {
+export default function useMap(lat: any, lng: any) {
+  console.log(lat, lng);
+  console.log(lat, lng);
+  if (lat === undefined) lat = 33.450701;
+  if (lng === undefined) lat = 126.570667;
   const [latlng, setLatlng] = useState<any>("");
   const [address, setAddress] = useState<any>("");
+
   useEffect(() => {
     const script = document.createElement("script");
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=86e8d7dcdac578c6f87227c9b54397f1&libraries=services&autoload=false";
+    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=86e8d7dcdac578c6f87227c9b54397f1&libraries=services&autoload=false";
 
     document.head.appendChild(script);
 
     script.onload = () => {
       window.kakao.maps.load(function () {
         const container = document.getElementById("map");
-        const markerPosition = new window.kakao.maps.LatLng(33.450701, 126.570667);
+
+        // -----------------------------------
+        // 공통 부분: 맵 초기화
+        // -----------------------------------
+
+        const markerPosition = new window.kakao.maps.LatLng(lat, lng);
         const options = {
           center: markerPosition,
           level: 3,
@@ -55,9 +64,11 @@ export default function useMapSelect() {
         });
       });
     };
-  }, []);
-  return {
-    address,
-    latlng,
-  };
+    return () => {
+      // 스크립트 제거
+      document.head.removeChild(script);
+    };
+  }, [lat, lng]);
+
+  return { address, latlng };
 }

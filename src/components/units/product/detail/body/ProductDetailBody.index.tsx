@@ -6,7 +6,8 @@ import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
 import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
 import { useFetchProduct } from "../../../../commons/hooks/queries/product/useFetchProduct";
 import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
-import useMapView from "../../../../commons/hooks/customs/useMapView";
+// import useMapView from "../../../../commons/hooks/customs/useMapView";
+import useMap from "../../../../commons/hooks/customs/useMap";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import HeartIcon02 from "../../../../commons/icon/heart/02";
@@ -37,7 +38,8 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { onClickDelete, onClickPayment } = useProduct();
   const { onClickPick, pick } = useProductPicked();
 
-  useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
+  // useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
+  useMap(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
 
   // 해당 페이지 정보 로컬 스토리지 저장
   useEffect(() => {
@@ -73,11 +75,7 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
               {pick === 1 && <HeartIcon01 size={20} />}
               {pick === 0 && <HeartIcon02 size={20} />}
             </button>
-            <S.PickScore>
-              {typeof props.data?.fetchUseditem.pickedCount === "number"
-                ? props.data?.fetchUseditem.pickedCount + pick
-                : props.data?.fetchUseditem.pickedCount}
-            </S.PickScore>
+            <S.PickScore>{typeof props.data?.fetchUseditem.pickedCount === "number" ? props.data?.fetchUseditem.pickedCount + pick : props.data?.fetchUseditem.pickedCount}</S.PickScore>
           </S.Pick>
         </S.BodyHeader>
         <Slider {...settings}>

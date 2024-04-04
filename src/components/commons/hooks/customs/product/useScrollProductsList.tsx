@@ -12,8 +12,7 @@ export const useScrollProductsList = () => {
       updateQuery: (prev, { fetchMoreResult }) => {
         console.log(prev.fetchUseditems);
         console.log(fetchMoreResult.fetchUseditems);
-        if (fetchMoreResult?.fetchUseditems === undefined) return prev; // 추가된 부분
-        // if (fetchMoreResult?.fetchUseditems === undefined) return { fetchUseditems: [...prev.fetchUseditems] };
+        if (fetchMoreResult?.fetchUseditems === undefined) return { fetchUseditems: [...prev.fetchUseditems] };
         return {
           fetchUseditems: [...prev.fetchUseditems, ...fetchMoreResult.fetchUseditems],
         };

@@ -9,7 +9,7 @@ import Button01 from "../../../commons/element/buttons/01";
 import TagsWrite01 from "../../../commons/tags/write/01";
 // Custom Hooks
 import { useProduct } from "../../../commons/hooks/customs/product/useProduct";
-import useMapSelection from "../../../commons/hooks/customs/useMapSelect";
+// import useMapSelection from "../../../commons/hooks/customs/useMapSelect";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
@@ -17,6 +17,7 @@ import { schemaProductWrite } from "../../../../commons/libraries/validation";
 import type { IFormDataProductWrite, IProductWriteProps } from "./ProductWrite.types";
 // Style
 import * as S from "./ProductWrite.styles";
+import useMap from "../../../commons/hooks/customs/useMap";
 
 export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormDataProductWrite>({
@@ -24,7 +25,9 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     mode: "onChange",
   });
   // 맵 선택 Hook
-  const { latlng, address } = useMapSelection();
+
+  const { latlng, address } = useMap(33.450701, 126.570667);
+  // const { latlng, address } = useMapSelection();
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
@@ -53,6 +56,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   tagsProps.children[0].forEach((data: any) => {
     tags.push(String(data.key));
   });
+
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({ fileUrls, latlng, tags });
 
@@ -63,40 +67,24 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
         <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
           <S.InputWrap>
             <Label01 text="상품명" />
-            <Input01
-              placeholder="상품명을 작성해주세요."
-              defaultValue={props.data?.fetchUseditem.name ?? ""}
-              register={register("name")}
-            />
+            <Input01 placeholder="상품명을 작성해주세요." defaultValue={props.data?.fetchUseditem.name ?? ""} register={register("name")} />
             <Error01 text={formState.errors.name?.message} />
           </S.InputWrap>
           <S.InputWrap>
             <Label01 text="한줄요약" />
-            <Input01
-              placeholder="상품 한줄요약을 작성해주세요."
-              defaultValue={props.data?.fetchUseditem.remarks ?? ""}
-              register={register("remarks")}
-            />
+            <Input01 placeholder="상품 한줄요약을 작성해주세요." defaultValue={props.data?.fetchUseditem.remarks ?? ""} register={register("remarks")} />
             <Error01 text={formState.errors.remarks?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
             <Label01 text="상품설명" />
-            <S.Contents
-              placeholder="상품설명을 작성해주세요."
-              defaultValue={props.data?.fetchUseditem.contents ?? ""}
-              onChange={onChangeContents}
-            />
+            <S.Contents placeholder="상품설명을 작성해주세요." defaultValue={props.data?.fetchUseditem.contents ?? ""} onChange={onChangeContents} />
             <Error01 text={formState.errors.contents?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
             <Label01 text="판매 가격" />
-            <Input01
-              placeholder="상품가격을 작성해주세요."
-              defaultValue={props.data?.fetchUseditem.price ?? 0}
-              register={register("price")}
-            />
+            <Input01 placeholder="상품가격을 작성해주세요." defaultValue={props.data?.fetchUseditem.price ?? 0} register={register("price")} />
             <Error01 text={formState.errors.price?.message} />
           </S.InputWrap>
 

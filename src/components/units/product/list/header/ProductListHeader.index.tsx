@@ -1,19 +1,20 @@
 import Link from "next/link";
+import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import DataOutputString01 from "../../../../commons/data/output/string/01";
 // Style
 import * as S from "./ProductListHeader.styles";
 // Type
-import type { IProductListHeaderProps } from "../ProductList.types";
 import { memo } from "react";
 
-function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
+function ProductListHeader(): JSX.Element {
+  const { data } = useFetchProductsBest();
   return (
     <S.Header>
       <S.Title>베스트 상품</S.Title>
       <S.ListWrap>
-        {props.dataProductsBest?.fetchUseditemsOfTheBest.map((el) => (
+        {data?.fetchUseditemsOfTheBest.map((el) => (
           <S.List key={el._id}>
             <Link href={`/products/${el._id}`}>
               <a>
