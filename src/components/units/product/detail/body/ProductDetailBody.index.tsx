@@ -38,8 +38,9 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { onClickDelete, onClickPayment } = useProduct();
   const { onClickPick, pick } = useProductPicked();
 
-  // useMapView(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
-  useMap(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng);
+  const dataLat = props.data?.fetchUseditem.useditemAddress?.lat;
+  const dataLng = props.data?.fetchUseditem.useditemAddress?.lng;
+  useMap(dataLat, dataLng, false);
 
   // 해당 페이지 정보 로컬 스토리지 저장
   useEffect(() => {
@@ -87,10 +88,7 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
               </S.ImgWrap>
             ))}
         </Slider>
-        {/* <S.ImgWrap> */}
-        {/* {props.data?.fetchUseditem.images?.filter((el) => el).map((el) => <S.ImgItem key={el} src={`http://storage.googleapis.com/${el}`} />)} */}
-        {/* {props.data?.fetchUseditem.images?.filter((el) => el).map((el) => console.log(el))} */}
-        {/* </S.ImgWrap> */}
+
         <S.FlexColumn>
           {typeof window !== "undefined" && (
             <S.Contents

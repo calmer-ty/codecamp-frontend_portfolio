@@ -1,9 +1,9 @@
-import { Modal } from "antd";
 import * as yup from "yup";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-export const checkValidation = (file?: File): boolean => {
+export const checkValidation = async (file?: File): Promise<boolean> => {
+  const { Modal } = await import("antd");
   if (typeof file === "undefined") {
     Modal.error({ content: "파일이 없습니다." });
     return false;
@@ -21,11 +21,7 @@ export const checkValidation = (file?: File): boolean => {
   return true;
 };
 
-const passwordSchema = yup
-  .string()
-  .required("비밀번호 입력은 필수입니다.")
-  .min(4, "비밀번호는 4자리 이상이여야 합니다")
-  .max(16, "비밀번호는 16자리 이하이여야 합니다");
+const passwordSchema = yup.string().required("비밀번호 입력은 필수입니다.").min(4, "비밀번호는 4자리 이상이여야 합니다").max(16, "비밀번호는 16자리 이하이여야 합니다");
 
 export const schemaBoardWrite = yup.object({
   writer: yup.string().required("작성자 입력은 필수입니다."),

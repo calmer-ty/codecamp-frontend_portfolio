@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
 import { Modal, Rate } from "antd";
-
+// import dynamic from "next/dynamic";
+// const Modal = dynamic(async () => await import("antd"), {
+//   ssr: false,
+// });
+// const Rate = dynamic(async () => await import("antd"), {
+//   ssr: false,
+// });
 // Layout
 export const FlexRow = styled.div`
   display: flex;

@@ -26,7 +26,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   });
   // 맵 선택 Hook
 
-  const { latlng, address } = useMap(33.450701, 126.570667);
+  const { latlng, address } = useMap(33.450701, 126.570667, true);
   // const { latlng, address } = useMapSelection();
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
