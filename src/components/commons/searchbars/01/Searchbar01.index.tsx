@@ -1,11 +1,12 @@
-import type { ChangeEvent } from "react";
 import * as S from "./Searchbar01.styles";
+import { memo, type ChangeEvent } from "react";
 
 interface ISearchBar01 {
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Searchbar01(props: ISearchBar01): JSX.Element {
+function Searchbar01(props: ISearchBar01): JSX.Element {
+  console.log("Searchbar01 렌더링 됩니다");
   return (
     <S.Searchbar>
       <S.SearchIcon />
@@ -13,3 +14,4 @@ export default function Searchbar01(props: ISearchBar01): JSX.Element {
     </S.Searchbar>
   );
 }
+export default memo(Searchbar01);

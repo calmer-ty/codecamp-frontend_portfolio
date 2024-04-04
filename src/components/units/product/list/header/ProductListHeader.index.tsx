@@ -6,8 +6,9 @@ import DataOutputString01 from "../../../../commons/data/output/string/01";
 import * as S from "./ProductListHeader.styles";
 // Type
 import type { IProductListHeaderProps } from "../ProductList.types";
+import { memo } from "react";
 
-export default function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
+function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
   return (
     <S.Header>
       <S.Title>베스트 상품</S.Title>
@@ -34,3 +35,5 @@ export default function ProductListHeader(props: IProductListHeaderProps): JSX.E
     </S.Header>
   );
 }
+
+export default memo(ProductListHeader);

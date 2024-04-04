@@ -21,8 +21,8 @@ export default function ProductListBody(props: IProductListBodyProps) {
       <Searchbar01 onChangeSearch={props.onChangeSearch} />
       <S.ListWrap>
         <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
-          {props.dataProductsList?.fetchUseditems?.map((el) => (
-            <S.List key={uuidv4()}>
+          {props.dataProductsList?.fetchUseditems?.map((el, index) => (
+            <S.List key={`${el._id}_${index}`}>
               <Link href={`/products/${el._id}`}>
                 <a>
                   <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
@@ -36,8 +36,8 @@ export default function ProductListBody(props: IProductListBodyProps) {
                       {el.name
                         .replaceAll(props.keyword, `${SECRET_STRING}${props.keyword}${SECRET_STRING}`)
                         .split(SECRET_STRING)
-                        .map((el) => (
-                          <S.KeywordToken key={uuidv4()} isMatched={props.keyword === el}>
+                        .map((el, index) => (
+                          <S.KeywordToken key={`${el}_${uuidv4()}`} isMatched={props.keyword === el}>
                             {el}
                           </S.KeywordToken>
                         ))}
