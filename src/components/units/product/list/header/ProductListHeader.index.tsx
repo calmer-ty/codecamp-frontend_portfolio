@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
 // Component
-import DataOutputString01 from "../../../../commons/data/output/string/01";
 import Picked01 from "../../../../commons/picked/01";
 // Style
 import * as S from "./ProductListHeader.styles";
@@ -15,19 +14,15 @@ function ProductListHeader(): JSX.Element {
       <S.Title>베스트 상품</S.Title>
       <S.ListWrap>
         {data?.fetchUseditemsOfTheBest.map((el) => (
-          <S.List key={el._id}>
-            <Link href={`/products/${el._id}`}>
-              <a>
-                <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
-              </a>
-            </Link>
-            <Link href={`/products/${el._id}`}>
+          <Link key={el._id} href={`/products/${el._id}`}>
+            <S.List>
+              <S.MainImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
               <S.ItemTitle>{el.name}</S.ItemTitle>
-            </Link>
-            <DataOutputString01 text={el.remarks} />
-            <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
-            <Picked01 text={el.pickedCount} />
-          </S.List>
+              <S.ItemRemark>{el.name}</S.ItemRemark>
+              <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
+              <Picked01 text={el.pickedCount} />
+            </S.List>
+          </Link>
         ))}
       </S.ListWrap>
     </S.Header>

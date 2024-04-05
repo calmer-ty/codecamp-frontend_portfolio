@@ -6,11 +6,10 @@ import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
 import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
 import { useFetchProduct } from "../../../../commons/hooks/queries/product/useFetchProduct";
 import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
-// import useMapView from "../../../../commons/hooks/customs/useMapView";
 import useMap from "../../../../commons/hooks/customs/useMap";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
-import HeartIcon02 from "../../../../commons/icon/heart/02";
+// import HeartIcon02 from "../../../../commons/icon/heart/02";
 import TagsView01 from "../../../../commons/tags/view/01";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -36,7 +35,7 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { data } = useFetchProduct({ useditemId: id });
 
   const { onClickDelete, onClickPayment } = useProduct();
-  const { onClickPick, pick } = useProductPicked();
+  const { onClickPick } = useProductPicked();
 
   const dataLat = props.data?.fetchUseditem.useditemAddress?.lat;
   const dataLng = props.data?.fetchUseditem.useditemAddress?.lng;
@@ -73,10 +72,9 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
           </S.TitleText>
           <S.Pick>
             <button onClick={onClickPick}>
-              {pick === 1 && <HeartIcon01 size={20} />}
-              {pick === 0 && <HeartIcon02 size={20} />}
+              <HeartIcon01 size={20} />
             </button>
-            <S.PickScore>{typeof props.data?.fetchUseditem.pickedCount === "number" ? props.data?.fetchUseditem.pickedCount + pick : props.data?.fetchUseditem.pickedCount}</S.PickScore>
+            <S.PickScore>{data?.fetchUseditem.pickedCount}</S.PickScore>
           </S.Pick>
         </S.BodyHeader>
         <Slider {...settings}>

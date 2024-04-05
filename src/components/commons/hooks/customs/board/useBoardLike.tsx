@@ -7,11 +7,12 @@ import { useIdCheck } from "../useIdCheck";
 
 import { Modal } from "antd";
 
-export const useBoardRate = () => {
+export const useBoardLike = () => {
   const { id } = useIdCheck("boardId");
   const { data } = useFetchBoard({
     boardId: id,
   });
+
   const router = useRouter();
 
   const [likeBoard] = useLikeBoard();

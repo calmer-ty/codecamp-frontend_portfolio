@@ -15,28 +15,28 @@ export const ListWrap = styled.main`
   display: flex;
   justify-content: space-between;
 `;
-export const List = styled.article`
+export const List = styled.a`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 282px;
-  height: 390px;
+  width: 280px;
   padding: 20px;
   box-shadow: 2px 2px 3px #cdcdcd;
   :hover {
     background-color: #dedede;
     box-shadow: none;
+    color: blue;
   }
+  cursor: pointer;
 `;
 
-export const ItemImg = styled.img`
+export const MainImg = styled.img`
   width: 242px;
   height: 242px;
   margin-bottom: 20px;
   object-fit: contain;
 `;
-export const ItemTitle = styled.a`
-  width: 100%;
+export const ItemTitle = styled.span`
   margin-bottom: 4px;
   font-size: 18px;
   font-weight: bold;
@@ -44,10 +44,6 @@ export const ItemTitle = styled.a`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  cursor: pointer;
-  :hover {
-    color: blue;
-  }
 `;
 export const ItemRemark = styled.span`
   width: 100%;
@@ -57,6 +53,7 @@ export const ItemPrice = styled.span`
   width: 100%;
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 4px;
 `;
 export const Picked = styled.div`
   position: absolute;

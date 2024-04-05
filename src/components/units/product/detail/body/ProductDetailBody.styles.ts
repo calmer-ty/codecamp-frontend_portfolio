@@ -45,8 +45,7 @@ export const Pick = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 4px;
-  cursor: pointer;
+  row-gap: 5px;
 `;
 export const PickScore = styled.span``;
 

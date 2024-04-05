@@ -11,13 +11,14 @@ const iconStyles = {
 };
 const divStyles = {
   display: "flex",
-  columnGap: "5px",
+  rowGap: "5px",
   alignItems: "center",
+  flexDirection: "column" as "row" | "row-reverse" | "column" | "column-reverse",
 };
 
-export default function Picked01(props: IPicked01Props): JSX.Element {
+export default function Picked02(props: IPicked01Props): JSX.Element {
   return (
-    <div style={{ ...divStyles }}>
+    <div style={divStyles}>
       <HeartFilled style={iconStyles} />
       <span>{props.text}</span>
     </div>
