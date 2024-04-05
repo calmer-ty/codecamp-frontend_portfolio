@@ -7,11 +7,11 @@ import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
 // Component
 import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
 import UserIcon01 from "../../../../commons/icon/user/01";
-import HeartIcon01 from "../../../../commons/icon/heart/01";
 import TagsView01 from "../../../../commons/tags/view/01";
 import DataOutputString01 from "../../../../commons/data/output/string/01";
 // Style
 import * as S from "./ProductListBody.styles";
+import Picked01 from "../../../../commons/picked/01";
 
 const SECRET_STRING = "!@#$";
 
@@ -54,10 +54,7 @@ export default function ProductListBody() {
                     <UserIcon01 size={16} padding={4} />
                     <span>{el.seller?.name}</span>
                   </S.FlexRow>
-                  <S.FlexRow>
-                    <HeartIcon01 size={20} />
-                    <span>{el.pickedCount}</span>
-                  </S.FlexRow>
+                  <Picked01 text={el.pickedCount} />
                 </S.InfoBottom>
               </S.ItemInfo>
               <S.ItemPrice>

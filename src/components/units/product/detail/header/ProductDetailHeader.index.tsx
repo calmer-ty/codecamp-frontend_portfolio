@@ -17,11 +17,7 @@ export default function ProductDetailHeader(props: IProductDetailHeaderProps) {
       </S.HeaderItem1>
       <S.HeaderItem2>
         <S.LinkBtn src="/images/board/detail/ic_link.png"></S.LinkBtn>
-        <S.AddressInfo
-          title={`${props.data?.fetchUseditem?.useditemAddress?.address ?? ""} ${
-            props.data?.fetchUseditem?.useditemAddress?.addressDetail ?? ""
-          }`}
-        >
+        <S.AddressInfo title={`${props.data?.fetchUseditem?.useditemAddress?.address ?? ""} ${props.data?.fetchUseditem?.useditemAddress?.addressDetail ?? ""}`}>
           <img src="/images/board/detail/ic_location.png" />
         </S.AddressInfo>
       </S.HeaderItem2>

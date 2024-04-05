@@ -1,6 +1,6 @@
 // Component
 import { memo, useEffect, useState } from "react";
-import HeartIcon01 from "../../icon/heart/01";
+import Picked01 from "../../picked/01";
 import TagsView01 from "../../tags/view/01";
 // Type
 import type { IUseditem } from "../../../../commons/types/generated/types";
@@ -19,10 +19,7 @@ function TodayView01(): JSX.Element {
       <S.ViewTitle>오늘 본 상품</S.ViewTitle>
       {product.map((el) => (
         <S.ViewItem key={el._id}>
-          <S.Picked>
-            <HeartIcon01 size={20} />
-            <span>{el.pickedCount}</span>
-          </S.Picked>
+          <Picked01 text={el.pickedCount} />
           <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
           <S.ItemName title={el.name}>{el.name}</S.ItemName>
           <S.ItemRemark title={el.remarks}>{el.remarks}</S.ItemRemark>

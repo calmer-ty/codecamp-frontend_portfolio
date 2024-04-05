@@ -10,8 +10,8 @@ export const useScrollComment = () => {
         page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        console.log(prev);
-        console.log(fetchMoreResult);
+        // console.log(prev);
+        // console.log(fetchMoreResult);
         if (fetchMoreResult?.fetchBoardComments === undefined) return { fetchBoardComments: [...prev.fetchBoardComments] };
 
         return {

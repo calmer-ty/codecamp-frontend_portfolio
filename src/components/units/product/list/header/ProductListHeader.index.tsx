@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
 // Component
-import HeartIcon01 from "../../../../commons/icon/heart/01";
 import DataOutputString01 from "../../../../commons/data/output/string/01";
+import Picked01 from "../../../../commons/picked/01";
 // Style
 import * as S from "./ProductListHeader.styles";
 // Type
@@ -26,10 +26,7 @@ function ProductListHeader(): JSX.Element {
             </Link>
             <DataOutputString01 text={el.remarks} />
             <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
-            <S.Picked>
-              <HeartIcon01 size={20} />
-              <span>{el.pickedCount}</span>
-            </S.Picked>
+            <Picked01 text={el.pickedCount} />
           </S.List>
         ))}
       </S.ListWrap>

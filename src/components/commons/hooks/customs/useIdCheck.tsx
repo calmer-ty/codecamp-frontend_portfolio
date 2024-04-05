@@ -1,21 +1,24 @@
-// import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export const useIdCheck = (id: string) => {
   const router = useRouter();
-  const queryId = router.query[id];
+  const [queryId, setQueryId] = useState<string>("");
 
-  if (queryId === undefined) {
-    // console.log("id를 못찾았습니다");
-    return { id: "" };
-  }
-  if (typeof queryId === "string") {
-    // console.log("id를 찾았습니다");
-    return { id: queryId };
-  }
-  if (typeof queryId === "object") return { id: queryId[0] };
+  useEffect(() => {
+    const idFromQuery = router.query[id];
 
-  return {
-    id: "",
-  };
+    if (idFromQuery === undefined) {
+      console.log("id를 못찾았습니다");
+      setQueryId("");
+    } else if (typeof idFromQuery === "string") {
+      console.log("id를 찾았습니다");
+      setQueryId(idFromQuery);
+    } else if (typeof idFromQuery === "object") {
+      console.log("id를 찾았습니다");
+      setQueryId(idFromQuery[0]);
+    }
+  }, [router.query[id]]);
+
+  return { id: queryId };
 };

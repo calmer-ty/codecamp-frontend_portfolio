@@ -17,7 +17,7 @@ export const WithAuth =
 
     useEffect(() => {
       void restoreAccessToken.toPromise().then((newAccessToken) => {
-        console.log(newAccessToken);
+        // console.log(newAccessToken);
         if (newAccessToken === undefined) {
           Modal.error({ content: "로그인 후 이용 가능합니다." });
           void router.push("/user/login");
