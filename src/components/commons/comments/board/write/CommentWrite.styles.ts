@@ -8,7 +8,7 @@ export const CommentWrite = styled.article`
   flex-direction: column;
   width: 1200px;
   padding: 40px 0;
-  border-top: ${(props: ICommentWriteProps) => (props.isEdit ? "" : "1px solid #bdbdbd")};
+  /* border-top: ${(props: ICommentWriteProps) => (props.isEdit ? "" : "1px solid #bdbdbd")}; */
 `;
 export const Form = styled.form`
   display: flex;

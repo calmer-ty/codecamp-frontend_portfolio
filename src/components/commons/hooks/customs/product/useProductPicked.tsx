@@ -15,12 +15,10 @@ const FETCH_USEDITEM = gql`
 
 export const useProductPicked = () => {
   const { id } = useIdCheck("useditemId");
-  // const { data } = useFetchProduct({ useditemId: id });
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(FETCH_BOARD, {
-    variables: { boardId: "65fc1a7e5d6eaa0029f7e4aa" },
-  });
-
-  console.log(data);
+  const { data } = useFetchProduct({ useditemId: id });
+  // const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(FETCH_BOARD, {
+  //   variables: { boardId: "65fc1a7e5d6eaa0029f7e4aa" },
+  // });
 
   const [pickProduct] = useToggleProductPick();
 

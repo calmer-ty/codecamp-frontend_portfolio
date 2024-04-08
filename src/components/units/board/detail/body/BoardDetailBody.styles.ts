@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import ReactPlayer from "react-player";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 
-export const Body = styled.section`
+export const Body = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,18 +21,34 @@ export const Contents = styled.p`
   margin-top: 40px;
 `;
 
-export const LikeWrap = styled.section`
+export const LikeWrap = styled.div`
   display: flex;
   justify-content: center;
   column-gap: 20px;
 `;
-export const LikeItem = styled.section`
+export const LikeItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 40px;
   height: 51px;
+`;
+
+export const LinkWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+  column-gap: 24px;
+`;
+export const LinkBtn = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  cursor: pointer;
 `;
 
 export const LikeScore = styled.div``;

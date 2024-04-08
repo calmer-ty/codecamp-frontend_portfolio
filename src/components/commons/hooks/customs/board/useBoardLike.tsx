@@ -4,24 +4,22 @@ import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
 import { useLikeBoard } from "../../mutations/board/useLikeBoard";
 import { useDislikeBoard } from "../../mutations/board/useDislikeBoard";
 import { useIdCheck } from "../useIdCheck";
-
-import { useCallback } from "react";
+import type { IQuery, IQueryFetchBoardArgs } from "../../../../../commons/types/generated/types";
 
 export const useBoardLike = () => {
+  const router = useRouter();
   const { id } = useIdCheck("boardId");
   const { data } = useFetchBoard({
     boardId: id,
   });
 
-  const router = useRouter();
-
   const [likeBoard] = useLikeBoard();
   const [dislikeBoard] = useDislikeBoard();
 
-  const onClickLike = useCallback(async () => {
+  const onClickLike = async () => {
     const { Modal } = await import("antd");
     if (typeof router.query.boardId !== "string") {
-      alert("시스템에 문제가 있습니다.");
+      Modal.error({ content: "시스템에 문제가 있습니다" });
       return;
     }
 
@@ -32,6 +30,12 @@ export const useBoardLike = () => {
           likeBoard: (data?.fetchBoard.likeCount ?? 0) + 1,
         },
         update: (cache, { data }) => {
+          const prevData = cache.readQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>({
+            query: FETCH_BOARD,
+            variables: {
+              boardId: id,
+            },
+          });
           cache.writeQuery({
             query: FETCH_BOARD,
             variables: {
@@ -41,6 +45,7 @@ export const useBoardLike = () => {
               fetchBoard: {
                 _id: id,
                 __typename: "Board",
+                ...prevData?.fetchBoard,
                 likeCount: data?.likeBoard,
               },
             },
@@ -50,23 +55,38 @@ export const useBoardLike = () => {
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
-  }, [likeBoard, router.query.boardId, id, data]);
-
+  };
   const onClickDislike = async (): Promise<void> => {
     const { Modal } = await import("antd");
     if (typeof router.query.boardId !== "string") {
-      alert("시스템에 문제가 있습니다.");
+      Modal.error({ content: "시스템에 문제가 있습니다" });
       return;
     }
     try {
       await dislikeBoard({
         variables: { boardId: router.query.boardId },
-        refetchQueries: [
-          {
+        update: (cache, { data }) => {
+          const prevData = cache.readQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>({
             query: FETCH_BOARD,
-            variables: { boardId: router.query.boardId },
-          },
-        ],
+            variables: {
+              boardId: id,
+            },
+          });
+          cache.writeQuery({
+            query: FETCH_BOARD,
+            variables: {
+              boardId: id,
+            },
+            data: {
+              fetchBoard: {
+                _id: id,
+                __typename: "Board",
+                ...prevData?.fetchBoard,
+                dislikeCount: data?.dislikeBoard,
+              },
+            },
+          });
+        },
       });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

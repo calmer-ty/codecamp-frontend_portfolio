@@ -1,6 +1,4 @@
 import { useForm } from "react-hook-form";
-//
-import * as S from "./CommentWrite.styles";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaBoardComment } from "../../../../../commons/libraries/validation";
@@ -12,6 +10,8 @@ import TitleComment from "../../../element/title/comment";
 import InputComment from "../../../element/inputs/comment";
 // Type
 import type { ICommentWriteProps, IFormData } from "./CommentWrite.types";
+// Style
+import * as S from "./CommentWrite.styles";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
   const { register, handleSubmit, watch } = useForm<IFormData>({

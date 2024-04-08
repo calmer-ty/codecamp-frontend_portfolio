@@ -1,14 +1,8 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 export const CardWrap = styled.section`
   display: flex;
   flex-direction: column;
-  width: 1200px;
-  padding: 84px 102px;
+  padding: 80px 100px;
   border: 1px solid #bdbdbd;
 `;

@@ -1,10 +1,16 @@
-import { useBoardLike } from "../../../../commons/hooks/customs/board/useBoardLike";
-import type { IBoardDetailProps } from "../BoardDetail.types";
+import { memo } from "react";
+import Link from "next/link";
 
+import { useBoard } from "../../../../commons/hooks/customs/board/useBoard";
+import { useBoardLike } from "../../../../commons/hooks/customs/board/useBoardLike";
+
+import type { IBoardDetailProps } from "../BoardDetail.types";
 import * as S from "./BoardDetailBody.styles";
 
-export default function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
+function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
+  console.log(props);
   const { onClickLike, onClickDislike } = useBoardLike();
+  const { onClickDelete } = useBoard();
 
   return (
     <S.Body>
@@ -22,6 +28,16 @@ export default function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
           <S.LikeScore>{props.data?.fetchBoard.dislikeCount}</S.LikeScore>
         </S.LikeItem>
       </S.LikeWrap>
+      <S.LinkWrap>
+        <Link href={"/boards"}>
+          <S.LinkBtn>목록으로</S.LinkBtn>
+        </Link>
+        <Link href={`/boards/${props.data?.fetchBoard._id}/edit`}>
+          <S.LinkBtn>수정하기</S.LinkBtn>
+        </Link>
+        <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
+      </S.LinkWrap>
     </S.Body>
   );
 }
+export default memo(BoardDetailBody);
