@@ -1,15 +1,15 @@
-import * as S from "./BoardDetailFooter.styles";
 import Link from "next/link";
-
+// Custom Hooks
 import { useBoard } from "../../../../commons/hooks/customs/board/useBoard";
 import { useScrollComment } from "../../../../commons/hooks/customs/board/useScrollComment";
-
+// Component
 import InfiniteScroll from "react-infinite-scroller";
-
 import CommentWrite from "../../../../commons/comments/board/write/CommentWrite.index";
 import CommentList from "../../../../commons/comments/board/list/CommentList.index";
-
+// Type
 import type { IBoardDetailProps } from "../BoardDetail.types";
+// Style
+import * as S from "./BoardDetailFooter.styles";
 
 export default function BoardDetailFooter(props: IBoardDetailProps): JSX.Element {
   const { onClickDelete } = useBoard();

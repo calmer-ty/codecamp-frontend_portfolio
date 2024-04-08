@@ -5,7 +5,7 @@ import { useLikeBoard } from "../../mutations/board/useLikeBoard";
 import { useDislikeBoard } from "../../mutations/board/useDislikeBoard";
 import { useIdCheck } from "../useIdCheck";
 
-import { Modal } from "antd";
+import { useCallback } from "react";
 
 export const useBoardLike = () => {
   const { id } = useIdCheck("boardId");
@@ -18,25 +18,20 @@ export const useBoardLike = () => {
   const [likeBoard] = useLikeBoard();
   const [dislikeBoard] = useDislikeBoard();
 
-  const onClickLike = async (): Promise<void> => {
+  const onClickLike = useCallback(async () => {
+    const { Modal } = await import("antd");
     if (typeof router.query.boardId !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
     }
+
     try {
       await likeBoard({
         variables: { boardId: router.query.boardId },
-        // refetchQueries: [
-        //   {
-        //     query: FETCH_BOARD,
-        //     variables: { boardId: router.query.boardId },
-        //   },
-        // ],
         optimisticResponse: {
           likeBoard: (data?.fetchBoard.likeCount ?? 0) + 1,
         },
         update: (cache, { data }) => {
-          // writeQuery => 내가 없던걸 추가
           cache.writeQuery({
             query: FETCH_BOARD,
             variables: {
@@ -55,9 +50,10 @@ export const useBoardLike = () => {
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
-  };
+  }, [likeBoard, router.query.boardId, id, data]);
 
   const onClickDislike = async (): Promise<void> => {
+    const { Modal } = await import("antd");
     if (typeof router.query.boardId !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;

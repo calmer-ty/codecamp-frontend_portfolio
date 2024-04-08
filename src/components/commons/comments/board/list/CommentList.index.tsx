@@ -1,15 +1,14 @@
-import * as S from "./CommentList.styles";
 import CommentWrite from "../write/CommentWrite.index";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-
-import { getDate } from "../../../../../commons/libraries/utils";
-
 // Custom Hooks
 import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useToggle } from "../../../hooks/customs/useToggle";
-
+// Type
 import type { IBoardComment } from "../../../../../commons/types/generated/types";
+// Style
+import * as S from "./CommentList.styles";
+import { getDate } from "../../../../../commons/libraries/utils";
 
 interface CommentItemProps {
   el: IBoardComment;

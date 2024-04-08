@@ -16,11 +16,7 @@ export default function BoardDetailHeader(props: IBoardDetailProps): JSX.Element
       </S.FlexRow>
       <S.FlexRow>
         <S.OptBtn src="/images/board/detail/ic_link.png"></S.OptBtn>
-        <S.AddressInfo
-          title={`${props.data?.fetchBoard?.boardAddress?.address ?? ""} ${
-            props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""
-          }`}
-        >
+        <S.AddressInfo title={`${props.data?.fetchBoard?.boardAddress?.address ?? ""} ${props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}`}>
           <S.OptBtn src="/images/board/detail/ic_location.png"></S.OptBtn>
         </S.AddressInfo>
       </S.FlexRow>

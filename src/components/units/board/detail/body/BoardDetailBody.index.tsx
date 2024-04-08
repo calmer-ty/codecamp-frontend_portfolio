@@ -1,7 +1,7 @@
-import * as S from "./BoardDetailBody.styles";
-
 import { useBoardLike } from "../../../../commons/hooks/customs/board/useBoardLike";
 import type { IBoardDetailProps } from "../BoardDetail.types";
+
+import * as S from "./BoardDetailBody.styles";
 
 export default function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
   const { onClickLike, onClickDislike } = useBoardLike();
