@@ -1,4 +1,3 @@
-import { memo } from "react";
 import Link from "next/link";
 
 import { useBoard } from "../../../../commons/hooks/customs/board/useBoard";
@@ -7,8 +6,7 @@ import { useBoardLike } from "../../../../commons/hooks/customs/board/useBoardLi
 import type { IBoardDetailProps } from "../BoardDetail.types";
 import * as S from "./BoardDetailBody.styles";
 
-function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
-  console.log(props);
+export default function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
   const { onClickLike, onClickDislike } = useBoardLike();
   const { onClickDelete } = useBoard();
 
@@ -40,4 +38,3 @@ function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
     </S.Body>
   );
 }
-export default memo(BoardDetailBody);

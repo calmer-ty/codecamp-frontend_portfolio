@@ -14,10 +14,23 @@ export const ListWrap = styled.main`
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
 `;
-export const List = styled.article`
+export const List = styled.div`
+  /* display: flex;
+  align-items: center;
+  border-bottom: 1px solid #bdbdbd;
+  cursor: pointer;
+  :hover {
+    background-color: #cdcdcd;
+  } */
+`;
+export const ListItem = styled.a`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #bdbdbd;
+  cursor: pointer;
+  :hover {
+    background-color: #cdcdcd;
+  }
 `;
 export const ItemInfo = styled.div`
   display: flex;
@@ -40,15 +53,15 @@ export const ItemImg = styled.img`
   background-color: #ccc;
 `;
 
-export const ItemTitle = styled.a`
+export const ItemTitle = styled.span`
   margin-bottom: 4px;
   font-size: 24px;
   font-weight: bold;
   color: #4f4f4f;
-  cursor: pointer;
-  :hover {
-    color: blue;
-  }
+`;
+export const ItemRemark = styled.span`
+  margin-bottom: 4px;
+  color: #4f4f4f;
 `;
 
 export const ItemPrice = styled.div`

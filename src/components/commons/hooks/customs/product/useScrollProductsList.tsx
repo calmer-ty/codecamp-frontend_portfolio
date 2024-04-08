@@ -10,8 +10,6 @@ export const useScrollProductsList = () => {
         page: Math.ceil(data?.fetchUseditems.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        // console.log(prev.fetchUseditems);
-        // console.log(fetchMoreResult.fetchUseditems);
         if (fetchMoreResult?.fetchUseditems === undefined) return { fetchUseditems: [...prev.fetchUseditems] };
         return {
           fetchUseditems: [...prev.fetchUseditems, ...fetchMoreResult.fetchUseditems],

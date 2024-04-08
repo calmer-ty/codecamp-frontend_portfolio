@@ -1,13 +1,12 @@
 import Link from "next/link";
-import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
-// Component
-import Picked01 from "../../../../commons/picked/01";
-// Style
-import * as S from "./ProductListHeader.styles";
-// Type
-import { memo } from "react";
 
-function ProductListHeader(): JSX.Element {
+import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
+import Picked01 from "../../../../commons/picked/01";
+
+import * as S from "./ProductListHeader.styles";
+
+export default function ProductListHeader(): JSX.Element {
+  console.log("리랜더링");
   const { data } = useFetchProductsBest();
   return (
     <S.Header>
@@ -28,5 +27,3 @@ function ProductListHeader(): JSX.Element {
     </S.Header>
   );
 }
-
-export default memo(ProductListHeader);

@@ -1,4 +1,4 @@
-// Custon Hooks
+// Custom Hooks
 import { useFetchBoard } from "../../../commons/hooks/queries/board/useFetchBoard";
 import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
 // UI

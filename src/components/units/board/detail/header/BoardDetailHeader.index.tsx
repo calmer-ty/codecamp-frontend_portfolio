@@ -1,10 +1,11 @@
-import * as S from "./BoardDetailHeader.styles";
-
-import { getDate } from "../../../../../commons/libraries/utils";
-import type { IBoardDetailProps } from "../BoardDetail.types";
 import UserIcon01 from "../../../../commons/icon/user/01";
 
+import type { IBoardDetailProps } from "../BoardDetail.types";
+import * as S from "./BoardDetailHeader.styles";
+import { getDate } from "../../../../../commons/libraries/utils";
+
 export default function BoardDetailHeader(props: IBoardDetailProps): JSX.Element {
+  console.log("re BoardDetailHeader");
   return (
     <S.Header>
       <S.FlexRow>

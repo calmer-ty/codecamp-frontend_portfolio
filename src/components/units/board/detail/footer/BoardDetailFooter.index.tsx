@@ -1,3 +1,4 @@
+import { memo } from "react";
 // Custom Hooks
 import { useScrollComment } from "../../../../commons/hooks/customs/board/useScrollComment";
 // Component
@@ -5,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import CommentWrite from "../../../../commons/comments/board/write/CommentWrite.index";
 import CommentList from "../../../../commons/comments/board/list/CommentList.index";
 
-export default function BoardDetailFooter(): JSX.Element {
+function BoardDetailFooter(): JSX.Element {
   const { data, onLoadMore } = useScrollComment();
 
   return (
@@ -17,3 +18,4 @@ export default function BoardDetailFooter(): JSX.Element {
     </>
   );
 }
+export default memo(BoardDetailFooter);
