@@ -8,7 +8,7 @@ export const useIdCheck = (id: string) => {
   useEffect(() => {
     const idFromQuery = router.query[id];
 
-    if (idFromQuery === undefined) {
+    if (idFromQuery === undefined || idFromQuery === null) {
       console.log("id를 못찾았습니다");
       setQueryId("");
     } else if (typeof idFromQuery === "string") {

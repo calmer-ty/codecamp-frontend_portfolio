@@ -1,4 +1,4 @@
-import * as S from "./ProductDetailFooter.styles";
+import { memo } from "react";
 
 import InfiniteScroll from "react-infinite-scroller";
 import { useScrollQuestion } from "../../../../commons/hooks/customs/product/useScrollQuestion";
@@ -6,7 +6,9 @@ import { useScrollQuestion } from "../../../../commons/hooks/customs/product/use
 import QuestionWrite from "../../../../commons/comments/product/write/QuestionWrite.index";
 import QuestionList from "../../../../commons/comments/product/list/QuestionList.index";
 
-export default function ProductDetailFooter() {
+import * as S from "./ProductDetailFooter.styles";
+
+function ProductDetailFooter() {
   const { data, onLoadMore } = useScrollQuestion();
 
   return (
@@ -18,3 +20,4 @@ export default function ProductDetailFooter() {
     </S.Footer>
   );
 }
+export default memo(ProductDetailFooter);

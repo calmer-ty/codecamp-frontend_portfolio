@@ -4,8 +4,14 @@ import { createUploadLink } from "apollo-upload-client";
 import { onError } from "@apollo/client/link/error";
 
 import { getAccessToken } from "../../../commons/libraries/getAccessToken";
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { accessTokenState, restoreAccessTokenLoadable } from "../../../commons/stores";
+import {
+  useRecoilState,
+  // useRecoilValueLoadable
+} from "recoil";
+import {
+  accessTokenState,
+  // restoreAccessTokenLoadable
+} from "../../../commons/stores";
 
 // 서버 데이터
 const GLOBAL_STATE = new InMemoryCache();
@@ -16,16 +22,14 @@ interface IApolloSettingProps {
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   // 23-01 로그인 페이지에서 가져온 accessToken을 모든 페이지에 뿌릴 수 있게 설정
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
+  // const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
-  // console.log("apollo의 토큰 " + restoreAccessToken);
-
-  useEffect(() => {
-    void restoreAccessToken.toPromise().then((newAccessToken) => {
-      setAccessToken(newAccessToken ?? "");
-      // console.log("apollo의 useEffect 프로미스 토큰 " + newAccessToken);
-    });
-  }, []);
+  // useEffect(() => {
+  //   void restoreAccessToken.toPromise().then((newAccessToken) => {
+  //     setAccessToken(newAccessToken ?? "");
+  //     // console.log("apollo의 useEffect 프로미스 토큰 " + newAccessToken);
+  //   });
+  // }, []);
   useEffect(() => {
     // 2-1. 리코일 API(useRecoilValueLoadable) 사용 이전
     void getAccessToken().then((newAccessToken): void => {

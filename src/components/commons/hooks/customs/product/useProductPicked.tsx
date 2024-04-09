@@ -2,32 +2,29 @@
 import { useIdCheck } from "../useIdCheck";
 import { useToggleProductPick } from "../../mutations/product/useToggleProductPick";
 import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
-import type { IQuery, IQueryFetchUseditemArgs } from "../../../../../commons/types/generated/types";
 
-// const FETCH_USEDITEM = gql`
-//   query fetchUseditem($useditem: ID!) {
-//     fetchBoard(useditem: $useditem) {
-//       _id
-//       likeCount
-//     }
-//   }
-// `;
+import type { IQuery, IQueryFetchUseditemArgs } from "../../../../../commons/types/generated/types";
 
 export const useProductPicked = () => {
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
+
+  console.log(data);
 
   const [pickProduct] = useToggleProductPick();
 
   const onClickPick = async (): Promise<void> => {
     // 클릭시 모달 임포트
     const { Modal } = await import("antd");
-    console.log(id);
-
     try {
       await pickProduct({
         variables: { useditemId: id },
-
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_USEDITEM,
+        //     variables: { useditemId: id },
+        //   },
+        // ],
         optimisticResponse: {
           toggleUseditemPick: data?.fetchUseditem.pickedCount ?? 0,
         },
@@ -55,7 +52,7 @@ export const useProductPicked = () => {
         },
       });
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message + " catch" });
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 

@@ -7,9 +7,7 @@ import type { IQuery, IQueryFetchBoardArgs } from "../../../../../commons/types/
 
 export const useBoardLike = () => {
   const { id } = useIdCheck("boardId");
-  const { data } = useFetchBoard({
-    boardId: id,
-  });
+  const { data } = useFetchBoard({ boardId: id });
 
   const [likeBoard] = useLikeBoard();
   const [dislikeBoard] = useDislikeBoard();

@@ -1,9 +1,10 @@
-import * as S from "./ProductDetailHeader.styles";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { getDate } from "../../../../../commons/libraries/utils";
 
 import type { IProductDetailHeaderProps } from "../ProductDetail.types";
+
+import * as S from "./ProductDetailHeader.styles";
+import { getDate } from "../../../../../commons/libraries/utils";
 
 export default function ProductDetailHeader(props: IProductDetailHeaderProps) {
   return (
