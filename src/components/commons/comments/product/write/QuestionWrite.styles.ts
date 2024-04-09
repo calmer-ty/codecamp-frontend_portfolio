@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
-// Library
 import { Rate } from "antd";
+import type { IQuestionWriteProps } from "./QuestionWrite.types";
 
 export const QuestionWrite = styled.article`
   display: flex;
   flex-direction: column;
-  width: 1200px;
   padding: 40px 0;
-  border-top: 1px solid #bdbdbd;
+  border-top: ${(props: IQuestionWriteProps) => (props.isEdit ? "1px solid #bdbdbd" : "")};
 `;
 export const Form = styled.form`
   display: flex;

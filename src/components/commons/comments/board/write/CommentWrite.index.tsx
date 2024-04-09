@@ -27,7 +27,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
 
   return (
     <S.CommentWrite isEdit={props.isEdit}>
-      <TitleComment text="댓글" />
+      {!props.isEdit && <TitleComment text="댓글" />}
       <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
           <InputComment placeholder="작성자" defaultValue={props.el?.writer ?? ""} register={register("writer")} />

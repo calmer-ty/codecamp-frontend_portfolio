@@ -23,7 +23,7 @@ export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
   });
 
   return (
-    <S.QuestionWrite>
+    <S.QuestionWrite isEdit={props.isEdit}>
       {!props.isEdit && <TitleComment text="문의" />}
       <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
         <Textarea01

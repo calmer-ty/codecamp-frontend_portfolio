@@ -4,6 +4,8 @@ import { UserOutlined } from "@ant-design/icons";
 // Custom Hooks
 import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useToggle } from "../../../hooks/customs/useToggle";
+import EditBtn01 from "../../../element/buttons/edit/01";
+import DeleteBtn01 from "../../../element/buttons/delete/01";
 // Type
 import type { IBoardComment } from "../../../../../commons/types/generated/types";
 // Style
@@ -45,8 +47,8 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
             </S.FlexColumn>
           </S.FlexRow>
           <S.BtnWrap>
-            <S.EditBtn onClick={onToggleEdit} />
-            <S.DeleteBtn onClick={onToggleModal} />
+            <EditBtn01 onClick={onToggleEdit} />
+            <DeleteBtn01 onClick={onToggleModal} />
           </S.BtnWrap>
         </S.ListItem>
       ) : (

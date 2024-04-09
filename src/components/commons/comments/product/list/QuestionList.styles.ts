@@ -4,14 +4,17 @@ import { Modal, Rate } from "antd";
 // Layout
 export const FlexRow = styled.div`
   display: flex;
+  column-gap: 16px;
+  justify-content: space-between;
 `;
 export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 50px);
 `;
 
 // List
-export const ListItem = styled.div`
+export const ListItem = styled.article`
   display: flex;
   flex-direction: column;
   width: 1200px;
@@ -20,18 +23,13 @@ export const ListItem = styled.div`
   border-bottom: 1px solid #bdbdbd;
 `;
 
-export const ItemTop = styled.div`
-  display: flex;
-  margin-bottom: 4px;
+export const Writer = styled.span`
+  margin-bottom: 10px;
 `;
-export const Writer = styled.div`
-  margin-right: 16px;
-`;
-export const Contents = styled.div`
-  margin-top: 6px;
+export const Contents = styled.p`
   margin-bottom: 20px;
 `;
-export const CreateDate = styled.div`
+export const CreateDate = styled.span`
   font-size: 12px;
   color: #bdbdbd;
 `;
@@ -44,17 +42,6 @@ export const BtnWrap = styled.div`
   top: 20px;
   right: 0;
 `;
-export const EditBtn = styled.button`
-  width: 18px;
-  height: 18px;
-  background: url("/images/boardComment/list/ic_edit.png") no-repeat center/contain;
-`;
-export const DeleteBtn = styled.button`
-  width: 18px;
-  height: 18px;
-  background: url("/images/boardComment/list/ic_exit.png") no-repeat center/contain;
-`;
-
 // Library
 export const CommentDeleteModal = styled(Modal)``;
 export const RateScore = styled(Rate)``;
