@@ -9,7 +9,6 @@ import { useProductPicked } from "../../../../commons/hooks/customs/product/useP
 import useMap from "../../../../commons/hooks/customs/useMap";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
-// import HeartIcon02 from "../../../../commons/icon/heart/02";
 import TagsView01 from "../../../../commons/tags/view/01";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

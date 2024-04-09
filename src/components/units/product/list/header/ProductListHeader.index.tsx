@@ -6,7 +6,6 @@ import Picked01 from "../../../../commons/picked/01";
 import * as S from "./ProductListHeader.styles";
 
 export default function ProductListHeader(): JSX.Element {
-  console.log("리랜더링");
   const { data } = useFetchProductsBest();
   return (
     <S.Header>

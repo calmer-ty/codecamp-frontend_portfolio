@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
 
 import { useLikeBoard } from "../../mutations/board/useLikeBoard";
@@ -7,7 +6,6 @@ import { useIdCheck } from "../useIdCheck";
 import type { IQuery, IQueryFetchBoardArgs } from "../../../../../commons/types/generated/types";
 
 export const useBoardLike = () => {
-  const router = useRouter();
   const { id } = useIdCheck("boardId");
   const { data } = useFetchBoard({
     boardId: id,
@@ -18,14 +16,10 @@ export const useBoardLike = () => {
 
   const onClickLike = async () => {
     const { Modal } = await import("antd");
-    if (typeof router.query.boardId !== "string") {
-      Modal.error({ content: "시스템에 문제가 있습니다" });
-      return;
-    }
 
     try {
       await likeBoard({
-        variables: { boardId: router.query.boardId },
+        variables: { boardId: id },
         optimisticResponse: {
           likeBoard: (data?.fetchBoard.likeCount ?? 0) + 1,
         },
@@ -58,13 +52,9 @@ export const useBoardLike = () => {
   };
   const onClickDislike = async (): Promise<void> => {
     const { Modal } = await import("antd");
-    if (typeof router.query.boardId !== "string") {
-      Modal.error({ content: "시스템에 문제가 있습니다" });
-      return;
-    }
     try {
       await dislikeBoard({
-        variables: { boardId: router.query.boardId },
+        variables: { boardId: id },
         update: (cache, { data }) => {
           const prevData = cache.readQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>({
             query: FETCH_BOARD,
