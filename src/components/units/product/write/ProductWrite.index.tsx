@@ -51,18 +51,18 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   }, [props.data]);
 
   // Tags
-  // const { props: tagsProps } = TagsWrite01();
-  // const tags: string[] = [];
-  // tagsProps.children.forEach((data: any) => {
-  //   tags.push(String(data.key));
-  // });
   const { props: tagsProps } = TagsWrite01();
+  const tags: string[] = [];
+  tagsProps.children[0].forEach((el: React.ReactElement) => {
+    if (typeof el.key !== "string") return;
+    tags.push(el.key);
+  });
 
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({
     fileUrls,
     latlng,
-    // tags,
+    tags,
   });
 
   return (
@@ -96,11 +96,13 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.InputWrap>
             <Label01 text="태그입력" />
             {/* <TagsWrite01 /> */}
-            {tagsProps.children.map((el: string[]) => (
-              <>
-                <span>{el}</span>
-              </>
-            ))}
+            <S.Tags>
+              {tagsProps.children.map((el: string) => (
+                <>
+                  <div>{el}</div>
+                </>
+              ))}
+            </S.Tags>
             <Error01 text={formState.errors.tags?.message} />
           </S.InputWrap>
 

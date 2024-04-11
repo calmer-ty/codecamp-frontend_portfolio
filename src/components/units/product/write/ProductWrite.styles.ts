@@ -48,9 +48,12 @@ export const Form = styled.form`
   row-gap: 20px;
 `;
 
-export const Input = styled.input`
+export const Tags = styled.div`
+  display: flex;
+  align-items: center;
   height: 52px;
   padding: 0 16px;
+  border: 1px solid #bdbdbd;
 `;
 
 export const AreaWrap = styled.div`

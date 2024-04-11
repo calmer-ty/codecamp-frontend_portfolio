@@ -21,7 +21,7 @@ const Tags = styled.article`
 
 export const TagsWrite01 = () => {
   const { token } = theme.useToken();
-  const [tags, setTags] = useState<string[]>(["Unremovable", "Tag 2", "Tag 3"]);
+  const [tags, setTags] = useState<string[]>(["Tag 1", "Tag 2", "Tag 3"]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [editInputIndex, setEditInputIndex] = useState(-1);
@@ -131,7 +131,7 @@ export const TagsWrite01 = () => {
         <Input ref={inputRef} type="text" size="small" style={tagInputStyle} value={inputValue} onChange={handleInputChange} onBlur={handleInputConfirm} onPressEnter={handleInputConfirm} />
       ) : (
         <Tag style={tagPlusStyle} icon={<PlusOutlined />} onClick={showInput}>
-          New Tag
+          태그를 입력해주세요(엔터키)
         </Tag>
       )}
     </Tags>
