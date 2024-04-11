@@ -56,6 +56,11 @@ export const Tags = styled.div`
   border: 1px solid #bdbdbd;
 `;
 
+export const LatLngInput = styled.input`
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #bdbdbd;
+`;
 export const AreaWrap = styled.div`
   display: flex;
   justify-content: space-between;

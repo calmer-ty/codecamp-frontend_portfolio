@@ -7,8 +7,9 @@ export interface IFormDataProductWrite {
   contents: string;
   price: number;
   images?: string[];
-  zipcode?: string;
-  address: string;
+  lat: number;
+  lng: number;
+  address?: string;
   addressDetail?: string;
   tags?: string[];
 }
