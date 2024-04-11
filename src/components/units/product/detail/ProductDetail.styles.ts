@@ -8,5 +8,5 @@ export const Wrapper = styled.div`
 export const CardWrap = styled.article`
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: 100%;
 `;

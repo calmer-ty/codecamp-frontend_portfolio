@@ -19,9 +19,9 @@ const Tags = styled.article`
   border: 1px solid #767676;
 `;
 
-export default function TagsWrite01() {
+export const TagsWrite01 = () => {
   const { token } = theme.useToken();
-  const [tags, setTags] = useState<string[]>(["Tag 1", "Tag 2", "Tag 3"]);
+  const [tags, setTags] = useState<string[]>(["Unremovable", "Tag 2", "Tag 3"]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [editInputIndex, setEditInputIndex] = useState(-1);
@@ -100,7 +100,7 @@ export default function TagsWrite01() {
         const tagElem = (
           <Tag
             key={tag}
-            closable={true}
+            closable={index !== -1}
             style={{ userSelect: "none" }}
             onClose={() => {
               handleClose(tag);
@@ -108,7 +108,7 @@ export default function TagsWrite01() {
           >
             <span
               onDoubleClick={(e) => {
-                if (index !== 0) {
+                if (index !== -1) {
                   setEditInputIndex(index);
                   setEditInputValue(tag);
                   e.preventDefault();
@@ -128,16 +128,7 @@ export default function TagsWrite01() {
         );
       })}
       {inputVisible ? (
-        <Input
-          ref={inputRef}
-          type="text"
-          size="small"
-          style={tagInputStyle}
-          value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleInputConfirm}
-          onPressEnter={handleInputConfirm}
-        />
+        <Input ref={inputRef} type="text" size="small" style={tagInputStyle} value={inputValue} onChange={handleInputChange} onBlur={handleInputConfirm} onPressEnter={handleInputConfirm} />
       ) : (
         <Tag style={tagPlusStyle} icon={<PlusOutlined />} onClick={showInput}>
           New Tag
@@ -145,4 +136,4 @@ export default function TagsWrite01() {
       )}
     </Tags>
   );
-}
+};

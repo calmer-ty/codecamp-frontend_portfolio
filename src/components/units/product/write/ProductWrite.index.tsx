@@ -6,10 +6,10 @@ import Label01 from "../../../commons/element/labels/01";
 import Input01 from "../../../commons/element/inputs/01";
 import Error01 from "../../../commons/element/errors/01";
 import Button01 from "../../../commons/element/buttons/01";
-import TagsWrite01 from "../../../commons/tags/write/01";
+import { TagsWrite01 } from "../../../commons/tags/write/01";
 // Custom Hooks
 import { useProduct } from "../../../commons/hooks/customs/product/useProduct";
-// import useMapSelection from "../../../commons/hooks/customs/useMapSelect";
+import useMap from "../../../commons/hooks/customs/useMap";
 // Yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
@@ -17,15 +17,14 @@ import { schemaProductWrite } from "../../../../commons/libraries/validation";
 import type { IFormDataProductWrite, IProductWriteProps } from "./ProductWrite.types";
 // Style
 import * as S from "./ProductWrite.styles";
-import useMap from "../../../commons/hooks/customs/useMap";
 
 export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormDataProductWrite>({
     resolver: yupResolver(schemaProductWrite),
     mode: "onChange",
   });
-  // 맵 선택 Hook
 
+  // 맵 선택 Hook
   const { latlng, address } = useMap(33.450701, 126.570667, true);
   // const { latlng, address } = useMapSelection();
   // 상품 설명 이벤트
@@ -45,20 +44,26 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
   };
+
   useEffect(() => {
     const images = props.data?.fetchUseditem.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
 
   // Tags
+  // const { props: tagsProps } = TagsWrite01();
+  // const tags: string[] = [];
+  // tagsProps.children.forEach((data: any) => {
+  //   tags.push(String(data.key));
+  // });
   const { props: tagsProps } = TagsWrite01();
-  const tags: string[] = [];
-  tagsProps.children[0].forEach((data: any) => {
-    tags.push(String(data.key));
-  });
 
   // 상품 뮤테이션 Hook
-  const { onClickCreate, onClickUpdate } = useProduct({ fileUrls, latlng, tags });
+  const { onClickCreate, onClickUpdate } = useProduct({
+    fileUrls,
+    latlng,
+    // tags,
+  });
 
   return (
     <S.Wrapper>
@@ -90,7 +95,12 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
           <S.InputWrap>
             <Label01 text="태그입력" />
-            <TagsWrite01 />
+            {/* <TagsWrite01 /> */}
+            {tagsProps.children.map((el: string[]) => (
+              <>
+                <span>{el}</span>
+              </>
+            ))}
             <Error01 text={formState.errors.tags?.message} />
           </S.InputWrap>
 

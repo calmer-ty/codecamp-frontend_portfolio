@@ -9,8 +9,6 @@ export const useProductPicked = () => {
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
 
-  console.log(data);
-
   const [pickProduct] = useToggleProductPick();
 
   const onClickPick = async (): Promise<void> => {
