@@ -26,7 +26,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 맵 선택 Hook
   const { latlng, address } = useMap(33.450701, 126.570667, true);
-  console.log(typeof latlng.La);
+  console.log(latlng);
 
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
@@ -109,19 +109,19 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.AreaWrap>
             <S.Map>
               <Label01 text="거래위치" />
-              <div id="map" style={{ width: "100%", height: "260px" }}></div>
+              <div id="map" style={{ width: "100%", height: "100%" }}></div>
             </S.Map>
             <S.MapInfo>
               <S.InputWrap>
                 <Label01 text="위도/경도" />
                 <S.FlexRow style={{ columnGap: "20px" }}>
-                  <S.InputWrap>
-                    <S.LatLngInput type="number" {...register("lat")} value={latlng?.La ?? 0} readOnly />
-                  </S.InputWrap>
-                  <S.InputWrap>
-                    <S.LatLngInput type="number" {...register("lng")} value={latlng?.Ma ?? 0} readOnly />
-                  </S.InputWrap>
+                  {/* <S.FlexRow> */}
+                  <S.LatLngInput type="number" {...register("lat")} value={latlng?.La} readOnly />
+                  <S.LatLngInput type="number" {...register("lng")} value={latlng?.Ma} readOnly />
+                  {/* </S.FlexRow> */}
+                  {/* <S.InputWrap></S.InputWrap> */}
                 </S.FlexRow>
+                <Error01 text={formState.errors.lat?.message} />
               </S.InputWrap>
               <S.InputWrap>
                 <Label01 text="주소" />

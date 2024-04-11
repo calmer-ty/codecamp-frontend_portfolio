@@ -55,6 +55,6 @@ export const schemaProductWrite = yup.object({
   contents: yup.string().required("상품설명 입력은 필수입니다."),
   price: yup.number().typeError("숫자를 입력해주세요.").required("상품가격 입력은 필수입니다."),
   // address: yup.string().required("거래장소 선택은 필수입니다."),
-  lat: yup.number().required("위도를 입력해주세요."),
-  lng: yup.number().required("경도를 입력해주세요."),
+  lat: yup.number().typeError("위치를 선택해주세요").required("위도를 입력해주세요."),
+  lng: yup.number().typeError("위치를 선택해주세요").required("경도를 입력해주세요."),
 });
