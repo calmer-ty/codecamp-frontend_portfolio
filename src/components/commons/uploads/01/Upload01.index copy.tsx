@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 // Hooks
 import { useUploadFile } from "../../hooks/mutations/useUploadFile";
 // Component
@@ -17,8 +17,6 @@ interface IUpload01Props {
 
 export default function Upload01(props: IUpload01Props): JSX.Element {
   const [uploadFile] = useUploadFile();
-  const [fileUrl, setFileUrl] = useState("");
-  console.log(fileUrl);
 
   // 참조 기능
   const fileRef = useRef<HTMLInputElement>(null);
@@ -28,16 +26,6 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = event?.target.files?.[0];
-    if (file === undefined) return;
-
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (event) => {
-      // console.log(event.target?.result); // 게시판에서 event.target.id를 쓰면 eslint가 잡았던 이유: event.target은 태그만을 가르키지 않음
-      if (typeof event.target?.result === "string") {
-        setFileUrl(event.target?.result);
-      }
-    };
 
     // 파일 업로드 조건을 걸어준다
     const isValid = checkValidationImg(file);
@@ -52,6 +40,7 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
+
   return (
     <>
       {props.fileUrl !== "" ? (
