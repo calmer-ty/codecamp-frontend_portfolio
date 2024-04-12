@@ -26,7 +26,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 맵 선택 Hook
   const { latlng, address } = useMap(33.450701, 126.570667, true);
-  console.log(latlng);
 
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
@@ -36,6 +35,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 파일 전송 기능
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  // console.log(fileUrls);
   // console.log(fileUrls);
   // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선
   // Upload 컴포넌트의 file input클릭 시 얻어온 url 값이 필요하다
