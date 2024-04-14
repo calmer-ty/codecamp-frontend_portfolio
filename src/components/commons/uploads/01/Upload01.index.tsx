@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 // Hooks
 import checkValidationImg from "./Upload01.validation";
-import { useUploadFile } from "../../hooks/mutations/useUploadFile";
+// import { useUploadFile } from "../../hooks/mutations/useUploadFile";
 // Style
 import * as S from "./Upload01.styles";
 // Type
@@ -14,10 +14,10 @@ interface IUpload01Props {
 }
 
 export default function Upload01(props: IUpload01Props): JSX.Element {
-  const [uploadFile] = useUploadFile();
+  // const [uploadFile] = useUploadFile();
   const [fileUrl, setFileUrl] = useState("");
-  // const [file, setFile] = useState<File>();
-  // console.log(file);
+  const [file, setFile] = useState<File>();
+  console.log(file);
 
   // 참조 기능
   const fileRef = useRef<HTMLInputElement>(null);
@@ -27,7 +27,6 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = event?.target.files?.[0];
-    console.log(file);
     if (file === undefined) return;
 
     // 파일 업로드 조건을 걸어준다
@@ -38,29 +37,26 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
       // console.log(event.target?.result); // 게시판에서 event.target.id를 쓰면 eslint가 잡았던 이유: event.target은 태그만을 가르키지 않음
-      const result = event.target?.result;
-      console.log(result);
-      if (typeof result === "string") {
-        setFileUrl(result);
-        // setFile(file);
-        uploadFileToServer(file).catch((error: any) => {
-          console.error("Failed to upload file:", error);
-        });
+      // const result = event.target?.result;
+      if (typeof event.target?.result === "string") {
+        setFileUrl(event.target?.result);
+        // uploadFileToServer(event.target?.result);
+        setFile(file);
       }
     };
   };
 
-  const uploadFileToServer = async (file: File) => {
-    const { Modal } = await import("antd");
-    try {
-      const resultFile = await uploadFile({ variables: { file } });
-      if (resultFile.data?.uploadFile.url === undefined) return;
-      // 업로드 API 결과 값과, 프리젠터에서 받은 index를 게시판 컨테이너로 전달인자를 보낸다
-      props.onChangeFileUrls(resultFile.data?.uploadFile.url, props.index);
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
-  };
+  // const uploadFileToServer = async () => {
+  //   const { Modal } = await import("antd");
+  //   try {
+  //     const resultFile = await uploadFile({ variables: { file } });
+  //     if (resultFile.data?.uploadFile.url === undefined) return;
+  //     // 업로드 API 결과 값과, 프리젠터에서 받은 index를 게시판 컨테이너로 전달인자를 보낸다
+  //     props.onChangeFileUrls(resultFile.data?.uploadFile.url, props.index);
+  //   } catch (error) {
+  //     if (error instanceof Error) Modal.error({ content: error.message });
+  //   }
+  // };
   return (
     <>
       {/* {props.fileUrl !== "" ? ( */}
