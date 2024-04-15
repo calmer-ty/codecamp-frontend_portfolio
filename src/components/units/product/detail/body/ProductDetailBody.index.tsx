@@ -32,7 +32,6 @@ const settings = {
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
-  console.log(data);
 
   const { onClickDelete, onClickPayment } = useProduct();
   const { onClickPick } = useProductPicked();
@@ -107,6 +106,9 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
           <S.LinkBtn>목록으로</S.LinkBtn>
         </Link>
         <S.LinkBtn onClick={onClickPayment}>구매하기</S.LinkBtn>
+        <Link href={`/products/${props.data?.fetchUseditem._id}/edit`}>
+          <S.LinkBtn>수정하기</S.LinkBtn>
+        </Link>
         <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
       </S.BtnWrap>
     </S.Body>

@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-
 // Custom Hooks
 import { useIdCheck } from "../useIdCheck";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
@@ -7,14 +6,13 @@ import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
-// Component
-// import { Modal } from "antd";
+import { useUploadFile } from "../../mutations/useUploadFile";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
 
 interface IUseProductArgs {
-  fileUrls?: string[];
+  files?: Array<File | null>;
   latlng?: any;
   address?: string;
   tags?: string[];
@@ -26,6 +24,7 @@ declare const window: typeof globalThis & {
 };
 
 export const useProduct = (args?: IUseProductArgs) => {
+  console.log(args);
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
@@ -33,6 +32,7 @@ export const useProduct = (args?: IUseProductArgs) => {
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
   const [deleteProduct] = useDeleteProduct();
+  const [uploadFile] = useUploadFile();
 
   // 결제 기능
   const onClickPayment = (): void => {
@@ -68,10 +68,23 @@ export const useProduct = (args?: IUseProductArgs) => {
     );
   };
 
+  // const [images, setImages] = useState();
+
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
-    if (typeof args === "undefined") return;
     const { Modal } = await import("antd");
+
+    if (args?.files === undefined) return;
+    const uploadResults = await Promise.all(
+      args.files?.map(async (file) => {
+        if (file !== null) return await uploadFile({ variables: { file } });
+        return null; // 파일이 null이거나 undefined인 경우, null 반환
+      })
+    );
+
+    const images = uploadResults.map((res) => res?.data?.uploadFile?.url).filter((url): url is string => url != null);
+    // setImages(images);
+
     try {
       const result = await createProduct({
         variables: {
@@ -87,7 +100,7 @@ export const useProduct = (args?: IUseProductArgs) => {
               address: args.address,
               addressDetail: data.addressDetail,
             },
-            images: args.fileUrls,
+            images,
           },
         },
         refetchQueries: [
@@ -108,9 +121,10 @@ export const useProduct = (args?: IUseProductArgs) => {
     if (typeof args === "undefined") return;
     const { Modal } = await import("antd");
     // files
-    const currentFiles = JSON.stringify(args.fileUrls);
-    const defaultFiles = JSON.stringify(data.images);
-    const isChangedFiles = currentFiles !== defaultFiles;
+    // const currentFiles = JSON.stringify(args.fileUrls);
+    // const defaultFiles = JSON.stringify(data.images);
+    // const isChangedFiles = currentFiles !== defaultFiles;
+
     // tags
     const currentTags = JSON.stringify(args.tags);
     const defaultTags = JSON.stringify(data.tags);
@@ -128,7 +142,7 @@ export const useProduct = (args?: IUseProductArgs) => {
       if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
       if (addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = addressDetail;
     }
-    if (isChangedFiles) updateUseditemInput.images = args.fileUrls;
+    // if (isChangedFiles) updateUseditemInput.images = args.fileUrls;
     if (isChangedTags) updateUseditemInput.tags = args.tags;
 
     try {
