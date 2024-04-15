@@ -1,5 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import {
+  // useEffect,
+  useState,
+} from "react";
 // Component
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
 import Label01 from "../../../commons/element/labels/01";
@@ -35,17 +38,16 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 파일 전송 기능
   const [files, setFiles] = useState<Array<File | null>>(new Array(3).fill(null));
-  // console.log(files);
   const onChangeFiles = (file: File, index: number): void => {
     const newFiles = [...files];
     newFiles[index] = file;
     setFiles(newFiles);
   };
 
-  useEffect(() => {
-    const images = props.data?.fetchUseditem.images;
-    if (images !== undefined && images !== null) setFiles([...images]);
-  }, [props.data]);
+  // useEffect(() => {
+  //   const images = props.data?.fetchUseditem.images;
+  //   if (images !== undefined && images !== null) setFiles([...images]);
+  // }, [props.data]);
 
   // Tags
   const { props: tagsProps } = TagsWrite01();
@@ -135,13 +137,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.InputWrap>
             <Label01 text="사진첨부" />
             <S.ImgWrap>
-              {files.map((_, index) => (
-                <Upload01
-                  key={index}
-                  index={index}
-                  // file={el}
-                  onChangeFiles={onChangeFiles}
-                />
+              {files.map((el, index) => (
+                <Upload01 key={`${index}`} index={index} onChangeFiles={onChangeFiles} />
               ))}
             </S.ImgWrap>
           </S.InputWrap>
