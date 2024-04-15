@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-
 // Custom Hooks
 import { useIdCheck } from "../useIdCheck";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
@@ -7,16 +6,14 @@ import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
-// Component
-// import { Modal } from "antd";
+import { useUploadFile } from "../../mutations/useUploadFile";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
-import { useUploadFile } from "../../mutations/useUploadFile";
+// import { useState } from "react";
 
 interface IUseProductArgs {
-  file?: any;
-  fileUrls?: string[];
+  files?: Array<File | null>;
   latlng?: any;
   address?: string;
   tags?: string[];
@@ -30,7 +27,8 @@ declare const window: typeof globalThis & {
 export const useProduct = (args?: IUseProductArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
-  const { data } = useFetchProduct({ useditemId: id });
+  const { data: fetchData } = useFetchProduct({ useditemId: id });
+  console.log(fetchData);
 
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
@@ -48,8 +46,8 @@ export const useProduct = (args?: IUseProductArgs) => {
         pg: "kakaopay",
         pay_method: "card",
         //   merchant_uid: "ORD20180131-0000011",
-        name: data?.fetchUseditem.name,
-        amount: data?.fetchUseditem.price,
+        name: fetchData?.fetchUseditem.name,
+        amount: fetchData?.fetchUseditem.price,
         // buyer_email: "gildong@gmail.com",
         // buyer_name: "홍길동",
         // buyer_tel: "010-4242-4242",
@@ -71,19 +69,25 @@ export const useProduct = (args?: IUseProductArgs) => {
     );
   };
 
+  // const [fileUrls, setFileUrls] = useState("");
+  // console.log(fileUrls);
+
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
-    if (typeof args === "undefined") return;
     const { Modal } = await import("antd");
 
-    try {
-      const result = await uploadFile({ variables: { file: args.file } });
-      if (result.data?.uploadFile.url === undefined) return;
-      // 업로드 API 결과 값과, 프리젠터에서 받은 index를 게시판 컨테이너로 전달인자를 보낸다
-      // props.onChangeFileUrls(result.data?.uploadFile.url, props.index);
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
+    if (args?.files === undefined) return;
+    const uploadResults = await Promise.all(
+      args.files?.map(async (file) => {
+        if (file !== null) return await uploadFile({ variables: { file } });
+        return null; // 파일이 null이거나 undefined인 경우, null 반환
+      })
+    );
+
+    const images = uploadResults.map((res) => res?.data?.uploadFile?.url ?? "");
+    // const newImages = JSON.stringify(images);
+    // setFileUrls(newImages);
+    // console.log(images);
 
     try {
       const result = await createProduct({
@@ -100,7 +104,7 @@ export const useProduct = (args?: IUseProductArgs) => {
               address: args.address,
               addressDetail: data.addressDetail,
             },
-            images: args.fileUrls,
+            images,
           },
         },
         refetchQueries: [
@@ -120,10 +124,12 @@ export const useProduct = (args?: IUseProductArgs) => {
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof args === "undefined") return;
     const { Modal } = await import("antd");
+
     // files
-    const currentFiles = JSON.stringify(args.fileUrls);
-    const defaultFiles = JSON.stringify(data.images);
-    const isChangedFiles = currentFiles !== defaultFiles;
+    // const currentFiles = JSON.stringify(args.fileUrls);
+    // const defaultFiles = JSON.stringify(data.images);
+    // const isChangedFiles = currentFiles !== defaultFiles;
+
     // tags
     const currentTags = JSON.stringify(args.tags);
     const defaultTags = JSON.stringify(data.tags);
@@ -141,7 +147,7 @@ export const useProduct = (args?: IUseProductArgs) => {
       if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
       if (addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = addressDetail;
     }
-    if (isChangedFiles) updateUseditemInput.images = args.fileUrls;
+    // if (isChangedFiles) updateUseditemInput.images = args.fileUrls;
     if (isChangedTags) updateUseditemInput.tags = args.tags;
 
     try {
@@ -188,5 +194,6 @@ export const useProduct = (args?: IUseProductArgs) => {
     onClickUpdate,
     onClickDelete,
     onClickPayment,
+    // fileUrls,
   };
 };

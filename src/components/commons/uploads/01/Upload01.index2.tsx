@@ -1,19 +1,18 @@
 import { useRef, useState } from "react";
+// Hooks
+import checkValidationImg from "./Upload01.validation";
 // Style
 import * as S from "./Upload01.styles";
 // Type
 import type { ChangeEvent } from "react";
-import checkValidationImg from "./Upload01.validation";
 
 interface IUpload01Props {
   index: number;
-  fileUrl: string;
-  onChangeFileUrls: (file: File, fileUrl: string, index: number) => void;
+  onChangeFiles: (file: File, index: number) => void;
 }
 
 export default function Upload01(props: IUpload01Props): JSX.Element {
-  const [imageUrl, setImageUrl] = useState("");
-  // const [imageFile, setImageFile] = useState<File>();
+  const [fileUrl, setFileUrl] = useState("");
 
   // 참조 기능
   const fileRef = useRef<HTMLInputElement>(null);
@@ -27,29 +26,46 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
 
     // 파일 업로드 조건을 걸어준다
     const isValid = checkValidationImg(file);
-    if (!isValid) return;
+    if (!isValid) {
+      console.error("Invalid file type.");
+      return;
+    }
 
     const fileReader = new FileReader();
+    // fileReader.onerror = (error) => {
+    //   console.error("Error reading file:", error);
+    // };
+
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
-      // console.log(event.target?.result); // 게시판에서 event.target.id를 쓰면 eslint가 잡았던 이유: event.target은 태그만을 가르키지 않음
       if (typeof event.target?.result === "string") {
-        setImageUrl(event.target?.result);
-        // setImageFile(file);
-        props.onChangeFileUrls(file, imageUrl, props.index);
+        setFileUrl(event.target?.result);
+        props.onChangeFiles(file, props.index);
       }
     };
   };
 
+  // const uploadFileToServer = async () => {
+  //   const { Modal } = await import("antd");
+  //   try {
+  //     const resultFile = await uploadFile({ variables: { file } });
+  //     if (resultFile.data?.uploadFile.url === undefined) return;
+  //     // 업로드 API 결과 값과, 프리젠터에서 받은 index를 게시판 컨테이너로 전달인자를 보낸다
+  //     props.onChangeFileUrls(resultFile.data?.uploadFile.url, props.index);
+  //   } catch (error) {
+  //     if (error instanceof Error) Modal.error({ content: error.message });
+  //   }
+  // };
   return (
     <>
-      {imageUrl !== "" ? (
+      {/* {props.fileUrl !== "" ? ( */}
+      {fileUrl !== "" ? (
         // fileUrl에 값이 있다면 이미지 요소를 보여주고 없다면 버튼을 보여준다
         <S.UploadImg
           // 참조한 UploadInput을 클릭 이벤트로 넣어준다
           onClick={onClickUpload}
-          // src={`http://storage.googleapis.com/${props.fileUrl}` ?? imageUrl}
-          src={imageUrl ?? `http://storage.googleapis.com/${props.fileUrl}`}
+          // src={`http://storage.googleapis.com/${props.fileUrl}`}
+          src={fileUrl}
         />
       ) : (
         <S.UploadBtn

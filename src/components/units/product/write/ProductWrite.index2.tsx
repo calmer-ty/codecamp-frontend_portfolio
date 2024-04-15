@@ -1,5 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import {
+  // useEffect,
+  useState,
+} from "react";
 // Component
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
 import Label01 from "../../../commons/element/labels/01";
@@ -34,30 +37,17 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   };
 
   // 파일 전송 기능
-  const [files, setFiles] = useState<File[]>(new Array(3).fill(null));
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
-  // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선
-  // Upload 컴포넌트의 file input클릭 시 얻어온 url 값이 필요하다
-  // const onChangeFileUrls = (file: File, fileUrl: string, index: number): void => {
-  const onChangeFileUrls = (file: File, fileUrl: string, index: number): void => {
-    console.log(file);
-    console.log(fileUrl);
-    console.log(index);
-    // 객체나 배열은 값을 바꾸면 주소값은 그대로이기 떄문에 setState 에서 인식을 하지 못하여 리랜더링이 되지 않는다
-    // 그래서 얕은 복사를 하여 새로운 배열로 변수를 만들어주어 배열 전체를 바꾸는식으로 스테이트 값을 변경한다.
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
-
+  const [files, setFiles] = useState<Array<File | null>>(new Array(3).fill(null));
+  const onChangeFiles = (file: File, index: number): void => {
     const newFiles = [...files];
     newFiles[index] = file;
     setFiles(newFiles);
   };
 
-  useEffect(() => {
-    const images = props.data?.fetchUseditem.images;
-    if (images !== undefined && images !== null) setFileUrls([...images]);
-  }, [props.data]);
+  // useEffect(() => {
+  //   const images = props.data?.fetchUseditem.images;
+  //   if (images !== undefined && images !== null) setFiles([...images]);
+  // }, [props.data]);
 
   // Tags
   const { props: tagsProps } = TagsWrite01();
@@ -69,7 +59,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({
-    fileUrls,
+    files,
     latlng,
     tags,
   });
@@ -147,8 +137,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.InputWrap>
             <Label01 text="사진첨부" />
             <S.ImgWrap>
-              {fileUrls.map((el, index) => (
-                <Upload01 key={`${el}_${index}`} index={index} fileUrl={el} onChangeFileUrls={onChangeFileUrls} />
+              {files.map((el, index) => (
+                <Upload01 key={`${index}`} index={index} onChangeFiles={onChangeFiles} />
               ))}
             </S.ImgWrap>
           </S.InputWrap>
