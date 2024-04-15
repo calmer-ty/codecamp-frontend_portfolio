@@ -69,6 +69,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({
+    files,
     fileUrls,
     latlng,
     tags,
