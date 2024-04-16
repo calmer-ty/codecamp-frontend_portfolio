@@ -22,10 +22,12 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormDataProductWrite>({
     resolver: yupResolver(schemaProductWrite),
     mode: "onChange",
+    // mode: "onSubmit",
   });
 
   // 맵 선택 Hook
   const { latlng, address } = useMap(33.450701, 126.570667, true);
+  console.log(latlng);
 
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
@@ -38,11 +40,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
   // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선
   // Upload 컴포넌트의 file input클릭 시 얻어온 url 값이 필요하다
-  // const onChangeFileUrls = (file: File, fileUrl: string, index: number): void => {
   const onChangeFileUrls = (file: File, fileUrl: string, index: number): void => {
-    console.log(file);
-    console.log(fileUrl);
-    console.log(index);
     // 객체나 배열은 값을 바꾸면 주소값은 그대로이기 떄문에 setState 에서 인식을 하지 못하여 리랜더링이 되지 않는다
     // 그래서 얕은 복사를 하여 새로운 배열로 변수를 만들어주어 배열 전체를 바꾸는식으로 스테이트 값을 변경한다.
     const newFileUrls = [...fileUrls];
@@ -71,6 +69,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   const { onClickCreate, onClickUpdate } = useProduct({
     files,
     fileUrls,
+    address,
     latlng,
     tags,
   });
@@ -82,7 +81,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
         <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
           <S.InputWrap>
             <Label01 text="상품명" />
-            <Input01 placeholder="상품명을 작성해주세요." defaultValue={props.data?.fetchUseditem.name ?? ""} register={register("name")} />
+            <Input01 placeholder="상품명을 작성해주세요." defaultValue={props.data?.fetchUseditem.name} register={register("name")} />
             <Error01 text={formState.errors.name?.message} />
           </S.InputWrap>
           <S.InputWrap>
@@ -124,11 +123,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
               <S.InputWrap>
                 <Label01 text="위도/경도" />
                 <S.FlexRow style={{ columnGap: "20px" }}>
-                  {/* <S.FlexRow> */}
-                  <S.LatLngInput type="number" {...register("lat")} value={latlng?.La} readOnly />
-                  <S.LatLngInput type="number" {...register("lng")} value={latlng?.Ma} readOnly />
-                  {/* </S.FlexRow> */}
-                  {/* <S.InputWrap></S.InputWrap> */}
+                  <S.LatLng type="number" value={latlng?.Ma !== "" ? latlng?.Ma : props.data?.fetchUseditem.useditemAddress?.lat ?? ""} readOnly {...register("lat")} />
+                  <S.LatLng type="number" value={latlng?.La !== "" ? latlng?.La : props.data?.fetchUseditem.useditemAddress?.lng ?? ""} readOnly {...register("lng")} />
                 </S.FlexRow>
                 <Error01 text={formState.errors.lat?.message} />
               </S.InputWrap>
@@ -136,7 +132,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
                 <Label01 text="주소" />
                 <S.InputWrap style={{ rowGap: "20px" }}>
                   <S.InputWrap>
-                    <Input01 value={address} register={register("address")} readOnly />
+                    <S.Address value={address !== "" ? address : props.data?.fetchUseditem.useditemAddress?.address ?? ""} readOnly {...register("address")} />
                     <Error01 text={formState.errors.address?.message} />
                   </S.InputWrap>
                   <Input01 register={register("addressDetail")} />

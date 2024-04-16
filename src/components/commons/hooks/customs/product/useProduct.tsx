@@ -8,11 +8,12 @@ import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
 // Component
-// import { Modal } from "antd";
+import { Modal } from "antd";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
 import { useUploadFile } from "../../mutations/useUploadFile";
+// import { useEffect } from "react";
 
 interface IUseProductArgs {
   files?: File[];
@@ -70,35 +71,20 @@ export const useProduct = (args?: IUseProductArgs) => {
       }
     );
   };
+  // useEffect(() => {
+  //   console.log(args);
+  // }, [args]);
 
-  console.log(args);
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
-    // if (typeof args === "undefined") return;
     if (args?.files === undefined) return;
-    const { Modal } = await import("antd");
-
-    try {
-      // const resultFile = await uploadFile({ variables: { file: args.files } });
-      const resultFile = Promise.all(
-        args.files.map(async (file) => {
-          if (file !== null) return await uploadFile({ variables: { file } });
-        })
-      );
-      // if (resultFile.data?.uploadFile.url === undefined) return;
-      console.log(resultFile);
-      // 업로드 API 결과 값과, 프리젠터에서 받은 index를 게시판 컨테이너로 전달인자를 보낸다
-      // props.onChangeFileUrls(result.data?.uploadFile.url, props.index);
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
-
-    // const uploadResults = await Promise.all(
-    //   args.files?.map(async (file) => {
-    //     if (file !== null) return await uploadFile({ variables: { file } });
-    //     return null; // 파일이 null이거나 undefined인 경우, null 반환
-    //   })
-    // );
+    const resultFile = await Promise.all(
+      args.files.map(async (file) => {
+        if (file !== null) return await uploadFile({ variables: { file } });
+        return null; // 파일이 null이거나 undefined인 경우, null 반환
+      })
+    );
+    const resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
 
     try {
       const result = await createProduct({
@@ -115,7 +101,7 @@ export const useProduct = (args?: IUseProductArgs) => {
               address: args.address,
               addressDetail: data.addressDetail,
             },
-            images: args.fileUrls,
+            images: resultFileUrls,
           },
         },
         refetchQueries: [
@@ -134,7 +120,6 @@ export const useProduct = (args?: IUseProductArgs) => {
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof args === "undefined") return;
-    const { Modal } = await import("antd");
     // files
     const currentFiles = JSON.stringify(args.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
@@ -181,7 +166,6 @@ export const useProduct = (args?: IUseProductArgs) => {
 
   // 판매 상품 삭제
   const onClickDelete = async (): Promise<void> => {
-    const { Modal } = await import("antd");
     try {
       await deleteProduct({
         variables: { useditemId: id },

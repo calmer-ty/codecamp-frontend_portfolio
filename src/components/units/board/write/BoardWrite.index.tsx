@@ -9,7 +9,7 @@ import { useAddressSearch } from "../../../commons/hooks/customs/useAddressSearc
 // Component
 import Button01 from "../../../commons/element/buttons/01";
 import Error01 from "../../../commons/element/errors/01";
-import Input01 from "../../../commons/element/inputs/01";
+import Input01 from "../../../commons/element/inputs/defaultValue/01";
 import Label01 from "../../../commons/element/labels/01";
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
 // Style
@@ -50,12 +50,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             <S.FlexRow>
               <S.InputWrap>
                 <Label01 text="작성자" />
-                <Input01
-                  placeholder="이름을 작성해주세요."
-                  defaultValue={props.data?.fetchBoard.writer ?? ""}
-                  register={register("writer")}
-                  readOnly={props.isEdit}
-                />
+                <Input01 placeholder="이름을 작성해주세요." defaultValue={props.data?.fetchBoard.writer ?? ""} register={register("writer")} readOnly={props.isEdit} />
                 <Error01 text={formState.errors?.writer?.message} />
               </S.InputWrap>
               <S.InputWrap>
@@ -67,21 +62,13 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
             <S.FlexColumn>
               <Label01 text="제목" />
-              <Input01
-                placeholder="제목을 작성해주세요."
-                defaultValue={props.data?.fetchBoard.title ?? ""}
-                register={register("title")}
-              />
+              <Input01 placeholder="제목을 작성해주세요." defaultValue={props.data?.fetchBoard.title ?? ""} register={register("title")} />
               <Error01 text={formState.errors?.title?.message} />
             </S.FlexColumn>
 
             <S.FlexColumn>
               <Label01 text="내용" />
-              <S.Contents
-                placeholder="내용을 작성해주세요."
-                defaultValue={props.data?.fetchBoard.contents}
-                {...register("contents")}
-              />
+              <S.Contents placeholder="내용을 작성해주세요." defaultValue={props.data?.fetchBoard.contents} {...register("contents")} />
               <Error01 text={formState.errors?.contents?.message} />
             </S.FlexColumn>
 
@@ -89,43 +76,26 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               <Label01 text="주소" />
               <S.AddressWrap>
                 <S.FlexRow style={{ justifyContent: "flex-start", columnGap: "20px" }}>
-                  <S.Zipcode
-                    readOnly
-                    value={zipcode !== "" ? zipcode : props.data?.fetchBoard.boardAddress?.zipcode ?? ""}
-                    {...register("zipcode")}
-                  />
+                  <S.Zipcode readOnly value={zipcode !== "" ? zipcode : props.data?.fetchBoard.boardAddress?.zipcode ?? ""} {...register("zipcode")} />
                   <S.SearchBtn type="button" onClick={onClickAddressSearch}>
                     우편번호 검색
                   </S.SearchBtn>
                 </S.FlexRow>
-                <S.Input
-                  value={address !== "" ? address : props.data?.fetchBoard.boardAddress?.address ?? ""}
-                  readOnly
-                  {...register("address")}
-                />
-                <Input01
-                  defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail ?? ""}
-                  register={register("addressDetail")}
-                />
+                <S.Input value={address !== "" ? address : props.data?.fetchBoard.boardAddress?.address ?? ""} readOnly {...register("address")} />
+                <Input01 defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail ?? ""} register={register("addressDetail")} />
               </S.AddressWrap>
             </S.FlexColumn>
 
             <S.FlexColumn>
               <Label01 text="유튜브" />
-              <Input01
-                placeholder="링크를 복사해주세요."
-                defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""}
-                register={register("youtubeUrl")}
-              />
+              <Input01 placeholder="링크를 복사해주세요." defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""} register={register("youtubeUrl")} />
             </S.FlexColumn>
 
             <S.FlexColumn>
               <Label01 text="사진첨부" />
               <S.ImgWrap>
                 {fileUrls.map((el, index) => {
-                  return (
-                    <Upload01 key={`${el}_${index}`} index={index} fileUrl={el} onChangeFileUrls={onChangeFileUrls} />
-                  );
+                  return <Upload01 key={`${el}_${index}`} index={index} fileUrl={el} onChangeFileUrls={onChangeFileUrls} />;
                 })}
               </S.ImgWrap>
             </S.FlexColumn>
