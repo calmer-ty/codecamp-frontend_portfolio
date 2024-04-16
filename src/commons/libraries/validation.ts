@@ -50,11 +50,19 @@ export const schemaUserJoin = yup.object({
 });
 
 export const schemaProductWrite = yup.object({
-  name: yup.string().required("상품명 입력은 필수입니다."),
-  remarks: yup.string().required("상품요약 입력은 필수입니다."),
-  contents: yup.string().required("상품설명 입력은 필수입니다."),
-  price: yup.number().typeError("숫자를 입력해주세요.").required("상품가격 입력은 필수입니다."),
-  // address: yup.string().required("거래장소 선택은 필수입니다."),
+  // name: yup.string().required("상품명은 필수입니다."),
+  name: yup.string().when("$isEdit", {
+    is: true, // 조건: $isEdit 값이 true일 때
+    then: yup.string().optional(), // 그 경우에 적용할 스키마
+    otherwise: yup.string().required("상품명은 필수입니다."), // 그 외의 경우에 적용할 스키마
+  }),
+  // remarks: yup.string().optional(),
+  remarks: yup.string().required("상품한줄은 필수입니다."),
+  contents: yup.string().required("상품설명은 필수입니다."),
+  price: yup.number().typeError("숫자를 입력해주세요.").required("상품가격은 필수입니다."),
+  // tags: yup.array().of(yup.string()).required("태그는 하나 이상 입력해야 합니다."),
+  tags: yup.array().optional(),
+  address: yup.string().required("거래장소 선택은 필수입니다."),
   lat: yup.number().typeError("위치를 선택해주세요").required("위도를 입력해주세요."),
   lng: yup.number().typeError("위치를 선택해주세요").required("경도를 입력해주세요."),
 });

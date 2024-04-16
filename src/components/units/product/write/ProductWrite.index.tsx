@@ -19,15 +19,20 @@ import type { IFormDataProductWrite, IProductWriteProps } from "./ProductWrite.t
 import * as S from "./ProductWrite.styles";
 
 export default function ProductWrite(props: IProductWriteProps): JSX.Element {
-  const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormDataProductWrite>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    trigger,
+    formState: { errors, isValid },
+  } = useForm<IFormDataProductWrite>({
     resolver: yupResolver(schemaProductWrite),
     mode: "onChange",
-    // mode: "onSubmit",
+    context: { isEdit: props.isEdit }, // 추가: 폼의 수정 상태 정보 전달
   });
 
   // 맵 선택 Hook
   const { latlng, address } = useMap(33.450701, 126.570667, true);
-  console.log(latlng);
 
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
@@ -82,24 +87,24 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.InputWrap>
             <Label01 text="상품명" />
             <Input01 placeholder="상품명을 작성해주세요." defaultValue={props.data?.fetchUseditem.name} register={register("name")} />
-            <Error01 text={formState.errors.name?.message} />
+            <Error01 text={errors.name?.message} />
           </S.InputWrap>
           <S.InputWrap>
             <Label01 text="한줄요약" />
-            <Input01 placeholder="상품 한줄요약을 작성해주세요." defaultValue={props.data?.fetchUseditem.remarks ?? ""} register={register("remarks")} />
-            <Error01 text={formState.errors.remarks?.message} />
+            <Input01 placeholder="상품 한줄요약을 작성해주세요." defaultValue={props.data?.fetchUseditem.remarks} register={register("remarks")} />
+            <Error01 text={errors.remarks?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
             <Label01 text="상품설명" />
-            <S.Contents placeholder="상품설명을 작성해주세요." defaultValue={props.data?.fetchUseditem.contents ?? ""} onChange={onChangeContents} />
-            <Error01 text={formState.errors.contents?.message} />
+            <S.Contents placeholder="상품설명을 작성해주세요." defaultValue={props.data?.fetchUseditem.contents} onChange={onChangeContents} />
+            <Error01 text={errors.contents?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
             <Label01 text="판매 가격" />
             <Input01 placeholder="0" defaultValue={props.data?.fetchUseditem.price ?? ""} register={register("price")} />
-            <Error01 text={formState.errors.price?.message} />
+            <Error01 text={errors.price?.message} />
           </S.InputWrap>
 
           <S.InputWrap>
@@ -111,7 +116,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
                 </>
               ))}
             </S.Tags>
-            <Error01 text={formState.errors.tags?.message} />
+            <Error01 text={errors.tags?.message} />
           </S.InputWrap>
 
           <S.AreaWrap>
@@ -123,17 +128,17 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
               <S.InputWrap>
                 <Label01 text="위도/경도" />
                 <S.FlexRow style={{ columnGap: "20px" }}>
-                  <S.LatLng type="number" value={latlng?.Ma !== "" ? latlng?.Ma : props.data?.fetchUseditem.useditemAddress?.lat ?? ""} readOnly {...register("lat")} />
-                  <S.LatLng type="number" value={latlng?.La !== "" ? latlng?.La : props.data?.fetchUseditem.useditemAddress?.lng ?? ""} readOnly {...register("lng")} />
+                  <S.LatLng type="number" value={latlng !== "" ? latlng?.Ma : props.data?.fetchUseditem.useditemAddress?.lat ?? ""} readOnly {...register("lat")} />
+                  <S.LatLng type="number" value={latlng !== "" ? latlng?.La : props.data?.fetchUseditem.useditemAddress?.lng ?? ""} readOnly {...register("lng")} />
                 </S.FlexRow>
-                <Error01 text={formState.errors.lat?.message} />
+                <Error01 text={errors.lat?.message} />
               </S.InputWrap>
               <S.InputWrap>
                 <Label01 text="주소" />
                 <S.InputWrap style={{ rowGap: "20px" }}>
                   <S.InputWrap>
                     <S.Address value={address !== "" ? address : props.data?.fetchUseditem.useditemAddress?.address ?? ""} readOnly {...register("address")} />
-                    <Error01 text={formState.errors.address?.message} />
+                    <Error01 text={errors.address?.message} />
                   </S.InputWrap>
                   <Input01 register={register("addressDetail")} />
                 </S.InputWrap>
@@ -160,7 +165,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             </S.FlexRow>
           </S.InputWrap>
 
-          <Button01 text={props.isEdit ? "수정하기" : "등록하기"} isActive={formState.isValid} />
+          <Button01 text={props.isEdit ? "수정하기" : "등록하기"} isActive={isValid} />
         </S.Form>
       </S.Container>
     </S.Wrapper>

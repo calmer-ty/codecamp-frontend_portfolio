@@ -9,7 +9,7 @@ export interface IFormDataProductWrite {
   images?: string[];
   lat: number;
   lng: number;
-  address?: string;
+  address: string;
   addressDetail?: string;
   tags?: string[];
 }

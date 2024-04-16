@@ -31,7 +31,7 @@ declare const window: typeof globalThis & {
 export const useProduct = (args?: IUseProductArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
-  const { data } = useFetchProduct({ useditemId: id });
+  const { data: defaultData } = useFetchProduct({ useditemId: id });
 
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
@@ -49,8 +49,8 @@ export const useProduct = (args?: IUseProductArgs) => {
         pg: "kakaopay",
         pay_method: "card",
         //   merchant_uid: "ORD20180131-0000011",
-        name: data?.fetchUseditem.name,
-        amount: data?.fetchUseditem.price,
+        name: defaultData?.fetchUseditem.name,
+        amount: defaultData?.fetchUseditem.price,
         // buyer_email: "gildong@gmail.com",
         // buyer_name: "홍길동",
         // buyer_tel: "010-4242-4242",
@@ -71,9 +71,6 @@ export const useProduct = (args?: IUseProductArgs) => {
       }
     );
   };
-  // useEffect(() => {
-  //   console.log(args);
-  // }, [args]);
 
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
@@ -132,6 +129,7 @@ export const useProduct = (args?: IUseProductArgs) => {
     const { addressDetail, ...inputs } = data;
 
     const updateUseditemInput: IUpdateUseditemInput = {};
+
     if (inputs.name !== "") updateUseditemInput.name = inputs.name;
     if (inputs.remarks !== "") updateUseditemInput.remarks = inputs.remarks;
     if (inputs.contents !== "") updateUseditemInput.contents = inputs.contents;

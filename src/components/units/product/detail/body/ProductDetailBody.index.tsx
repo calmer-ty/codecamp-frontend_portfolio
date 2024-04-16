@@ -32,7 +32,6 @@ const settings = {
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
-  console.log(data);
 
   const { onClickDelete, onClickPayment } = useProduct();
   const { onClickPick } = useProductPicked();
