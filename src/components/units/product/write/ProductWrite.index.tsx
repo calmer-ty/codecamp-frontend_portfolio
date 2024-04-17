@@ -28,7 +28,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   } = useForm<IFormDataProductWrite>({
     resolver: yupResolver(schemaProductWrite),
     mode: "onChange",
-    context: { isEdit: props.isEdit }, // 추가: 폼의 수정 상태 정보 전달
+    // context: { isEdit: props.isEdit }, // 추가: 폼의 수정 상태 정보 전달
   });
 
   // 맵 선택 Hook
@@ -39,6 +39,30 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     void trigger("contents");
   };
+
+  const validateAllFields = async () => {
+    const result = await trigger(); // 모든 필드에 대한 유효성 검사를 트리거
+    console.log(result);
+    if (result) {
+      console.log("All fields are valid!");
+      // 모든 필드가 유효하다면 추가 작업 수행
+    } else {
+      console.log("Some fields are invalid.");
+      // 하나 이상의 필드가 유효하지 않다면 오류 처리
+    }
+  };
+
+  useEffect(() => {
+    // 초기 값 설정 및 유효성 검사
+    setValue("name", props.data?.fetchUseditem.name ?? "", { shouldValidate: true });
+    setValue("price", props.data?.fetchUseditem.price ?? 0, { shouldValidate: true });
+    // 필요한 경우 trigger() 사용
+    void trigger();
+  }, [setValue, props.data?.fetchUseditem, trigger]);
+
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
 
   // 파일 전송 기능
   const [files, setFiles] = useState<File[]>(new Array(3).fill(null));
@@ -77,6 +101,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     address,
     latlng,
     tags,
+    // trigger,
   });
 
   return (
@@ -165,6 +190,9 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             </S.FlexRow>
           </S.InputWrap>
 
+          <button type="button" onClick={validateAllFields}>
+            Validate All Fields
+          </button>
           <Button01 text={props.isEdit ? "수정하기" : "등록하기"} isActive={isValid} />
         </S.Form>
       </S.Container>

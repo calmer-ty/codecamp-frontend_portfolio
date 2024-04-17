@@ -7,12 +7,13 @@ import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
+import { useUploadFile } from "../../mutations/useUploadFile";
 // Component
 import { Modal } from "antd";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
-import { useUploadFile } from "../../mutations/useUploadFile";
+// import type { UseFormTrigger } from "react-hook-form";
 // import { useEffect } from "react";
 
 interface IUseProductArgs {
@@ -22,6 +23,7 @@ interface IUseProductArgs {
   address?: string;
   tags?: string[];
   pick?: number;
+  // trigger: UseFormTrigger<IFormDataProductWrite>;
 }
 
 declare const window: typeof globalThis & {
