@@ -40,22 +40,37 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     void trigger("contents");
   };
 
-  const validateAllFields = async () => {
-    const result = await trigger(); // 모든 필드에 대한 유효성 검사를 트리거
-    console.log(result);
-    if (result) {
-      console.log("All fields are valid!");
-      // 모든 필드가 유효하다면 추가 작업 수행
-    } else {
-      console.log("Some fields are invalid.");
-      // 하나 이상의 필드가 유효하지 않다면 오류 처리
-    }
-  };
+  // const validateAllFields = async () => {
+  //   const result = await trigger(); // 모든 필드에 대한 유효성 검사를 트리거
+  //   console.log(result);
+  //   if (result) {
+  //     console.log("All fields are valid!");
+  //     // 모든 필드가 유효하다면 추가 작업 수행
+  //   } else {
+  //     console.log("Some fields are invalid.");
+  //     // 하나 이상의 필드가 유효하지 않다면 오류 처리
+  //   }
+  // };
 
   useEffect(() => {
     // 초기 값 설정 및 유효성 검사
-    setValue("name", props.data?.fetchUseditem.name ?? "", { shouldValidate: true });
-    setValue("price", props.data?.fetchUseditem.price ?? 0, { shouldValidate: true });
+    const itemData = {
+      name: props.data?.fetchUseditem.name ?? "",
+      remarks: props.data?.fetchUseditem.remarks ?? "",
+      contents: props.data?.fetchUseditem.contents ?? "",
+      lat: props.data?.fetchUseditem.useditemAddress?.lat ?? 0,
+      lng: props.data?.fetchUseditem.useditemAddress?.lng ?? 0,
+      address: props.data?.fetchUseditem.useditemAddress?.address ?? "",
+      price: props.data?.fetchUseditem.price ?? 0,
+    };
+
+    // 객체의 각 키-값 쌍에 대해 setValue를 호출
+    Object.entries(itemData).forEach(([key, value]) => {
+      setValue(key as "name" | "remarks" | "contents" | "price" | "tags" | "address" | "lat" | "lng" | "images" | "addressDetail" | `tags.${number}` | `images.${number}`, value, {
+        shouldValidate: true,
+      });
+    });
+
     // 필요한 경우 trigger() 사용
     void trigger();
   }, [setValue, props.data?.fetchUseditem, trigger]);
@@ -190,9 +205,9 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             </S.FlexRow>
           </S.InputWrap>
 
-          <button type="button" onClick={validateAllFields}>
+          {/* <button type="button" onClick={validateAllFields}>
             Validate All Fields
-          </button>
+          </button> */}
           <Button01 text={props.isEdit ? "수정하기" : "등록하기"} isActive={isValid} />
         </S.Form>
       </S.Container>
