@@ -30,6 +30,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     mode: "onChange",
     // context: { isEdit: props.isEdit }, // 추가: 폼의 수정 상태 정보 전달
   });
+  console.log(props.data);
 
   // 맵 선택 Hook
   const { latlng, address } = useMap(33.450701, 126.570667, true);
@@ -116,7 +117,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     address,
     latlng,
     tags,
-    // trigger,
   });
 
   return (

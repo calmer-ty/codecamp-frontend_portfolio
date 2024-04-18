@@ -13,6 +13,7 @@ interface IUpload01Props {
 
 export default function Upload01(props: IUpload01Props): JSX.Element {
   const [imageUrl, setImageUrl] = useState("");
+  console.log(props.fileUrl);
   // const [imageFile, setImageFile] = useState<File>();
 
   // 참조 기능
@@ -43,13 +44,13 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
 
   return (
     <>
-      {imageUrl !== "" ? (
+      {imageUrl !== "" || props.fileUrl !== "" ? (
         // fileUrl에 값이 있다면 이미지 요소를 보여주고 없다면 버튼을 보여준다
         <S.UploadImg
           // 참조한 UploadInput을 클릭 이벤트로 넣어준다
           onClick={onClickUpload}
           // src={`http://storage.googleapis.com/${props.fileUrl}` ?? imageUrl}
-          src={imageUrl ?? `http://storage.googleapis.com/${props.fileUrl}`}
+          src={imageUrl !== "" ? imageUrl : `http://storage.googleapis.com/${props.fileUrl}`}
         />
       ) : (
         <S.UploadBtn

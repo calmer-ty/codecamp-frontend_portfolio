@@ -13,8 +13,6 @@ import { Modal } from "antd";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
-// import type { UseFormTrigger } from "react-hook-form";
-// import { useEffect } from "react";
 
 interface IUseProductArgs {
   files?: File[];
@@ -23,7 +21,6 @@ interface IUseProductArgs {
   address?: string;
   tags?: string[];
   pick?: number;
-  // trigger: UseFormTrigger<IFormDataProductWrite>;
 }
 
 declare const window: typeof globalThis & {
