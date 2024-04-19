@@ -56,7 +56,9 @@ export default function LayoutHeader(): JSX.Element {
     <S.Wrapper>
       <S.Container>
         <Link href={"/"}>
-          <S.Logo>Logo</S.Logo>
+          <S.Logo>
+            <img src="/images/layout/header/tae_logo.webp" />
+          </S.Logo>
         </Link>
         {accessToken === "" ? (
           <S.FlexRow>

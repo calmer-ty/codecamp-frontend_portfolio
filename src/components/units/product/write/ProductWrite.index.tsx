@@ -30,7 +30,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     mode: "onChange",
     // context: { isEdit: props.isEdit }, // 추가: 폼의 수정 상태 정보 전달
   });
-  console.log(props.data);
 
   // 맵 선택 Hook
   const { latlng, address } = useMap(33.450701, 126.570667, true);
@@ -41,18 +40,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     void trigger("contents");
   };
 
-  // const validateAllFields = async () => {
-  //   const result = await trigger(); // 모든 필드에 대한 유효성 검사를 트리거
-  //   console.log(result);
-  //   if (result) {
-  //     console.log("All fields are valid!");
-  //     // 모든 필드가 유효하다면 추가 작업 수행
-  //   } else {
-  //     console.log("Some fields are invalid.");
-  //     // 하나 이상의 필드가 유효하지 않다면 오류 처리
-  //   }
-  // };
-
   useEffect(() => {
     // 초기 값 설정 및 유효성 검사
     const itemData = {
@@ -62,7 +49,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
       lat: props.data?.fetchUseditem.useditemAddress?.lat ?? 0,
       lng: props.data?.fetchUseditem.useditemAddress?.lng ?? 0,
       address: props.data?.fetchUseditem.useditemAddress?.address ?? "",
-      price: props.data?.fetchUseditem.price ?? 0,
+      price: props.data?.fetchUseditem.price ?? "",
     };
 
     // 객체의 각 키-값 쌍에 대해 setValue를 호출
@@ -75,10 +62,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     // 필요한 경우 trigger() 사용
     void trigger();
   }, [setValue, props.data?.fetchUseditem, trigger]);
-
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
 
   // 파일 전송 기능
   const [files, setFiles] = useState<File[]>(new Array(3).fill(null));
@@ -96,6 +79,11 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     newFiles[index] = file;
     setFiles(newFiles);
   };
+  // const onChangeFiles = (file: File, index: number): void => {
+  //   const newFiles = [...files];
+  //   newFiles[index] = file;
+  //   setFiles(newFiles);
+  // };
 
   useEffect(() => {
     const images = props.data?.fetchUseditem.images;
@@ -151,9 +139,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             <Label01 text="태그입력" />
             <S.Tags>
               {tagsProps.children.map((el: string) => (
-                <>
-                  <div>{el}</div>
-                </>
+                <div key={el}>{el}</div>
               ))}
             </S.Tags>
             <Error01 text={errors.tags?.message} />

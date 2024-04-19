@@ -13,6 +13,7 @@ import { Modal } from "antd";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
+import { useEffect } from "react";
 
 interface IUseProductArgs {
   files?: File[];
@@ -114,12 +115,36 @@ export const useProduct = (args?: IUseProductArgs) => {
   };
 
   // 판매 상품 수정
+  useEffect(() => {
+    console.log(args?.fileUrls);
+  }, [args?.fileUrls]);
+
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof args === "undefined") return;
+
+    if (args?.files === undefined) return;
+    const resultFile = await Promise.all(
+      args.files.map(async (file) => {
+        if (file !== null) return await uploadFile({ variables: { file } });
+        return null; // 파일이 null이거나 undefined인 경우, null 반환
+      })
+    );
+    const resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
+
+    // # 파일 URL 병합 로직
+    // const newFileUrls = args.fileUrls?.map((url, index) => resultFileUrls[index] || url);
+    const newFileUrls = args.fileUrls?.map((url, index) => {
+      const newUrl = resultFileUrls[index];
+      // 명시적으로 null과 undefined만을 체크합니다. 빈 문자열 ""은 유효한 URL로 간주됩니다.
+      return newUrl || url;
+    });
+    console.log("newFileUrls", newFileUrls);
+
     // files
     const currentFiles = JSON.stringify(args.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
+
     // tags
     const currentTags = JSON.stringify(args.tags);
     const defaultTags = JSON.stringify(data.tags);
