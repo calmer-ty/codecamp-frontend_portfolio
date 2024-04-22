@@ -1,4 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  // useEffect,
+  useRef,
+  useState,
+} from "react";
 // Style
 import * as S from "./Upload01.styles";
 // Type
@@ -20,10 +24,10 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
   const onClickUpload = (): void => {
     fileRef.current?.click();
   };
-  useEffect(() => {
-    console.log("===== Updated fileReaderUrl ===== :", props.index, fileReaderUrl);
-    console.log("===== Updated fileUrl ===== :", props.index, props.fileUrl);
-  }, [fileReaderUrl]);
+  // useEffect(() => {
+  //   console.log("===== Updated fileReaderUrl ===== :", props.index, fileReaderUrl);
+  //   console.log("===== Updated fileUrl ===== :", props.index, props.fileUrl);
+  // }, [fileReaderUrl]);
 
   // useEffect(() => {
   //   if (fileReaderUrl !== "") {

@@ -13,7 +13,7 @@ import { Modal } from "antd";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 interface IUseProductArgs {
   files?: File[];
@@ -74,14 +74,20 @@ export const useProduct = (args?: IUseProductArgs) => {
 
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
-    if (args?.files === undefined) return;
-    const resultFile = await Promise.all(
-      args.files.map(async (file) => {
-        if (file !== null) return await uploadFile({ variables: { file } });
-        return null; // 파일이 null이거나 undefined인 경우, null 반환
-      })
-    );
-    const resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
+    if (args === undefined) return;
+
+    let resultFileUrls: string[] = []; // 결과 파일 URL 배열을 초기화
+
+    if (args.files !== undefined) {
+      const resultFile = await Promise.all(
+        args.files.map(async (file) => {
+          if (file !== null) return await uploadFile({ variables: { file } });
+          return null; // 파일이 null이거나 undefined인 경우, null 반환
+        })
+      );
+      resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
+    }
+    console.log(resultFileUrls);
 
     try {
       const result = await createProduct({
@@ -115,34 +121,36 @@ export const useProduct = (args?: IUseProductArgs) => {
   };
 
   // 판매 상품 수정
-  useEffect(() => {
-    console.log(args?.fileUrls);
-  }, [args?.fileUrls]);
-
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof args === "undefined") return;
+    // console.log(args);
 
-    if (args?.files === undefined) return;
-    const resultFile = await Promise.all(
-      args.files.map(async (file) => {
-        if (file !== null) return await uploadFile({ variables: { file } });
-        return null; // 파일이 null이거나 undefined인 경우, null 반환
-      })
-    );
-    const resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
+    let resultFileUrls: string[] = []; // 결과 파일 URL 배열을 초기화
+
+    if (args.files !== undefined) {
+      const resultFile = await Promise.all(
+        args.files.map(async (file) => {
+          if (file !== null) return await uploadFile({ variables: { file } });
+          return null; // 파일이 null이거나 undefined인 경우, null 반환
+        })
+      );
+      resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
+    }
 
     // # 파일 URL 병합 로직
     // const newFileUrls = args.fileUrls?.map((url, index) => resultFileUrls[index] || url);
-    const newFileUrls = args.fileUrls?.map((url, index) => {
-      const newUrl = resultFileUrls[index];
-      // 명시적으로 null과 undefined만을 체크합니다. 빈 문자열 ""은 유효한 URL로 간주됩니다.
-      return newUrl || url;
-    });
-    console.log("newFileUrls", newFileUrls);
+    const newFileUrls =
+      args.fileUrls?.map((url, index) => {
+        const resultUrl = typeof resultFileUrls[index] === "string" ? resultFileUrls[index] : undefined;
+        return resultUrl !== undefined && resultUrl !== "" ? resultUrl : url;
+      }) ?? [];
 
+    console.log("newFileUrls", newFileUrls);
     // files
-    const currentFiles = JSON.stringify(args.fileUrls);
-    const defaultFiles = JSON.stringify(data.images);
+    const defaultFiles = JSON.stringify(args.fileUrls);
+    console.log("defaultFiles", defaultFiles);
+    const currentFiles = JSON.stringify(newFileUrls);
+    console.log("currentFiles", currentFiles);
     const isChangedFiles = currentFiles !== defaultFiles;
 
     // tags
@@ -163,7 +171,7 @@ export const useProduct = (args?: IUseProductArgs) => {
       if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
       if (addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = addressDetail;
     }
-    if (isChangedFiles) updateUseditemInput.images = args.fileUrls;
+    if (isChangedFiles) updateUseditemInput.images = newFileUrls;
     if (isChangedTags) updateUseditemInput.tags = args.tags;
 
     try {

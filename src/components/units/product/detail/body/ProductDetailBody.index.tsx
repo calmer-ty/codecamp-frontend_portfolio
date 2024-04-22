@@ -17,9 +17,9 @@ import "slick-carousel/slick/slick-theme.css";
 import * as S from "./ProductDetailBody.styles";
 // Type
 import type { IProductDetailBodyProps } from "../ProductDetail.types";
-import type { IUseditem } from "../../../../../commons/types/generated/types";
+// import type { IUseditem } from "../../../../../commons/types/generated/types";
 
-const TODAY_VIEW_PRODUCT = 2;
+// const TODAY_VIEW_PRODUCT = 2;
 
 const settings = {
   dots: true,
@@ -32,7 +32,7 @@ const settings = {
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
-  // console.log(data);
+  console.log(data);
 
   const { onClickDelete, onClickPayment } = useProduct();
   const { onClickPick } = useProductPicked();
@@ -41,24 +41,29 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const dataLng = props.data?.fetchUseditem.useditemAddress?.lng;
   useMap(dataLat, dataLng, false);
 
-  // 해당 페이지 정보 로컬 스토리지 저장
-  useEffect(() => {
-    if (data === undefined) return;
-    const todayView = JSON.parse(localStorage.getItem("todayView") ?? "[]");
-    // 2. 이미 담겼는지 확인
-    const temp = todayView.filter((el: IUseditem) => el?._id === data?.fetchUseditem._id);
-    if (temp.length >= 1) {
-      return;
-    }
-    // 3. 클릭한 상품 추가하기
-    todayView.unshift(data?.fetchUseditem);
-    // 로컬스토리지 push 조건
-    if (todayView.length > TODAY_VIEW_PRODUCT) {
-      todayView.pop();
-    }
-    // 4. 오늘 본 상품 변경
-    localStorage.setItem("todayView", JSON.stringify(todayView));
-  }, [data]);
+  // // 해당 페이지 정보 로컬 스토리지 저장
+  // useEffect(() => {
+  //   if (data === undefined) return;
+  //   const todayView = JSON.parse(localStorage.getItem("todayView") ?? "[]");
+  //   // 2. 이미 담겼는지 확인
+  //   const temp = todayView.filter((el: IUseditem) => el?._id === data?.fetchUseditem._id);
+  //   if (temp.length >= 1) {
+  //     return;
+  //   }
+  //   // 3. 클릭한 상품 추가하기
+  //   todayView.unshift(data?.fetchUseditem);
+  //   // 로컬스토리지 push 조건
+  //   if (todayView.length > TODAY_VIEW_PRODUCT) {
+  //     todayView.pop();
+  //   }
+  //   // 4. 오늘 본 상품 변경
+  //   localStorage.setItem("todayView", JSON.stringify(todayView));
+  // }, [data]);
+
+  // useEffect(() => {
+  //   const images = props.data?.fetchUseditem.images;
+  //   if (images !== undefined && images !== null) setFileUrls([...images]);
+  // }, [props.data]);
 
   return (
     <S.Body>
