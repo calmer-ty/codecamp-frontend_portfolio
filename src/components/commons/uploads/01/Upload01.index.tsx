@@ -10,10 +10,10 @@ import type { ChangeEvent } from "react";
 import checkValidationImg from "./Upload01.validation";
 
 interface IUpload01Props {
-  file?: File;
-  fileUrl?: string;
+  fileUrl: string;
   index: number;
-  onChangeFileUrls: (file: File, fileUrl: string, index: number) => void;
+  file?: File;
+  onChangeFileUrls: (fileUrl: string, index: number, file?: File) => void;
 }
 
 export default function Upload01(props: IUpload01Props): JSX.Element {
@@ -48,7 +48,7 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
     fileReader.onload = (event) => {
       if (typeof event.target?.result === "string") {
         setFileReaderUrl(event.target?.result);
-        props.onChangeFileUrls(file, props.fileUrl ?? "", props.index);
+        props.onChangeFileUrls(props.fileUrl ?? "", props.index, file);
       }
     };
   };

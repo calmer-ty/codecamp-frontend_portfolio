@@ -1,14 +1,11 @@
 import Link from "next/link";
 import Dompurufy from "dompurify";
-import { useEffect } from "react";
 // Hooks
-import { useIdCheck } from "../../../../commons/hooks/customs/useIdCheck";
 import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
-import { useFetchProduct } from "../../../../commons/hooks/queries/product/useFetchProduct";
-import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
-import useMap from "../../../../commons/hooks/customs/useMap";
+// import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
+// import useMap from "../../../../commons/hooks/customs/useMap";
 // Component
-import HeartIcon01 from "../../../../commons/icon/heart/01";
+// import HeartIcon01 from "../../../../commons/icon/heart/01";
 import TagsView01 from "../../../../commons/tags/view/01";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -30,16 +27,12 @@ const settings = {
 };
 
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
-  const { id } = useIdCheck("useditemId");
-  const { data } = useFetchProduct({ useditemId: id });
-  console.log(data);
-
   const { onClickDelete, onClickPayment } = useProduct();
-  const { onClickPick } = useProductPicked();
+  // const { onClickPick } = useProductPicked();
 
-  const dataLat = props.data?.fetchUseditem.useditemAddress?.lat;
-  const dataLng = props.data?.fetchUseditem.useditemAddress?.lng;
-  useMap(dataLat, dataLng, false);
+  // const dataLat = props.data?.fetchUseditem.useditemAddress?.lat;
+  // const dataLng = props.data?.fetchUseditem.useditemAddress?.lng;
+  // useMap(dataLat, dataLng, false);
 
   // // 해당 페이지 정보 로컬 스토리지 저장
   // useEffect(() => {
@@ -60,11 +53,6 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
   //   localStorage.setItem("todayView", JSON.stringify(todayView));
   // }, [data]);
 
-  // useEffect(() => {
-  //   const images = props.data?.fetchUseditem.images;
-  //   if (images !== undefined && images !== null) setFileUrls([...images]);
-  // }, [props.data]);
-
   return (
     <S.Body>
       <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
@@ -76,10 +64,10 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
             <S.Price>{props.data?.fetchUseditem.price}원</S.Price>
           </S.TitleText>
           <S.Pick>
-            <button onClick={onClickPick}>
+            {/* <button onClick={onClickPick}>
               <HeartIcon01 size={20} />
-            </button>
-            <S.PickScore>{data?.fetchUseditem.pickedCount}</S.PickScore>
+            </button> */}
+            <S.PickScore>{props.data?.fetchUseditem.pickedCount}</S.PickScore>
           </S.Pick>
         </S.BodyHeader>
         <Slider {...settings}>

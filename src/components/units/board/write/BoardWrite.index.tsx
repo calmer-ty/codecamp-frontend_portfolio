@@ -9,7 +9,7 @@ import { useAddressSearch } from "../../../commons/hooks/customs/useAddressSearc
 // Component
 import Button01 from "../../../commons/element/buttons/01";
 import Error01 from "../../../commons/element/errors/01";
-import Input01 from "../../../commons/element/inputs/defaultValue/01";
+import Input01 from "../../../commons/element/inputs/01";
 import Label01 from "../../../commons/element/labels/01";
 import Upload01 from "../../../commons/uploads/01/Upload01.index";
 // Style

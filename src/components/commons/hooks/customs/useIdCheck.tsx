@@ -5,20 +5,19 @@ export const useIdCheck = (id: string) => {
   const router = useRouter();
   const [queryId, setQueryId] = useState<string>("");
 
+  const idFromQuery = router.query[id];
   useEffect(() => {
-    const idFromQuery = router.query[id];
-
     if (idFromQuery === undefined || idFromQuery === null) {
       console.log("id를 못찾았습니다");
       setQueryId("");
     } else if (typeof idFromQuery === "string") {
-      console.log("id를 찾았습니다");
+      console.log("id를 찾았습니다 string");
       setQueryId(idFromQuery);
     } else if (typeof idFromQuery === "object") {
-      console.log("id를 찾았습니다");
+      console.log("id를 찾았습니다 object");
       setQueryId(idFromQuery[0]);
     }
-  }, [router.query[id]]);
+  }, [idFromQuery]);
 
   return { id: queryId };
 };

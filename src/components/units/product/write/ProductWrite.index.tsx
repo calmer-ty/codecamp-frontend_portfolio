@@ -68,13 +68,14 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
   // 업로드 컴포넌트에서 값을 받아온다, 이유는 게시판 작성 화면에도 이미지를 보여주기 위해선
   // Upload 컴포넌트의 file input클릭 시 얻어온 url 값이 필요하다
-  const onChangeFileUrls = (file: File, fileUrl: string, index: number): void => {
+  const onChangeFileUrls = (fileUrl: string, index: number, file: File | undefined): void => {
     // 객체나 배열은 값을 바꾸면 주소값은 그대로이기 떄문에 setState 에서 인식을 하지 못하여 리랜더링이 되지 않는다
     // 그래서 얕은 복사를 하여 새로운 배열로 변수를 만들어주어 배열 전체를 바꾸는식으로 스테이트 값을 변경한다.
     const newFileUrls = [...fileUrls];
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
 
+    if (file === undefined) return;
     const newFiles = [...files];
     newFiles[index] = file;
     setFiles(newFiles);

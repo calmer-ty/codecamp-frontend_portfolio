@@ -18,7 +18,6 @@ export const FETCH_USEDITEM = gql`
         name
       }
       useditemAddress {
-        zipcode
         address
         addressDetail
         lat

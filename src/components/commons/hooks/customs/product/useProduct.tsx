@@ -31,7 +31,7 @@ declare const window: typeof globalThis & {
 export const useProduct = (args?: IUseProductArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
-  const { data: defaultData } = useFetchProduct({ useditemId: id });
+  const { data } = useFetchProduct({ useditemId: id });
 
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
@@ -49,8 +49,8 @@ export const useProduct = (args?: IUseProductArgs) => {
         pg: "kakaopay",
         pay_method: "card",
         //   merchant_uid: "ORD20180131-0000011",
-        name: defaultData?.fetchUseditem.name,
-        amount: defaultData?.fetchUseditem.price,
+        name: data?.fetchUseditem.name,
+        amount: data?.fetchUseditem.price,
         // buyer_email: "gildong@gmail.com",
         // buyer_name: "홍길동",
         // buyer_tel: "010-4242-4242",
@@ -72,22 +72,31 @@ export const useProduct = (args?: IUseProductArgs) => {
     );
   };
 
+  // 파일 업로드 및 URL 처리 함수
+  const uploadFilesAndGetUrls = async (files: File[] | undefined) => {
+    // 파일 업로드 및 URL 처리 함수 정의
+    let resultFileUrls: string[] = []; // 파일 URL을 저장할 배열 초기화
+
+    if (files !== undefined) {
+      // 파일이 존재하는 경우에만 처리
+      const resultFile = await Promise.all(
+        // 모든 파일에 대해 병렬로 업로드 처리
+        files.map(async (file) => {
+          if (file !== null) return await uploadFile({ variables: { file } }); // 파일 업로드 요청
+          return null; // 파일이 null이거나 undefined인 경우, null 반환
+        })
+      );
+      resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? ""); // 업로드된 파일의 URL을 추출하여 배열에 저장
+    }
+
+    return resultFileUrls; // 파일 URL 배열 반환
+  };
+
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
     if (args === undefined) return;
 
-    let resultFileUrls: string[] = []; // 결과 파일 URL 배열을 초기화
-
-    if (args.files !== undefined) {
-      const resultFile = await Promise.all(
-        args.files.map(async (file) => {
-          if (file !== null) return await uploadFile({ variables: { file } });
-          return null; // 파일이 null이거나 undefined인 경우, null 반환
-        })
-      );
-      resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
-    }
-    console.log(resultFileUrls);
+    const resultFileUrls = await uploadFilesAndGetUrls(args.files); // 파일 업로드 및 URL 처리 함수 호출하여 파일 URL 배열 획득
 
     try {
       const result = await createProduct({
@@ -104,14 +113,14 @@ export const useProduct = (args?: IUseProductArgs) => {
               address: args.address,
               addressDetail: data.addressDetail,
             },
-            images: resultFileUrls,
+            images: resultFileUrls, // 업로드된 파일 URL 배열 전달
           },
         },
-        refetchQueries: [
-          {
-            query: FETCH_USEDITEMS,
-          },
-        ],
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_USEDITEMS,
+        //   },
+        // ],
       });
       Modal.success({ content: "상품이 등록되었습니다!" });
       void router.push(`/products/${result.data?.createUseditem._id}`);
@@ -122,20 +131,9 @@ export const useProduct = (args?: IUseProductArgs) => {
 
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
-    if (typeof args === "undefined") return;
-    // console.log(args);
+    if (args === undefined) return;
 
-    let resultFileUrls: string[] = []; // 결과 파일 URL 배열을 초기화
-
-    if (args.files !== undefined) {
-      const resultFile = await Promise.all(
-        args.files.map(async (file) => {
-          if (file !== null) return await uploadFile({ variables: { file } });
-          return null; // 파일이 null이거나 undefined인 경우, null 반환
-        })
-      );
-      resultFileUrls = resultFile.map((res) => res?.data?.uploadFile?.url ?? "");
-    }
+    const resultFileUrls = await uploadFilesAndGetUrls(args.files);
 
     // # 파일 URL 병합 로직
     // const newFileUrls = args.fileUrls?.map((url, index) => resultFileUrls[index] || url);
@@ -145,12 +143,9 @@ export const useProduct = (args?: IUseProductArgs) => {
         return resultUrl !== undefined && resultUrl !== "" ? resultUrl : url;
       }) ?? [];
 
-    console.log("newFileUrls", newFileUrls);
     // files
     const defaultFiles = JSON.stringify(args.fileUrls);
-    console.log("defaultFiles", defaultFiles);
     const currentFiles = JSON.stringify(newFileUrls);
-    console.log("currentFiles", currentFiles);
     const isChangedFiles = currentFiles !== defaultFiles;
 
     // tags
@@ -161,7 +156,6 @@ export const useProduct = (args?: IUseProductArgs) => {
     const { addressDetail, ...inputs } = data;
 
     const updateUseditemInput: IUpdateUseditemInput = {};
-
     if (inputs.name !== "") updateUseditemInput.name = inputs.name;
     if (inputs.remarks !== "") updateUseditemInput.remarks = inputs.remarks;
     if (inputs.contents !== "") updateUseditemInput.contents = inputs.contents;
