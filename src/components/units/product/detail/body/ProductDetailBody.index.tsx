@@ -2,10 +2,10 @@ import Link from "next/link";
 import Dompurufy from "dompurify";
 // Hooks
 import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
-// import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
-// import useMap from "../../../../commons/hooks/customs/useMap";
+import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
+import useMap from "../../../../commons/hooks/customs/useMap";
 // Component
-// import HeartIcon01 from "../../../../commons/icon/heart/01";
+import HeartIcon01 from "../../../../commons/icon/heart/01";
 import TagsView01 from "../../../../commons/tags/view/01";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -28,30 +28,11 @@ const settings = {
 
 export default function ProductDetailBody(props: IProductDetailBodyProps) {
   const { onClickDelete, onClickPayment } = useProduct();
-  // const { onClickPick } = useProductPicked();
+  const { onClickPick } = useProductPicked();
 
-  // const dataLat = props.data?.fetchUseditem.useditemAddress?.lat;
-  // const dataLng = props.data?.fetchUseditem.useditemAddress?.lng;
-  // useMap(dataLat, dataLng, false);
-
-  // // 해당 페이지 정보 로컬 스토리지 저장
-  // useEffect(() => {
-  //   if (data === undefined) return;
-  //   const todayView = JSON.parse(localStorage.getItem("todayView") ?? "[]");
-  //   // 2. 이미 담겼는지 확인
-  //   const temp = todayView.filter((el: IUseditem) => el?._id === data?.fetchUseditem._id);
-  //   if (temp.length >= 1) {
-  //     return;
-  //   }
-  //   // 3. 클릭한 상품 추가하기
-  //   todayView.unshift(data?.fetchUseditem);
-  //   // 로컬스토리지 push 조건
-  //   if (todayView.length > TODAY_VIEW_PRODUCT) {
-  //     todayView.pop();
-  //   }
-  //   // 4. 오늘 본 상품 변경
-  //   localStorage.setItem("todayView", JSON.stringify(todayView));
-  // }, [data]);
+  const dataLat = props.data?.fetchUseditem.useditemAddress?.lat;
+  const dataLng = props.data?.fetchUseditem.useditemAddress?.lng;
+  useMap(dataLat, dataLng, false);
 
   return (
     <S.Body>
@@ -64,9 +45,9 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
             <S.Price>{props.data?.fetchUseditem.price}원</S.Price>
           </S.TitleText>
           <S.Pick>
-            {/* <button onClick={onClickPick}>
+            <button onClick={onClickPick}>
               <HeartIcon01 size={20} />
-            </button> */}
+            </button>
             <S.PickScore>{props.data?.fetchUseditem.pickedCount}</S.PickScore>
           </S.Pick>
         </S.BodyHeader>

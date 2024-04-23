@@ -6,5 +6,5 @@ export interface IProductDetailHeaderProps {
 
 export interface IProductDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem"> | undefined;
-  onClickDelete: () => Promise<void>;
+  // onClickDelete: () => Promise<void>;
 }

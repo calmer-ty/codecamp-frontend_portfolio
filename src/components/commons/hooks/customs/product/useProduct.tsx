@@ -29,7 +29,7 @@ declare const window: typeof globalThis & {
 };
 
 export const useProduct = (args?: IUseProductArgs) => {
-  const router = useRouter();
+  // const router = useRouter();
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
 
@@ -207,6 +207,7 @@ export const useProduct = (args?: IUseProductArgs) => {
   };
 
   return {
+    data,
     onClickCreate,
     onClickUpdate,
     onClickDelete,
