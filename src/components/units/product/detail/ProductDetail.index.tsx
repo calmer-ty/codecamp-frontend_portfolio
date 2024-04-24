@@ -1,6 +1,4 @@
 // Custom Hooks
-// import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
-// import { useFetchProduct } from "../../../commons/hooks/queries/product/useFetchProduct";
 import { useProduct } from "../../../commons/hooks/customs/product/useProduct";
 // UI
 import ProductDetailBody from "./body/ProductDetailBody.index";

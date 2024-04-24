@@ -1,22 +1,19 @@
 import Link from "next/link";
 import Dompurufy from "dompurify";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // Hooks
-import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
+// import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
 import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
 import useMap from "../../../../commons/hooks/customs/useMap";
 // Component
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import TagsView01 from "../../../../commons/tags/view/01";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 // Style
 import * as S from "./ProductDetailBody.styles";
 // Type
-import type { IProductDetailBodyProps } from "../ProductDetail.types";
-// import type { IUseditem } from "../../../../../commons/types/generated/types";
-
-// const TODAY_VIEW_PRODUCT = 2;
+import type { IProductDetailProps } from "../ProductDetail.types";
 
 const settings = {
   dots: true,
@@ -26,8 +23,8 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function ProductDetailBody(props: IProductDetailBodyProps) {
-  const { onClickDelete, onClickPayment } = useProduct();
+export default function ProductDetailBody(props: IProductDetailProps) {
+  // const { onClickDelete, onClickPayment } = useProduct();
   const { onClickPick } = useProductPicked();
 
   const dataLat = props.data?.fetchUseditem.useditemAddress?.lat;
@@ -51,6 +48,7 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
             <S.PickScore>{props.data?.fetchUseditem.pickedCount}</S.PickScore>
           </S.Pick>
         </S.BodyHeader>
+
         <Slider {...settings}>
           {props.data?.fetchUseditem.images
             ?.filter((el) => el)
@@ -80,11 +78,11 @@ export default function ProductDetailBody(props: IProductDetailBodyProps) {
         <Link href={"/products"}>
           <S.LinkBtn>목록으로</S.LinkBtn>
         </Link>
-        <S.LinkBtn onClick={onClickPayment}>구매하기</S.LinkBtn>
+        {/* <S.LinkBtn onClick={onClickPayment}>구매하기</S.LinkBtn> */}
         <Link href={`/products/${props.data?.fetchUseditem._id}/edit`}>
           <S.LinkBtn>수정하기</S.LinkBtn>
         </Link>
-        <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
+        {/* <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn> */}
       </S.BtnWrap>
     </S.Body>
   );

@@ -20,7 +20,6 @@ export default function ProductListBody() {
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,
   });
-  console.log("======================================================");
 
   return (
     <S.Body>

@@ -2,18 +2,17 @@ import { useRouter } from "next/router";
 
 // Custom Hooks
 import { useIdCheck } from "../useIdCheck";
-import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
 import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
-import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
+import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
+import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
 // Component
 import { Modal } from "antd";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
-// import { useEffect } from "react";
 
 interface IUseProductArgs {
   files?: File[];
@@ -29,9 +28,12 @@ declare const window: typeof globalThis & {
 };
 
 export const useProduct = (args?: IUseProductArgs) => {
-  // const router = useRouter();
+  const router = useRouter();
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
+  // if (typeof id !== "string") return<></>;
+  // const { data } = useFetchProduct({ useditemId: id });
+  // console.log(data);
 
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
@@ -190,6 +192,7 @@ export const useProduct = (args?: IUseProductArgs) => {
 
   // 판매 상품 삭제
   const onClickDelete = async (): Promise<void> => {
+    if (typeof id !== "string") return;
     try {
       await deleteProduct({
         variables: { useditemId: id },
