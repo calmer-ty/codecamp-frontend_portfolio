@@ -4,7 +4,6 @@ import { useFetchProduct } from "../../../../src/components/commons/hooks/querie
 
 export default function ProductsEditPage(): JSX.Element {
   const { id } = useIdCheck("useditemId");
-
   const { data } = useFetchProduct({
     useditemId: id,
   });
