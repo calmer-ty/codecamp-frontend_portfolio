@@ -63,7 +63,7 @@ export default function ProductDetailBody(props: IProductDetailProps) {
           {typeof window !== "undefined" && (
             <S.Contents
               dangerouslySetInnerHTML={{
-                __html: Dompurufy.sanitize(props.data?.fetchUseditem.contents ?? ""),
+                __html: Dompurufy.sanitize(props.data?.fetchUseditem.contents || ""),
               }}
             />
           )}
