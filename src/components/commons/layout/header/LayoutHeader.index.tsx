@@ -6,25 +6,34 @@ import { Dropdown, Space } from "antd";
 import UserIcon01 from "../../icon/user/01";
 // Hooks
 import { useRecoilState } from "recoil";
-import { FETCH_USER_LOGGED_IN, useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
+import { useLogoutUser } from "../../hooks/mutations/useLogoutUser";
+import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 // Type
 import type { MenuProps } from "antd";
 // Style
 import * as S from "./LayoutHeader.styles";
-import { useApolloClient } from "@apollo/client";
 
 export default function LayoutHeader(): JSX.Element {
   const { data } = useFetchLoggedIn();
+  const [logoutUser] = useLogoutUser();
   const [accessToken] = useRecoilState(accessTokenState);
 
-  // 아폴로 클라이언트 테스트
-  const client = useApolloClient();
-  const onClickApolloClient = async (): Promise<void> => {
-    const result = await client.query({
-      query: FETCH_USER_LOGGED_IN,
-    });
+  console.log(accessToken);
+
+  const onClickLogout = async () => {
+    const result = await logoutUser();
     console.log(result);
+    console.log("onClickLogout을 눌렀어요");
   };
+
+  // 아폴로 클라이언트 테스트
+  // const client = useApolloClient();
+  // const onClickApolloClient = async (): Promise<void> => {
+  //   const result = await client.query({
+  //     query: FETCH_USER_LOGGED_IN,
+  //   });
+  //   console.log(result);
+  // };
 
   const items: MenuProps["items"] = [
     {
@@ -40,16 +49,17 @@ export default function LayoutHeader(): JSX.Element {
       key: "0",
     },
     {
-      type: "divider",
+      label: (
+        <button style={{ width: "100%" }} onClick={onClickLogout}>
+          로그아웃
+        </button>
+      ),
+      key: "1",
     },
-    {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
-      key: "2",
-    },
-    {
-      label: <button onClick={onClickApolloClient}>onClickApolloClient</button>,
-      key: "3",
-    },
+    // {
+    //   label: <button onClick={onClickApolloClient}>onClickApolloClient</button>,
+    //   key: "2",
+    // },
   ];
 
   return (
