@@ -12,13 +12,17 @@ import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 import type { MenuProps } from "antd";
 // Style
 import * as S from "./LayoutHeader.styles";
+import { useEffect } from "react";
 
 export default function LayoutHeader(): JSX.Element {
   const { data } = useFetchLoggedIn();
   const [logoutUser] = useLogoutUser();
   const [accessToken] = useRecoilState(accessTokenState);
 
-  console.log(accessToken);
+  useEffect(() => {
+    // 상태가 변경될 때마다 실행되는 로직
+    console.log("토큰이 변경되었습니다");
+  }, [accessToken]); // state가 변경될 때마다 useEffect 실행
 
   const onClickLogout = async () => {
     const result = await logoutUser();

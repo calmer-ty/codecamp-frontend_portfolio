@@ -21,7 +21,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   useEffect(() => {
     void restoreAccessToken.toPromise().then((newAccessToken) => {
       setAccessToken(newAccessToken ?? "");
-      console.log("apollo의 useEffect 프로미스 토큰 " + newAccessToken);
+      // console.log("apollo의 useEffect 프로미스 토큰 " + newAccessToken);
     });
   }, []);
   // useEffect(() => {
