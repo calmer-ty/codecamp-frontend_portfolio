@@ -1,21 +1,18 @@
 import { useRouter } from "next/router";
 
 // Custom Hooks
-import { useIdCheck } from "../useIdCheck";
 import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import {
-  // FETCH_USEDITEM,
-  useFetchProduct,
-} from "../../queries/product/useFetchProduct";
+import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
 // Component
 import { Modal } from "antd";
 // Type
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
+import { useIdCheck } from "../useIdCheck";
 
 interface IUseProductArgs {
   files?: File[];
@@ -33,10 +30,9 @@ declare const window: typeof globalThis & {
 export const useProduct = (args?: IUseProductArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
-  const { data } = useFetchProduct({ useditemId: id });
-  // if (typeof id !== "string") return<></>;
-  // const { data } = useFetchProduct({ useditemId: id });
-  // console.log(data);
+  const { data, refetch } = useFetchProduct({ useditemId: id });
+  console.log(data);
+  void refetch();
 
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
@@ -158,17 +154,15 @@ export const useProduct = (args?: IUseProductArgs) => {
     const defaultTags = JSON.stringify(data.tags);
     const isChangedTags = currentTags !== defaultTags;
 
-    const { addressDetail, ...inputs } = data;
-
     const updateUseditemInput: IUpdateUseditemInput = {};
-    if (inputs.name !== "") updateUseditemInput.name = inputs.name;
-    if (inputs.remarks !== "") updateUseditemInput.remarks = inputs.remarks;
-    if (inputs.contents !== "") updateUseditemInput.contents = inputs.contents;
-    if (inputs.price !== null) updateUseditemInput.price = inputs.price;
-    if (args.address !== "" || addressDetail !== "") {
+    if (data.name !== "") updateUseditemInput.name = data.name;
+    if (data.remarks !== "") updateUseditemInput.remarks = data.remarks;
+    if (data.contents !== "") updateUseditemInput.contents = data.contents;
+    if (data.price !== null) updateUseditemInput.price = data.price;
+    if (args.address !== "" || data.addressDetail !== "") {
       updateUseditemInput.useditemAddress = {};
       if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
-      if (addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = addressDetail;
+      if (data.addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
     }
     if (isChangedFiles) updateUseditemInput.images = newFileUrls;
     if (isChangedTags) updateUseditemInput.tags = args.tags;
@@ -181,7 +175,8 @@ export const useProduct = (args?: IUseProductArgs) => {
         },
         refetchQueries: [
           {
-            query: FETCH_USEDITEMS,
+            query: FETCH_USEDITEM,
+            variables: { useditemId: id },
           },
         ],
       });
@@ -195,7 +190,6 @@ export const useProduct = (args?: IUseProductArgs) => {
 
   // 판매 상품 삭제
   const onClickDelete = async (): Promise<void> => {
-    if (typeof id !== "string") return;
     try {
       await deleteProduct({
         variables: { useditemId: id },
@@ -213,7 +207,6 @@ export const useProduct = (args?: IUseProductArgs) => {
   };
 
   return {
-    data,
     onClickCreate,
     onClickUpdate,
     onClickDelete,
