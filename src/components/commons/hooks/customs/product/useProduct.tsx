@@ -6,7 +6,10 @@ import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
+import {
+  // FETCH_USEDITEM,
+  useFetchProduct,
+} from "../../queries/product/useFetchProduct";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
 // Component
 import { Modal } from "antd";
@@ -178,11 +181,11 @@ export const useProduct = (args?: IUseProductArgs) => {
         },
         refetchQueries: [
           {
-            query: FETCH_USEDITEM,
-            variables: { useditemId: id },
+            query: FETCH_USEDITEMS,
           },
         ],
       });
+      console.log(result);
       Modal.success({ content: "상품이 수정되었습니다!" });
       void router.push(`/products/${result.data?.updateUseditem._id}`);
     } catch (error) {

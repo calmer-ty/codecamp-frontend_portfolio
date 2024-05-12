@@ -1,33 +1,34 @@
 import Link from "next/link";
-import { accessTokenState } from "../../../../commons/stores";
+import { useRecoilState } from "recoil";
 // Component
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import UserIcon01 from "../../icon/user/01";
-// Hooks
-import { useRecoilState } from "recoil";
+// Custom Hooks
 import { useLogoutUser } from "../../hooks/mutations/useLogoutUser";
 import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 // Type
 import type { MenuProps } from "antd";
 // Style
 import * as S from "./LayoutHeader.styles";
-import { useEffect } from "react";
+// import { useApolloClient } from "@apollo/client";
+import { accessTokenState } from "../../../../commons/stores";
 
 export default function LayoutHeader(): JSX.Element {
   const { data } = useFetchLoggedIn();
   const [logoutUser] = useLogoutUser();
-  const [accessToken] = useRecoilState(accessTokenState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  useEffect(() => {
-    // 상태가 변경될 때마다 실행되는 로직
-    console.log("토큰이 변경되었습니다");
-  }, [accessToken]); // state가 변경될 때마다 useEffect 실행
-
+  // const client = useApolloClient();
+  // console.log(client);
   const onClickLogout = async () => {
-    const result = await logoutUser();
-    console.log(result);
-    console.log("onClickLogout을 눌렀어요");
+    try {
+      const result = await logoutUser();
+      console.log("onClickLogout을 눌렀어요", result);
+      setAccessToken("");
+    } catch (error) {
+      console.error("로그아웃 실패", error);
+    }
   };
 
   // 아폴로 클라이언트 테스트
