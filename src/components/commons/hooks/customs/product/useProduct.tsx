@@ -1,24 +1,18 @@
 import { useRouter } from "next/router";
 
-// Custom Hooks
 import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import {
-  FETCH_USEDITEM,
-  // useFetchProduct
-} from "../../queries/product/useFetchProduct";
+import { FETCH_USEDITEM } from "../../queries/product/useFetchProduct";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
-// Component
 import { Modal } from "antd";
-// Type
+
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
 import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
-import { useIdCheck } from "../useIdCheck";
 
 interface IUseProductArgs {
-  // useditemId: any;
+  useditemId?: string;
   files?: File[];
   fileUrls?: string[];
   latlng?: any;
@@ -27,53 +21,13 @@ interface IUseProductArgs {
   pick?: number;
 }
 
-declare const window: typeof globalThis & {
-  IMP: any;
-};
-
 export const useProduct = (args: IUseProductArgs) => {
   const router = useRouter();
-  const { id } = useIdCheck("useditemId");
-  console.log(id);
 
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
   const [deleteProduct] = useDeleteProduct();
   const [uploadFile] = useUploadFile();
-
-  // 결제 기능
-  const onClickPayment = (): void => {
-    const IMP = window.IMP;
-    IMP.init("imp80516171");
-
-    IMP.request_pay(
-      {
-        // param
-        pg: "kakaopay",
-        pay_method: "card",
-        //   merchant_uid: "ORD20180131-0000011",
-        // name: data?.fetchUseditem.name,
-        // amount: data?.fetchUseditem.price,
-        // buyer_email: "gildong@gmail.com",
-        // buyer_name: "홍길동",
-        // buyer_tel: "010-4242-4242",
-        // buyer_addr: "서울특별시 강남구 신사동",
-        // buyer_postcode: "01181",
-        m_redirect_url: "http://localhost:3000/section28/28-01-payment", // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
-      },
-      (rsp: any) => {
-        // callback
-        if (rsp.success === true) {
-          // 결제 성공 시 로직,
-          console.log(rsp);
-          //   백엔드에 결제 관련 데이터 넘겨주기 => 즉, 뮤테이션 실행하기
-          //   createPointTransactionOfLoading
-        } else {
-          // 결제 실패 시 로직,
-        }
-      }
-    );
-  };
 
   // 파일 업로드 및 URL 처리 함수
   const uploadFilesAndGetUrls = async (files: File[] | undefined) => {
@@ -134,7 +88,7 @@ export const useProduct = (args: IUseProductArgs) => {
 
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
-    if (args === undefined) return;
+    if (args.useditemId === undefined) return;
 
     const resultFileUrls = await uploadFilesAndGetUrls(args.files);
 
@@ -164,6 +118,7 @@ export const useProduct = (args: IUseProductArgs) => {
     if (args.address !== "" || data.addressDetail !== "") {
       updateUseditemInput.useditemAddress = {};
       if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
+      if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
       if (data.addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
     }
     if (isChangedFiles) updateUseditemInput.images = newFileUrls;
@@ -172,13 +127,13 @@ export const useProduct = (args: IUseProductArgs) => {
     try {
       const result = await updateProduct({
         variables: {
-          useditemId: id,
+          useditemId: args.useditemId,
           updateUseditemInput,
         },
         refetchQueries: [
           {
             query: FETCH_USEDITEM,
-            variables: { useditemId: id },
+            variables: { useditemId: args.useditemId },
           },
         ],
       });
@@ -192,9 +147,11 @@ export const useProduct = (args: IUseProductArgs) => {
 
   // 판매 상품 삭제
   const onClickDelete = async (): Promise<void> => {
+    if (args.useditemId === undefined) return;
+
     try {
       await deleteProduct({
-        variables: { useditemId: id },
+        variables: { useditemId: args.useditemId },
         refetchQueries: [
           {
             query: FETCH_USEDITEMS,
@@ -212,6 +169,5 @@ export const useProduct = (args: IUseProductArgs) => {
     onClickCreate,
     onClickUpdate,
     onClickDelete,
-    onClickPayment,
   };
 };

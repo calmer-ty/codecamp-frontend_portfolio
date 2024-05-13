@@ -1,20 +1,18 @@
-import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
+import { useRouter } from "next/router";
 import { useFetchProduct } from "../../../commons/hooks/queries/product/useFetchProduct";
 // UI
-import ProductDetailBody from "./body/ProductDetailBody.index";
 import ProductDetailHeader from "./header/ProductDetailHeader.index";
+import ProductDetailBody from "./body/ProductDetailBody.index";
 import ProductDetailFooter from "./footer/ProductDetailFooter.index";
 // Style
 import * as S from "./ProductDetail.styles";
-import { useEffect } from "react";
 
 export default function ProductDetail(): JSX.Element {
-  const { id } = useIdCheck("useditemId");
-  const { data } = useFetchProduct({ useditemId: id });
+  const router = useRouter();
+  const useditemId = router.query.useditemId;
+  if (typeof useditemId !== "string") return <></>;
+  const { data } = useFetchProduct({ useditemId });
 
-  useEffect(() => {
-    console.log("값이 바뀌어 렌더링 되었습니다");
-  }, [data]);
   return (
     <>
       <S.Wrapper>
