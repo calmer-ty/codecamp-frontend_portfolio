@@ -17,8 +17,14 @@ import { schemaProductWrite } from "../../../../commons/libraries/validation";
 import type { IFormDataProductWrite, IProductWriteProps } from "./ProductWrite.types";
 // Style
 import * as S from "./ProductWrite.styles";
+// import { useIdCheck } from "../../../commons/hooks/customs/useIdCheck";
+// import { useRouter } from "next/router";
 
 export default function ProductWrite(props: IProductWriteProps): JSX.Element {
+  // const { id: useditemId } = useIdCheck("useditemId");
+  // const router = useRouter();
+  // const useditemId = router.query.useditemId;
+
   const {
     register,
     handleSubmit,
@@ -101,6 +107,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({
+    // useditemId,
     files,
     fileUrls,
     address,

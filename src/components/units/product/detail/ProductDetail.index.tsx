@@ -6,12 +6,15 @@ import ProductDetailHeader from "./header/ProductDetailHeader.index";
 import ProductDetailFooter from "./footer/ProductDetailFooter.index";
 // Style
 import * as S from "./ProductDetail.styles";
+import { useEffect } from "react";
 
 export default function ProductDetail(): JSX.Element {
-  // const { data } = useProduct();
-
   const { id } = useIdCheck("useditemId");
   const { data } = useFetchProduct({ useditemId: id });
+
+  useEffect(() => {
+    console.log("값이 바뀌어 렌더링 되었습니다");
+  }, [data]);
   return (
     <>
       <S.Wrapper>

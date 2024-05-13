@@ -5,7 +5,10 @@ import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
+import {
+  FETCH_USEDITEM,
+  // useFetchProduct
+} from "../../queries/product/useFetchProduct";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
 // Component
 import { Modal } from "antd";
@@ -15,6 +18,7 @@ import type { IUpdateUseditemInput } from "../../../../../commons/types/generate
 import { useIdCheck } from "../useIdCheck";
 
 interface IUseProductArgs {
+  // useditemId: any;
   files?: File[];
   fileUrls?: string[];
   latlng?: any;
@@ -27,12 +31,10 @@ declare const window: typeof globalThis & {
   IMP: any;
 };
 
-export const useProduct = (args?: IUseProductArgs) => {
+export const useProduct = (args: IUseProductArgs) => {
   const router = useRouter();
   const { id } = useIdCheck("useditemId");
-  const { data, refetch } = useFetchProduct({ useditemId: id });
-  console.log(data);
-  void refetch();
+  console.log(id);
 
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
@@ -50,8 +52,8 @@ export const useProduct = (args?: IUseProductArgs) => {
         pg: "kakaopay",
         pay_method: "card",
         //   merchant_uid: "ORD20180131-0000011",
-        name: data?.fetchUseditem.name,
-        amount: data?.fetchUseditem.price,
+        // name: data?.fetchUseditem.name,
+        // amount: data?.fetchUseditem.price,
         // buyer_email: "gildong@gmail.com",
         // buyer_name: "홍길동",
         // buyer_tel: "010-4242-4242",
