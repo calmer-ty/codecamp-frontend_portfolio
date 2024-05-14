@@ -24,6 +24,9 @@ interface IUseProductArgs {
 export const useProduct = (args: IUseProductArgs) => {
   const router = useRouter();
 
+  console.log(args.latlng, args.address);
+  console.log(typeof args.latlng.La);
+
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
   const [deleteProduct] = useDeleteProduct();
@@ -31,11 +34,10 @@ export const useProduct = (args: IUseProductArgs) => {
 
   // 파일 업로드 및 URL 처리 함수
   const uploadFilesAndGetUrls = async (files: File[] | undefined) => {
-    // 파일 업로드 및 URL 처리 함수 정의
     let resultFileUrls: string[] = []; // 파일 URL을 저장할 배열 초기화
 
+    // 파일이 존재하는 경우에만 처리
     if (files !== undefined) {
-      // 파일이 존재하는 경우에만 처리
       const resultFile = await Promise.all(
         // 모든 파일에 대해 병렬로 업로드 처리
         files.map(async (file) => {
@@ -88,6 +90,7 @@ export const useProduct = (args: IUseProductArgs) => {
 
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
+    console.log(data);
     if (args.useditemId === undefined) return;
 
     const resultFileUrls = await uploadFilesAndGetUrls(args.files);
@@ -117,7 +120,8 @@ export const useProduct = (args: IUseProductArgs) => {
     if (data.price !== null) updateUseditemInput.price = data.price;
     if (args.address !== "" || data.addressDetail !== "") {
       updateUseditemInput.useditemAddress = {};
-      if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
+      // if (data.lat !== null) updateUseditemInput.useditemAddress.lat = args.latlng.La;
+      // if (data.lng !== null) updateUseditemInput.useditemAddress.lng = args.latlng.Ma;
       if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
       if (data.addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
     }

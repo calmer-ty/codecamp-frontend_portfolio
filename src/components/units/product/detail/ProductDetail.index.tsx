@@ -9,8 +9,7 @@ import * as S from "./ProductDetail.styles";
 
 export default function ProductDetail(): JSX.Element {
   const router = useRouter();
-  const useditemId = router.query.useditemId;
-  if (typeof useditemId !== "string") return <></>;
+  const useditemId = router.query.useditemId as string;
   const { data } = useFetchProduct({ useditemId });
 
   return (

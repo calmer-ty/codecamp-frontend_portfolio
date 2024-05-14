@@ -1,6 +1,7 @@
 import ProductWrite from "../../../../src/components/units/product/write/ProductWrite.index";
-import { useFetchProduct } from "../../../../src/components/commons/hooks/queries/product/useFetchProduct";
+
 import { useRouter } from "next/router";
+import { useFetchProduct } from "../../../../src/components/commons/hooks/queries/product/useFetchProduct";
 
 export default function ProductsEditPage(): JSX.Element {
   const router = useRouter();

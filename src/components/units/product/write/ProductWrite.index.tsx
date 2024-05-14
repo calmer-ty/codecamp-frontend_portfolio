@@ -24,8 +24,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   // 맵 선택 Hook
   // const { latlng, address } = useMap(33.450701, 126.570667, true);
   const { latlng, address } = useMap(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng, true);
-  console.log(latlng);
-  console.log(address);
+
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
@@ -85,8 +84,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     useditemId: props.data?.fetchUseditem._id,
     files,
     fileUrls,
-    address,
     latlng,
+    address,
     tags,
   });
 

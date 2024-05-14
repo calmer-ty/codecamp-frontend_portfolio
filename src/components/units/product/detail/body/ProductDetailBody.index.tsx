@@ -28,7 +28,8 @@ const settings = {
 
 export default function ProductDetailBody(props: IProductDetailProps) {
   if (props.data === undefined) return <></>;
-  console.log(props.data.fetchUseditem.useditemAddress, "detail");
+  console.log(props.data.fetchUseditem.useditemAddress?.lat);
+  console.log(props.data.fetchUseditem.useditemAddress?.lng);
 
   const { onClickPayment } = usePayment(props.data?.fetchUseditem);
   const { onClickPick } = useProductPicked(props.data?.fetchUseditem);
