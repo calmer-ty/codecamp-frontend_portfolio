@@ -24,9 +24,6 @@ interface IUseProductArgs {
 export const useProduct = (args: IUseProductArgs) => {
   const router = useRouter();
 
-  console.log(args.latlng, args.address);
-  console.log(typeof args.latlng.La);
-
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
   const [deleteProduct] = useDeleteProduct();
@@ -120,8 +117,8 @@ export const useProduct = (args: IUseProductArgs) => {
     if (data.price !== null) updateUseditemInput.price = data.price;
     if (args.address !== "" || data.addressDetail !== "") {
       updateUseditemInput.useditemAddress = {};
-      // if (data.lat !== null) updateUseditemInput.useditemAddress.lat = args.latlng.La;
-      // if (data.lng !== null) updateUseditemInput.useditemAddress.lng = args.latlng.Ma;
+      if (data.lat !== null) updateUseditemInput.useditemAddress.lat = args.latlng.Ma;
+      if (data.lng !== null) updateUseditemInput.useditemAddress.lng = args.latlng.La;
       if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
       if (data.addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
     }

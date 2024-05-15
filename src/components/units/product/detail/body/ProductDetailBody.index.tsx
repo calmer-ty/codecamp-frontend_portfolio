@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import Dompurufy from "dompurify";
 import Slider from "react-slick";
@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
 import { usePayment } from "../../../../commons/hooks/customs/product/usePayment";
+import { useProduct } from "../../../../commons/hooks/customs/product/useProduct";
 import useMap from "../../../../commons/hooks/customs/useMap";
 
 import HeartIcon01 from "../../../../commons/icon/heart/01";
@@ -14,7 +15,7 @@ import TagsView01 from "../../../../commons/tags/view/01";
 
 import * as S from "./ProductDetailBody.styles";
 import type { IProductDetailProps } from "../ProductDetail.types";
-// import type { IUseditem } from "../../../../../commons/types/generated/types";
+import type { IUseditem } from "../../../../../commons/types/generated/types";
 
 const settings = {
   dots: true,
@@ -24,34 +25,36 @@ const settings = {
   slidesToScroll: 1,
 };
 
-// const TODAY_VIEW_PRODUCT = 2;
+const TODAY_VIEW_PRODUCT = 2;
 
 export default function ProductDetailBody(props: IProductDetailProps) {
   if (props.data === undefined) return <></>;
-  console.log(props.data.fetchUseditem.useditemAddress?.lat);
-  console.log(props.data.fetchUseditem.useditemAddress?.lng);
 
   const { onClickPayment } = usePayment(props.data?.fetchUseditem);
   const { onClickPick } = useProductPicked(props.data?.fetchUseditem);
+  const { onClickDelete } = useProduct({ useditemId: props.data?.fetchUseditem._id });
 
   useMap(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng, false);
-  // useEffect(() => {
-  //   if (props.data === undefined) return;
-  //   const todayView = JSON.parse(localStorage.getItem("todayView") ?? "[]");
-  //   // 2. 이미 담겼는지 확인
-  //   const temp = todayView.filter((el: IUseditem) => el?._id === props.data?.fetchUseditem._id);
-  //   if (temp.length >= 1) {
-  //     return;
-  //   }
-  //   // 3. 클릭한 상품 추가하기
-  //   todayView.unshift(props.data?.fetchUseditem);
-  //   // 로컬스토리지 push 조건
-  //   if (todayView.length > TODAY_VIEW_PRODUCT) {
-  //     todayView.pop();
-  //   }
-  //   // 4. 오늘 본 상품 변경
-  //   localStorage.setItem("todayView", JSON.stringify(todayView));
-  // }, [props.data]);
+
+  // 오늘 본 상품
+  useEffect(() => {
+    // 1. 기존 값을 가져온다
+    const todayView = JSON.parse(localStorage.getItem("todayView") ?? "[]");
+    console.log(todayView);
+    // 2. 이미 담겼는지 확인
+    const temp = todayView.filter((el: IUseditem) => el?._id === props.data?.fetchUseditem._id);
+    if (temp.length >= 1) {
+      return;
+    }
+    // 3. 클릭한 상품 추가하기
+    todayView.unshift(props.data?.fetchUseditem);
+    // 로컬스토리지 push 조건
+    if (todayView.length > TODAY_VIEW_PRODUCT) {
+      todayView.pop();
+    }
+    // 4. 오늘 본 상품 변경
+    localStorage.setItem("todayView", JSON.stringify(todayView));
+  }, [props.data]);
 
   return (
     <S.Body>
@@ -104,7 +107,7 @@ export default function ProductDetailBody(props: IProductDetailProps) {
         <Link href={`/products/${props.data?.fetchUseditem._id}/edit`}>
           <S.LinkBtn>수정하기</S.LinkBtn>
         </Link>
-        {/* <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn> */}
+        <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
       </S.BtnWrap>
     </S.Body>
   );

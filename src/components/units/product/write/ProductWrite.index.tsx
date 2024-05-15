@@ -22,8 +22,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   = useForm<IFormDataProductWrite>({ resolver: yupResolver(schemaProductWrite), mode: "onChange"});
 
   // 맵 선택 Hook
-  // const { latlng, address } = useMap(33.450701, 126.570667, true);
-  const { latlng, address } = useMap(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng, true);
+  const { latlng, address } = useMap(props.data?.fetchUseditem.useditemAddress?.lat ?? 33.450701, props.data?.fetchUseditem.useditemAddress?.lng ?? 126.570667, true);
 
   // 상품 설명 이벤트
   const onChangeContents = (value: string) => {
