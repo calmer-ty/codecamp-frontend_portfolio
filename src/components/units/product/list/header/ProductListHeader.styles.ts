@@ -21,6 +21,7 @@ export const List = styled.a`
   position: relative;
   width: 280px;
   padding: 20px;
+  background-color: #f9f9f9;
   box-shadow: 2px 2px 3px #cdcdcd;
   :hover {
     background-color: #dedede;

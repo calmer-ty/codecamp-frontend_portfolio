@@ -40,7 +40,6 @@ export default function ProductDetailBody(props: IProductDetailProps) {
   useEffect(() => {
     // 1. 기존 값을 가져온다
     const todayView = JSON.parse(localStorage.getItem("todayView") ?? "[]");
-    console.log(todayView);
     // 2. 이미 담겼는지 확인
     const temp = todayView.filter((el: IUseditem) => el?._id === props.data?.fetchUseditem._id);
     if (temp.length >= 1) {
@@ -64,7 +63,7 @@ export default function ProductDetailBody(props: IProductDetailProps) {
           <S.TitleText>
             <S.Remark>{props.data?.fetchUseditem.remarks}</S.Remark>
             <S.Name>{props.data?.fetchUseditem.name}</S.Name>
-            <S.Price>{props.data?.fetchUseditem.price}원</S.Price>
+            <S.Price>{props.data?.fetchUseditem.price?.toLocaleString()}원</S.Price>
           </S.TitleText>
           <S.Pick>
             <button onClick={onClickPick}>

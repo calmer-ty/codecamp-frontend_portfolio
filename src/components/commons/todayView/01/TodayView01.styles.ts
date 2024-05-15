@@ -7,17 +7,18 @@ export const TodayView = styled.article`
   justify-content: center;
   row-gap: 20px;
   position: fixed;
-  top: 460px;
+  bottom: 0;
   right: 0;
   padding: 20px;
   border: 1px solid #bdbdbd;
-  background-color: #ffffff;
+  background-color: #fefefe;
 `;
 export const ViewTitle = styled.div`
   font-size: 18px;
 `;
+
 // View Item
-export const ViewItem = styled.div`
+export const ViewItem = styled.a`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -26,6 +27,11 @@ export const ViewItem = styled.div`
   width: 140px;
   padding: 30px 25px 15px;
   border: 1px solid #bdbdbd;
+  background-color: #fff;
+  cursor: pointer;
+  :hover {
+    background-color: rgba(205, 205, 205, 0.5);
+  }
 `;
 export const Picked = styled.div`
   display: flex;

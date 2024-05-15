@@ -13,23 +13,25 @@ export const ListWrap = styled.main`
   max-height: calc(194px * 10);
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
-`;
-export const List = styled.div`
-  /* display: flex;
-  align-items: center;
-  border-bottom: 1px solid #bdbdbd;
-  cursor: pointer;
-  :hover {
-    background-color: #cdcdcd;
-  } */
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: #efefef;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #cdcdcd;
+    cursor: pointer;
+  }
 `;
 export const ListItem = styled.a`
   display: flex;
+  padding: 0 20px;
   align-items: center;
   border-bottom: 1px solid #bdbdbd;
+  background-color: #f9f9f9;
   cursor: pointer;
   :hover {
-    background-color: #cdcdcd;
+    background-color: rgba(205, 205, 205, 0.5);
   }
 `;
 export const ItemInfo = styled.div`
@@ -50,7 +52,7 @@ export const InfoTop = styled.div`
 export const ItemImg = styled.img`
   width: 160px;
   height: 160px;
-  background-color: #ccc;
+  object-fit: contain;
 `;
 
 export const ItemTitle = styled.span`
