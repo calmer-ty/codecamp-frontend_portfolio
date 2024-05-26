@@ -43,7 +43,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     };
     // 객체의 각 키-값 쌍에 대해 setValue를 호출
     Object.entries(itemData).forEach(([key, value]) => {
-      setValue(key as "name" | "remarks" | "contents" | "price" | "tags" | "address" | "lat" | "lng" | "images" | "addressDetail" | `tags.${number}` | `images.${number}`, value, {
+      setValue(key as "name" | "remarks" | "contents" | "price" | "tags" | "address" | "lat" | "lng" | "images" | "address" | `tags.${number}` | `images.${number}`, value, {
         shouldValidate: true,
       });
     });
