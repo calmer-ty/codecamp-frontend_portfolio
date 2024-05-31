@@ -1,6 +1,15 @@
 import Link from "next/link";
-import React, { Fragment } from "react";
-// Style
+import React, { useEffect, useState } from "react";
+
+import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
+import { useLogoutUser } from "../../hooks/mutations/useLogoutUser";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/stores";
+
+import { Dropdown, Space, type MenuProps } from "antd";
+import UserIcon01 from "../../icon/user/01";
+import { CloseOutlined, DownOutlined, MenuOutlined } from "@ant-design/icons";
+
 import * as S from "./LayoutNavigation.styles";
 
 const NAVIGATION_MENUS = [
@@ -13,17 +22,112 @@ const NAVIGATION_MENUS = [
 ];
 
 export default function LayoutNavigation(): JSX.Element {
+  const { data } = useFetchLoggedIn();
+  const [logoutUser] = useLogoutUser();
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [isOpen, setIsOpen] = useState(false);
+  console.log(isOpen);
+
+  const handleChangeIcon = () => {
+    setIsOpen((prev) => !prev);
+  };
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1390px)");
+
+    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setIsOpen(false); // 초기화할 상태 값 설정
+      }
+    };
+
+    // Add listener to handle changes
+    mediaQuery.addListener(handleMediaQueryChange);
+
+    // Initial check
+    if (mediaQuery.matches) {
+      setIsOpen(false); // 초기화할 상태 값 설정
+    }
+
+    // Clean up listener on component unmount
+    return () => {
+      mediaQuery.removeListener(handleMediaQueryChange);
+    };
+  }, []);
+
+  const onClickLogout = async () => {
+    try {
+      const result = await logoutUser();
+      console.log("onClickLogout을 눌렀어요", result);
+      setAccessToken("");
+    } catch (error) {
+      console.error("로그아웃 실패", error);
+    }
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <S.FlexRow>
+          <UserIcon01 size={30} padding={8} />
+          <S.UserInfo>
+            <div>{data?.fetchUserLoggedIn.name}</div>
+            <div>100,000 P</div>
+          </S.UserInfo>
+        </S.FlexRow>
+      ),
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "2",
+      label: (
+        <button style={{ width: "100%" }} onClick={onClickLogout}>
+          로그아웃
+        </button>
+      ),
+      disabled: true,
+    },
+  ];
+
   return (
-    <S.Wrapper>
-      <S.Container>
+    <>
+      <S.Navigation isOpen={isOpen}>
         {NAVIGATION_MENUS.map((el) => (
-          <Fragment key={el.page}>
+          <S.ItemWrap key={el.page}>
             <Link href={el.page}>
               <S.MenuItem>{el.name}</S.MenuItem>
             </Link>
-          </Fragment>
+          </S.ItemWrap>
         ))}
-      </S.Container>
-    </S.Wrapper>
+        {accessToken === "" ? (
+          <S.UserProcedure>
+            <Link href={"/user/join"}>
+              <S.JoinBtn>회원가입</S.JoinBtn>
+            </Link>
+            <Link href={"/user/login"}>
+              <S.LoginBtn>로그인</S.LoginBtn>
+            </Link>
+          </S.UserProcedure>
+        ) : (
+          <S.FlexRow>
+            <Dropdown menu={{ items }}>
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <Space>
+                  <S.UserName>{data?.fetchUserLoggedIn.name}</S.UserName> 님
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+          </S.FlexRow>
+        )}
+      </S.Navigation>
+      <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <CloseOutlined /> : <MenuOutlined />}></S.NavToggleBtn>
+    </>
   );
 }

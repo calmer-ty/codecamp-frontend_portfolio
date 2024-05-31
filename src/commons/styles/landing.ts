@@ -1,10 +1,16 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.article`
   overflow: hidden;
-  padding: 0 120px;
+  /* position: relative; */
+  height: calc(100vh - 80px);
 `;
 export const Container = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
   padding: 50px;
   border-radius: 20px;
   border: 8px solid #284b63;
