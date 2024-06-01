@@ -12,9 +12,9 @@ export const checkValidation = async (file?: File): Promise<boolean> => {
     Modal.error({ content: "파일 용량이 너무 큽니다. (5MB 이하)" });
     return false;
   }
-  if (!file.type.includes("jpeg") && !file.type.includes("png")) {
+  if (!file.type.includes("jpeg") && !file.type.includes("png") && !file.type.includes("webp")) {
     Modal.error({
-      content: "파일 확장자가 올바르지 않습니다. (jpeg/png만 가능합니다.)",
+      content: "파일 확장자가 올바르지 않습니다. (jpeg/png/webp만 가능합니다.)",
     });
     return false;
   }
