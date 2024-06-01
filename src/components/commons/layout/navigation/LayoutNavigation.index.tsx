@@ -137,7 +137,7 @@ export default function LayoutNavigation(): JSX.Element {
           )}
         </S.Navigation>
       </S.NavigationWrap>
-      <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <CloseOutlined /> : <MenuOutlined />}></S.NavToggleBtn>
+      <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <CloseOutlined style={{ fontSize: "24px" }} /> : <MenuOutlined style={{ fontSize: "24px" }} />}></S.NavToggleBtn>
     </>
   );
 }

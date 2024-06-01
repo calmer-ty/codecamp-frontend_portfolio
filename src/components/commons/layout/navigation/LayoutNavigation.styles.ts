@@ -35,6 +35,16 @@ export const NavToggleBtn = styled(Button)`
   top: 26px;
   right: 20px;
   z-index: 1;
+
+  /* antd icon css 변경 */
+  box-shadow: none;
+  border: none;
+  background-color: initial;
+  color: #fff;
+  &:where(.css-dev-only-do-not-override-1qhpsh8).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    color: #fff;
+    border-color: #fff;
+  }
   @media (max-width: 1390px) {
     display: block;
   }
@@ -46,7 +56,7 @@ export const Menus = styled.ul`
   align-items: center;
 
   /* 오른쪽 요소 분리를 위한 css */
-  border-right: 2px solid #000;
+  border-right: 2px solid #fff;
   @media (max-width: 1390px) {
     flex-direction: column;
     row-gap: 20px;
