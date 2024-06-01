@@ -13,9 +13,10 @@ import useMap from "../../../../commons/hooks/customs/useMap";
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import TagsView01 from "../../../../commons/tags/view/01";
 
-import * as S from "./ProductDetailBody.styles";
 import type { IProductDetailProps } from "../ProductDetail.types";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
+
+import * as S from "./ProductDetailBody.styles";
 
 const settings = {
   dots: true,

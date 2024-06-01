@@ -5,11 +5,11 @@ export const Body = styled.main`
   flex-direction: column;
 `;
 export const BodyTop = styled.section`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   row-gap: 80px;
   padding: 20px 0 40px 0;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd; */
 `;
 export const BodyHeader = styled.header`
   display: flex;

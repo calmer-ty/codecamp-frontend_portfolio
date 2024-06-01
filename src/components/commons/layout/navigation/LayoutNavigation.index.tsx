@@ -21,7 +21,6 @@ import type { DocumentNode } from "graphql";
 import * as S from "./LayoutNavigation.styles";
 
 const NAVIGATION_MENUS = [
-  { name: "HOME", page: "/" },
   { name: "Firebase", page: "/boards_firebase" },
   { name: "자유게시판", page: "/boards", fetch: [FETCH_BOARDS] },
   { name: "중고마켓", page: "/products", fetch: [FETCH_USEDITEMS, FETCH_USEDITEMS_BEST] },

@@ -5,7 +5,5 @@ export const Wrapper = styled.article`
   flex-direction: column;
 `;
 export const LayoutBody = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 40px 0;
 `;
