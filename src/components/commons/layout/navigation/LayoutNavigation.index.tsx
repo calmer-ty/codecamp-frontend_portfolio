@@ -31,6 +31,9 @@ export default function LayoutNavigation(): JSX.Element {
   const handleChangeIcon = () => {
     setIsOpen((prev) => !prev);
   };
+  const handleNavOff = () => {
+    setIsOpen(false);
+  };
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1390px)");
 
@@ -94,20 +97,24 @@ export default function LayoutNavigation(): JSX.Element {
   return (
     <>
       <S.Navigation isOpen={isOpen}>
-        {NAVIGATION_MENUS.map((el) => (
-          <S.ItemWrap key={el.page}>
-            <Link href={el.page}>
-              <S.MenuItem>{el.name}</S.MenuItem>
-            </Link>
-          </S.ItemWrap>
-        ))}
+        {/* 네비게이션 메뉴 */}
+        <S.Menus>
+          {NAVIGATION_MENUS.map((el) => (
+            <S.MenuItem key={el.page}>
+              <Link href={el.page}>
+                <S.itemLink onClick={handleNavOff}>{el.name}</S.itemLink>
+              </Link>
+            </S.MenuItem>
+          ))}
+        </S.Menus>
+        {/* 회원가입/로그인 */}
         {accessToken === "" ? (
           <S.UserProcedure>
             <Link href={"/user/join"}>
-              <S.JoinBtn>회원가입</S.JoinBtn>
+              <S.UserOptBtn>회원가입</S.UserOptBtn>
             </Link>
             <Link href={"/user/login"}>
-              <S.LoginBtn>로그인</S.LoginBtn>
+              <S.UserOptBtn>로그인</S.UserOptBtn>
             </Link>
           </S.UserProcedure>
         ) : (

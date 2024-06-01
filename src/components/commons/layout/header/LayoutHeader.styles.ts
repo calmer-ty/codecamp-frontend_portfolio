@@ -7,7 +7,7 @@ export const Header = styled.header`
   height: 80px;
   padding: 0 40px;
   position: relative;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
 `;
 export const Logo = styled.h1`
   display: flex;
