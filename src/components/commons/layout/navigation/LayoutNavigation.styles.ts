@@ -3,20 +3,25 @@ import { Button } from "antd";
 
 import type { IMenus } from "./LayoutNavigation.types";
 
-export const Navigation = styled.nav`
+export const NavigationWrap = styled.nav`
   display: flex;
   @media (max-width: 1390px) {
-    flex-direction: column;
-    width: 200px;
-    height: 100vh;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
     position: fixed;
     top: 0;
-    right: 0;
-    background-color: #000;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
-    transform: ${(props: IMenus) => (props.isOpen ? "0" : "translateX(200px)")};
+    transform: ${(props: IMenus) => (props.isOpen ? "0" : "translateX(100%)")};
     z-index: 1;
   }
+`;
+export const Navigation = styled.div`
+  width: 240px;
+  height: 100%;
+  background-color: #000;
 `;
 export const NavToggleBtn = styled(Button)`
   display: none;
@@ -52,6 +57,9 @@ export const MenuItem = styled.li`
 `;
 export const itemLink = styled.a`
   cursor: pointer;
+  &:hover {
+    color: #74e291;
+  }
 `;
 
 // 로그인/회원가입 요소 스타일
@@ -104,6 +112,9 @@ export const UserOptBtn = styled.a`
   width: max-content;
   font-weight: bold;
   cursor: pointer;
+  &:hover {
+    color: #74e291;
+  }
 `;
 export const LogoutBtn = styled.button`
   width: 100%;

@@ -97,44 +97,46 @@ export default function LayoutNavigation(): JSX.Element {
 
   return (
     <>
-      <S.Navigation isOpen={isOpen}>
-        {/* 네비게이션 메뉴 */}
-        <S.Menus>
-          {NAVIGATION_MENUS.map((el) => (
-            <S.MenuItem key={el.page}>
-              <Link href={el.page}>
-                <S.itemLink onClick={handleNavOff}>{el.name}</S.itemLink>
-              </Link>
-            </S.MenuItem>
-          ))}
-        </S.Menus>
-
-        {/* 회원가입/로그인 */}
-        {accessToken === "" ? (
-          <S.UserProcedure>
-            {USER_OPTIONS.map((el) => (
-              <Link key={el.page} href={el.page}>
-                <S.UserOptBtn onClick={handleNavOff}>{el.name}</S.UserOptBtn>
-              </Link>
+      <S.NavigationWrap isOpen={isOpen}>
+        <S.Navigation>
+          {/* 네비게이션 메뉴 */}
+          <S.Menus>
+            {NAVIGATION_MENUS.map((el) => (
+              <S.MenuItem key={el.page}>
+                <Link href={el.page}>
+                  <S.itemLink onClick={handleNavOff}>{el.name}</S.itemLink>
+                </Link>
+              </S.MenuItem>
             ))}
-          </S.UserProcedure>
-        ) : (
-          <S.UserInfo>
-            <Dropdown menu={{ items }}>
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                <Space>
-                  <S.UserName>{data?.fetchUserLoggedIn.name}</S.UserName> 님
-                  <DownOutlined />
-                </Space>
-              </a>
-            </Dropdown>
-          </S.UserInfo>
-        )}
-      </S.Navigation>
+          </S.Menus>
+
+          {/* 회원가입/로그인 */}
+          {accessToken === "" ? (
+            <S.UserProcedure>
+              {USER_OPTIONS.map((el) => (
+                <Link key={el.page} href={el.page}>
+                  <S.UserOptBtn onClick={handleNavOff}>{el.name}</S.UserOptBtn>
+                </Link>
+              ))}
+            </S.UserProcedure>
+          ) : (
+            <S.UserInfo>
+              <Dropdown menu={{ items }}>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <Space>
+                    <S.UserName>{data?.fetchUserLoggedIn.name}</S.UserName> 님
+                    <DownOutlined />
+                  </Space>
+                </a>
+              </Dropdown>
+            </S.UserInfo>
+          )}
+        </S.Navigation>
+      </S.NavigationWrap>
       <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <CloseOutlined /> : <MenuOutlined />}></S.NavToggleBtn>
     </>
   );
