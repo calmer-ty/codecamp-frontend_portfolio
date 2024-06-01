@@ -8,7 +8,7 @@ import { accessTokenState } from "../../../../commons/stores";
 
 import { Dropdown, Space, type MenuProps } from "antd";
 import UserIcon01 from "../../icon/user/01";
-import { CloseOutlined, DownOutlined, MenuOutlined } from "@ant-design/icons";
+import { CloseOutlined, DownOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 
 import * as S from "./LayoutNavigation.styles";
 
@@ -19,6 +19,10 @@ const NAVIGATION_MENUS = [
   { name: "마이페이지", page: "/myPage" },
   { name: "랜덤강아지", page: "/randomDogImg" },
   { name: "OpenApi", page: "/openApi" },
+];
+const USER_OPTIONS = [
+  { name: "회원가입", page: "/user/join" },
+  { name: "로그인", page: "/user/login" },
 ];
 
 export default function LayoutNavigation(): JSX.Element {
@@ -71,13 +75,13 @@ export default function LayoutNavigation(): JSX.Element {
     {
       key: "1",
       label: (
-        <S.FlexRow>
+        <S.UserInfoModal>
           <UserIcon01 size={30} padding={8} />
-          <S.UserInfo>
+          <div>
             <div>{data?.fetchUserLoggedIn.name}</div>
             <div>100,000 P</div>
-          </S.UserInfo>
-        </S.FlexRow>
+          </div>
+        </S.UserInfoModal>
       ),
     },
     {
@@ -85,12 +89,9 @@ export default function LayoutNavigation(): JSX.Element {
     },
     {
       key: "2",
-      label: (
-        <button style={{ width: "100%" }} onClick={onClickLogout}>
-          로그아웃
-        </button>
-      ),
-      disabled: true,
+      label: <S.LogoutBtn onClick={onClickLogout}>로그아웃</S.LogoutBtn>,
+      icon: <UserOutlined />,
+      danger: true,
     },
   ];
 
@@ -107,18 +108,18 @@ export default function LayoutNavigation(): JSX.Element {
             </S.MenuItem>
           ))}
         </S.Menus>
+
         {/* 회원가입/로그인 */}
         {accessToken === "" ? (
           <S.UserProcedure>
-            <Link href={"/user/join"}>
-              <S.UserOptBtn>회원가입</S.UserOptBtn>
-            </Link>
-            <Link href={"/user/login"}>
-              <S.UserOptBtn>로그인</S.UserOptBtn>
-            </Link>
+            {USER_OPTIONS.map((el) => (
+              <Link key={el.page} href={el.page}>
+                <S.UserOptBtn onClick={handleNavOff}>{el.name}</S.UserOptBtn>
+              </Link>
+            ))}
           </S.UserProcedure>
         ) : (
-          <S.FlexRow>
+          <S.UserInfo>
             <Dropdown menu={{ items }}>
               <a
                 onClick={(e) => {
@@ -131,7 +132,7 @@ export default function LayoutNavigation(): JSX.Element {
                 </Space>
               </a>
             </Dropdown>
-          </S.FlexRow>
+          </S.UserInfo>
         )}
       </S.Navigation>
       <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <CloseOutlined /> : <MenuOutlined />}></S.NavToggleBtn>

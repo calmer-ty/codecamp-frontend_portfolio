@@ -5,7 +5,6 @@ import type { IMenus } from "./LayoutNavigation.types";
 
 export const Navigation = styled.nav`
   display: flex;
-  /* justify-content: space-around; */
   @media (max-width: 1390px) {
     flex-direction: column;
     width: 200px;
@@ -16,8 +15,20 @@ export const Navigation = styled.nav`
     background-color: #000;
     color: #fff;
     transform: ${(props: IMenus) => (props.isOpen ? "0" : "translateX(200px)")};
+    z-index: 1;
   }
 `;
+export const NavToggleBtn = styled(Button)`
+  display: none;
+  position: absolute;
+  top: 26px;
+  right: 20px;
+  z-index: 1;
+  @media (max-width: 1390px) {
+    display: block;
+  }
+`;
+
 export const Menus = styled.ul`
   display: flex;
   justify-content: center;
@@ -27,15 +38,6 @@ export const Menus = styled.ul`
     flex-direction: column;
     row-gap: 20px;
     margin: 80px 0 40px 0;
-    /* 
-
-    z-index: 1;
-    padding: 20px 0;
-    background-color: #eee;
-    
-    transition: right 0.3s ease;
-    
-    */
   }
 `;
 
@@ -63,7 +65,6 @@ export const UserProcedure = styled.div`
 
   /* 왼쪽 요소 분리를 위한 border */
   border-left: 2px solid #000;
-  padding-left: 10px;
   @media (max-width: 1390px) {
     flex-direction: column;
     justify-content: center;
@@ -71,24 +72,27 @@ export const UserProcedure = styled.div`
     align-items: center;
 
     /* 왼쪽 요소 분리를 위한 border */
-    padding-left: 0;
-    padding-top: 20px;
     border-left: none;
     border-top: 2px solid #fff;
+    padding-top: 20px;
     margin: 0 40px;
   }
 `;
 
+// 로그인 후 유저 요소
 export const UserInfo = styled.div`
   display: flex;
-  flex-direction: column;
-  margin-left: 12px;
-  font-weight: bold;
+  justify-content: center;
+  cursor: pointer;
 `;
 export const UserName = styled.span`
   font-weight: bold;
 `;
 export const UserInfoModal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+  font-weight: bold;
   cursor: pointer;
 `;
 
@@ -101,14 +105,7 @@ export const UserOptBtn = styled.a`
   font-weight: bold;
   cursor: pointer;
 `;
-
-export const NavToggleBtn = styled(Button)`
-  display: none;
-  position: absolute;
-  top: 26px;
-  right: 20px;
-  z-index: 1;
-  @media (max-width: 1390px) {
-    display: block;
-  }
+export const LogoutBtn = styled.button`
+  width: 100%;
+  color: inherit;
 `;

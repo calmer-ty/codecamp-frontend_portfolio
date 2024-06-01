@@ -14,6 +14,14 @@ export const globalStyles = css`
     box-sizing: border-box;
     font-family: "NotoSansKR-Regular", sans-serif;
   }
+  html,
+  body,
+  #__next {
+    height: 100%;
+  }
+  #__next {
+    background: url("/images/bg_intro_1920.jpg") no-repeat center/cover;
+  }
   button {
     border: none;
     background-color: initial;
