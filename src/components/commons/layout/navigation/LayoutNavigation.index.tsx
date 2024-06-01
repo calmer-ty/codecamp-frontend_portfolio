@@ -1,21 +1,31 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useApolloClient } from "@apollo/client";
+import { useEffect, useState } from "react";
 
 import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 import { useLogoutUser } from "../../hooks/mutations/useLogoutUser";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 
-import { Dropdown, Space, type MenuProps } from "antd";
-import UserIcon01 from "../../icon/user/01";
+import { Dropdown, Space } from "antd";
 import { CloseOutlined, DownOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import UserIcon01 from "../../icon/user/01";
+
+import { FETCH_BOARDS } from "../../hooks/queries/board/useFetchBoards";
+import { FETCH_USEDITEMS } from "../../hooks/queries/product/useFetchProducts";
+import { FETCH_USEDITEMS_BEST } from "../../hooks/queries/product/useFetchProductsBest";
+
+import type { DocumentNode } from "graphql";
 
 import * as S from "./LayoutNavigation.styles";
 
 const NAVIGATION_MENUS = [
   { name: "Firebase", page: "/boards_firebase" },
-  { name: "자유게시판", page: "/boards" },
-  { name: "중고마켓", page: "/products" },
+  { name: "자유게시판", page: "/boards", fetch: [FETCH_BOARDS] },
+  { name: "중고마켓", page: "/products", fetch: [FETCH_USEDITEMS, FETCH_USEDITEMS_BEST] },
+  // { name: "자유게시판", page: "/boards", fetch: FETCH_BOARDS },
+  // { name: "중고마켓", page: "/products", fetch: FETCH_USEDITEMS },
   { name: "마이페이지", page: "/myPage" },
   { name: "랜덤강아지", page: "/randomDogImg" },
   { name: "OpenApi", page: "/openApi" },
@@ -30,7 +40,6 @@ export default function LayoutNavigation(): JSX.Element {
   const [logoutUser] = useLogoutUser();
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
 
   const handleChangeIcon = () => {
     setIsOpen((prev) => !prev);
@@ -38,6 +47,8 @@ export default function LayoutNavigation(): JSX.Element {
   const handleNavOff = () => {
     setIsOpen(false);
   };
+
+  // pc 해상도일 때, sideNav가 켜져있다면 초기화
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1390px)");
 
@@ -46,21 +57,19 @@ export default function LayoutNavigation(): JSX.Element {
         setIsOpen(false); // 초기화할 상태 값 설정
       }
     };
-
     // Add listener to handle changes
     mediaQuery.addListener(handleMediaQueryChange);
-
     // Initial check
     if (mediaQuery.matches) {
       setIsOpen(false); // 초기화할 상태 값 설정
     }
-
     // Clean up listener on component unmount
     return () => {
       mediaQuery.removeListener(handleMediaQueryChange);
     };
   }, []);
 
+  // 로그아웃
   const onClickLogout = async () => {
     try {
       const result = await logoutUser();
@@ -71,6 +80,7 @@ export default function LayoutNavigation(): JSX.Element {
     }
   };
 
+  // 로그인 시 유저 정보 팝업
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -95,6 +105,25 @@ export default function LayoutNavigation(): JSX.Element {
     },
   ];
 
+  // Prefetch
+  const client = useApolloClient();
+  const prefetchProduct = (fetch?: DocumentNode[]) => async () => {
+    if (fetch === undefined) {
+      return; // fetch가 없는 경우 종료
+    }
+    try {
+      const fetchQueries = Object?.values(fetch).map(async (query) => {
+        console.log(query);
+        const response = await client.query({ query });
+        return response;
+      });
+      const responses = await Promise.all(fetchQueries);
+      console.log(responses);
+    } catch (error) {
+      console.error("Error prefetching product:", error);
+    }
+  };
+
   return (
     <>
       <S.NavigationWrap isOpen={isOpen}>
@@ -104,7 +133,9 @@ export default function LayoutNavigation(): JSX.Element {
             {NAVIGATION_MENUS.map((el) => (
               <S.MenuItem key={el.page}>
                 <Link href={el.page}>
-                  <S.itemLink onClick={handleNavOff}>{el.name}</S.itemLink>
+                  <S.itemLink onClick={handleNavOff} onMouseOver={prefetchProduct(el.fetch)}>
+                    {el.name}
+                  </S.itemLink>
                 </Link>
               </S.MenuItem>
             ))}
