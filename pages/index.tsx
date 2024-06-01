@@ -8,22 +8,22 @@ export default function Home(): JSX.Element {
     {
       name: "자유게시판",
       src: "/images/landing/board.jpg",
-      desc: "자유롭게 게시물을 등록하고, 수정하고, 삭제할 수 있습니다",
+      desc: "자신의 생각을 공유해보세요.",
     },
     {
       name: "중고마켓",
       src: "/images/landing/e-commerce.jpg",
-      desc: "중고상품을 등록하고, 거래해보세요",
+      desc: "사용하지 않는 물건을 판매하고, 구매할 수 있어요.",
     },
     {
       name: "마이페이지",
       src: "/images/landing/e-commerce.jpg",
-      desc: "나를 소개합니다",
+      desc: "나의 정보들을 확인해요.",
     },
     {
       name: "랜덤강아지",
       src: "/images/landing/e-commerce.jpg",
-      desc: "랜덤으로 강아지를 볼 수 있습니다",
+      desc: "다양한 강아지 사진을 볼 수 있어요.",
     },
     {
       name: "openApi",

@@ -11,7 +11,7 @@ export const Container = styled.div`
   width: 1024px;
   padding: 50px;
   border-radius: 20px;
-  border: 8px solid #284b63;
+  border: 8px solid #59b4c3;
   background-color: #ffffff;
 
   @media (max-width: 1024px) {
@@ -26,7 +26,7 @@ export const SliderItem = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 20px;
-  margin: 0 20px;
+  margin: 0 20px 20px;
   @media (max-width: 1024px) {
     flex-direction: column;
     row-gap: 40px;
@@ -39,11 +39,11 @@ export const PageInfo = styled.div`
   column-gap: 20px;
 `;
 export const Title = styled.div`
-  font-size: 30px;
+  font-size: 36px;
   font-weight: bold;
 `;
 export const Desc = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   word-break: keep-all;
 `;
 export const PageMainImg = styled.img`
@@ -57,24 +57,26 @@ export const PageMainImg = styled.img`
 `;
 
 export const CustomSlider = styled(Slider)`
+  /* 슬라이드 전체 */
   .slick-slide {
-    /* 슬라이드 배경색 */
     /* background: #ccc; */
   }
 
+  /* 내비게이션 버튼 */
   .slick-prev:before,
   .slick-next:before {
-    /* 내비게이션 버튼 색상 */
-    color: black;
+    color: #211c6a;
+    font-size: 30px;
   }
 
+  /* 하단 도트 */
   .slick-dots li button:before {
-    /* 도트 색상 */
     /* color: blue; */
+    font-size: 12px;
   }
 
+  /* 하단 도트 -활성화 시- */
   .slick-dots li.slick-active button:before {
-    /* 활성화된 도트 색상 */
-    /* color: red; */
+    color: #211c6a;
   }
 `;
