@@ -1,7 +1,4 @@
 import Head from "next/head";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 // Style
 import * as S from "../src/commons/styles/landing";
@@ -37,9 +34,11 @@ export default function Home(): JSX.Element {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
   };
 
   return (
@@ -52,19 +51,19 @@ export default function Home(): JSX.Element {
       </Head>
       <S.Wrapper>
         <S.Container>
-          <Slider {...settings}>
+          <S.CustomSlider {...settings}>
             {LANDING_MENUS.map((el, index) => (
-              <S.SliderItem key={index}>
-                <S.SliderItemInner>
-                  <S.PageInfoWrap>
+              <S.SliderItemWrap key={index}>
+                <S.SliderItem>
+                  <S.PageInfo>
                     <S.Title>{el.name}</S.Title>
                     <S.Desc>{el.desc}</S.Desc>
-                  </S.PageInfoWrap>
+                  </S.PageInfo>
                   <S.PageMainImg src={el.src} />
-                </S.SliderItemInner>
-              </S.SliderItem>
+                </S.SliderItem>
+              </S.SliderItemWrap>
             ))}
-          </Slider>
+          </S.CustomSlider>
         </S.Container>
       </S.Wrapper>
     </>

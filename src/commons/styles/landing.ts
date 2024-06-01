@@ -1,46 +1,80 @@
 import styled from "@emotion/styled";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 export const Wrapper = styled.article`
-  width: 100%;
-  height: 100%;
+  margin: 150px auto;
 `;
 export const Container = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
+  width: 1024px;
   padding: 50px;
   border-radius: 20px;
   border: 8px solid #284b63;
   background-color: #ffffff;
-`;
-export const PageMainImg = styled.img`
-  width: 40%;
-  height: 350px;
-  object-fit: contain;
+
   @media (max-width: 1024px) {
-    width: 100%;
+    width: 480px;
   }
 `;
-export const PageInfoWrap = styled.div`
-  width: 60%;
+
+export const SliderItemWrap = styled.div`
+  /* 슬랙의 스타일이 겹치기 때문에 상위요소 생성 */
+`;
+export const SliderItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+  margin: 0 20px;
   @media (max-width: 1024px) {
-    width: 100%;
+    flex-direction: column;
+    row-gap: 40px;
   }
 `;
-export const SliderItem = styled.div``;
+export const PageInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  column-gap: 20px;
+`;
 export const Title = styled.div`
-  margin-bottom: 20px;
   font-size: 30px;
   font-weight: bold;
 `;
 export const Desc = styled.div`
   font-size: 20px;
+  word-break: keep-all;
 `;
-export const SliderItemInner = styled.div`
-  display: flex;
+export const PageMainImg = styled.img`
+  width: 40%;
+  /* height: 350px; */
+  object-position: top;
+  object-fit: contain;
   @media (max-width: 1024px) {
-    flex-direction: column;
+    width: 100%;
+  }
+`;
+
+export const CustomSlider = styled(Slider)`
+  .slick-slide {
+    /* 슬라이드 배경색 */
+    /* background: #ccc; */
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    /* 내비게이션 버튼 색상 */
+    color: black;
+  }
+
+  .slick-dots li button:before {
+    /* 도트 색상 */
+    /* color: blue; */
+  }
+
+  .slick-dots li.slick-active button:before {
+    /* 활성화된 도트 색상 */
+    /* color: red; */
   }
 `;
