@@ -19,9 +19,15 @@ export const NavigationWrap = styled.nav`
   }
 `;
 export const Navigation = styled.div`
-  width: 240px;
+  display: flex;
+  column-gap: 20px;
   height: 100%;
-  background-color: #000;
+  @media (max-width: 1390px) {
+    width: 240px;
+    align-items: center;
+    flex-direction: column;
+    background-color: #000;
+  }
 `;
 export const NavToggleBtn = styled(Button)`
   display: none;
@@ -39,10 +45,15 @@ export const Menus = styled.ul`
   justify-content: center;
   align-items: center;
 
+  /* 오른쪽 요소 분리를 위한 css */
+  border-right: 2px solid #000;
   @media (max-width: 1390px) {
     flex-direction: column;
     row-gap: 20px;
     margin: 80px 0 40px 0;
+
+    /* 오른쪽 요소 분리를 위한 css */
+    border-right: none;
   }
 `;
 
@@ -71,16 +82,13 @@ export const FlexRow = styled.div`
 export const UserProcedure = styled.div`
   display: flex;
 
-  /* 왼쪽 요소 분리를 위한 border */
-  border-left: 2px solid #000;
   @media (max-width: 1390px) {
     flex-direction: column;
     justify-content: center;
     row-gap: 20px;
     align-items: center;
 
-    /* 왼쪽 요소 분리를 위한 border */
-    border-left: none;
+    /* 상단 요소와 분리하기 위한 css */
     border-top: 2px solid #fff;
     padding-top: 20px;
     margin: 0 40px;
