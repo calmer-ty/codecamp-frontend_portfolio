@@ -30,7 +30,7 @@ export const Navigation = styled.div`
   }
 `;
 export const NavToggleBtn = styled(Button)`
-  display: none;
+  display: none !important;
   position: absolute;
   top: 26px;
   right: 20px;
@@ -46,7 +46,7 @@ export const NavToggleBtn = styled(Button)`
     border-color: #fff;
   }
   @media (max-width: 1390px) {
-    display: block;
+    display: block !important;
   }
 `;
 
