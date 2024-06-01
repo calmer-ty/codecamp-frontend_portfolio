@@ -21,11 +21,10 @@ import type { DocumentNode } from "graphql";
 import * as S from "./LayoutNavigation.styles";
 
 const NAVIGATION_MENUS = [
+  { name: "HOME", page: "/" },
   { name: "Firebase", page: "/boards_firebase" },
   { name: "자유게시판", page: "/boards", fetch: [FETCH_BOARDS] },
   { name: "중고마켓", page: "/products", fetch: [FETCH_USEDITEMS, FETCH_USEDITEMS_BEST] },
-  // { name: "자유게시판", page: "/boards", fetch: FETCH_BOARDS },
-  // { name: "중고마켓", page: "/products", fetch: FETCH_USEDITEMS },
   { name: "마이페이지", page: "/myPage" },
   { name: "랜덤강아지", page: "/randomDogImg" },
   { name: "OpenApi", page: "/openApi" },
@@ -41,14 +40,35 @@ export default function LayoutNavigation(): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [isOpen, setIsOpen] = useState(false);
 
+  // Prefetch
+  const client = useApolloClient();
+  const prefetchProduct = (fetch?: DocumentNode[]) => async () => {
+    if (fetch === undefined) {
+      return; // fetch가 없는 경우 종료
+    }
+    try {
+      const fetchQueries = Object?.values(fetch).map(async (query) => {
+        console.log(query);
+        const response = await client.query({ query });
+        return response;
+      });
+      const responses = await Promise.all(fetchQueries);
+      console.log(responses);
+    } catch (error) {
+      console.error("Error prefetching product:", error);
+    }
+  };
+
+  // Nav Toggle Button
   const handleChangeIcon = () => {
     setIsOpen((prev) => !prev);
   };
-  const handleNavOff = () => {
+  // Nav Menu Router push시, rightNav 사라짐
+  const handleMovedNavOff = () => {
     setIsOpen(false);
   };
 
-  // pc 해상도일 때, sideNav가 켜져있다면 초기화
+  // // PC 해상도일 때, sideNav가 켜져있다면 초기화
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1390px)");
 
@@ -105,25 +125,6 @@ export default function LayoutNavigation(): JSX.Element {
     },
   ];
 
-  // Prefetch
-  const client = useApolloClient();
-  const prefetchProduct = (fetch?: DocumentNode[]) => async () => {
-    if (fetch === undefined) {
-      return; // fetch가 없는 경우 종료
-    }
-    try {
-      const fetchQueries = Object?.values(fetch).map(async (query) => {
-        console.log(query);
-        const response = await client.query({ query });
-        return response;
-      });
-      const responses = await Promise.all(fetchQueries);
-      console.log(responses);
-    } catch (error) {
-      console.error("Error prefetching product:", error);
-    }
-  };
-
   return (
     <>
       <S.NavigationWrap isOpen={isOpen}>
@@ -133,7 +134,7 @@ export default function LayoutNavigation(): JSX.Element {
             {NAVIGATION_MENUS.map((el) => (
               <S.MenuItem key={el.page}>
                 <Link href={el.page}>
-                  <S.itemLink onClick={handleNavOff} onMouseOver={prefetchProduct(el.fetch)}>
+                  <S.itemLink onClick={handleMovedNavOff} onMouseOver={prefetchProduct(el.fetch)}>
                     {el.name}
                   </S.itemLink>
                 </Link>
@@ -146,7 +147,7 @@ export default function LayoutNavigation(): JSX.Element {
             <S.UserProcedure>
               {USER_OPTIONS.map((el) => (
                 <Link key={el.page} href={el.page}>
-                  <S.UserOptBtn onClick={handleNavOff}>{el.name}</S.UserOptBtn>
+                  <S.UserOptBtn onClick={handleMovedNavOff}>{el.name}</S.UserOptBtn>
                 </Link>
               ))}
             </S.UserProcedure>
