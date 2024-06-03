@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
 
 export const Header = styled.header`
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+export const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 1280px;
   height: 80px;
-  padding: 0 40px;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
   color: #fff;
 `;
 export const Logo = styled.h1`

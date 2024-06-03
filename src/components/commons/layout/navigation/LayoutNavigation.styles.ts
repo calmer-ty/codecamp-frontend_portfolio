@@ -5,7 +5,7 @@ import type { IMenus } from "./LayoutNavigation.types";
 
 export const NavigationWrap = styled.nav`
   display: flex;
-  @media (max-width: 1390px) {
+  @media (max-width: 1280px) {
     justify-content: flex-end;
     width: 100%;
     height: 100%;
@@ -22,7 +22,7 @@ export const Navigation = styled.div`
   display: flex;
   column-gap: 20px;
   height: 100%;
-  @media (max-width: 1390px) {
+  @media (max-width: 1280px) {
     width: 240px;
     align-items: center;
     flex-direction: column;
@@ -45,7 +45,7 @@ export const NavToggleBtn = styled(Button)`
     color: #fff;
     border-color: #fff;
   }
-  @media (max-width: 1390px) {
+  @media (max-width: 1280px) {
     display: block !important;
   }
 `;
@@ -57,7 +57,7 @@ export const Menus = styled.ul`
 
   /* 오른쪽 요소 분리를 위한 css */
   border-right: 2px solid #fff;
-  @media (max-width: 1390px) {
+  @media (max-width: 1280px) {
     flex-direction: column;
     row-gap: 20px;
     margin: 80px 0 40px 0;
@@ -73,7 +73,7 @@ export const MenuItem = styled.li`
   align-items: center;
   min-width: 150px;
   width: max-content;
-  font-size: 18px;
+  font-size: 1.4rem;
   font-weight: 700;
 `;
 export const itemLink = styled.a`
@@ -92,7 +92,7 @@ export const FlexRow = styled.div`
 export const UserProcedure = styled.div`
   display: flex;
 
-  @media (max-width: 1390px) {
+  @media (max-width: 1280px) {
     flex-direction: column;
     justify-content: center;
     row-gap: 20px;
@@ -126,9 +126,9 @@ export const UserOptBtn = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 86px;
-  width: max-content;
-  font-weight: bold;
+  width: 100px;
+  font-size: 1.2rem;
+  font-weight: 700;
   cursor: pointer;
   &:hover {
     color: #74e291;

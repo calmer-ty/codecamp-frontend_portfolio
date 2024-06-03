@@ -25,11 +25,11 @@ export default function Home(): JSX.Element {
       src: "/images/landing/e-commerce.jpg",
       desc: "다양한 강아지 사진을 볼 수 있어요.",
     },
-    {
-      name: "openApi",
-      src: "/images/landing/e-commerce.jpg",
-      desc: "openApi",
-    },
+    // {
+    //   name: "openApi",
+    //   src: "/images/landing/e-commerce.jpg",
+    //   desc: "openApi",
+    // },
   ];
   const settings = {
     dots: true,
@@ -49,23 +49,21 @@ export default function Home(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <S.Wrapper>
-        <S.Container>
-          <S.CustomSlider {...settings}>
-            {LANDING_MENUS.map((el, index) => (
-              <S.SliderItemWrap key={index}>
-                <S.SliderItem>
-                  <S.PageInfo>
-                    <S.Title>{el.name}</S.Title>
-                    <S.Desc>{el.desc}</S.Desc>
-                  </S.PageInfo>
-                  <S.PageMainImg src={el.src} />
-                </S.SliderItem>
-              </S.SliderItemWrap>
-            ))}
-          </S.CustomSlider>
-        </S.Container>
-      </S.Wrapper>
+      <S.SliderWrap>
+        <S.CustomSlider {...settings}>
+          {LANDING_MENUS.map((el, index) => (
+            <S.SliderItemWrap key={index}>
+              <S.SliderItem>
+                <S.PageInfo>
+                  <S.Title>{el.name}</S.Title>
+                  <S.Desc>{el.desc}</S.Desc>
+                </S.PageInfo>
+                <S.PageMainImg src={el.src} />
+              </S.SliderItem>
+            </S.SliderItemWrap>
+          ))}
+        </S.CustomSlider>
+      </S.SliderWrap>
     </>
   );
 }

@@ -26,7 +26,7 @@ const NAVIGATION_MENUS = [
   { name: "중고마켓", page: "/products", fetch: [FETCH_USEDITEMS, FETCH_USEDITEMS_BEST] },
   { name: "마이페이지", page: "/myPage" },
   { name: "랜덤강아지", page: "/randomDogImg" },
-  { name: "OpenApi", page: "/openApi" },
+  // { name: "OpenApi", page: "/openApi" },
 ];
 const USER_OPTIONS = [
   { name: "회원가입", page: "/user/join" },

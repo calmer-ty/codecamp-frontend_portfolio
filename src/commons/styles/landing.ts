@@ -4,17 +4,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const Wrapper = styled.article`
-  margin: 150px auto;
-`;
-export const Container = styled.div`
-  width: 1024px;
+export const SliderWrap = styled.article`
+  width: 1280px;
   padding: 50px;
   border-radius: 20px;
   border: 8px solid #59b4c3;
   background-color: #ffffff;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     width: 480px;
   }
 `;
@@ -27,7 +24,7 @@ export const SliderItem = styled.div`
   justify-content: space-between;
   column-gap: 20px;
   margin: 0 20px 20px;
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     flex-direction: column;
     row-gap: 40px;
   }
@@ -48,10 +45,9 @@ export const Desc = styled.div`
 `;
 export const PageMainImg = styled.img`
   width: 40%;
-  /* height: 350px; */
   object-position: top;
   object-fit: contain;
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     width: 100%;
   }
 `;
