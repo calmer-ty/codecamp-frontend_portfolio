@@ -11,7 +11,7 @@ export const Title = styled.h2`
   font-size: 36px;
   text-align: center;
 `;
-export const ListWrap = styled.main`
+export const ListWrap = styled.div`
   display: flex;
   justify-content: space-between;
 `;

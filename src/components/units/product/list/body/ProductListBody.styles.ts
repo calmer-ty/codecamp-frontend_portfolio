@@ -8,7 +8,7 @@ export const Body = styled.div`
   row-gap: 40px;
   width: 100%;
 `;
-export const ListWrap = styled.main`
+export const ListWrap = styled.div`
   overflow-y: scroll;
   max-height: calc(194px * 10);
   border-top: 2px solid #000;
