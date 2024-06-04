@@ -5,15 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export const SliderWrap = styled.article`
-  width: 1280px;
+  /* width: 1280px; */
   padding: 50px;
   border-radius: 20px;
   border: 8px solid #59b4c3;
   background-color: #ffffff;
-
-  @media (max-width: 1280px) {
-    width: 480px;
-  }
 `;
 
 export const SliderItemWrap = styled.div`
@@ -24,7 +20,7 @@ export const SliderItem = styled.div`
   justify-content: space-between;
   column-gap: 20px;
   margin: 0 20px 20px;
-  @media (max-width: 1280px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     row-gap: 40px;
   }
@@ -47,7 +43,7 @@ export const PageMainImg = styled.img`
   width: 40%;
   object-position: top;
   object-fit: contain;
-  @media (max-width: 1280px) {
+  @media (max-width: 768px) {
     width: 100%;
   }
 `;

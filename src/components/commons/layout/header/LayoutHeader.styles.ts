@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
 
 export const Header = styled.header`
-  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 `;
 export const HeaderInner = styled.div`
   display: flex;
@@ -11,7 +15,6 @@ export const HeaderInner = styled.div`
   height: 80px;
   margin: 0 auto;
   padding: 0 20px;
-  color: #fff;
 `;
 export const Logo = styled.h1`
   display: flex;

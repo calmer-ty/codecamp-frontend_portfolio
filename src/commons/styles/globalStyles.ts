@@ -22,12 +22,18 @@ export const globalStyles = css`
   li {
     list-style-type: none;
   }
+  a {
+    text-decoration: none;
+  }
   #__next {
     position: relative;
     min-height: 100%; /* wrap에 해당 되는 요소를 최소 높이값을 100%로 잡는다 */
-    background: url("/images/bg_intro_1920.jpg") no-repeat center / cover fixed; /* attachment fixed 하여 배경이미지 크기를 고정시킨다 */
+    /* attachment fixed 하여 배경이미지 크기를 고정시킨다 */
+    /* background: url("/images/bg_intro_1920.jpg") no-repeat center / cover fixed;  */
+    background-color: #f1f5f8;
     display: flex;
     flex-direction: column;
+    z-index: 1;
   }
   /* #__next::before {
     content: "";
@@ -36,14 +42,26 @@ export const globalStyles = css`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3) center/cover no-repeat;
+    background: rgba(0, 0, 0, 0.5) center/cover no-repeat;
     background-size: cover;
-    z-index: 0;
+    z-index: -1;
   } */
 
   main > article,
   main > section {
-    width: 1280px;
+    width: 1024px;
+  }
+  @media screen and (max-width: 1024px) {
+    main > article,
+    main > section {
+      width: 768px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    main > article,
+    main > section {
+      width: 480px;
+    }
   }
 
   button {

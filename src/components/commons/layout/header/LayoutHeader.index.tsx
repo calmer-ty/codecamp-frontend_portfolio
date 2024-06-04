@@ -10,7 +10,7 @@ export default function LayoutHeader(): JSX.Element {
       <S.HeaderInner>
         <Link href={"/"}>
           <S.Logo>
-            <S.LogoImg src="/images/layout/header/tae_logo.webp" />
+            <S.LogoImg src="/images/layout/header/tae_logo_bk.webp" />
           </S.Logo>
         </Link>
         <LayoutNavigation />
