@@ -1,8 +1,12 @@
-interface IAArgs {
+import Link from "next/link";
+
+interface ILink01Args {
   text: string;
+  href: string;
+  style?: React.CSSProperties;
 }
 
-const buttonStyle = {
+const aStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -11,22 +15,22 @@ const buttonStyle = {
   height: "52px",
   fontWeight: "bold",
   border: "1px solid #d9d9d9",
+  backgroundColor: "#fff",
   borderRadius: "10px",
   cursor: "pointer",
+  color: "#000",
 };
 const iconStyle = {
   marginRight: "6px",
 };
 
-export default function LinkBtn01(args: IAArgs) {
+export const LinkButton01 = (args: ILink01Args) => {
   return (
-    <a
-      style={{
-        ...buttonStyle,
-      }}
-    >
-      <img style={iconStyle} src="/images/board/list/ic_create.png"></img>
-      {args.text}
-    </a>
+    <Link href={args.href}>
+      <a style={aStyle}>
+        <img style={iconStyle} src="/images/board/list/ic_create.png"></img>
+        {args.text}
+      </a>
+    </Link>
   );
-}
+};
