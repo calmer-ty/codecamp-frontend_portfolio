@@ -9,7 +9,6 @@ export const Title = styled.h2`
   margin-bottom: 40px;
   font-size: 36px;
   text-align: center;
-  color: #fff;
 `;
 export const ProductList = styled.div`
   height: 400px;
@@ -17,10 +16,12 @@ export const ProductList = styled.div`
   justify-content: space-between;
 `;
 export const ListItem = styled.a`
+  display: block;
   width: 280px;
   padding: 30px;
   background-color: #f9f9f9;
-  box-shadow: 2px 2px 3px #cdcdcd;
+  border: 1px solid #f1f1f1;
+  /* box-shadow: 2px 2px 3px #cdcdcd; */
   cursor: pointer;
   :hover {
     background-color: #dedede;

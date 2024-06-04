@@ -1,6 +1,5 @@
 import * as S from "./ProductListFooter.styles";
-import {} from "../../../../commons/element/buttons/link/01";
-import { LinkButton01 } from "../../../../commons/element/buttons/04";
+import { LinkButton01 } from "../../../../commons/element/buttons/link/01";
 
 export default function ProductListFooter() {
   return (
