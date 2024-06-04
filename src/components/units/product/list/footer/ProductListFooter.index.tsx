@@ -1,15 +1,11 @@
-import Link from "next/link";
 import * as S from "./ProductListFooter.styles";
+import {} from "../../../../commons/element/buttons/link/01";
+import { LinkButton01 } from "../../../../commons/element/buttons/04";
 
 export default function ProductListFooter() {
   return (
     <S.Footer>
-      <Link href={"/products/new"}>
-        <S.LinkBtn>
-          <img src="/images/board/list/ic_create.png" />
-          상품 등록하기
-        </S.LinkBtn>
-      </Link>
+      <LinkButton01 text="상품 등록하기" href="/products/new" />
     </S.Footer>
   );
 }

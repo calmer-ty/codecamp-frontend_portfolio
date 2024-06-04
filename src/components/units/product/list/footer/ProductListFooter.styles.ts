@@ -16,5 +16,6 @@ export const LinkBtn = styled.a`
   font-weight: bold;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
+  background-color: #fff;
   cursor: pointer;
 `;
