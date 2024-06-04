@@ -52,15 +52,15 @@ export default function Home(): JSX.Element {
       <S.SliderWrap>
         <S.CustomSlider {...settings}>
           {LANDING_MENUS.map((el, index) => (
-            <S.SliderItemWrap key={index}>
-              <S.SliderItem>
-                <S.PageInfo>
-                  <S.Title>{el.name}</S.Title>
-                  <S.Desc>{el.desc}</S.Desc>
-                </S.PageInfo>
-                <S.PageMainImg src={el.src} />
-              </S.SliderItem>
-            </S.SliderItemWrap>
+            // <S.SliderInner key={index}>
+            <S.SliderItem key={index}>
+              <S.PageInfo>
+                <S.Title>{el.name}</S.Title>
+                <S.Desc>{el.desc}</S.Desc>
+              </S.PageInfo>
+              <S.PageMainImg src={el.src} />
+            </S.SliderItem>
+            // </S.SliderInner>
           ))}
         </S.CustomSlider>
       </S.SliderWrap>

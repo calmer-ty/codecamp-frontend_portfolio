@@ -40,7 +40,6 @@ export const NavToggleBtn = styled(Button)`
   box-shadow: none;
   border: none;
   background-color: initial;
-  /* color: #fff; */
   &:where(.css-dev-only-do-not-override-1qhpsh8).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
     color: #fff;
     border-color: #fff;

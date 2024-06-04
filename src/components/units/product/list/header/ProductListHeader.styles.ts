@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import Picked01 from "../../../../commons/picked/01";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 export const BestProduct = styled.article`
   display: flex;
   flex-direction: column;
@@ -10,18 +14,12 @@ export const Title = styled.h2`
   font-size: 36px;
   text-align: center;
 `;
-export const ProductList = styled.div`
-  height: 400px;
-  display: flex;
-  justify-content: space-between;
-`;
 export const ListItem = styled.a`
   display: block;
-  width: 280px;
-  padding: 30px;
+  /* width: 280px; */
+  padding: 20px;
   background-color: #f9f9f9;
   border: 1px solid #f1f1f1;
-  /* box-shadow: 2px 2px 3px #cdcdcd; */
   cursor: pointer;
   :hover {
     background-color: #dedede;
@@ -71,4 +69,12 @@ export const StyledPicked01 = styled(Picked01)`
   position: absolute;
   right: 20px;
   bottom: 20px;
+`;
+
+export const CustomSlider = styled(Slider)`
+  /* 슬라이드 전체 */
+  .slick-track {
+    display: flex;
+    column-gap: 10px;
+  }
 `;

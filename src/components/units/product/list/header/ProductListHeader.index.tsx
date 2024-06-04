@@ -1,9 +1,5 @@
 import Link from "next/link";
 
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
 import Picked01 from "../../../../commons/picked/01";
 
@@ -15,7 +11,7 @@ export default function ProductListHeader(): JSX.Element {
     slidesToShow: 4,
     initialSlide: 0,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     dots: true,
     infinite: true,
     responsive: [
@@ -55,7 +51,7 @@ export default function ProductListHeader(): JSX.Element {
           </Link>
         ))}
       </S.ProductList> */}
-      <Slider {...settings}>
+      <S.CustomSlider {...settings}>
         {data?.fetchUseditemsOfTheBest.map((el) => (
           <Link key={el._id} href={`/products/${el._id}`}>
             <S.ListItem>
@@ -71,7 +67,7 @@ export default function ProductListHeader(): JSX.Element {
             </S.ListItem>
           </Link>
         ))}
-      </Slider>
+      </S.CustomSlider>
     </S.BestProduct>
   );
 }
