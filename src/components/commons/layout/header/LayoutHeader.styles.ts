@@ -10,6 +10,7 @@ export const HeaderInner = styled.div`
   width: 1280px;
   height: 80px;
   margin: 0 auto;
+  padding: 0 20px;
   color: #fff;
 `;
 export const Logo = styled.h1`

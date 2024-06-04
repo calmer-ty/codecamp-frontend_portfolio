@@ -11,7 +11,6 @@ export const globalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    z-index: 1;
   }
   html,
   body {
@@ -26,13 +25,11 @@ export const globalStyles = css`
   #__next {
     position: relative;
     min-height: 100%; /* wrap에 해당 되는 요소를 최소 높이값을 100%로 잡는다 */
-    background:
-      url("/images/bg_intro_1920.jpg") no-repeat center / cover fixed,
-      #f00; /* attachment fixed 하여 배경이미지 크기를 고정시킨다 */
+    background: url("/images/bg_intro_1920.jpg") no-repeat center / cover fixed; /* attachment fixed 하여 배경이미지 크기를 고정시킨다 */
     display: flex;
     flex-direction: column;
   }
-  #__next::before {
+  /* #__next::before {
     content: "";
     position: absolute;
     top: 0;
@@ -42,7 +39,7 @@ export const globalStyles = css`
     background: rgba(0, 0, 0, 0.3) center/cover no-repeat;
     background-size: cover;
     z-index: 0;
-  }
+  } */
 
   main > article,
   main > section {
