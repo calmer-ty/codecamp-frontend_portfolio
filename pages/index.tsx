@@ -32,13 +32,22 @@ export default function Home(): JSX.Element {
     // },
   ];
   const settings = {
-    dots: true,
+    // className: "center",
+    // centerPadding: "60px",
+    centerMode: true,
     infinite: true,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
+    slidesToShow: 2,
+    // autoplay: true,
+    // autoplaySpeed: 1000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          centerMode: false,
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -49,21 +58,21 @@ export default function Home(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <S.SliderWrap>
+      <S.Contents>
         <S.CustomSlider {...settings}>
           {LANDING_MENUS.map((el, index) => (
-            // <S.SliderInner key={index}>
-            <S.SliderItem key={index}>
-              <S.PageInfo>
-                <S.Title>{el.name}</S.Title>
-                <S.Desc>{el.desc}</S.Desc>
-              </S.PageInfo>
-              <S.PageMainImg src={el.src} />
-            </S.SliderItem>
-            // </S.SliderInner>
+            <S.SliderInner key={index}>
+              <S.SliderItem>
+                <S.ItemFigcaption>
+                  <S.Title>{el.name}</S.Title>
+                  <S.Desc>{el.desc}</S.Desc>
+                </S.ItemFigcaption>
+                <S.PageMainImg src={el.src} />
+              </S.SliderItem>
+            </S.SliderInner>
           ))}
         </S.CustomSlider>
-      </S.SliderWrap>
+      </S.Contents>
     </>
   );
 }
