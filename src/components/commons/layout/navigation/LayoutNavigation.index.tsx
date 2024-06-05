@@ -8,7 +8,7 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 
 import { Dropdown, Space } from "antd";
-import { CloseOutlined, DownOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import UserIcon01 from "../../icon/user/01";
 
@@ -168,7 +168,7 @@ export default function LayoutNavigation(): JSX.Element {
           )}
         </S.Navigation>
       </S.NavigationWrap>
-      <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <CloseOutlined style={{ fontSize: "24px" }} /> : <MenuOutlined style={{ fontSize: "24px" }} />}></S.NavToggleBtn>
+      <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <S.CloseBtn /> : <S.MenuBtn />}></S.NavToggleBtn>
     </>
   );
 }

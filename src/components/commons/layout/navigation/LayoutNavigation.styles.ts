@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Button } from "antd";
 
 import type { IMenus } from "./LayoutNavigation.types";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 
 export const NavigationWrap = styled.nav`
   display: flex;
@@ -20,7 +21,7 @@ export const NavigationWrap = styled.nav`
 `;
 export const Navigation = styled.div`
   display: flex;
-  column-gap: 20px;
+  column-gap: 10px;
   height: 100%;
   @media (max-width: 1280px) {
     width: 240px;
@@ -37,13 +38,13 @@ export const NavToggleBtn = styled(Button)`
   z-index: 1;
 
   /* antd icon css 변경 */
-  box-shadow: none;
+  background: initial;
   border: none;
-  background-color: initial;
-  &:where(.css-dev-only-do-not-override-1qhpsh8).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
-    color: #fff;
-    border-color: #fff;
+  &:hover {
+    background: initial !important;
   }
+
+  /* 메뉴바가 보임 */
   @media (max-width: 1280px) {
     display: block !important;
   }
@@ -52,17 +53,16 @@ export const NavToggleBtn = styled(Button)`
 export const Menus = styled.ul`
   display: flex;
   justify-content: center;
+  box-shadow: none;
+  border: none;
+  background-color: initial;
   align-items: center;
 
   /* 오른쪽 요소 분리를 위한 css */
-  border-right: 2px solid #fff;
   @media (max-width: 1280px) {
     flex-direction: column;
     row-gap: 20px;
     margin: 80px 0 40px 0;
-
-    /* 오른쪽 요소 분리를 위한 css */
-    border-right: none;
   }
 `;
 
@@ -72,7 +72,7 @@ export const MenuItem = styled.li`
   align-items: center;
   min-width: 150px;
   width: max-content;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
 `;
 export const itemLink = styled.a`
@@ -90,6 +90,13 @@ export const FlexRow = styled.div`
 
 export const UserProcedure = styled.div`
   display: flex;
+  align-items: center;
+  &::before {
+    content: "";
+    width: 2px;
+    height: 20px;
+    background-color: #000;
+  }
 
   @media (max-width: 1280px) {
     flex-direction: column;
@@ -97,11 +104,21 @@ export const UserProcedure = styled.div`
     row-gap: 20px;
     align-items: center;
 
-    /* 상단 요소와 분리하기 위한 css */
-    border-top: 2px solid #fff;
-    padding-top: 20px;
-    margin: 0 40px;
+    &::before {
+      width: 70px;
+      height: 2px;
+      background-color: #fff;
+    }
   }
+`;
+
+export const MenuBtn = styled(MenuOutlined)`
+  font-size: 24px !important;
+  color: #000;
+`;
+export const CloseBtn = styled(CloseOutlined)`
+  font-size: 24px !important;
+  color: #fff;
 `;
 
 // 로그인 후 유저 요소
@@ -116,7 +133,6 @@ export const UserName = styled.span`
 export const UserInfoModal = styled.div`
   display: flex;
   justify-content: space-between;
-  column-gap: 10px;
   font-weight: bold;
   cursor: pointer;
 `;
@@ -126,7 +142,7 @@ export const UserOptBtn = styled.a`
   justify-content: center;
   align-items: center;
   width: 100px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   &:hover {
