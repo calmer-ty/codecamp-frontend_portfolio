@@ -39,8 +39,8 @@ export default function Home(): JSX.Element {
     slidesToScroll: 1,
     speed: 500,
     dots: true,
-    // autoplay: true,
-    // autoplaySpeed: 1000,
+    autoplay: true,
+    autoplaySpeed: 5000,
     responsive: [
       {
         breakpoint: 768,

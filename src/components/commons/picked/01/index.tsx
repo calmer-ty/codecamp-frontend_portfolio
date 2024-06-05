@@ -1,25 +1,27 @@
 import { HeartFilled } from "@ant-design/icons";
+import styled from "@emotion/styled";
 import type { Maybe } from "yup";
 
 interface IPicked01Props {
   text: Maybe<number> | undefined;
+  style?: React.CSSProperties;
 }
 
-const iconStyles = {
-  fontSize: "18px",
-  color: "#f00",
-};
-const divStyles = {
-  display: "flex",
-  columnGap: "5px",
-  alignItems: "center",
-};
+const LikeRate = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
+`;
+const IconHeart = styled(HeartFilled)`
+  font-size: 18px;
+  color: #f00;
+`;
 
 export default function Picked01(props: IPicked01Props): JSX.Element {
   return (
-    <div style={{ ...divStyles }}>
-      <HeartFilled style={iconStyles} />
+    <LikeRate style={{ ...props.style }}>
+      <IconHeart />
       <span>{props.text}</span>
-    </div>
+    </LikeRate>
   );
 }

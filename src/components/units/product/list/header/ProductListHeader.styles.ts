@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Picked01 from "../../../../commons/picked/01";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -14,10 +13,32 @@ export const Title = styled.h2`
   font-size: 36px;
   text-align: center;
 `;
+
+export const CustomSlider = styled(Slider)`
+  .slick-arrow {
+    width: 24px;
+    height: 24px;
+  }
+  .slick-arrow::before {
+    color: #1679ab;
+    font-size: 24px;
+  }
+  .slick-arrow.slick-prev {
+    left: -26px;
+  }
+  .slick-arrow.slick-next {
+    right: -26px;
+  }
+  .slick-dots {
+    bottom: -30px;
+  }
+`;
+
 export const ListItem = styled.a`
+  position: relative;
   display: block;
-  /* width: 280px; */
   padding: 20px;
+  margin: 0 10px;
   background-color: #f9f9f9;
   border: 1px solid #f1f1f1;
   cursor: pointer;
@@ -29,10 +50,11 @@ export const ListItem = styled.a`
 `;
 
 export const ItemFigure = styled.figure`
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
+  row-gap: 10px;
 `;
 export const ItemThumbnail = styled.img`
   width: 100%;
@@ -64,17 +86,4 @@ export const ItemRemark = styled.p`
 export const ItemPrice = styled.p`
   font-size: 18px;
   font-weight: bold;
-`;
-export const StyledPicked01 = styled(Picked01)`
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-`;
-
-export const CustomSlider = styled(Slider)`
-  /* 슬라이드 전체 */
-  .slick-track {
-    display: flex;
-    column-gap: 10px;
-  }
 `;
