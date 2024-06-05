@@ -7,7 +7,7 @@ export default function Home(): JSX.Element {
   const LANDING_MENUS = [
     {
       name: "자유게시판",
-      src: "/images/landing/board.jpg",
+      src: "/images/landing/e-commerce.jpg",
       desc: "자신의 생각을 공유해보세요.",
     },
     {
@@ -32,18 +32,19 @@ export default function Home(): JSX.Element {
     // },
   ];
   const settings = {
-    // className: "center",
-    // centerPadding: "60px",
+    className: "center",
     centerMode: true,
     infinite: true,
-    slidesToShow: 2,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    speed: 500,
+    dots: true,
     // autoplay: true,
     // autoplaySpeed: 1000,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 768,
         settings: {
-          centerMode: false,
           slidesToShow: 1,
         },
       },
@@ -63,11 +64,13 @@ export default function Home(): JSX.Element {
           {LANDING_MENUS.map((el, index) => (
             <S.SliderInner key={index}>
               <S.SliderItem>
-                <S.ItemFigcaption>
-                  <S.Title>{el.name}</S.Title>
-                  <S.Desc>{el.desc}</S.Desc>
-                </S.ItemFigcaption>
-                <S.PageMainImg src={el.src} />
+                <S.Figure>
+                  <S.Figcaption>
+                    <S.Title>{el.name}</S.Title>
+                    <S.Desc>{el.desc}</S.Desc>
+                  </S.Figcaption>
+                  <S.MainImg src={el.src} />
+                </S.Figure>
               </S.SliderItem>
             </S.SliderInner>
           ))}

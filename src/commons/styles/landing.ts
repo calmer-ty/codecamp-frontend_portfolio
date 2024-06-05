@@ -7,63 +7,68 @@ import "slick-carousel/slick/slick-theme.css";
 export const Contents = styled.article`
   width: 100%;
 `;
-export const CustomSlider = styled(Slider)``;
-export const SliderInner = styled.div``;
 
-export const SliderItem = styled.figure`
-  display: flex;
-  justify-content: center;
-  column-gap: 20px;
-  padding: 30px;
-  border: 3px solid #000;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    row-gap: 40px;
+export const CustomSlider = styled(Slider)`
+  .slick-track {
+    padding: 10px 0;
+  }
+  .slick-slide.slick-center article {
+    box-shadow: 0px 8px 6px -6px #666;
+    border: 1px solid #666;
+    opacity: 1;
+  }
+  .slick-arrow {
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+  }
+  .slick-arrow::before {
+    color: #1679ab;
+    font-size: 30px;
+  }
+  .slick-arrow.slick-prev {
+    left: 20px;
+  }
+  .slick-arrow.slick-next {
+    right: 20px;
+  }
+  .slick-dots {
+    bottom: -35px;
   }
 `;
-export const ItemFigcaption = styled.figcaption`
+
+export const SliderInner = styled.div``;
+
+export const SliderItem = styled.article`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  column-gap: 20px;
-  height: 300px;
+
+  margin: 0 10px;
+  padding: 30px;
+  background-color: #fff;
+  opacity: 0.6;
 `;
-export const Title = styled.div`
-  font-size: 36px;
+export const Title = styled.h3`
+  font-size: 1.6rem;
   font-weight: bold;
 `;
-export const Desc = styled.div`
-  font-size: 24px;
+export const Figure = styled.figure`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 20px;
+`;
+export const Figcaption = styled.figcaption`
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  font-size: 1.2rem;
   word-break: keep-all;
 `;
-export const PageMainImg = styled.img`
-  width: 40%;
-  object-fit: contain;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+export const Desc = styled.p`
+  height: 56px;
 `;
-
-// export const CustomSlider = styled(Slider)`
-//   /* 슬라이드 전체 */
-//   /* .slick-track {
-//     display: flex;
-//   } */
-
-//   /* 내비게이션 버튼 */
-//   .slick-prev:before,
-//   .slick-next:before {
-//     color: #211c6a;
-//     font-size: 30px;
-//   }
-
-//   /* 하단 도트 */
-//   .slick-dots li button:before {
-//     font-size: 12px;
-//   }
-
-//   /* 하단 도트 -활성화 시- */
-//   .slick-dots li.slick-active button:before {
-//     color: #211c6a;
-//   }
-// `;
+export const MainImg = styled.img`
+  object-fit: cover;
+`;

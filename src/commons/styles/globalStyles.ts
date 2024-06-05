@@ -52,6 +52,9 @@ export const globalStyles = css`
     width: 1024px;
   }
   @media screen and (max-width: 1024px) {
+    html {
+      font-size: 14px;
+    }
     main > article,
     main > section {
       width: 768px;
