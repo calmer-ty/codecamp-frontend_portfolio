@@ -8,7 +8,6 @@ export const BestProduct = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0 40px 40px;
 `;
 export const Title = styled.h2`
   margin-bottom: 40px;

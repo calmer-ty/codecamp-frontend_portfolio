@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import type { IKeywordTokenProps } from "../ProductList.types";
 import { TagOutlined } from "@ant-design/icons";
 
-export const Body = styled.div`
+export const ProductList = styled.section`
   display: flex;
   flex-direction: column;
   row-gap: 40px;

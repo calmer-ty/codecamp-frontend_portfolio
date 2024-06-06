@@ -22,7 +22,7 @@ export default function ProductListBody() {
   console.log(data);
 
   return (
-    <S.Body>
+    <S.ProductList>
       <Searchbar01 onChangeSearch={onChangeSearch} />
       <S.ListWrap>
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
@@ -31,7 +31,6 @@ export default function ProductListBody() {
               <S.ListItem>
                 <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
                 <S.ItemInfo>
-                  {/* <S.InfoTop> */}
                   <S.ItemTitle>
                     {el.name
                       .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
@@ -44,7 +43,6 @@ export default function ProductListBody() {
                   </S.ItemTitle>
                   <S.ItemRemark>{el.remarks}</S.ItemRemark>
                   <TagsView01 tags={el.tags} />
-                  {/* </S.InfoTop> */}
                   <S.InfoBottom>
                     <S.SellerInfo>
                       <UserIcon01 size={16} padding={4} />
@@ -62,6 +60,6 @@ export default function ProductListBody() {
           )) ?? <></>}
         </InfiniteScroll>
       </S.ListWrap>
-    </S.Body>
+    </S.ProductList>
   );
 }

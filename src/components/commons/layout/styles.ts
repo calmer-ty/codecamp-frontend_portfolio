@@ -11,6 +11,6 @@ export const LayoutBody = styled.main`
   /* 위 모든게 flex: 1로 표현할 수 있다 / Flex 아이템이 남은 공간을 모두 차지하여 가능한한 크게 확장됩니다.  */
   flex: 1;
   min-height: 100%;
-  margin-top: 80px;
+  margin: 80px 40px 0;
   padding: 60px 0px;
 `;
