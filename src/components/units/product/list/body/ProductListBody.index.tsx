@@ -31,25 +31,25 @@ export default function ProductListBody() {
               <S.ListItem>
                 <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />
                 <S.ItemInfo>
-                  <S.InfoTop>
-                    <S.ItemTitle>
-                      {el.name
-                        .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
-                        .split(SECRET_STRING)
-                        .map((el, index) => (
-                          <S.KeywordToken key={`${el}_${index}`} isMatched={keyword === el}>
-                            {el}
-                          </S.KeywordToken>
-                        ))}
-                    </S.ItemTitle>
-                    <S.ItemRemark>{el.remarks}</S.ItemRemark>
-                    <TagsView01 tags={el.tags} />
-                  </S.InfoTop>
+                  {/* <S.InfoTop> */}
+                  <S.ItemTitle>
+                    {el.name
+                      .replaceAll(keyword, `${SECRET_STRING}${keyword}${SECRET_STRING}`)
+                      .split(SECRET_STRING)
+                      .map((el, index) => (
+                        <S.KeywordToken key={`${el}_${index}`} isMatched={keyword === el}>
+                          {el}
+                        </S.KeywordToken>
+                      ))}
+                  </S.ItemTitle>
+                  <S.ItemRemark>{el.remarks}</S.ItemRemark>
+                  <TagsView01 tags={el.tags} />
+                  {/* </S.InfoTop> */}
                   <S.InfoBottom>
-                    <S.FlexRow>
+                    <S.SellerInfo>
                       <UserIcon01 size={16} padding={4} />
                       <span>{el.seller?.name}</span>
-                    </S.FlexRow>
+                    </S.SellerInfo>
                     <Picked01 text={el.pickedCount} />
                   </S.InfoBottom>
                 </S.ItemInfo>

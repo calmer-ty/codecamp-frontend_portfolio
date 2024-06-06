@@ -35,33 +35,20 @@ export const globalStyles = css`
     flex-direction: column;
     z-index: 1;
   }
-  /* #__next::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5) center/cover no-repeat;
-    background-size: cover;
-    z-index: -1;
-  } */
 
-  // main > article,
-  // main > section {
-  //   width: 1024px;
-  // }
+  main {
+    display: flex;
+    flex-direction: column;
+  }
   @media screen and (max-width: 1024px) {
     html {
       font-size: 14px;
     }
-    // main > article,
-    // main > section {
-    //   width: 768px;
-    // }
+    main > section {
+      width: 768px;
+    }
   }
   @media screen and (max-width: 768px) {
-    main > article,
     main > section {
       width: 480px;
     }

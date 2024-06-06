@@ -4,10 +4,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const BestProduct = styled.article`
+export const BestProduct = styled.section`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  width: 100%;
+  margin: 0 40px 40px;
 `;
 export const Title = styled.h2`
   margin-bottom: 40px;

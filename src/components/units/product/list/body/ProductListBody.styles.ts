@@ -10,7 +10,7 @@ export const Body = styled.div`
 `;
 export const ListWrap = styled.div`
   overflow-y: scroll;
-  max-height: calc(194px * 10);
+  max-height: calc(200px * 10);
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
   &::-webkit-scrollbar {
@@ -25,34 +25,41 @@ export const ListWrap = styled.div`
 `;
 export const ListItem = styled.a`
   display: flex;
-  padding: 0 20px;
+  column-gap: 30px;
+  padding: 20px;
   align-items: center;
   border-bottom: 1px solid #bdbdbd;
   background-color: #f9f9f9;
   cursor: pointer;
-  :hover {
+
+  &:hover {
     background-color: rgba(205, 205, 205, 0.5);
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    row-gap: 20px;
   }
 `;
 export const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  row-gap: 24px;
-  padding: 28px 0;
-  margin-left: 40px;
+  row-gap: 6px;
+  @media screen and (max-width: 768px) {
+    width: 200px;
+  }
 `;
 
-export const InfoTop = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: #4f4f4f;
-`;
+// export const InfoTop = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   color: #4f4f4f;
+// `;
 
 export const ItemImg = styled.img`
-  width: 160px;
-  height: 160px;
-  object-fit: contain;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 `;
 
 export const ItemTitle = styled.span`
@@ -66,29 +73,31 @@ export const ItemRemark = styled.span`
   color: #4f4f4f;
 `;
 
+export const TagIcon = styled(TagOutlined)`
+  font-size: 40px;
+  color: #ffd600;
+`;
+
+export const InfoBottom = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  margin-top: 10px;
+`;
+export const SellerInfo = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+`;
 export const ItemPrice = styled.div`
   display: flex;
   align-items: center;
   margin-left: auto;
   column-gap: 10px;
 `;
-export const TagIcon = styled(TagOutlined)`
-  font-size: 40px;
-  color: #ffd600;
-`;
 export const PriceText = styled.span`
   font-size: 24px;
   font-weight: bold;
-`;
-
-export const InfoBottom = styled.div`
-  display: flex;
-  column-gap: 22px;
-`;
-export const FlexRow = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 4px;
 `;
 
 export const KeywordToken = styled.span`
