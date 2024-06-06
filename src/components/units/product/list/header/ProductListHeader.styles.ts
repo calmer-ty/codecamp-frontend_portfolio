@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 export const BestProduct = styled.article`
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
 export const Title = styled.h2`
   margin-bottom: 40px;
@@ -44,10 +45,17 @@ export const ListItem = styled.a`
   border: 1px solid #f1f1f1;
   position: relative;
   cursor: pointer;
-  :hover {
-    background-color: #dedede;
-    box-shadow: none;
-    color: blue;
+  &:hover {
+    &::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 `;
 
