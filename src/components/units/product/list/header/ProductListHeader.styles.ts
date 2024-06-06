@@ -15,6 +15,8 @@ export const Title = styled.h2`
 `;
 
 export const CustomSlider = styled(Slider)`
+  .slick-slide {
+  }
   .slick-arrow {
     width: 24px;
     height: 24px;
@@ -35,12 +37,12 @@ export const CustomSlider = styled(Slider)`
 `;
 
 export const ListItem = styled.a`
-  position: relative;
   display: block;
   padding: 20px;
   margin: 0 10px;
   background-color: #f9f9f9;
   border: 1px solid #f1f1f1;
+  position: relative;
   cursor: pointer;
   :hover {
     background-color: #dedede;
