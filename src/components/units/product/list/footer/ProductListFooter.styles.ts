@@ -4,6 +4,7 @@ export const Footer = styled.footer`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  margin-top: 40px;
 `;
 
 export const LinkBtn = styled.a`

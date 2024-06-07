@@ -16,5 +16,6 @@ export const LayoutBody = styled.main`
   width: 100%;
   min-height: 100%;
   margin: 80px auto 0;
-  padding: 60px 0px;
+  /* padding: 60px 20px; */
+  padding: ${(props: IMainPage) => (props.path === "/" ? "0" : "60px 20px")};
 `;
