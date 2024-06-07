@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import type { SerializedStyles } from "@emotion/react";
 
 export const globalStyles = css`
   /* 폰트 */
@@ -60,3 +61,22 @@ export const globalStyles = css`
     cursor: pointer;
   }
 `;
+
+// 미디어 쿼리 믹스인 정의
+export const mediaQueries = {
+  mobile: (styles: SerializedStyles) => css`
+    @media screen and (max-width: 480px) {
+      ${styles}
+    }
+  `,
+  tablet: (styles: SerializedStyles) => css`
+    @media screen and (max-width: 768px) {
+      ${styles}
+    }
+  `,
+  desktop: (styles: SerializedStyles) => css`
+    @media screen and (max-width: 1024px) {
+      ${styles}
+    }
+  `,
+};
