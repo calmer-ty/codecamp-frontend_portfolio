@@ -16,7 +16,10 @@ export const Title = styled.h2`
 `;
 
 export const CustomSlider = styled(Slider)`
+  margin-bottom: 50px;
   .slick-track {
+    display: flex;
+    column-gap: 10px;
   }
   .slick-arrow {
     width: 24px;
@@ -26,23 +29,13 @@ export const CustomSlider = styled(Slider)`
     color: #1679ab;
     font-size: 24px;
   }
-  .slick-arrow.slick-prev {
-    left: -26px;
-  }
-  .slick-arrow.slick-next {
-    right: -26px;
-  }
-  .slick-dots {
-    bottom: -30px;
-  }
 `;
 
 export const ListItem = styled.a`
   display: block;
-  padding: 20px;
-  /* margin: 0 10px; */
+  padding: 30px;
   background-color: #f9f9f9;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #d1d1d1;
   position: relative;
   cursor: pointer;
   &:hover {
