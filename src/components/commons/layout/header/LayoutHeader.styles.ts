@@ -11,7 +11,7 @@ export const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1280px;
+  /* min-width: 1280px; */
   height: 80px;
   margin: 0 auto;
   padding: 0 20px;

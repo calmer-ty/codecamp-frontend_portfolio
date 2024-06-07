@@ -6,7 +6,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   return (
     <>
       <LayoutHeader />
-      <S.LayoutBody>{props.children}</S.LayoutBody>
+      <S.LayoutBody path={props.path}>{props.children}</S.LayoutBody>
     </>
   );
 }

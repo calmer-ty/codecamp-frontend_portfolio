@@ -7,15 +7,18 @@ import Layout from "../src/components/commons/layout";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import { RecoilRoot } from "recoil";
+import { useRouter } from "next/router";
 
 export default function App({ Component }: AppProps): JSX.Element {
+  const router = useRouter();
+  console.log(router.asPath);
   return (
     <>
       <RecoilRoot>
         <ApolloSetting>
           <>
             <Global styles={globalStyles} />
-            <Layout>
+            <Layout path={router.asPath}>
               <Component />
             </Layout>
           </>
