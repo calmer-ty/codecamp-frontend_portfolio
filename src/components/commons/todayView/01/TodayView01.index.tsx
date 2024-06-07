@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { memo, useEffect, useState } from "react";
-// import TagsView01 from "../../tags/view/01";
 
 import * as S from "./TodayView01.styles";
 import type { IUseditem } from "../../../../commons/types/generated/types";
