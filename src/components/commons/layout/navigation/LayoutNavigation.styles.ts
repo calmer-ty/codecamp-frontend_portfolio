@@ -3,10 +3,13 @@ import { Button } from "antd";
 
 import type { IMenus } from "./LayoutNavigation.types";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
+import { mediaQueries } from "../../../../commons/styles/globalStyles";
+import { css } from "@emotion/react";
 
 export const NavigationWrap = styled.nav`
   display: flex;
-  @media (max-width: 1280px) {
+
+  @media (max-width: 1024px) {
     justify-content: flex-end;
     width: 100%;
     height: 100%;
@@ -21,14 +24,14 @@ export const NavigationWrap = styled.nav`
 `;
 export const Navigation = styled.div`
   display: flex;
-  column-gap: 10px;
   height: 100%;
-  @media (max-width: 1280px) {
+
+  ${mediaQueries.desktop(css`
     width: 240px;
     align-items: center;
     flex-direction: column;
     background-color: #000;
-  }
+  `)}
 `;
 export const NavToggleBtn = styled(Button)`
   display: none !important;
@@ -45,9 +48,9 @@ export const NavToggleBtn = styled(Button)`
   }
 
   /* 메뉴바가 보임 */
-  @media (max-width: 1280px) {
+  ${mediaQueries.desktop(css`
     display: block !important;
-  }
+  `)}
 `;
 
 export const Menus = styled.ul`
@@ -59,18 +62,15 @@ export const Menus = styled.ul`
   align-items: center;
 
   /* 오른쪽 요소 분리를 위한 css */
-  @media (max-width: 1280px) {
+  ${mediaQueries.desktop(css`
     flex-direction: column;
     row-gap: 20px;
     margin: 80px 0 40px 0;
-  }
+  `)}
 `;
 
 export const MenuItem = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 150px;
+  padding: 0 16px;
   width: max-content;
   font-size: 1.2rem;
   font-weight: 700;
@@ -88,7 +88,7 @@ export const FlexRow = styled.div`
   align-items: center;
 `;
 
-export const UserProcedure = styled.div`
+export const UserProcedure = styled.ul`
   display: flex;
   align-items: center;
   &::before {
@@ -98,7 +98,7 @@ export const UserProcedure = styled.div`
     background-color: #000;
   }
 
-  @media (max-width: 1280px) {
+  ${mediaQueries.desktop(css`
     flex-direction: column;
     justify-content: center;
     row-gap: 20px;
@@ -109,7 +109,7 @@ export const UserProcedure = styled.div`
       height: 2px;
       background-color: #fff;
     }
-  }
+  `)}
 `;
 
 export const MenuBtn = styled(MenuOutlined)`
@@ -138,10 +138,6 @@ export const UserInfoModal = styled.div`
 `;
 
 export const UserOptBtn = styled.a`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;

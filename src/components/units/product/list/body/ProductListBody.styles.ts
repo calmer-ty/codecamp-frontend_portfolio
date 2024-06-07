@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import type { IKeywordTokenProps } from "../ProductList.types";
 import { TagOutlined } from "@ant-design/icons";
+import { mediaQueries } from "../../../../../commons/styles/globalStyles";
+import { css } from "@emotion/react";
 
 export const ProductList = styled.section`
   display: flex;
@@ -35,19 +37,21 @@ export const ListItem = styled.a`
   &:hover {
     background-color: rgba(205, 205, 205, 0.5);
   }
-  @media screen and (max-width: 768px) {
+
+  ${mediaQueries.desktop(css`
     flex-direction: column;
     row-gap: 20px;
-  }
+  `)}
 `;
 export const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   row-gap: 6px;
-  @media screen and (max-width: 768px) {
+
+  ${mediaQueries.desktop(css`
     width: 200px;
-  }
+  `)}
 `;
 
 // export const InfoTop = styled.div`

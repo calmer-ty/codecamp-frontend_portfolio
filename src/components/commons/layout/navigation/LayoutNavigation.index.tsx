@@ -145,9 +145,11 @@ export default function LayoutNavigation(): JSX.Element {
           {accessToken === "" ? (
             <S.UserProcedure>
               {USER_OPTIONS.map((el) => (
-                <Link key={el.page} href={el.page}>
-                  <S.UserOptBtn onClick={handleMovedNavOff}>{el.name}</S.UserOptBtn>
-                </Link>
+                <S.MenuItem key={el.page}>
+                  <Link href={el.page}>
+                    <S.UserOptBtn onClick={handleMovedNavOff}>{el.name}</S.UserOptBtn>
+                  </Link>
+                </S.MenuItem>
               ))}
             </S.UserProcedure>
           ) : (
