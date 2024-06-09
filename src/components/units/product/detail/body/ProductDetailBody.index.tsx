@@ -59,7 +59,6 @@ export default function ProductDetailBody(props: IProductDetailProps) {
   return (
     <>
       <S.Body>
-        <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
         <S.TextWrap>
           <S.Remark>{props.data?.fetchUseditem.remarks}</S.Remark>
           <S.Name>{props.data?.fetchUseditem.name}</S.Name>

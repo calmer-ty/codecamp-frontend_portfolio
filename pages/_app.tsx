@@ -9,7 +9,7 @@ import { globalStyles } from "../src/commons/styles/globalStyles";
 import { RecoilRoot } from "recoil";
 import { useRouter } from "next/router";
 
-export default function App({ Component }: AppProps): JSX.Element {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const router = useRouter();
   return (
     <>
@@ -18,7 +18,7 @@ export default function App({ Component }: AppProps): JSX.Element {
           <>
             <Global styles={globalStyles} />
             <Layout path={router.asPath}>
-              <Component />
+              <Component {...pageProps} />
             </Layout>
           </>
         </ApolloSetting>
