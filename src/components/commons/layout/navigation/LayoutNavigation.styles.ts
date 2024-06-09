@@ -25,6 +25,7 @@ export const NavigationWrap = styled.nav`
 export const Navigation = styled.div`
   display: flex;
   height: 100%;
+  align-items: center;
 
   ${mediaQueries.desktop(css`
     width: 240px;
@@ -83,11 +84,6 @@ export const itemLink = styled.a`
 `;
 
 // 로그인/회원가입 요소 스타일
-export const FlexRow = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export const UserProcedure = styled.ul`
   display: flex;
   align-items: center;
