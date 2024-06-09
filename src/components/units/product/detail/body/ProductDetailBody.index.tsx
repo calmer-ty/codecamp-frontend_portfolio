@@ -1,9 +1,5 @@
-import { useEffect } from "react";
-import Link from "next/link";
 import Dompurufy from "dompurify";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { useEffect } from "react";
 
 import { useProductPicked } from "../../../../commons/hooks/customs/product/useProductPicked";
 import { usePayment } from "../../../../commons/hooks/customs/product/usePayment";
@@ -12,10 +8,10 @@ import useMap from "../../../../commons/hooks/customs/useMap";
 
 import HeartIcon01 from "../../../../commons/icon/heart/01";
 import TagsView01 from "../../../../commons/tags/view/01";
+import { LinkButton02 } from "../../../../commons/element/buttons/link/02";
 
 import type { IProductDetailProps } from "../ProductDetail.types";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
-
 import * as S from "./ProductDetailBody.styles";
 
 const settings = {
@@ -27,6 +23,10 @@ const settings = {
 };
 
 const TODAY_VIEW_PRODUCT = 2;
+
+declare const window: typeof globalThis & {
+  IMP: any;
+};
 
 export default function ProductDetailBody(props: IProductDetailProps) {
   if (props.data === undefined) return <></>;
@@ -57,34 +57,24 @@ export default function ProductDetailBody(props: IProductDetailProps) {
   }, [props.data]);
 
   return (
-    <S.Body>
-      <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-      <S.BodyTop>
-        <S.BodyHeader>
-          <S.TitleText>
-            <S.Remark>{props.data?.fetchUseditem.remarks}</S.Remark>
-            <S.Name>{props.data?.fetchUseditem.name}</S.Name>
-            <S.Price>{props.data?.fetchUseditem.price?.toLocaleString()}원</S.Price>
-          </S.TitleText>
-          <S.Pick>
-            <button onClick={onClickPick}>
-              <HeartIcon01 size={20} />
-            </button>
-            <S.PickScore>{props.data?.fetchUseditem.pickedCount}</S.PickScore>
-          </S.Pick>
-        </S.BodyHeader>
+    <>
+      <S.Body>
+        <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+        <S.TextWrap>
+          <S.Remark>{props.data?.fetchUseditem.remarks}</S.Remark>
+          <S.Name>{props.data?.fetchUseditem.name}</S.Name>
+          <S.Price>{props.data?.fetchUseditem.price?.toLocaleString()}원</S.Price>
+        </S.TextWrap>
+        <S.Pick>
+          <button onClick={onClickPick}>
+            <HeartIcon01 size={20} />
+          </button>
+          <span>{props.data?.fetchUseditem.pickedCount}</span>
+        </S.Pick>
 
-        <Slider {...settings}>
-          {props.data?.fetchUseditem.images
-            ?.filter((el) => el)
-            .map((el, index) => (
-              <S.ImgWrap key={index}>
-                <S.ImgItem src={`http://storage.googleapis.com/${el}`} />
-              </S.ImgWrap>
-            ))}
-        </Slider>
+        <S.CustomSlider {...settings}>{props.data?.fetchUseditem.images?.filter((el) => el).map((el, index) => <S.ImgItem key={index} src={`http://storage.googleapis.com/${el}`} />)}</S.CustomSlider>
 
-        <S.FlexColumn>
+        <S.TextWrap>
           {typeof window !== "undefined" && (
             <S.Contents
               dangerouslySetInnerHTML={{
@@ -93,22 +83,16 @@ export default function ProductDetailBody(props: IProductDetailProps) {
             />
           )}
           <TagsView01 tags={props.data?.fetchUseditem.tags} />
-        </S.FlexColumn>
-      </S.BodyTop>
+        </S.TextWrap>
+        <div id="map" style={{ width: "100%", height: "250px", margin: "60px 0" }}></div>
 
-      <S.BodyBottom>
-        <div id="map" style={{ width: "100%", height: "250px" }}></div>
-      </S.BodyBottom>
-      <S.BtnWrap>
-        <Link href={"/products"}>
-          <S.LinkBtn>목록으로</S.LinkBtn>
-        </Link>
-        <S.LinkBtn onClick={onClickPayment}>구매하기</S.LinkBtn>
-        <Link href={`/products/${props.data?.fetchUseditem._id}/edit`}>
-          <S.LinkBtn>수정하기</S.LinkBtn>
-        </Link>
-        <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
-      </S.BtnWrap>
-    </S.Body>
+        <S.BtnWrap>
+          <LinkButton02 href="/products" text="목록으로" />
+          <S.LinkBtn onClick={onClickPayment}>구매하기</S.LinkBtn>
+          <LinkButton02 href={`/products/${props.data?.fetchUseditem._id}/edit`} text="수정하기" />
+          <S.LinkBtn onClick={onClickDelete}>삭제하기</S.LinkBtn>
+        </S.BtnWrap>
+      </S.Body>
+    </>
   );
 }

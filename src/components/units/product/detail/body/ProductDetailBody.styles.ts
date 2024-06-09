@@ -1,26 +1,23 @@
 import styled from "@emotion/styled";
 
-export const Body = styled.div`
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+export const Body = styled.section`
   display: flex;
   flex-direction: column;
+  margin: 20px 10px;
+
+  position: relative;
 `;
-export const BodyTop = styled.section`
-  /* display: flex;
-  flex-direction: column;
-  row-gap: 80px;
-  padding: 20px 0 40px 0;
-  border-bottom: 1px solid #bdbdbd; */
-`;
-export const BodyHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-`;
-export const TitleText = styled.section`
+
+export const TextWrap = styled.section`
   display: flex;
   flex-direction: column;
   row-gap: 6px;
 `;
-export const Remark = styled.p`
+export const Remark = styled.span`
   font-size: 18px;
   color: #bdbdbd;
 `;
@@ -32,13 +29,13 @@ export const Price = styled.span`
   font-size: 36px;
   font-weight: bold;
 `;
-export const ImgWrap = styled.div`
-  height: 390px;
+
+// 슬라이드
+export const CustomSlider = styled(Slider)`
+  margin: 50px 0;
 `;
 export const ImgItem = styled.img`
-  width: 100%;
-  height: 100%;
-  margin-bottom: 20px;
+  max-height: 400px;
   object-fit: contain;
 `;
 export const Pick = styled.div`
@@ -46,37 +43,27 @@ export const Pick = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 5px;
-`;
-export const PickScore = styled.span``;
 
-export const FlexColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 export const Contents = styled.p``;
 
-// BodyBottom
-export const BodyBottom = styled.section`
-  padding: 80px 0;
-  border-bottom: 1px solid #bdbdbd;
-`;
-export const Map = styled.div`
-  height: 360px;
-  background-color: #bdbdbd;
-`;
-export const BtnWrap = styled.section`
+export const BtnWrap = styled.footer`
   display: flex;
   justify-content: center;
-  margin: 101px 0 87px 0;
+  padding: 80px 0 40px 0;
   column-gap: 24px;
+  border-top: 1px solid #bdbdbd;
 `;
-export const LinkBtn = styled.a`
+export const LinkBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
+  font-size: 16px;
   cursor: pointer;
 `;

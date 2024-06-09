@@ -12,12 +12,12 @@ export const Header = styled.header`
   padding-bottom: 20px;
   border-bottom: 1px solid #bdbdbd;
 `;
-export const HeaderItem1 = styled.section`
+export const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
   column-gap: 12px;
 `;
-export const HeaderItem2 = styled.section`
+export const HeaderRight = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
