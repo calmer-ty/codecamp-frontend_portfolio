@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
 
 declare const window: typeof globalThis & {
@@ -6,9 +5,6 @@ declare const window: typeof globalThis & {
 };
 
 export const usePayment = (fetchUseditem: IUseditem) => {
-  useEffect(() => {
-    console.log(window.IMP);
-  }, []);
   const onClickPayment = (): void => {
     const IMP = window.IMP;
     IMP.init("imp80516171");

@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 
 export default function App({ Component }: AppProps): JSX.Element {
   const router = useRouter();
-  console.log(router.asPath);
   return (
     <>
       <RecoilRoot>
