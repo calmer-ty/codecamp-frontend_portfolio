@@ -22,7 +22,7 @@ export default function ProductListBody() {
   console.log(data);
 
   return (
-    <S.ProductList>
+    <S.Body>
       <Searchbar01 onChangeSearch={onChangeSearch} />
       <S.ListWrap>
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
@@ -60,6 +60,6 @@ export default function ProductListBody() {
           )) ?? <></>}
         </InfiniteScroll>
       </S.ListWrap>
-    </S.ProductList>
+    </S.Body>
   );
 }

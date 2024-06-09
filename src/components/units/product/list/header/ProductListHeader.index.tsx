@@ -31,7 +31,7 @@ export default function ProductListHeader(): JSX.Element {
   };
   const { data } = useFetchProductsBest();
   return (
-    <S.BestProduct>
+    <S.Header>
       <S.Title>베스트 상품</S.Title>
       <S.CustomSlider {...settings}>
         {data?.fetchUseditemsOfTheBest.map((el) => (
@@ -50,6 +50,6 @@ export default function ProductListHeader(): JSX.Element {
           </Link>
         ))}
       </S.CustomSlider>
-    </S.BestProduct>
+    </S.Header>
   );
 }

@@ -10,9 +10,9 @@ export const SearchInput = styled.input`
   width: 100%;
   height: 100%;
   padding-left: 45px;
-  border: none;
   border-radius: 10px;
-  background-color: #f2f2f2;
+  border: 1px solid #000;
+  background-color: #fff;
 `;
 export const SearchIcon = styled(SearchOutlined)`
   position: absolute;

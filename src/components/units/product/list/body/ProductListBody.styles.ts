@@ -4,7 +4,7 @@ import { TagOutlined } from "@ant-design/icons";
 import { mediaQueries } from "../../../../../commons/styles/globalStyles";
 import { css } from "@emotion/react";
 
-export const ProductList = styled.section`
+export const Body = styled.section`
   display: flex;
   flex-direction: column;
   row-gap: 40px;
