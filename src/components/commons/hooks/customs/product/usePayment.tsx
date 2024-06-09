@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
 
 declare const window: typeof globalThis & {
@@ -5,10 +6,12 @@ declare const window: typeof globalThis & {
 };
 
 export const usePayment = (fetchUseditem: IUseditem) => {
+  useEffect(() => {
+    console.log(window.IMP);
+  }, []);
   const onClickPayment = (): void => {
     const IMP = window.IMP;
     IMP.init("imp80516171");
-
     IMP.request_pay(
       {
         // param
@@ -22,7 +25,7 @@ export const usePayment = (fetchUseditem: IUseditem) => {
         // buyer_tel: "010-4242-4242",
         // buyer_addr: "서울특별시 강남구 신사동",
         // buyer_postcode: "01181",
-        m_redirect_url: "http://localhost:3000/section28/28-01-payment", // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
+        m_redirect_url: `/products/${fetchUseditem._id}`, // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
       },
       (rsp: any) => {
         // callback
