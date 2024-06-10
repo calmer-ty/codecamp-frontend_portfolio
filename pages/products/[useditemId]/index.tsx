@@ -4,22 +4,15 @@ import { FETCH_USEDITEM } from "../../../src/components/commons/hooks/queries/pr
 import ProductDetail from "../../../src/components/units/product/detail/ProductDetail.index";
 import type { IQuery, IQueryFetchUseditemArgs } from "../../../src/commons/types/generated/types";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import type { IProductDetailPageProps } from "./type";
 
-// Props 타입 정의
-interface ProductDetailPageProps {
-  useditems: {
-    name: string;
-    remarks: string;
-    images: string[];
-  };
-}
-
-export default function ProductsDetailPage(props: ProductDetailPageProps): JSX.Element {
+export default function ProductsDetailPage(props: IProductDetailPageProps): JSX.Element {
   console.log(props);
+  console.log({ ...props });
   return <ProductDetail {...props} />;
 }
 
-export const getServerSideProps: GetServerSideProps<ProductDetailPageProps> = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<ProductDetailPageProps>> => {
+export const getServerSideProps: GetServerSideProps<IProductDetailPageProps> = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<IProductDetailPageProps>> => {
   console.log("여기는 서버입니다.");
   const { useditemId } = context.params as { useditemId: string };
 
