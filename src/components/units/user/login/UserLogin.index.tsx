@@ -20,7 +20,10 @@ export default function UserLogin(): JSX.Element {
     resolver: yupResolver(schemaUserLogin),
   });
 
-  const { onClickLogin } = useUser();
+  const {
+    // onClickLogin,
+    onClickLoginExample,
+  } = useUser();
 
   // 테스트
 
@@ -28,7 +31,7 @@ export default function UserLogin(): JSX.Element {
     <S.Wrapper>
       <S.Container>
         <S.Logo>Logo</S.Logo>
-        <S.Form onSubmit={handleSubmit(onClickLogin)}>
+        <S.Form onSubmit={handleSubmit(onClickLoginExample)}>
           {/* <S.Form onSubmit={handleSubmit(onClickLoginExample)}> */}
           <S.InputWrap>
             <Label01 text="이메일" />

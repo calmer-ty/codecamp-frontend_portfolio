@@ -14,13 +14,12 @@ interface IApolloSettingProps {
   children: JSX.Element;
 }
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
-  // 23-01 로그인 페이지에서 가져온 accessToken을 모든 페이지에 뿌릴 수 있게 설정
+  // 로그인 페이지에서 가져온 accessToken을 모든 페이지에 뿌릴 수 있게 설정
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
-  console.log("useEffect 밖 토큰", restoreAccessToken);
   useEffect(() => {
-    console.log(restoreAccessToken);
+    console.log("restoreAccessToken state: ", restoreAccessToken.state);
     if (restoreAccessToken.state === "hasValue") {
       const newAccessToken = restoreAccessToken.contents;
       setAccessToken(newAccessToken ?? "");
@@ -28,13 +27,12 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
     } else if (restoreAccessToken.state === "hasError") {
       console.error("Failed to restore access token:", restoreAccessToken.contents);
     }
-  }, [restoreAccessToken]);
+  }, [restoreAccessToken.state, restoreAccessToken.contents, setAccessToken]);
 
   // useEffect(() => {
   //   console.log(restoreAccessToken);
   //   void restoreAccessToken.toPromise().then((newAccessToken) => {
   //     setAccessToken(newAccessToken ?? "");
-  //     console.log("apollo의 useEffect 프로미스 토큰: ", newAccessToken);
   //   });
   // }, [restoreAccessToken]);
   // useEffect(() => {
@@ -44,6 +42,11 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   //   });
   // }, []);
 
+  // 디버깅용 콘솔 로그 추가
+  useEffect(() => {
+    console.log("Current accessToken:", accessToken);
+  }, [accessToken]);
+
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // operation: 쿼리
     // forward: 쿼리.. 재요청 함수
@@ -52,9 +55,11 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
       for (const err of graphQLErrors) {
         // 1-2. 해당 에러가 토큰 만료 에러인지 체크(UNAUTHENTICATED)
         if (err.extensions.code === "UNAUTHENTICATED") {
+          console.log("GraphQL error detected, refreshing access token...");
           return fromPromise(
             // 2. refreshToken으로 accessToken을 재발급 받기
             getAccessToken().then((newAccessToken) => {
+              console.log("New accessToken from refresh: ", newAccessToken);
               setAccessToken(newAccessToken ?? "");
               // 3. 재발급 받은 accessToken으로 방금 실패한 쿼리 요청하기
               // 쿼리문을 수정한다

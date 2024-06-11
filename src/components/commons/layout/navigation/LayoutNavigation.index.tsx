@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useApolloClient } from "@apollo/client";
 import { useEffect, useState } from "react";
 
-import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
+import { FETCH_USER_LOGGED_IN, useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 import { useLogoutUser } from "../../hooks/mutations/useLogoutUser";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
@@ -19,6 +19,7 @@ import { FETCH_USEDITEMS_BEST } from "../../hooks/queries/product/useFetchProduc
 import type { DocumentNode } from "graphql";
 
 import * as S from "./LayoutNavigation.styles";
+import { wrapAsyncFunc } from "../../../../commons/libraries/asyncFunc";
 
 const NAVIGATION_MENUS = [
   { name: "Firebase", page: "/boards_firebase" },
@@ -34,13 +35,15 @@ const USER_OPTIONS = [
 
 export default function LayoutNavigation(): JSX.Element {
   const { data } = useFetchLoggedIn();
-  const [logoutUser] = useLogoutUser();
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Prefetch
+  const [logoutUser] = useLogoutUser();
+
   const client = useApolloClient();
-  const prefetchProduct = (fetch?: DocumentNode[]) => async () => {
+
+  // Prefetch
+  const prefetch = (fetch?: DocumentNode[]) => async () => {
     if (fetch === undefined) {
       return; // fetch가 없는 경우 종료
     }
@@ -56,11 +59,11 @@ export default function LayoutNavigation(): JSX.Element {
   };
 
   // Nav Toggle Button
-  const handleChangeIcon = () => {
+  const handleChangeIcon = (): void => {
     setIsOpen((prev) => !prev);
   };
   // Nav Menu Router push시, rightNav 사라짐
-  const handleMovedNavOff = () => {
+  const handleMovedNavOff = (): void => {
     setIsOpen(false);
   };
 
@@ -68,7 +71,7 @@ export default function LayoutNavigation(): JSX.Element {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1390px)");
 
-    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
+    const handleMediaQueryChange = (e: MediaQueryListEvent): void => {
       if (e.matches) {
         setIsOpen(false); // 초기화할 상태 값 설정
       }
@@ -86,7 +89,7 @@ export default function LayoutNavigation(): JSX.Element {
   }, []);
 
   // 로그아웃
-  const onClickLogout = async () => {
+  const onClickLogout = async (): Promise<void> => {
     try {
       const result = await logoutUser();
       console.log("onClickLogout을 눌렀어요", result);
@@ -94,6 +97,13 @@ export default function LayoutNavigation(): JSX.Element {
     } catch (error) {
       console.error("로그아웃 실패", error);
     }
+  };
+  // 로그인 확인
+  const onClickFetchLoggedIn = async (): Promise<void> => {
+    const result = await client.query({
+      query: FETCH_USER_LOGGED_IN,
+    });
+    console.log(result);
   };
 
   // 로그인 시 유저 정보 팝업
@@ -115,7 +125,13 @@ export default function LayoutNavigation(): JSX.Element {
     },
     {
       key: "2",
-      label: <S.LogoutBtn onClick={onClickLogout}>로그아웃</S.LogoutBtn>,
+      label: <S.LogoutBtn onClick={wrapAsyncFunc(onClickLogout)}>로그아웃</S.LogoutBtn>,
+      icon: <UserOutlined />,
+      danger: true,
+    },
+    {
+      key: "3",
+      label: <S.LogoutBtn onClick={wrapAsyncFunc(onClickFetchLoggedIn)}>로그인 확인</S.LogoutBtn>,
       icon: <UserOutlined />,
       danger: true,
     },
@@ -130,7 +146,7 @@ export default function LayoutNavigation(): JSX.Element {
             {NAVIGATION_MENUS.map((el) => (
               <S.MenuItem key={el.page}>
                 <Link href={el.page}>
-                  <S.itemLink onClick={handleMovedNavOff} onMouseOver={prefetchProduct(el.fetch)}>
+                  <S.itemLink onClick={handleMovedNavOff} onMouseOver={wrapAsyncFunc(prefetch(el.fetch))}>
                     {el.name}
                   </S.itemLink>
                 </Link>

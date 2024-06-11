@@ -1,5 +1,4 @@
 import { atom, selector } from "recoil";
-import { v1 } from "uuid";
 import { getAccessToken } from "../libraries/getAccessToken";
 
 export const accessTokenState = atom({
