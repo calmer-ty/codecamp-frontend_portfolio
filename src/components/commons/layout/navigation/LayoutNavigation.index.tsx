@@ -46,12 +46,11 @@ export default function LayoutNavigation(): JSX.Element {
     }
     try {
       const fetchQueries = Object?.values(fetch).map(async (query) => {
-        console.log(query);
         const response = await client.query({ query });
         return response;
       });
-      const responses = await Promise.all(fetchQueries);
-      console.log(responses);
+      await Promise.all(fetchQueries);
+      // console.log(responses);
     } catch (error) {
       console.error("Error prefetching product:", error);
     }
