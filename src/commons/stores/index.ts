@@ -1,26 +1,21 @@
 import { atom, selector } from "recoil";
+import { v1 } from "uuid";
 import { getAccessToken } from "../libraries/getAccessToken";
 
-export const isEditState = atom({
-  key: "isEditState",
-  default: true,
-});
-
 export const accessTokenState = atom({
-  key: "accessTokenState",
+  key: `userState/${v1()}`,
   default: "",
 });
 
 export const visitedPageState = atom({
-  key: "visitedPageState",
+  key: `userState/${v1()}`,
   default: "",
 });
 
 export const restoreAccessTokenLoadable = selector({
-  key: "restoreAccessTokenLoadable",
+  key: `userState/${v1()}`,
   get: async () => {
     const newAccessToken = await getAccessToken();
-    // console.log("store의 토큰 " + newAccessToken);
     return newAccessToken;
   },
 });
