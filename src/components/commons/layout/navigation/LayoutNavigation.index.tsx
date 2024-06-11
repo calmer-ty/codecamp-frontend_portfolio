@@ -50,7 +50,6 @@ export default function LayoutNavigation(): JSX.Element {
         return response;
       });
       await Promise.all(fetchQueries);
-      // console.log(responses);
     } catch (error) {
       console.error("Error prefetching product:", error);
     }

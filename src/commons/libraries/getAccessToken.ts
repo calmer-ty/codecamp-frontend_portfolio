@@ -18,13 +18,10 @@ export const getAccessToken = async (): Promise<string | undefined> => {
       // 중요한 정보, 쿠키를 포함시키겠다
       credentials: "include",
     });
-    // console.log("API 요청 전");
     const result = await graphQLClient.request<Pick<IMutation, "restoreAccessToken">>(RESTORE_ACCESS_TOKEN);
     const newAccessToken = result.restoreAccessToken.accessToken;
-    // console.log("API 요청 후", newAccessToken);
     return newAccessToken;
   } catch (error) {
-    // console.log("예외 발생");
     if (error instanceof Error) console.log(error.message);
   }
 };
