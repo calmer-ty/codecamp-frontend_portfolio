@@ -1,17 +1,12 @@
 import Head from "next/head";
-// import { GraphQLClient } from "graphql-request";
 import { useRouter } from "next/router";
-import {
-  // FETCH_USEDITEM,
-  useFetchProduct,
-} from "../../../commons/hooks/queries/product/useFetchProduct";
-// UI
+import { useFetchProduct } from "../../../commons/hooks/queries/useQueryProduct";
+
 import ProductDetailHeader from "./header/ProductDetailHeader.index";
 import ProductDetailBody from "./body/ProductDetailBody.index";
 import ProductDetailFooter from "./footer/ProductDetailFooter.index";
 
 import type { IProductDetailPageProps } from "../../../../../pages/products/[useditemId]/type";
-// Style
 import * as S from "./ProductDetail.styles";
 
 export default function ProductDetail({ useditems }: IProductDetailPageProps): JSX.Element {

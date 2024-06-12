@@ -4,8 +4,7 @@ import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import { FETCH_USEDITEM } from "../../queries/product/useFetchProduct";
-import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
+import { FETCH_USEDITEM, FETCH_USEDITEMS } from "../../queries/useQueryProduct";
 import { Modal } from "antd";
 
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";

@@ -1,9 +1,11 @@
-import { useFetchProducts } from "../../queries/product/useFetchProducts";
+import { useFetchProducts } from "../../queries/useQueryProduct";
+
+import type { IQuery, IQueryFetchUseditemsArgs } from "../../../../../commons/types/generated/types";
 
 export default function useScrollProductsList(): {
-  data: any;
+  data: Pick<IQuery, "fetchUseditems"> | undefined;
   onLoadMore: () => void;
-  refetch: any;
+  refetch: (variables?: Partial<IQueryFetchUseditemsArgs> | undefined) => Promise<any>;
 } {
   const { data, fetchMore, refetch } = useFetchProducts();
   // 댓글 무한 스크롤

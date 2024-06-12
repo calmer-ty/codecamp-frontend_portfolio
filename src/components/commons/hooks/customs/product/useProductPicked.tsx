@@ -1,5 +1,5 @@
 import { useToggleProductPick } from "../../mutations/product/useToggleProductPick";
-import { FETCH_USEDITEM } from "../../queries/product/useFetchProduct";
+import { FETCH_USEDITEM } from "../../queries/useQueryProduct";
 
 import type { IQuery, IQueryFetchUseditemArgs, IUseditem } from "../../../../../commons/types/generated/types";
 

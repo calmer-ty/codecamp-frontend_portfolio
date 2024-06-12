@@ -1,7 +1,8 @@
-import { useFetchProductQuestions } from "../../queries/product/useFetchProductQuestions";
+import { useFetchProductQuestions } from "../../queries/useQueryProduct";
+import type { IQuery } from "../../../../../commons/types/generated/types";
 
 export default function useScrollQuestion(): {
-  data: any;
+  data: Pick<IQuery, "fetchUseditemQuestions"> | undefined;
   onLoadMore: () => void;
 } {
   const { data, fetchMore } = useFetchProductQuestions();

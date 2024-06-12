@@ -2,8 +2,8 @@ import Link from "next/link";
 
 import InfiniteScroll from "react-infinite-scroller";
 
-import { useScrollProductsList } from "../../../../commons/hooks/customs/product/useScrollProductsList";
-import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
+import useScrollProductsList from "../../../../commons/hooks/customs/product/useScrollProductsList";
+import useSearchbar from "../../../../commons/hooks/customs/useSearch";
 
 import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
 import UserIcon01 from "../../../../commons/icon/user/01";
@@ -19,14 +19,13 @@ export default function ProductListBody(): JSX.Element {
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,
   });
-  console.log(data);
 
   return (
     <S.Body>
       <Searchbar01 onChangeSearch={onChangeSearch} />
       <S.ListWrap>
         <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
-          {data?.fetchUseditems?.map((el) => (
+          {data?.fetchUseditems.map((el) => (
             <Link key={el._id} href={`/products/${el._id}`}>
               <S.ListItem>
                 <S.ItemImg src={`http://storage.googleapis.com/${el.images?.[0]}`} />

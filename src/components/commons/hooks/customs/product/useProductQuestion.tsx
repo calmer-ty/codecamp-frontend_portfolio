@@ -1,9 +1,8 @@
-import { useIdCheck } from "../useIdCheck";
-
-import { FETCH_USEDITEM_QUESTIONS } from "../../queries/product/useFetchProductQuestions";
+import useIdCheck from "../useIdCheck";
 import { useCreateProductQuestion } from "../../mutations/product/useCreateProductQuestion";
 import { useUpdateProductQuestion } from "../../mutations/product/useUpdateProductQuestion";
 import { useDeleteProductQuestion } from "../../mutations/product/useDeleteProductQuestion";
+import { FETCH_USEDITEM_QUESTIONS } from "../../queries/useQueryProduct";
 
 import { Modal } from "antd";
 
