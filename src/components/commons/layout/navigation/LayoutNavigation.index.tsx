@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { useLogoutUser } from "../../hooks/mutations/user/useLogoutUser";
 
-import UserIcon01 from "../../icon/user/01";
+import UserIcon01 from "../../element/icon/user/01";
 
 import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 import { FETCH_BOARDS } from "../../hooks/queries/board/useFetchBoards";

@@ -1,4 +1,4 @@
-import UserIcon01 from "../../../../commons/icon/user/01";
+import UserIcon01 from "../../../../commons/element/icon/user/01";
 
 import type { IBoardDetailProps } from "../BoardDetail.types";
 import * as S from "./BoardDetailHeader.styles";

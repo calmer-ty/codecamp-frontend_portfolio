@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import Upload01 from "../../../commons/uploads/01/Upload01.index";
+import { useProduct } from "../../../commons/hooks/customs/product/useProduct";
+import { useMap } from "../../../commons/hooks/customs/useMap";
+
+import Upload01 from "../../../commons/element/uploads/01";
 import Label01 from "../../../commons/element/labels/01";
 import Input01 from "../../../commons/element/inputs/01";
 import Error01 from "../../../commons/element/errors/01";
 import Button01 from "../../../commons/element/buttons/01";
-
-import useProduct from "../../../commons/hooks/customs/product/useProduct";
-import TagsWrite01 from "../../../commons/tags/write/01";
-import useMap from "../../../commons/hooks/customs/useMap";
+import TagsWrite01 from "../../../commons/element/tags/write/01";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductWrite } from "../../../../commons/libraries/validation";
@@ -80,7 +80,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({
-    useditemId: props.data?.fetchUseditem._id,
+    _id: props.data?.fetchUseditem._id,
     files,
     fileUrls,
     latlng,

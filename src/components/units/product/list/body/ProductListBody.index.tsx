@@ -5,10 +5,10 @@ import InfiniteScroll from "react-infinite-scroller";
 import { useScrollProductsList } from "../../../../commons/hooks/customs/product/useScrollProductsList";
 import { useSearchbar } from "../../../../commons/hooks/customs/useSearch";
 
-import Searchbar01 from "../../../../commons/searchbars/01";
-import UserIcon01 from "../../../../commons/icon/user/01";
-import TagsView01 from "../../../../commons/tags/view/01";
-import Picked01 from "../../../../commons/pickeds/01";
+import Searchbar01 from "../../../../commons/element/searchbars/01";
+import UserIcon01 from "../../../../commons/element/icon/user/01";
+import TagsView01 from "../../../../commons/element/tags/view/01";
+import Pick01 from "../../../../commons/element/picks/01";
 
 import * as S from "./ProductListBody.styles";
 
@@ -47,7 +47,7 @@ export default function ProductListBody(): JSX.Element {
                       <UserIcon01 size={16} padding={4} />
                       <span>{el.seller?.name}</span>
                     </S.SellerInfo>
-                    <Picked01 text={el.pickedCount} />
+                    <Pick01 text={el.pickedCount} />
                   </S.InfoBottom>
                 </S.ItemInfo>
                 <S.ItemPrice>

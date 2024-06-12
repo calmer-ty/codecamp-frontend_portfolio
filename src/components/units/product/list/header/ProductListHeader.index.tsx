@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchBestProducts";
-import Picked01 from "../../../../commons/pickeds/01";
+import Pick01 from "../../../../commons/element/picks/01";
 
 import * as S from "./ProductListHeader.styles";
 
@@ -44,7 +44,7 @@ export default function ProductListHeader(): JSX.Element {
                   <S.ItemRemark>{el.name}</S.ItemRemark>
                   <S.ItemPrice>{el.price?.toLocaleString()}원</S.ItemPrice>
                 </S.ItemFigcaption>
-                <Picked01 style={{ position: "absolute", bottom: "10px", right: "10px" }} text={el.pickedCount} />
+                <Pick01 style={{ position: "absolute", bottom: "10px", right: "10px" }} text={el.pickedCount} />
               </S.ItemFigure>
             </S.ListItem>
           </Link>
