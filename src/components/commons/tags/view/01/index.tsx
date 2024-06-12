@@ -1,27 +1,6 @@
-import type { Maybe } from "yup";
+import * as S from "./styles";
+import type { ITagsView } from "./types";
 
-interface IPProps {
-  tags: Maybe<string[]> | undefined;
-}
-
-const pStyles = {
-  display: "flex",
-  columnGap: "6px",
-};
-const spanStyles = {
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-};
-
-export default function TagsView01(props: IPProps): JSX.Element {
-  return (
-    <p style={pStyles}>
-      {props.tags?.map((el) => (
-        <span style={spanStyles} key={el}>
-          #{el}
-        </span>
-      ))}
-    </p>
-  );
+export default function TagsView01(props: ITagsView): JSX.Element {
+  return <S.Tags>{props.tags?.map((el) => <S.TagItem key={el}># {el}</S.TagItem>)}</S.Tags>;
 }

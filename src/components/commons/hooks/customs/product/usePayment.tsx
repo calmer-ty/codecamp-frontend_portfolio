@@ -4,9 +4,11 @@ declare const window: typeof globalThis & {
   IMP: any;
 };
 
-export default function usePayment(fetchUseditem: IUseditem): {
+export const usePayment = (
+  fetchUseditem: IUseditem
+): {
   onClickPayment: () => void;
-} {
+} => {
   const onClickPayment = (): void => {
     const IMP = window.IMP;
     IMP.init("imp80516171");
@@ -42,4 +44,4 @@ export default function usePayment(fetchUseditem: IUseditem): {
   return {
     onClickPayment,
   };
-}
+};

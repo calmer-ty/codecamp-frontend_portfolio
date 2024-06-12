@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useToggle(args: boolean): [boolean, () => void] {
+export const useToggle = (args: boolean): [boolean, () => void] => {
   const [isToggle, setIsToggle] = useState(args);
 
   const onToggle = (): void => {
@@ -8,4 +8,4 @@ export default function useToggle(args: boolean): [boolean, () => void] {
   };
 
   return [isToggle, onToggle];
-}
+};

@@ -3,15 +3,18 @@ import { useRouter } from "next/router";
 import { useCreateProduct } from "../../mutations/product/useCreateProduct";
 import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
+import { usePickProduct } from "../../mutations/product/usePickProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import { FETCH_USEDITEM, FETCH_USEDITEMS } from "../../queries/useQueryProduct";
+import { FETCH_USEDITEM } from "../../queries/product/useFetchProduct";
+import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
+
 import { Modal } from "antd";
 
 import type { IFormDataProductWrite } from "../../../../units/product/write/ProductWrite.types";
-import type { IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
+import type { IQuery, IQueryFetchUseditemArgs, IUpdateUseditemInput } from "../../../../../commons/types/generated/types";
 
 interface IUseProductArgs {
-  useditemId?: string;
+  _id?: string;
   files?: File[];
   fileUrls?: string[];
   latlng?: any;
@@ -20,16 +23,19 @@ interface IUseProductArgs {
   pick?: number;
 }
 
-export default function useProduct(args: IUseProductArgs): {
+export const useProduct = (
+  args: IUseProductArgs
+): {
   onClickCreate: (data: IFormDataProductWrite) => Promise<void>;
   onClickUpdate: (data: IFormDataProductWrite) => Promise<void>;
   onClickDelete: () => Promise<void>;
-} {
+  onClickPick: () => Promise<void>;
+} => {
   const router = useRouter();
-
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
   const [deleteProduct] = useDeleteProduct();
+  const [pickProduct] = usePickProduct();
   const [uploadFile] = useUploadFile();
 
   // 파일 업로드 및 URL 처리 함수
@@ -41,7 +47,7 @@ export default function useProduct(args: IUseProductArgs): {
       const resultFile = await Promise.all(
         // 모든 파일에 대해 병렬로 업로드 처리
         files.map(async (file) => {
-          if (file !== null) return uploadFile({ variables: { file } }); // 파일 업로드 요청
+          if (file !== null) return await uploadFile({ variables: { file } }); // 파일 업로드 요청
           return null; // 파일이 null이거나 undefined인 경우, null 반환
         })
       );
@@ -53,10 +59,7 @@ export default function useProduct(args: IUseProductArgs): {
 
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
-    if (args === undefined) return;
-
     const resultFileUrls = await uploadFilesAndGetUrls(args.files); // 파일 업로드 및 URL 처리 함수 호출하여 파일 URL 배열 획득
-
     try {
       const result = await createProduct({
         variables: {
@@ -75,11 +78,6 @@ export default function useProduct(args: IUseProductArgs): {
             images: resultFileUrls, // 업로드된 파일 URL 배열 전달
           },
         },
-        // refetchQueries: [
-        //   {
-        //     query: FETCH_USEDITEMS,
-        //   },
-        // ],
       });
       Modal.success({ content: "상품이 등록되었습니다!" });
       void router.push(`/products/${result.data?.createUseditem._id}`);
@@ -90,13 +88,10 @@ export default function useProduct(args: IUseProductArgs): {
 
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
-    console.log(data);
-    if (args.useditemId === undefined) return;
+    if (typeof args._id !== "string") return;
 
     const resultFileUrls = await uploadFilesAndGetUrls(args.files);
-
-    // # 파일 URL 병합 로직
-    // const newFileUrls = args.fileUrls?.map((url, index) => resultFileUrls[index] || url);
+    // 파일 URL 병합 로직 / const newFileUrls = args.fileUrls?.map((url, index) => resultFileUrls[index] || url);
     const newFileUrls =
       args.fileUrls?.map((url, index) => {
         const resultUrl = typeof resultFileUrls[index] === "string" ? resultFileUrls[index] : undefined;
@@ -131,17 +126,16 @@ export default function useProduct(args: IUseProductArgs): {
     try {
       const result = await updateProduct({
         variables: {
-          useditemId: args.useditemId,
+          useditemId: args._id,
           updateUseditemInput,
         },
         refetchQueries: [
           {
             query: FETCH_USEDITEM,
-            variables: { useditemId: args.useditemId },
+            variables: { useditemId: args._id },
           },
         ],
       });
-      console.log(result);
       Modal.success({ content: "상품이 수정되었습니다!" });
       void router.push(`/products/${result.data?.updateUseditem._id}`);
     } catch (error) {
@@ -151,11 +145,11 @@ export default function useProduct(args: IUseProductArgs): {
 
   // 판매 상품 삭제
   const onClickDelete = async (): Promise<void> => {
-    if (args.useditemId === undefined) return;
+    if (typeof args._id !== "string") return;
 
     try {
       await deleteProduct({
-        variables: { useditemId: args.useditemId },
+        variables: { useditemId: args._id },
         refetchQueries: [
           {
             query: FETCH_USEDITEMS,
@@ -169,9 +163,49 @@ export default function useProduct(args: IUseProductArgs): {
     }
   };
 
+  // 상품 찜하기
+  const onClickPick = async (): Promise<void> => {
+    if (typeof args._id !== "string") return;
+
+    try {
+      await pickProduct({
+        variables: { useditemId: args._id },
+
+        optimisticResponse: {
+          toggleUseditemPick: args.pick ?? 0,
+        },
+        update: (cache, { data }) => {
+          const prevData = cache.readQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>({
+            query: FETCH_USEDITEM,
+            variables: {
+              useditemId: args._id ?? "",
+            },
+          });
+          cache.writeQuery({
+            query: FETCH_USEDITEM,
+            variables: {
+              useditemId: args._id,
+            },
+            data: {
+              fetchUseditem: {
+                _id: args._id,
+                __typename: "Useditem",
+                ...prevData?.fetchUseditem,
+                pickedCount: data?.toggleUseditemPick,
+              },
+            },
+          });
+        },
+      });
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
+  };
+
   return {
     onClickCreate,
     onClickUpdate,
     onClickDelete,
+    onClickPick,
   };
-}
+};

@@ -1,14 +1,13 @@
 import Dompurufy from "dompurify";
 import { useEffect } from "react";
 
-import useProductPicked from "../../../../commons/hooks/customs/product/useProductPicked";
 import usePayment from "../../../../commons/hooks/customs/product/usePayment";
 import useProduct from "../../../../commons/hooks/customs/product/useProduct";
 import useMap from "../../../../commons/hooks/customs/useMap";
 
 import HeartIcon01 from "../../../../commons/icon/heart/01";
-import TagsView01 from "../../../../commons/tags/view/01";
 import LinkButton02 from "../../../../commons/element/buttons/link/02";
+import { TagsView01 } from "../../../../commons/tags/view";
 
 import type { IProductDetailProps } from "../ProductDetail.types";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
@@ -30,10 +29,8 @@ declare const window: typeof globalThis & {
 
 export default function ProductDetailBody(props: IProductDetailProps): JSX.Element {
   if (props.data === undefined) return <></>;
-
   const { onClickPayment } = usePayment(props.data?.fetchUseditem);
-  const { onClickPick } = useProductPicked(props.data?.fetchUseditem);
-  const { onClickDelete } = useProduct({ useditemId: props.data?.fetchUseditem._id });
+  const { onClickDelete, onClickPick } = useProduct({ _id: props.data.fetchUseditem._id, pick: props.data.fetchUseditem.pickedCount ?? 0 });
 
   useMap(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng, false);
 

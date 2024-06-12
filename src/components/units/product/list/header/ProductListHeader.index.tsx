@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { useFetchProductsBest } from "../../../../commons/hooks/queries/product/useFetchProductsBest";
-import Picked01 from "../../../../commons/picked/01";
+import { useFetchProductsBest } from "../../../../commons/hooks/queries/useQueryProduct";
+import Picked01 from "../../../../commons/pickeds/01";
 
 import * as S from "./ProductListHeader.styles";
 

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import type { IPageBtnProps, IPageProps } from "./Pagination01.types";
+import type { IPageBtnProps, IPageProps } from "./types";
 
 export const Pagination = styled.article`
   display: flex;

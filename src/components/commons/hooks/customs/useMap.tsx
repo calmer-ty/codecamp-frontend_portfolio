@@ -4,14 +4,14 @@ export declare const window: typeof globalThis & {
   kakao: any;
 };
 
-export default function useMap(
+export const useMap = (
   lat: any,
   lng: any,
   enableClick: boolean
 ): {
   latlng: any;
   address: any;
-} {
+} => {
   const [latlng, setLatlng] = useState<any>("");
   const [address, setAddress] = useState<any>("");
 
@@ -76,4 +76,4 @@ export default function useMap(
   }, [lat, lng, enableClick]);
 
   return { latlng, address };
-}
+};

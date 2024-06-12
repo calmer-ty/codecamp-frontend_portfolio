@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import * as S from "./TodayView01.styles";
+import * as S from "./styles";
 import type { IUseditem } from "../../../../commons/types/generated/types";
 
-function TodayView01(): JSX.Element {
+export default function TodayView01(): JSX.Element {
   const [product, setProduct] = useState<IUseditem[]>([]);
 
   useEffect(() => {
@@ -28,4 +28,3 @@ function TodayView01(): JSX.Element {
     </S.TodayView>
   );
 }
-export default memo(TodayView01);

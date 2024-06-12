@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import type { InputRef } from "antd";
 import { Input, Tag, theme, Tooltip } from "antd";
-import styled from "@emotion/styled";
+
+import type { InputRef } from "antd";
+import * as S from "./styles";
 
 const tagInputStyle: React.CSSProperties = {
   width: 64,
@@ -10,15 +11,6 @@ const tagInputStyle: React.CSSProperties = {
   marginInlineEnd: 8,
   verticalAlign: "top",
 };
-
-const Tags = styled.article`
-  display: flex;
-  align-items: center;
-  height: 52px;
-  padding: 0 16px;
-  border: 1px solid #767676;
-`;
-
 export default function TagsWrite01(): JSX.Element {
   const { token } = theme.useToken();
   const [tags, setTags] = useState<string[]>(["Tag 1", "Tag 2", "Tag 3"]);
@@ -80,7 +72,7 @@ export default function TagsWrite01(): JSX.Element {
   };
 
   return (
-    <Tags>
+    <S.Tags>
       {tags.map<React.ReactNode>((tag, index) => {
         if (editInputIndex === index) {
           return (
@@ -134,6 +126,6 @@ export default function TagsWrite01(): JSX.Element {
           태그를 입력해주세요(엔터키)
         </Tag>
       )}
-    </Tags>
+    </S.Tags>
   );
 }

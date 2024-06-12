@@ -1,8 +1,9 @@
-import useIdCheck from "../useIdCheck";
+import { useIdCheck } from "../useIdCheck";
+
 import { useCreateProductQuestion } from "../../mutations/product/useCreateProductQuestion";
 import { useUpdateProductQuestion } from "../../mutations/product/useUpdateProductQuestion";
 import { useDeleteProductQuestion } from "../../mutations/product/useDeleteProductQuestion";
-import { FETCH_USEDITEM_QUESTIONS } from "../../queries/useQueryProduct";
+import { FETCH_USEDITEM_QUESTIONS } from "../../queries/product/useQueryProduct";
 
 import { Modal } from "antd";
 
@@ -14,11 +15,13 @@ interface IUseProductQuestionArgs {
   onToggleEdit?: () => void;
 }
 
-export default function useProductQuestion(args: IUseProductQuestionArgs): {
+export const useProductQuestion = (
+  args: IUseProductQuestionArgs
+): {
   onClickCreate: (data: IFormData) => Promise<void>;
   onClickUpdate: (data: IFormData) => Promise<void>;
   onClickDelete: () => Promise<void>;
-} {
+} => {
   const { id } = useIdCheck("useditemId");
 
   const [createQuestion] = useCreateProductQuestion();
@@ -100,4 +103,4 @@ export default function useProductQuestion(args: IUseProductQuestionArgs): {
     onClickUpdate,
     onClickDelete,
   };
-}
+};

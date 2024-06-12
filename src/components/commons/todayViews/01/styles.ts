@@ -3,8 +3,6 @@ import { css } from "@emotion/react";
 
 import { mediaQueries } from "../../../../commons/styles/globalStyles";
 
-// 미디어 쿼리 믹스인 정의
-
 export const TodayView = styled.article`
   display: flex;
   flex-direction: column;

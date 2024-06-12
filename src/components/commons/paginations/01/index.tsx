@@ -1,5 +1,5 @@
-import * as S from "./Pagination01.styles";
-import type { IPagination01Props } from "./Pagination01.types";
+import * as S from "./styles";
+import type { IPagination01Props } from "./types";
 
 export default function Pagination01(props: IPagination01Props): JSX.Element {
   return (
@@ -14,12 +14,7 @@ export default function Pagination01(props: IPagination01Props): JSX.Element {
           return currentPage <= props.lastPage;
         })
         .map((_, index) => (
-          <S.Page
-            key={props.startPage + index}
-            id={String(props.startPage + index)}
-            onClick={props.onClickPage}
-            isActive={props.startPage + index === props.activedPage}
-          >
+          <S.Page key={props.startPage + index} id={String(props.startPage + index)} onClick={props.onClickPage} isActive={props.startPage + index === props.activedPage}>
             {props.startPage + index}
           </S.Page>
         ))}

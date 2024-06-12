@@ -1,5 +1,5 @@
-import { SearchOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
+import { SearchOutlined } from "@ant-design/icons";
 
 export const Searchbar = styled.article`
   position: relative;

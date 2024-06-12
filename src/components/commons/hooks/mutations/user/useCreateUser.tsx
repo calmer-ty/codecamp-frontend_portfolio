@@ -1,5 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
-import type { IMutation, IMutationCreateUserArgs } from "../../../../commons/types/generated/types";
+
+import type { IMutation, IMutationCreateUserArgs } from "../../../../../commons/types/generated/types";
+import type { MutationReturnType } from "../../hooks.types";
 
 const CREATE_USER = gql`
   mutation createUser($createUserInput: CreateUserInput!) {
@@ -9,6 +11,7 @@ const CREATE_USER = gql`
     }
   }
 `;
-export const useCreateUser = (): any => {
+
+export const useCreateUser = (): MutationReturnType<"createUser", IMutationCreateUserArgs> => {
   return useMutation<Pick<IMutation, "createUser">, IMutationCreateUserArgs>(CREATE_USER);
 };

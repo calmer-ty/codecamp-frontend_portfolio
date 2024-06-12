@@ -8,14 +8,16 @@ interface IUsePaginationArgs {
   count: number | undefined;
 }
 
-export default function usePagination(args: IUsePaginationArgs): {
+export const usePagination = (
+  args: IUsePaginationArgs
+): {
   startPage: number;
   activedPage: number;
   lastPage: number;
   onClickPage: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickPrevPage: () => void;
   onClickNextPage: () => void;
-} {
+} => {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);
   const lastPage = Math.ceil((args.count ?? 10) / 10);
@@ -47,4 +49,4 @@ export default function usePagination(args: IUsePaginationArgs): {
     onClickPrevPage,
     onClickNextPage,
   };
-}
+};

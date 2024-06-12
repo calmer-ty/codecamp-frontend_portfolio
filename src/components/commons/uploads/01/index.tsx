@@ -1,13 +1,8 @@
-import {
-  // useEffect,
-  useRef,
-  useState,
-} from "react";
-// Style
-import * as S from "./Upload01.styles";
-// Type
+import { useRef, useState } from "react";
+import checkValidationImg from "./validation";
+
+import * as S from "./styles";
 import type { ChangeEvent } from "react";
-import checkValidationImg from "./Upload01.validation";
 
 interface IUpload01Props {
   fileUrl: string;
@@ -24,16 +19,6 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
   const onClickUpload = (): void => {
     fileRef.current?.click();
   };
-  // useEffect(() => {
-  //   console.log("===== Updated fileReaderUrl ===== :", props.index, fileReaderUrl);
-  //   console.log("===== Updated fileUrl ===== :", props.index, props.fileUrl);
-  // }, [fileReaderUrl]);
-
-  // useEffect(() => {
-  //   if (fileReaderUrl !== "") {
-  //     props.onChangeFileUrls(fileRef.current?.files[0], props.fileUrl, props.index);
-  //   }
-  // }, [fileReaderUrl, props]);
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = event?.target.files?.[0];
@@ -57,7 +42,6 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
 
   return (
     <>
-      {/* {props.fileUrl !== "" ? ( */}
       {imageSrc !== "" ? (
         // fileUrl에 값이 있다면 이미지 요소를 보여주고 없다면 버튼을 보여준다
         <S.UploadImg
