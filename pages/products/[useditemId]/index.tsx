@@ -1,7 +1,8 @@
 import { GraphQLClient } from "graphql-request";
-import { FETCH_USEDITEM } from "../../../src/components/commons/hooks/queries/useQueryProduct";
 
 import ProductDetail from "../../../src/components/units/product/detail/ProductDetail.index";
+import { FETCH_USEDITEM } from "../../../src/components/commons/hooks/queries/product/useFetchProduct";
+
 import type { IQuery, IQueryFetchUseditemArgs } from "../../../src/commons/types/generated/types";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { IProductDetailPageProps } from "./type";

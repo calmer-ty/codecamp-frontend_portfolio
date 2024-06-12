@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useFetchProduct } from "../../../commons/hooks/queries/useQueryProduct";
+import { useFetchProduct } from "../../../commons/hooks/queries/product/useFetchProduct";
 
 import ProductDetailHeader from "./header/ProductDetailHeader.index";
 import ProductDetailBody from "./body/ProductDetailBody.index";

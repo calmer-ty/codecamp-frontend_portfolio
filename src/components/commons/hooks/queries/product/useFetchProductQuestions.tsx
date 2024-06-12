@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import useIdCheck from "../../customs/useIdCheck";
+import { useIdCheck } from "../../customs/useIdCheck";
 
 import type { IQuery, IQueryFetchUseditemQuestionsArgs } from "../../../../../commons/types/generated/types";
 import type { QueryReturnType } from "../../hooks.types";

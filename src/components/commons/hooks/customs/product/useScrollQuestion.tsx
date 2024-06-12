@@ -1,4 +1,4 @@
-import { useFetchProductQuestions } from "../../queries/product/useQueryProduct";
+import { useFetchProductQuestions } from "../../queries/product/useFetchProductQuestions";
 
 import type { IQuery } from "../../../../../commons/types/generated/types";
 

@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 
-import { useCreateUser, useLoginUser, useLoginUserExample } from "../mutations/useMutationUser";
+import { useCreateUser } from "../mutations/user/useCreateUser";
+import { useLoginUser } from "../mutations/user/useLoginUser";
+import { useLoginUserExample } from "../mutations/user/useLoginUserExample";
 
 import { Modal } from "antd";
 import { accessTokenState } from "../../../../commons/stores";
