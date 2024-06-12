@@ -8,8 +8,6 @@ import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsR
 import type { IProductDetailPageProps } from "./type";
 
 export default function ProductsDetailPage(props: IProductDetailPageProps): JSX.Element {
-  console.log(props);
-  console.log({ ...props });
   return <ProductDetail {...props} />;
 }
 

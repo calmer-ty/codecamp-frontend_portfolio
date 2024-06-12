@@ -1,4 +1,4 @@
-import Searchbar01 from "../../../../commons/searchbars/01/Searchbar01.index";
+import Searchbar01 from "../../../../commons/element/searchbars/01";
 import type { IBoardDetailHeaderProps } from "../BoardList.types";
 
 export default function BoardListHeader(props: IBoardDetailHeaderProps): JSX.Element {

@@ -9,7 +9,7 @@ import { useFetchBoardsCount } from "../../../commons/hooks/queries/board/useFet
 import BoardListHeader from "./header/BoardListHeader.index";
 import BoardListBody from "./body/BoardListBody.index";
 import BoardListFooter from "./footer/BoardListFooter.index";
-import Pagination01 from "../../../commons/paginations/01/Pagination01.index";
+import Pagination01 from "../../../commons/element/paginations/01";
 
 export default function BoardList(): JSX.Element {
   const { data, refetch } = useFetchBoards();

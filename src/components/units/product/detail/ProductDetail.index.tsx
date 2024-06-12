@@ -13,7 +13,6 @@ export default function ProductDetail({ useditems }: IProductDetailPageProps): J
   const router = useRouter();
   const useditemId = router.query.useditemId as string;
   const { data } = useFetchProduct({ useditemId });
-
   return (
     <>
       <Head>

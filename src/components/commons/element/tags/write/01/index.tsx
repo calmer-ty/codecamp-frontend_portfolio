@@ -13,7 +13,7 @@ const tagInputStyle: React.CSSProperties = {
 };
 export default function TagsWrite01(): JSX.Element {
   const { token } = theme.useToken();
-  const [tags, setTags] = useState<string[]>(["Tag 1", "Tag 2", "Tag 3"]);
+  const [tags, setTags] = useState<string[]>(["모르겠다", "모르겠다2"]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [editInputIndex, setEditInputIndex] = useState(-1);

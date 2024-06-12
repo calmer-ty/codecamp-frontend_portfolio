@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import { mediaQueries } from "../../../../commons/styles/globalStyles";
+import { mediaQueries } from "../../../../../commons/styles/globalStyles";
 
 export const TodayView = styled.article`
   display: flex;

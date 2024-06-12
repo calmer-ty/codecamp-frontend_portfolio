@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import type { IUseditem } from "../../../../../commons/types/generated/types";
 import * as S from "./styles";
-import type { IUseditem } from "../../../../commons/types/generated/types";
 
 export default function TodayView01(): JSX.Element {
   const [product, setProduct] = useState<IUseditem[]>([]);

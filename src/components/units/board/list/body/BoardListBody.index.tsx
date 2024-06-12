@@ -1,9 +1,8 @@
 import Link from "next/link";
-import * as S from "./BoardListBody.styles";
-
 import { getDate } from "../../../../../commons/libraries/utils";
 
 import type { IBoardDetailBodyProps } from "../BoardList.types";
+import * as S from "./BoardListBody.styles";
 
 const SECRET_STRING = "!@#$";
 
