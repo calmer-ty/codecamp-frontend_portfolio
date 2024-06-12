@@ -7,8 +7,8 @@ import Input01 from "../../../commons/element/inputs/01";
 import Error01 from "../../../commons/element/errors/01";
 import Button01 from "../../../commons/element/buttons/01";
 
-import { useProduct } from "../../../commons/hooks/customs/product/useProduct";
-import { TagsWrite01 } from "../../../commons/tags/write/01";
+import useProduct from "../../../commons/hooks/customs/product/useProduct";
+import TagsWrite01 from "../../../commons/tags/write/01";
 import useMap from "../../../commons/hooks/customs/useMap";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,7 +25,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   const { latlng, address } = useMap(props.data?.fetchUseditem.useditemAddress?.lat ?? 33.450701, props.data?.fetchUseditem.useditemAddress?.lng ?? 126.570667, true);
 
   // 상품 설명 이벤트
-  const onChangeContents = (value: string) => {
+  const onChangeContents = (value: string): void => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     void trigger("contents");
   };

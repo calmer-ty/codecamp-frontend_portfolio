@@ -5,7 +5,7 @@ import { useRecoilValueLoadable } from "recoil";
 import { restoreAccessTokenLoadable } from "../../../../commons/stores";
 // import { getAccessToken } from "../../../../commons/libraries/getAccessToken";
 
-export const useAuth = () => {
+export default function useAuth(): void {
   const router = useRouter();
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
@@ -25,4 +25,4 @@ export const useAuth = () => {
   //     }
   //   });
   // }, []);
-};
+}

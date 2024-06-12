@@ -14,7 +14,6 @@ export const FETCH_USEDITEMS_BEST = gql`
   }
 `;
 
-export const useFetchProductsBest = () => {
-  const result = useQuery<Pick<IQuery, "fetchUseditemsOfTheBest">>(FETCH_USEDITEMS_BEST);
-  return result;
+export const useFetchProductsBest = (): any => {
+  return useQuery<Pick<IQuery, "fetchUseditemsOfTheBest">>(FETCH_USEDITEMS_BEST);
 };

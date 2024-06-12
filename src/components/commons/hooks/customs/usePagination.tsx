@@ -4,13 +4,18 @@ import type { IQuery } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
 interface IUsePaginationArgs {
-  refetch: (
-    variables?: Partial<any> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
+  refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
   count: number | undefined;
 }
 
-export const usePagination = (args: IUsePaginationArgs) => {
+export default function usePagination(args: IUsePaginationArgs): {
+  startPage: number;
+  activedPage: number;
+  lastPage: number;
+  onClickPage: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickPrevPage: () => void;
+  onClickNextPage: () => void;
+} {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);
   const lastPage = Math.ceil((args.count ?? 10) / 10);
@@ -42,4 +47,4 @@ export const usePagination = (args: IUsePaginationArgs) => {
     onClickPrevPage,
     onClickNextPage,
   };
-};
+}

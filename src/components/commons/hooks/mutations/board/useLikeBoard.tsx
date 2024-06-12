@@ -7,8 +7,6 @@ const LIKE_BOARD = gql`
   }
 `;
 
-export const useLikeBoard = () => {
-  const result = useMutation<Pick<IMutation, "likeBoard">, IMutationLikeBoardArgs>(LIKE_BOARD);
-
-  return result;
+export const useLikeBoard = (): any => {
+  return useMutation<Pick<IMutation, "likeBoard">, IMutationLikeBoardArgs>(LIKE_BOARD);
 };

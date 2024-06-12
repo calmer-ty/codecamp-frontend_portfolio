@@ -9,7 +9,6 @@ const CREATE_PRODUCT = gql`
   }
 `;
 
-export const useCreateProduct = () => {
-  const result = useMutation<Pick<IMutation, "createUseditem">, IMutationCreateUseditemArgs>(CREATE_PRODUCT);
-  return result;
+export const useCreateProduct = (): any => {
+  return useMutation<Pick<IMutation, "createUseditem">, IMutationCreateUseditemArgs>(CREATE_PRODUCT);
 };

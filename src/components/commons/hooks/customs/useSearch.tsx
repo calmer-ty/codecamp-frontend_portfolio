@@ -8,7 +8,10 @@ interface IUseSearchbarArgs {
   refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
   refetchCount?: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>> | undefined;
 }
-export const useSearchbar = (props: IUseSearchbarArgs) => {
+export default function useSearchbar(props: IUseSearchbarArgs): {
+  keyword: string;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+} {
   const [keyword, setKeyword] = useState("");
 
   const getDebounce = _.debounce((value: string) => {
@@ -22,4 +25,4 @@ export const useSearchbar = (props: IUseSearchbarArgs) => {
   };
 
   return { keyword, onChangeSearch };
-};
+}

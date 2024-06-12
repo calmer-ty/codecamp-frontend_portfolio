@@ -9,7 +9,6 @@ const UPDATE_PRODUCT = gql`
   }
 `;
 
-export const useUpdateProduct = () => {
-  const result = useMutation<Pick<IMutation, "updateUseditem">, IMutationUpdateUseditemArgs>(UPDATE_PRODUCT);
-  return result;
+export const useUpdateProduct = (): any => {
+  return useMutation<Pick<IMutation, "updateUseditem">, IMutationUpdateUseditemArgs>(UPDATE_PRODUCT);
 };

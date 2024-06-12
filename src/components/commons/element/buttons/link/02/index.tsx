@@ -18,10 +18,10 @@ const aStyle = {
   color: "#000",
 };
 
-export const LinkButton02 = (args: ILink02Args) => {
+export default function LinkButton02(args: ILink02Args): JSX.Element {
   return (
     <Link href={args.href}>
       <a style={aStyle}>{args.text}</a>
     </Link>
   );
-};
+}

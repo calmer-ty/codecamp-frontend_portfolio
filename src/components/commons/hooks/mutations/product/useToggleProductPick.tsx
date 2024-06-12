@@ -7,7 +7,6 @@ const TOGGLE_PICK = gql`
   }
 `;
 
-export const useToggleProductPick = () => {
-  const result = useMutation<Pick<IMutation, "toggleUseditemPick">, IMutationToggleUseditemPickArgs>(TOGGLE_PICK);
-  return result;
+export const useToggleProductPick = (): any => {
+  return useMutation<Pick<IMutation, "toggleUseditemPick">, IMutationToggleUseditemPickArgs>(TOGGLE_PICK);
 };

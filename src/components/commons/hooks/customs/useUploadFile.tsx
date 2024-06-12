@@ -1,6 +1,6 @@
 import { useUploadFile } from "../../hooks/mutations/useUploadFile";
 
-export const useUploadFileToServer = async (file) => {
+export default async function useUploadFileToServer(file: File | undefined): Promise<File | undefined> {
   const [uploadFile] = useUploadFile();
   const { Modal } = await import("antd");
 
@@ -15,4 +15,4 @@ export const useUploadFileToServer = async (file) => {
   }
 
   // return {};
-};
+}

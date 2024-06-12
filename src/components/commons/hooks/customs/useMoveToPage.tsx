@@ -2,7 +2,10 @@
 import { useRecoilState } from "recoil";
 import { visitedPageState } from "../../../../commons/stores";
 
-export const useMoveToPage = () => {
+export default function useMoveToPage(): {
+  visitedPage: string;
+  onClickMoveToPage: (path: string) => () => void;
+} {
   // const router = useRouter();
   const [visitedPage, setVisitedPage] = useRecoilState(visitedPageState);
   console.log(visitedPage);
@@ -19,4 +22,4 @@ export const useMoveToPage = () => {
     visitedPage,
     onClickMoveToPage,
   };
-};
+}

@@ -24,7 +24,7 @@ const iconStyle = {
   marginRight: "6px",
 };
 
-export const LinkButton01 = (args: ILink01Args) => {
+export default function LinkButton01(args: ILink01Args): JSX.Element {
   return (
     <Link href={args.href}>
       <a style={aStyle}>
@@ -33,4 +33,4 @@ export const LinkButton01 = (args: ILink01Args) => {
       </a>
     </Link>
   );
-};
+}

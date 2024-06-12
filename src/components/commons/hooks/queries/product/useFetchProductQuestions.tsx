@@ -19,14 +19,9 @@ export const FETCH_USEDITEM_QUESTIONS = gql`
   }
 `;
 
-export const useFetchProductQuestions = () => {
+export const useFetchProductQuestions = (): any => {
   const { id } = useIdCheck("useditemId");
-  const result = useQuery<Pick<IQuery, "fetchUseditemQuestions">, IQueryFetchUseditemQuestionsArgs>(
-    FETCH_USEDITEM_QUESTIONS,
-    {
-      variables: { useditemId: id },
-    }
-  );
-
-  return result;
+  return useQuery<Pick<IQuery, "fetchUseditemQuestions">, IQueryFetchUseditemQuestionsArgs>(FETCH_USEDITEM_QUESTIONS, {
+    variables: { useditemId: id },
+  });
 };

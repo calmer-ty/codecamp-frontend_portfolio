@@ -19,7 +19,7 @@ const Tags = styled.article`
   border: 1px solid #767676;
 `;
 
-export const TagsWrite01 = () => {
+export default function TagsWrite01(): JSX.Element {
   const { token } = theme.useToken();
   const [tags, setTags] = useState<string[]>(["Tag 1", "Tag 2", "Tag 3"]);
   const [inputVisible, setInputVisible] = useState(false);
@@ -39,21 +39,21 @@ export const TagsWrite01 = () => {
     editInputRef.current?.focus();
   }, [editInputValue]);
 
-  const handleClose = (removedTag: string) => {
+  const handleClose = (removedTag: string): void => {
     const newTags = tags.filter((tag) => tag !== removedTag);
     console.log(newTags);
     setTags(newTags);
   };
 
-  const showInput = () => {
+  const showInput = (): void => {
     setInputVisible(true);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
   };
 
-  const handleInputConfirm = () => {
+  const handleInputConfirm = (): void => {
     if (typeof inputValue === "string" && !tags.includes(inputValue)) {
       setTags([...tags, inputValue]);
     }
@@ -61,11 +61,11 @@ export const TagsWrite01 = () => {
     setInputValue("");
   };
 
-  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEditInputValue(e.target.value);
   };
 
-  const handleEditInputConfirm = () => {
+  const handleEditInputConfirm = (): void => {
     const newTags = [...tags];
     newTags[editInputIndex] = editInputValue;
     setTags(newTags);
@@ -136,4 +136,4 @@ export const TagsWrite01 = () => {
       )}
     </Tags>
   );
-};
+}

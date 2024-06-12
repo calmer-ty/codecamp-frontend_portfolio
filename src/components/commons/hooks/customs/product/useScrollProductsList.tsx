@@ -1,6 +1,10 @@
 import { useFetchProducts } from "../../queries/product/useFetchProducts";
 
-export const useScrollProductsList = () => {
+export default function useScrollProductsList(): {
+  data: any;
+  onLoadMore: () => void;
+  refetch: any;
+} {
   const { data, fetchMore, refetch } = useFetchProducts();
   // 댓글 무한 스크롤
   const onLoadMore = (): void => {
@@ -22,4 +26,4 @@ export const useScrollProductsList = () => {
     onLoadMore,
     refetch,
   };
-};
+}

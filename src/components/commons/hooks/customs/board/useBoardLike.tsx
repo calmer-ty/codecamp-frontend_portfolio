@@ -3,16 +3,20 @@ import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
 import { useLikeBoard } from "../../mutations/board/useLikeBoard";
 import { useDislikeBoard } from "../../mutations/board/useDislikeBoard";
 import { useIdCheck } from "../useIdCheck";
+
 import type { IQuery, IQueryFetchBoardArgs } from "../../../../../commons/types/generated/types";
 
-export const useBoardLike = () => {
+export default function useBoardLike(): {
+  onClickLike: () => Promise<void>;
+  onClickDislike: () => Promise<void>;
+} {
   const { id } = useIdCheck("boardId");
   const { data } = useFetchBoard({ boardId: id });
 
   const [likeBoard] = useLikeBoard();
   const [dislikeBoard] = useDislikeBoard();
 
-  const onClickLike = async () => {
+  const onClickLike = async (): Promise<void> => {
     const { Modal } = await import("antd");
 
     try {
@@ -84,4 +88,4 @@ export const useBoardLike = () => {
     onClickLike,
     onClickDislike,
   };
-};
+}

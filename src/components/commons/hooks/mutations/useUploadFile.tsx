@@ -9,8 +9,6 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export const useUploadFile = () => {
-  const result = useMutation<Pick<IMutation, "uploadFile">, IMutationUploadFileArgs>(UPLOAD_FILE);
-
-  return result;
+export const useUploadFile = (): any => {
+  return useMutation<Pick<IMutation, "uploadFile">, IMutationUploadFileArgs>(UPLOAD_FILE);
 };

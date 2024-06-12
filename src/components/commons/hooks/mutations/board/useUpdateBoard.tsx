@@ -9,8 +9,6 @@ const UPDATE_BOARD = gql`
   }
 `;
 
-export const useUpdateBoard = () => {
-  const result = useMutation<Pick<IMutation, "updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD);
-
-  return result;
+export const useUpdateBoard = (): any => {
+  return useMutation<Pick<IMutation, "updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD);
 };

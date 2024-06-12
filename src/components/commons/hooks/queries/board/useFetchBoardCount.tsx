@@ -7,8 +7,6 @@ export const FETCH_BOARDS_COUNT = gql`
   }
 `;
 
-export const useFetchBoardsCount = () => {
-  const result = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(FETCH_BOARDS_COUNT);
-
-  return result;
+export const useFetchBoardsCount = (): any => {
+  return useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(FETCH_BOARDS_COUNT);
 };

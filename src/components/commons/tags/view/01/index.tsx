@@ -14,7 +14,7 @@ const spanStyles = {
   whiteSpace: "nowrap",
 };
 
-export default function TagsView01(props: IPProps) {
+export default function TagsView01(props: IPProps): JSX.Element {
   return (
     <p style={pStyles}>
       {props.tags?.map((el) => (

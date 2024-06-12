@@ -21,7 +21,11 @@ interface IUseProductArgs {
   pick?: number;
 }
 
-export const useProduct = (args: IUseProductArgs) => {
+export default function useProduct(args: IUseProductArgs): {
+  onClickCreate: (data: IFormDataProductWrite) => Promise<void>;
+  onClickUpdate: (data: IFormDataProductWrite) => Promise<void>;
+  onClickDelete: () => Promise<void>;
+} {
   const router = useRouter();
 
   const [createProduct] = useCreateProduct();
@@ -30,7 +34,7 @@ export const useProduct = (args: IUseProductArgs) => {
   const [uploadFile] = useUploadFile();
 
   // 파일 업로드 및 URL 처리 함수
-  const uploadFilesAndGetUrls = async (files: File[] | undefined) => {
+  const uploadFilesAndGetUrls = async (files: File[] | undefined): Promise<string[]> => {
     let resultFileUrls: string[] = []; // 파일 URL을 저장할 배열 초기화
 
     // 파일이 존재하는 경우에만 처리
@@ -38,7 +42,7 @@ export const useProduct = (args: IUseProductArgs) => {
       const resultFile = await Promise.all(
         // 모든 파일에 대해 병렬로 업로드 처리
         files.map(async (file) => {
-          if (file !== null) return await uploadFile({ variables: { file } }); // 파일 업로드 요청
+          if (file !== null) return uploadFile({ variables: { file } }); // 파일 업로드 요청
           return null; // 파일이 null이거나 undefined인 경우, null 반환
         })
       );
@@ -171,4 +175,4 @@ export const useProduct = (args: IUseProductArgs) => {
     onClickUpdate,
     onClickDelete,
   };
-};
+}

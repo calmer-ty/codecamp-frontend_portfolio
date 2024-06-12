@@ -20,7 +20,7 @@ const iconStyle = {
   marginRight: "8px",
 };
 
-export default function Button02(args: IButtonArgs) {
+export default function Button02(args: IButtonArgs): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
   return (
     <button

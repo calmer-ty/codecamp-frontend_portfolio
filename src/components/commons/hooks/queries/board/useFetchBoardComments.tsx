@@ -1,4 +1,3 @@
-// import { useRouter } from "next/router";
 import { useIdCheck } from "../../customs/useIdCheck";
 import { useQuery, gql } from "@apollo/client";
 import type { IQuery, IQueryFetchBoardCommentsArgs } from "../../../../../commons/types/generated/types";
@@ -15,11 +14,9 @@ export const FETCH_COMMENTS = gql`
   }
 `;
 
-export const useFetchBoardComments = () => {
+export const useFetchBoardComments = (): any => {
   const { id } = useIdCheck("boardId");
-  const result = useQuery<Pick<IQuery, "fetchBoardComments">, IQueryFetchBoardCommentsArgs>(FETCH_COMMENTS, {
+  return useQuery<Pick<IQuery, "fetchBoardComments">, IQueryFetchBoardCommentsArgs>(FETCH_COMMENTS, {
     variables: { boardId: id },
   });
-
-  return result;
 };

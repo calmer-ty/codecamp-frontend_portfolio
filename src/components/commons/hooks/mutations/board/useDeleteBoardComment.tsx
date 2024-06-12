@@ -7,8 +7,6 @@ const DELETE_COMMENT = gql`
   }
 `;
 
-export const useDeleteBoardComment = () => {
-  const result = useMutation<Pick<IMutation, "deleteBoardComment">, IMutationDeleteBoardCommentArgs>(DELETE_COMMENT);
-
-  return result;
+export const useDeleteBoardComment = (): any => {
+  return useMutation<Pick<IMutation, "deleteBoardComment">, IMutationDeleteBoardCommentArgs>(DELETE_COMMENT);
 };

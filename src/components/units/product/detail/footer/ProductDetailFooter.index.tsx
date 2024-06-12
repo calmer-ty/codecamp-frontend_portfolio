@@ -8,7 +8,7 @@ import QuestionList from "../../../../commons/comments/product/list/QuestionList
 
 import * as S from "./ProductDetailFooter.styles";
 
-function ProductDetailFooter() {
+function ProductDetailFooter(): JSX.Element {
   const { data, onLoadMore } = useScrollQuestion();
 
   return (

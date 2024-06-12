@@ -1,7 +1,13 @@
 import { useState } from "react";
 import type { Address } from "react-daum-postcode";
 
-export const useAddressSearch = () => {
+export default function useAddressSearch(): {
+  isOpen: boolean;
+  zipcode: string;
+  address: string;
+  onClickAddressSearch: () => void;
+  onCompleteAddressSearch: (data: Address) => void;
+} {
   const [isOpen, setIsOpen] = useState(false);
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
@@ -22,4 +28,4 @@ export const useAddressSearch = () => {
     onClickAddressSearch,
     onCompleteAddressSearch,
   };
-};
+}

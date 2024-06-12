@@ -4,7 +4,14 @@ export declare const window: typeof globalThis & {
   kakao: any;
 };
 
-export default function useMap(lat: any, lng: any, enableClick: boolean) {
+export default function useMap(
+  lat: any,
+  lng: any,
+  enableClick: boolean
+): {
+  latlng: any;
+  address: any;
+} {
   const [latlng, setLatlng] = useState<any>("");
   const [address, setAddress] = useState<any>("");
 
@@ -51,7 +58,7 @@ export default function useMap(lat: any, lng: any, enableClick: boolean) {
             // 좌표에 따른 주소
             const geocoder = new window.kakao.maps.services.Geocoder();
             const coord = new window.kakao.maps.LatLng(latlng.Ma, latlng.La);
-            const callback = function (result: any, status: any) {
+            const callback = function (result: any, status: any): void {
               const mapAddress = result[0].address.address_name;
               if (status === window.kakao.maps.services.Status.OK) {
                 setAddress(mapAddress);

@@ -3,10 +3,11 @@ import { FETCH_USEDITEM } from "../../queries/product/useFetchProduct";
 
 import type { IQuery, IQueryFetchUseditemArgs, IUseditem } from "../../../../../commons/types/generated/types";
 
-export const useProductPicked = (fetchUseditem: IUseditem) => {
-  const [pickProduct] = useToggleProductPick();
-
+export default function useProductPicked(fetchUseditem: IUseditem): {
+  onClickPick: () => Promise<void>;
+} {
   const onClickPick = async (): Promise<void> => {
+    const [pickProduct] = useToggleProductPick();
     // 클릭시 모달 임포트
     const { Modal } = await import("antd");
     try {
@@ -52,4 +53,4 @@ export const useProductPicked = (fetchUseditem: IUseditem) => {
   return {
     onClickPick,
   };
-};
+}

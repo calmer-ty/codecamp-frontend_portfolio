@@ -12,7 +12,7 @@ const buttonStyle = {
   color: "#fff",
 };
 
-export default function Button03(args: IButtonArgs) {
+export default function Button03(args: IButtonArgs): JSX.Element {
   return (
     <button
       style={{

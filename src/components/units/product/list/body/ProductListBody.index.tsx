@@ -14,7 +14,7 @@ import * as S from "./ProductListBody.styles";
 
 const SECRET_STRING = "!@#$";
 
-export default function ProductListBody() {
+export default function ProductListBody(): JSX.Element {
   const { data, refetch, onLoadMore } = useScrollProductsList();
   const { keyword, onChangeSearch } = useSearchbar({
     refetch,

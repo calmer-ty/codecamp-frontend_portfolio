@@ -19,7 +19,6 @@ export const FETCH_USEDITEMS = gql`
   }
 `;
 
-export const useFetchProducts = () => {
-  const result = useQuery<Pick<IQuery, "fetchUseditems">, IQueryFetchUseditemsArgs>(FETCH_USEDITEMS);
-  return result;
+export const useFetchProducts = (): any => {
+  return useQuery<Pick<IQuery, "fetchUseditems">, IQueryFetchUseditemsArgs>(FETCH_USEDITEMS);
 };

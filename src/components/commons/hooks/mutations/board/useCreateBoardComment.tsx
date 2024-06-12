@@ -9,8 +9,6 @@ const CREATE_COMMENT = gql`
   }
 `;
 
-export const useCreateBoardComment = () => {
-  const result = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_COMMENT);
-
-  return result;
+export const useCreateBoardComment = (): any => {
+  return useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_COMMENT);
 };

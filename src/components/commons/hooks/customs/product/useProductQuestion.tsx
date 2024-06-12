@@ -15,7 +15,11 @@ interface IUseProductQuestionArgs {
   onToggleEdit?: () => void;
 }
 
-export const useProductQuestion = (args: IUseProductQuestionArgs) => {
+export default function useProductQuestion(args: IUseProductQuestionArgs): {
+  onClickCreate: (data: IFormData) => Promise<void>;
+  onClickUpdate: (data: IFormData) => Promise<void>;
+  onClickDelete: () => Promise<void>;
+} {
   const { id } = useIdCheck("useditemId");
 
   const [createQuestion] = useCreateProductQuestion();
@@ -97,4 +101,4 @@ export const useProductQuestion = (args: IUseProductQuestionArgs) => {
     onClickUpdate,
     onClickDelete,
   };
-};
+}

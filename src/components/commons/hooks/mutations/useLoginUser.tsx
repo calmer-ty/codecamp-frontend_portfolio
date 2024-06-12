@@ -9,8 +9,6 @@ const LOGIN_USER = gql`
   }
 `;
 
-export const useLoginUser = () => {
-  const result = useMutation<Pick<IMutation, "loginUser">, IMutationLoginUserArgs>(LOGIN_USER);
-
-  return result;
+export const useLoginUser = (): any => {
+  return useMutation<Pick<IMutation, "loginUser">, IMutationLoginUserArgs>(LOGIN_USER);
 };

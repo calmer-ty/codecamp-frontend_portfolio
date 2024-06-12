@@ -7,8 +7,6 @@ const DISLIKE_BOARD = gql`
   }
 `;
 
-export const useDislikeBoard = () => {
-  const result = useMutation<Pick<IMutation, "dislikeBoard">, IMutationDislikeBoardArgs>(DISLIKE_BOARD);
-
-  return result;
+export const useDislikeBoard = (): any => {
+  return useMutation<Pick<IMutation, "dislikeBoard">, IMutationDislikeBoardArgs>(DISLIKE_BOARD);
 };

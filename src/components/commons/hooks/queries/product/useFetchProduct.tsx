@@ -27,9 +27,8 @@ export const FETCH_USEDITEM = gql`
   }
 `;
 
-export const useFetchProduct = (variables: IQueryFetchUseditemArgs) => {
-  const result = useQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>(FETCH_USEDITEM, {
+export const useFetchProduct = (variables: IQueryFetchUseditemArgs): any => {
+  return useQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>(FETCH_USEDITEM, {
     variables,
   });
-  return result;
 };

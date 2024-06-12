@@ -9,7 +9,7 @@ import { FETCH_COMMENTS } from "../../queries/board/useFetchBoardComments";
 import { Modal } from "antd";
 import { useIdCheck } from "../useIdCheck";
 
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import type { IFormData } from "../../../comments/board/write/CommentWrite.types";
 import type { IUpdateBoardCommentInput } from "../../../../../commons/types/generated/types";
 
@@ -19,7 +19,14 @@ interface IUseBoardCommentArgs {
   onToggleEdit?: () => void;
 }
 
-export const useBoardComment = (args: IUseBoardCommentArgs) => {
+export default function useBoardComment(args: IUseBoardCommentArgs): {
+  onClickCreate: (data: IFormData) => Promise<void>;
+  onClickUpdate: (data: IFormData) => Promise<void>;
+  onClickDelete: () => Promise<void>;
+  onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  rating: number | undefined;
+  setRating: Dispatch<SetStateAction<number | undefined>>;
+} {
   const { id } = useIdCheck("boardId");
   const [rating, setRating] = useState(args.rating);
   const [deletePassword, setDeletePassword] = useState("");
@@ -119,4 +126,4 @@ export const useBoardComment = (args: IUseBoardCommentArgs) => {
     rating,
     setRating,
   };
-};
+}

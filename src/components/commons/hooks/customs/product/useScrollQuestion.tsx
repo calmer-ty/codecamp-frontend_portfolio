@@ -1,6 +1,9 @@
 import { useFetchProductQuestions } from "../../queries/product/useFetchProductQuestions";
 
-export const useScrollQuestion = () => {
+export default function useScrollQuestion(): {
+  data: any;
+  onLoadMore: () => void;
+} {
   const { data, fetchMore } = useFetchProductQuestions();
   const onLoadMore = (): void => {
     if (data === undefined) return;
@@ -9,8 +12,7 @@ export const useScrollQuestion = () => {
         page: Math.ceil(data?.fetchUseditemQuestions.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (fetchMoreResult?.fetchUseditemQuestions === undefined)
-          return { fetchUseditemQuestions: [...prev.fetchUseditemQuestions] };
+        if (fetchMoreResult?.fetchUseditemQuestions === undefined) return { fetchUseditemQuestions: [...prev.fetchUseditemQuestions] };
 
         return {
           fetchUseditemQuestions: [...prev.fetchUseditemQuestions, ...fetchMoreResult.fetchUseditemQuestions],
@@ -22,4 +24,4 @@ export const useScrollQuestion = () => {
     data,
     onLoadMore,
   };
-};
+}

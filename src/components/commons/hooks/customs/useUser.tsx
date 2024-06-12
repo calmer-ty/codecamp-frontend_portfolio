@@ -11,7 +11,11 @@ import { accessTokenState } from "../../../../commons/stores";
 import type { IFormDataUserJoin } from "../../../units/user/join/UserJoin.types";
 import type { IFormDataUserLogin } from "../../../units/user/login/UserLogin.types";
 
-export const useUser = () => {
+export default function useUser(): {
+  onClickJoin: (data: IFormDataUserJoin) => Promise<void>;
+  onClickLogin: (data: IFormDataUserLogin) => Promise<void>;
+  onClickLoginExample: (data: IFormDataUserLogin) => Promise<void>;
+} {
   const router = useRouter();
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
@@ -47,7 +51,7 @@ export const useUser = () => {
       });
       const accessToken = result.data?.loginUser.accessToken;
 
-      if (accessToken === undefined || data.email === "" || data.password === "") {
+      if (typeof accessToken !== "string" || data.email === "" || data.password === "") {
         alert("로그인에 실패했습니다. 다시 시도해주세요.");
         return;
       }
@@ -69,7 +73,7 @@ export const useUser = () => {
       const accessToken = result.data?.loginUserExample.accessToken;
 
       // if (accessToken === undefined || data.email === "" || data.password === "") {
-      if (accessToken === undefined) {
+      if (typeof accessToken !== "string") {
         alert("로그인에 실패했습니다. 다시 시도해주세요.");
         return;
       }
@@ -85,4 +89,4 @@ export const useUser = () => {
     onClickLogin,
     onClickLoginExample,
   };
-};
+}

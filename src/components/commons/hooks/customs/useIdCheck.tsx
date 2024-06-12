@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export const useIdCheck = (id: string) => {
+export default function useIdCheck(id: string): {
+  id: string | null;
+} {
   const router = useRouter();
   const [queryId, setQueryId] = useState<string | null>(null);
 
@@ -19,4 +21,4 @@ export const useIdCheck = (id: string) => {
   }, [router.query[id]]);
 
   return { id: queryId };
-};
+}

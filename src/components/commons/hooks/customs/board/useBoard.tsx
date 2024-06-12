@@ -18,7 +18,11 @@ interface IUseBoardArgs {
   zipcode: string;
 }
 
-export const useBoard = (args?: IUseBoardArgs) => {
+export default function useBoard(args?: IUseBoardArgs): {
+  onClickSubmit: (data: IFormData) => Promise<void>;
+  onClickUpdate: (data: IFormData) => Promise<void>;
+  onClickDelete: () => Promise<void>;
+} {
   const router = useRouter();
   const { id } = useIdCheck("boardId");
 
@@ -146,4 +150,4 @@ export const useBoard = (args?: IUseBoardArgs) => {
     onClickUpdate,
     onClickDelete,
   };
-};
+}

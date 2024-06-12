@@ -5,7 +5,7 @@ import { getDate } from "../../../../../commons/libraries/utils";
 import * as S from "./ProductDetailHeader.styles";
 import type { IProductDetailProps } from "../ProductDetail.types";
 
-export default function ProductDetailHeader(props: IProductDetailProps) {
+export default function ProductDetailHeader(props: IProductDetailProps): JSX.Element {
   return (
     <S.Header>
       <S.HeaderLeft>

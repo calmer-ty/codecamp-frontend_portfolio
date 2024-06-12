@@ -6,8 +6,6 @@ const DELETE_BOARD = gql`
     deleteBoard(boardId: $boardId)
   }
 `;
-export const useDeleteBoard = () => {
-  const result = useMutation<Pick<IMutation, "deleteBoard">, IMutationDeleteBoardArgs>(DELETE_BOARD);
-
-  return result;
+export const useDeleteBoard = (): any => {
+  return useMutation<Pick<IMutation, "deleteBoard">, IMutationDeleteBoardArgs>(DELETE_BOARD);
 };

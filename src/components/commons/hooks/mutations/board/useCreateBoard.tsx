@@ -9,8 +9,6 @@ const CREATE_BOARD = gql`
   }
 `;
 
-export const useCreateBoard = () => {
-  const result = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD);
-
-  return result;
+export const useCreateBoard = (): any => {
+  return useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD);
 };
