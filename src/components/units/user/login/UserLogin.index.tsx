@@ -32,7 +32,6 @@ export default function UserLogin(): JSX.Element {
       <S.Container>
         <S.Logo>Logo</S.Logo>
         <S.Form onSubmit={handleSubmit(onClickLoginExample)}>
-          {/* <S.Form onSubmit={handleSubmit(onClickLoginExample)}> */}
           <S.InputWrap>
             <Label01 text="이메일" />
             <Input02 register={register("email")} />
@@ -43,11 +42,6 @@ export default function UserLogin(): JSX.Element {
             <Input02 type="password" register={register("password")} />
             <Error01 text={formState.errors.email?.message} />
           </S.InputWrap>
-
-          {/* <S.LoginState>
-            <input type="checkbox" />
-            <span>로그인 상태 유지</span>
-          </S.LoginState> */}
           <Button03 text="로그인하기" />
         </S.Form>
       </S.Container>

@@ -2,24 +2,23 @@ import Link from "next/link";
 import { useApolloClient } from "@apollo/client";
 import { useEffect, useState } from "react";
 
-import { FETCH_USER_LOGGED_IN, useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
+import UserIcon01 from "../../icon/user/01";
+
 import { useLogoutUser } from "../../hooks/mutations/useLogoutUser";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 
 import { Dropdown, Space } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import UserIcon01 from "../../icon/user/01";
 
 import { FETCH_BOARDS } from "../../hooks/queries/board/useFetchBoards";
 import { FETCH_USEDITEMS } from "../../hooks/queries/product/useFetchProducts";
 import { FETCH_USEDITEMS_BEST } from "../../hooks/queries/product/useFetchProductsBest";
+import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 
+import type { MenuProps } from "antd";
 import type { DocumentNode } from "graphql";
-
 import * as S from "./LayoutNavigation.styles";
-import { wrapAsyncFunc } from "../../../../commons/libraries/asyncFunc";
 
 const NAVIGATION_MENUS = [
   { name: "Firebase", page: "/boards_firebase" },
@@ -99,12 +98,13 @@ export default function LayoutNavigation(): JSX.Element {
     }
   };
   // 로그인 확인
-  const onClickFetchLoggedIn = async (): Promise<void> => {
-    const result = await client.query({
-      query: FETCH_USER_LOGGED_IN,
-    });
-    console.log(result);
-  };
+  // const onClickFetchLoggedIn = async (): Promise<void> => {
+  //   console.log("onClickFetchLoggedIn click");
+  //   const result = await client.query({
+  //     query: FETCH_USER_LOGGED_IN,
+  //   });
+  //   console.log(result);
+  // };
 
   // 로그인 시 유저 정보 팝업
   const items: MenuProps["items"] = [
@@ -125,16 +125,16 @@ export default function LayoutNavigation(): JSX.Element {
     },
     {
       key: "2",
-      label: <S.LogoutBtn onClick={wrapAsyncFunc(onClickLogout)}>로그아웃</S.LogoutBtn>,
+      label: <S.LogoutBtn onClick={onClickLogout}>로그아웃</S.LogoutBtn>,
       icon: <UserOutlined />,
       danger: true,
     },
-    {
-      key: "3",
-      label: <S.LogoutBtn onClick={wrapAsyncFunc(onClickFetchLoggedIn)}>로그인 확인</S.LogoutBtn>,
-      icon: <UserOutlined />,
-      danger: true,
-    },
+    // {
+    //   key: "3",
+    //   label: <S.LogoutBtn onClick={onClickFetchLoggedIn}>로그인 확인</S.LogoutBtn>,
+    //   icon: <UserOutlined />,
+    //   danger: true,
+    // },
   ];
 
   return (
@@ -146,7 +146,7 @@ export default function LayoutNavigation(): JSX.Element {
             {NAVIGATION_MENUS.map((el) => (
               <S.MenuItem key={el.page}>
                 <Link href={el.page}>
-                  <S.itemLink onClick={handleMovedNavOff} onMouseOver={wrapAsyncFunc(prefetch(el.fetch))}>
+                  <S.itemLink onClick={handleMovedNavOff} onMouseOver={prefetch(el.fetch)}>
                     {el.name}
                   </S.itemLink>
                 </Link>
