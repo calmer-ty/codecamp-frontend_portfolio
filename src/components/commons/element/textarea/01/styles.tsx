@@ -3,10 +3,11 @@ import styled from "@emotion/styled";
 export const ContentsWrap = styled.article`
   position: relative;
   border: 1px solid #bdbdbd;
+  background-color: #fff;
 `;
 export const Contents = styled.textarea`
   width: 100%;
-  height: 108px;
+  height: 110px;
   padding: 20px;
   border: 0;
 `;
@@ -14,8 +15,8 @@ export const ContentsBottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #f2f2f2;
-  background-color: #fff;
+  height: 50px;
+  border-top: 1px solid #bdbdbd;
 `;
 export const ContentsLength = styled.span`
   margin: 0 20px;
@@ -23,16 +24,18 @@ export const ContentsLength = styled.span`
 `;
 export const BtnWrap = styled.div`
   display: flex;
+  position: absolute;
+  right: 0;
 `;
 export const SubmitBtn = styled.button`
-  width: 91px;
-  height: 52px;
+  width: 90px;
+  height: 50px;
   background-color: #000;
   color: #fff;
 `;
 export const CancelBtn = styled.button`
-  width: 91px;
-  height: 52px;
+  width: 90px;
+  height: 50px;
   background-color: #f00;
   color: #fff;
 `;

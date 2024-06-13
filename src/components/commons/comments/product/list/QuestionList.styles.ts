@@ -1,34 +1,30 @@
 import styled from "@emotion/styled";
 import { Modal, Rate } from "antd";
 
-// Layout
-export const FlexRow = styled.div`
+export const ListItem = styled.section`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid #bdbdbd;
+  background-color: rgba(255, 255, 255, 0.3);
+`;
+export const ItemWrap = styled.div`
   display: flex;
   column-gap: 16px;
   justify-content: space-between;
 `;
-export const FlexColumn = styled.div`
+export const CommentContents = styled.div`
   display: flex;
   flex-direction: column;
+  row-gap: 5px;
   width: calc(100% - 50px);
 `;
 
-// List
-export const ListItem = styled.article`
-  display: flex;
-  flex-direction: column;
-  width: 1200px;
-  position: relative;
-  padding: 20px 0;
-  border-bottom: 1px solid #bdbdbd;
-`;
-
 export const Writer = styled.span`
-  margin-bottom: 10px;
+  font-weight: bold;
 `;
-export const Contents = styled.p`
-  margin-bottom: 20px;
-`;
+export const Contents = styled.p``;
 export const CreateDate = styled.span`
   font-size: 12px;
   color: #bdbdbd;
