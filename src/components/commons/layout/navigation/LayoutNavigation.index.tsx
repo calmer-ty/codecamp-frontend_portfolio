@@ -67,22 +67,23 @@ export default function LayoutNavigation(): JSX.Element {
 
   // // PC 해상도일 때, sideNav가 켜져있다면 초기화
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1390px)");
+    const mediaQuery = window.matchMedia("(max-width: 1280px)");
 
     const handleMediaQueryChange = (e: MediaQueryListEvent): void => {
       if (e.matches) {
         setIsOpen(false); // 초기화할 상태 값 설정
       }
     };
+
     // Add listener to handle changes
-    mediaQuery.addListener(handleMediaQueryChange);
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
     // Initial check
     if (mediaQuery.matches) {
       setIsOpen(false); // 초기화할 상태 값 설정
     }
     // Clean up listener on component unmount
     return () => {
-      mediaQuery.removeListener(handleMediaQueryChange);
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, []);
 
@@ -100,13 +101,13 @@ export default function LayoutNavigation(): JSX.Element {
     {
       key: "1",
       label: (
-        <S.UserInfoModal>
-          <UserIcon01 size={30} padding={8} />
-          <div>
-            <div>{data?.fetchUserLoggedIn.name}</div>
-            <div>100,000 P</div>
-          </div>
-        </S.UserInfoModal>
+        <S.UserModal>
+          <UserIcon01 />
+          <S.UserModalInfo>
+            <span>{data?.fetchUserLoggedIn.name}</span>
+            <span>100,000 P</span>
+          </S.UserModalInfo>
+        </S.UserModal>
       ),
     },
     {
@@ -144,32 +145,34 @@ export default function LayoutNavigation(): JSX.Element {
           </S.Menus>
 
           {/* 회원가입/로그인 */}
-          {accessToken === "" ? (
-            <S.UserProcedure>
-              {USER_OPTIONS.map((el) => (
-                <S.MenuItem key={el.page}>
-                  <Link href={el.page}>
-                    <S.UserOptBtn onClick={handleMovedNavOff}>{el.name}</S.UserOptBtn>
-                  </Link>
-                </S.MenuItem>
-              ))}
-            </S.UserProcedure>
-          ) : (
-            <S.UserInfo>
-              <Dropdown menu={{ items }}>
-                <a
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
-                  <Space>
-                    <S.UserName>{data?.fetchUserLoggedIn.name}</S.UserName> 님
-                    <DownOutlined />
-                  </Space>
-                </a>
-              </Dropdown>
-            </S.UserInfo>
-          )}
+          <S.UserInfoWrap>
+            {accessToken === "" ? (
+              <S.UserProcedure>
+                {USER_OPTIONS.map((el) => (
+                  <S.MenuItem key={el.page}>
+                    <Link href={el.page}>
+                      <S.UserOptBtn onClick={handleMovedNavOff}>{el.name}</S.UserOptBtn>
+                    </Link>
+                  </S.MenuItem>
+                ))}
+              </S.UserProcedure>
+            ) : (
+              <S.UserInfo>
+                <Dropdown menu={{ items }}>
+                  <a
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <Space>
+                      <S.UserName>{data?.fetchUserLoggedIn.name}</S.UserName> 님
+                      <DownOutlined />
+                    </Space>
+                  </a>
+                </Dropdown>
+              </S.UserInfo>
+            )}
+          </S.UserInfoWrap>
         </S.Navigation>
       </S.NavigationWrap>
       <S.NavToggleBtn onClick={handleChangeIcon} icon={isOpen ? <S.CloseBtn /> : <S.MenuBtn />}></S.NavToggleBtn>

@@ -84,11 +84,13 @@ export const itemLink = styled.a`
 `;
 
 // 로그인/회원가입 요소 스타일
-export const UserProcedure = styled.ul`
+export const UserInfoWrap = styled.div`
   display: flex;
   align-items: center;
+
   &::before {
     content: "";
+    display: inline-block;
     width: 2px;
     height: 20px;
     background-color: #000;
@@ -107,6 +109,15 @@ export const UserProcedure = styled.ul`
     }
   `)}
 `;
+export const UserProcedure = styled.ul`
+  display: flex;
+  align-items: center;
+
+  ${mediaQueries.desktop(css`
+    flex-direction: column;
+    row-gap: 20px;
+  `)}
+`;
 
 export const MenuBtn = styled(MenuOutlined)`
   font-size: 24px !important;
@@ -120,17 +131,22 @@ export const CloseBtn = styled(CloseOutlined)`
 // 로그인 후 유저 요소
 export const UserInfo = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  margin-left: 20px;
   cursor: pointer;
 `;
 export const UserName = styled.span`
   font-weight: bold;
 `;
-export const UserInfoModal = styled.div`
+export const UserModal = styled.div`
   display: flex;
-  justify-content: space-between;
+  column-gap: 10px;
   font-weight: bold;
   cursor: pointer;
+`;
+export const UserModalInfo = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const UserOptBtn = styled.a`
