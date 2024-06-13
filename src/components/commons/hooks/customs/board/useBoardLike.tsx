@@ -6,10 +6,10 @@ import { useIdCheck } from "../useIdCheck";
 
 import type { IQuery, IQueryFetchBoardArgs } from "../../../../../commons/types/generated/types";
 
-export default function useBoardLike(): {
+export const useBoardLike = (): {
   onClickLike: () => Promise<void>;
   onClickDislike: () => Promise<void>;
-} {
+} => {
   const { id } = useIdCheck("boardId");
   const { data } = useFetchBoard({ boardId: id });
 
@@ -88,4 +88,4 @@ export default function useBoardLike(): {
     onClickLike,
     onClickDislike,
   };
-}
+};

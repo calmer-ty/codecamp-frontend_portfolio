@@ -1,9 +1,9 @@
 import { useFetchBoardComments } from "../../queries/board/useFetchBoardComments";
 
-export default function useScrollComment(): {
+export const useScrollComment = (): {
   data: any;
   onLoadMore: () => void;
-} {
+} => {
   const { data, fetchMore } = useFetchBoardComments();
   // 댓글 무한 스크롤
   const onLoadMore = (): void => {
@@ -27,4 +27,4 @@ export default function useScrollComment(): {
     data,
     onLoadMore,
   };
-}
+};

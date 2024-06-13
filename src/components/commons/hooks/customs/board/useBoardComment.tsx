@@ -19,14 +19,16 @@ interface IUseBoardCommentArgs {
   onToggleEdit?: () => void;
 }
 
-export default function useBoardComment(args: IUseBoardCommentArgs): {
+export const useBoardComment = (
+  args: IUseBoardCommentArgs
+): {
   onClickCreate: (data: IFormData) => Promise<void>;
   onClickUpdate: (data: IFormData) => Promise<void>;
   onClickDelete: () => Promise<void>;
   onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   rating: number | undefined;
   setRating: Dispatch<SetStateAction<number | undefined>>;
-} {
+} => {
   const { id } = useIdCheck("boardId");
   const [rating, setRating] = useState(args.rating);
   const [deletePassword, setDeletePassword] = useState("");
@@ -126,4 +128,4 @@ export default function useBoardComment(args: IUseBoardCommentArgs): {
     rating,
     setRating,
   };
-}
+};
