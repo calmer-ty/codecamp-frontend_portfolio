@@ -9,8 +9,13 @@ export const FETCH_USEDITEM_QUESTIONS = gql`
     fetchUseditemQuestions(page: $page, useditemId: $useditemId) {
       _id
       contents
-      useditem
-      user
+      useditem {
+        _id
+      }
+      user {
+        _id
+        name
+      }
       createdAt
     }
   }
@@ -18,6 +23,7 @@ export const FETCH_USEDITEM_QUESTIONS = gql`
 
 export const useFetchProductQuestions = (): QueryReturnType<"fetchUseditemQuestions", IQueryFetchUseditemQuestionsArgs> => {
   const { id } = useIdCheck("useditemId");
+  console.log(id);
   return useQuery<Pick<IQuery, "fetchUseditemQuestions">, IQueryFetchUseditemQuestionsArgs>(FETCH_USEDITEM_QUESTIONS, {
     variables: { useditemId: id },
   });

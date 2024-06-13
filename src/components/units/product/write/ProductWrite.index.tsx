@@ -122,9 +122,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             <Label01 text="태그입력" />
             <S.Tags>
               {tagsProps.children.map((el: string) => (
-                <>
-                  <span key={el}>{el}</span>
-                </>
+                <span key={el}>{el}</span>
               ))}
             </S.Tags>
             <Error01 text={errors.tags?.message} />
