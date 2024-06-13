@@ -35,6 +35,7 @@ export default function LayoutNavigation(): JSX.Element {
   const { data } = useFetchLoggedIn();
   const [accessToken] = useRecoilState(accessTokenState);
   const [isOpen, setIsOpen] = useState(false);
+  console.log(isOpen);
 
   const client = useApolloClient();
 
@@ -67,11 +68,12 @@ export default function LayoutNavigation(): JSX.Element {
 
   // // PC 해상도일 때, sideNav가 켜져있다면 초기화
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1280px)");
+    const mediaQuery = window.matchMedia("(min-width: 1000px)");
 
     const handleMediaQueryChange = (e: MediaQueryListEvent): void => {
       if (e.matches) {
         setIsOpen(false); // 초기화할 상태 값 설정
+        console.log("isOpen set to false due to min-width 1280px"); // 콘솔 로그 추가
       }
     };
 
@@ -80,6 +82,7 @@ export default function LayoutNavigation(): JSX.Element {
     // Initial check
     if (mediaQuery.matches) {
       setIsOpen(false); // 초기화할 상태 값 설정
+      console.log("isOpen set to false on initial check due to min-width 1280px"); // 콘솔 로그 추가
     }
     // Clean up listener on component unmount
     return () => {
