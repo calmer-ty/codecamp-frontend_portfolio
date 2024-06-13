@@ -16,11 +16,9 @@ export const restoreAccessTokenLoadable = selector({
   get: async () => {
     try {
       const newAccessToken = await getAccessToken();
-      console.log("New access token:", newAccessToken);
       return newAccessToken;
     } catch (error) {
-      console.error("Failed to restore access token:", error);
-      return null;
+      if (error instanceof Error) console.log("Failed to restore access token:", error.message);
     }
   },
 });

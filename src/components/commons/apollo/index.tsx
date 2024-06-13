@@ -17,24 +17,13 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   // 로그인 페이지에서 가져온 accessToken을 모든 페이지에 뿌릴 수 있게 설정
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
+  console.log("restoreAccessToken", restoreAccessToken);
 
   useEffect(() => {
-    console.log("restoreAccessToken state: ", restoreAccessToken.state);
-    if (restoreAccessToken.state === "hasValue") {
-      const newAccessToken = restoreAccessToken.contents;
+    void restoreAccessToken.toPromise().then((newAccessToken) => {
       setAccessToken(newAccessToken ?? "");
-      console.log("apollo의 useEffect 프로미스 토큰: ", newAccessToken);
-    } else if (restoreAccessToken.state === "hasError") {
-      console.error("Failed to restore access token:", restoreAccessToken.contents);
-    }
-  }, [restoreAccessToken.state, restoreAccessToken.contents, setAccessToken]);
-
-  // useEffect(() => {
-  //   console.log(restoreAccessToken);
-  //   void restoreAccessToken.toPromise().then((newAccessToken) => {
-  //     setAccessToken(newAccessToken ?? "");
-  //   });
-  // }, [restoreAccessToken]);
+    });
+  }, []);
   // useEffect(() => {
   //   // 2-1. 리코일 API(useRecoilValueLoadable) 사용 이전
   //   void getAccessToken().then((newAccessToken): void => {
@@ -89,6 +78,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
     // 파일, 컴퓨터 메모리에 저장할지 선택가능
     // 서버데이터 + 프론트데이터
     cache: GLOBAL_STATE,
+    connectToDevTools: true,
   });
 
   // 아폴로 세팅이 끝나면 그 자식들이 useQuery..useMutation이 가능하다
