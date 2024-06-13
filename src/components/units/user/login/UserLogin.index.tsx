@@ -1,18 +1,16 @@
 import { useForm } from "react-hook-form";
-// Validation
-import { schemaUserLogin } from "../../../../commons/libraries/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
-// Hooks
-import useUser from "../../../commons/hooks/customs/useUser";
-// Component
+import { useUser } from "../../../commons/hooks/customs/useUser";
+
 import Label01 from "../../../commons/element/labels/01";
 import Error01 from "../../../commons/element/errors/01";
 import Input02 from "../../../commons/element/inputs/02";
 import Button03 from "../../../commons/element/buttons/03";
-// Style
-import * as S from "./UserLogin.styles";
-// Type
+
+import { schemaUserLogin } from "../../../../commons/libraries/validation";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import type { IFormDataUserLogin } from "./UserLogin.types";
+import * as S from "./UserLogin.styles";
 
 export default function UserLogin(): JSX.Element {
   // FROM

@@ -3,16 +3,14 @@ import { useRecoilState } from "recoil";
 import { useApolloClient } from "@apollo/client";
 import { useEffect, useState } from "react";
 
-import { useLogoutUser } from "../../hooks/mutations/user/useLogoutUser";
-
-import UserIcon01 from "../../element/icon/user/01";
-
+import { accessTokenState } from "../../../../commons/stores";
+import { useUser } from "../../hooks/customs/useUser";
 import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 import { FETCH_BOARDS } from "../../hooks/queries/board/useFetchBoards";
 import { FETCH_USEDITEMS } from "../../hooks/queries/product/useFetchProducts";
 import { FETCH_USEDITEMS_BEST } from "../../hooks/queries/product/useFetchBestProducts";
 
-import { accessTokenState } from "../../../../commons/stores";
+import UserIcon01 from "../../element/icon/user/01";
 
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
@@ -35,12 +33,12 @@ const USER_OPTIONS = [
 
 export default function LayoutNavigation(): JSX.Element {
   const { data } = useFetchLoggedIn();
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [accessToken] = useRecoilState(accessTokenState);
   const [isOpen, setIsOpen] = useState(false);
 
-  const [logoutUser] = useLogoutUser();
-
   const client = useApolloClient();
+
+  const { onClickLogout } = useUser();
 
   // Prefetch
   const prefetch = (fetch?: DocumentNode[]) => async () => {
@@ -54,7 +52,7 @@ export default function LayoutNavigation(): JSX.Element {
       });
       await Promise.all(fetchQueries);
     } catch (error) {
-      console.error("Error prefetching product:", error);
+      if (error instanceof Error) alert(error.message);
     }
   };
 
@@ -88,16 +86,6 @@ export default function LayoutNavigation(): JSX.Element {
     };
   }, []);
 
-  // 로그아웃
-  const onClickLogout = async (): Promise<void> => {
-    try {
-      const result = await logoutUser();
-      console.log("onClickLogout을 눌렀어요", result);
-      setAccessToken("");
-    } catch (error) {
-      console.error("로그아웃 실패", error);
-    }
-  };
   // 로그인 확인
   // const onClickFetchLoggedIn = async (): Promise<void> => {
   //   console.log("onClickFetchLoggedIn click");

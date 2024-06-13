@@ -1,27 +1,29 @@
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 
+import { accessTokenState } from "../../../../commons/stores";
 import { useCreateUser } from "../mutations/user/useCreateUser";
 import { useLoginUser } from "../mutations/user/useLoginUser";
 import { useLoginUserExample } from "../mutations/user/useLoginUserExample";
+import { useLogoutUser } from "../mutations/user/useLogoutUser";
 
 import { Modal } from "antd";
-import { accessTokenState } from "../../../../commons/stores";
-
 import type { IFormDataUserJoin } from "../../../units/user/join/UserJoin.types";
 import type { IFormDataUserLogin } from "../../../units/user/login/UserLogin.types";
 
-export default function useUser(): {
+export const useUser = (): {
   onClickJoin: (data: IFormDataUserJoin) => Promise<void>;
   onClickLogin: (data: IFormDataUserLogin) => Promise<void>;
   onClickLoginExample: (data: IFormDataUserLogin) => Promise<void>;
-} {
+  onClickLogout: () => Promise<void>;
+} => {
   const router = useRouter();
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [createUser] = useCreateUser();
   const [loginUser] = useLoginUser();
   const [loginUserExample] = useLoginUserExample();
+  const [logoutUser] = useLogoutUser();
 
   const onClickJoin = async (data: IFormDataUserJoin): Promise<void> => {
     const { passwordCheck, ...inputs } = data;
@@ -84,9 +86,22 @@ export default function useUser(): {
     }
   };
 
+  // 로그아웃
+  const onClickLogout = async (): Promise<void> => {
+    try {
+      const result = await logoutUser();
+      console.log("onClickLogout을 눌렀어요", result);
+      setAccessToken("");
+      void router.push("/user/login");
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
+
   return {
     onClickJoin,
     onClickLogin,
     onClickLoginExample,
+    onClickLogout,
   };
-}
+};
