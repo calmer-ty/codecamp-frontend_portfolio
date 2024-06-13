@@ -1,4 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
+
+import type { MutationReturnType } from "../../hooks.types";
 import type { IMutation, IMutationUpdateBoardCommentArgs } from "../../../../../commons/types/generated/types";
 
 const UPDATE_COMMENT = gql`
@@ -9,6 +11,6 @@ const UPDATE_COMMENT = gql`
   }
 `;
 
-export const useUpdateBoardComment = (): any => {
+export const useUpdateBoardComment = (): MutationReturnType<"updateBoardComment", IMutationUpdateBoardCommentArgs> => {
   return useMutation<Pick<IMutation, "updateBoardComment">, IMutationUpdateBoardCommentArgs>(UPDATE_COMMENT);
 };

@@ -1,4 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
+
+import type { MutationReturnType } from "../../hooks.types";
 import type { IMutation, IMutationDislikeBoardArgs } from "../../../../../commons/types/generated/types";
 
 const DISLIKE_BOARD = gql`
@@ -7,6 +9,6 @@ const DISLIKE_BOARD = gql`
   }
 `;
 
-export const useDislikeBoard = (): any => {
+export const useDislikeBoard = (): MutationReturnType<"dislikeBoard", IMutationDislikeBoardArgs> => {
   return useMutation<Pick<IMutation, "dislikeBoard">, IMutationDislikeBoardArgs>(DISLIKE_BOARD);
 };
