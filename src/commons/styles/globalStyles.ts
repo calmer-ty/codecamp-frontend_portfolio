@@ -58,6 +58,7 @@ export const globalStyles = css`
   button {
     border: none;
     background-color: initial;
+    font-family: "NotoSansKR-Regular", sans-serif;
     cursor: pointer;
   }
 `;
