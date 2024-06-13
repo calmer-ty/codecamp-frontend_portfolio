@@ -72,17 +72,13 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // Tags
   const { props: tagsProps } = TagsWrite01();
-  console.log(tagsProps);
   const tags: string[] = [];
   const tagsTest: React.ReactElement[] = [];
   tagsProps.children[0].forEach((el: React.ReactElement) => {
-    console.log(el);
     if (typeof el.key !== "string") return;
     tags.push(el.key);
     tagsTest.push(el);
   });
-  console.log(tags);
-  console.log(tagsTest);
 
   // 상품 뮤테이션 Hook
   const { onClickCreate, onClickUpdate } = useProduct({
