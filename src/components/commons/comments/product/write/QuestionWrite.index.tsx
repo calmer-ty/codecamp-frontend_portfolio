@@ -1,6 +1,4 @@
 import { useForm } from "react-hook-form";
-import * as S from "./QuestionWrite.styles";
-
 import { useProductQuestion } from "../../../hooks/customs/product/useProductQuestion";
 
 import Textarea01 from "../../../element/textarea/01";
@@ -9,6 +7,7 @@ import TitleComment from "../../../element/title/comment";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductQuestion } from "../../../../../commons/libraries/validation";
 import type { IQuestionWriteProps, IFormData } from "./QuestionWrite.types";
+import * as S from "./QuestionWrite.styles";
 
 export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
   const { register, handleSubmit, watch } = useForm<IFormData>({
