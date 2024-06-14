@@ -166,11 +166,11 @@ export const useProduct = (
   // 상품 찜하기
   const onClickPick = async (): Promise<void> => {
     if (typeof args._id !== "string") return;
+    console.log(args._id);
 
     try {
       await pickProduct({
         variables: { useditemId: args._id },
-
         optimisticResponse: {
           toggleUseditemPick: args.pick ?? 0,
         },
@@ -181,6 +181,9 @@ export const useProduct = (
               useditemId: args._id ?? "",
             },
           });
+          // 디버깅: 캐시에서 읽은 데이터 확인
+          console.log("Previous Data:", prevData);
+
           cache.writeQuery({
             query: FETCH_USEDITEM,
             variables: {
@@ -198,7 +201,7 @@ export const useProduct = (
         },
       });
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) Modal.error({ content: "로그인 후 찜하기가 가능합니다" });
     }
   };
 
