@@ -7,6 +7,8 @@ export const Body = styled.section`
   align-items: flex-end;
   row-gap: 20px;
   width: 100%;
+  background-color: #fff;
+  margin: 20px 0;
 `;
 export const Table = styled.table`
   width: 100%;

@@ -1,6 +1,3 @@
-import * as S from "./BoardList.styles";
-
-// Custom Hooks
 import { useSearchbar } from "../../../commons/hooks/customs/useSearch";
 import { usePagination } from "../../../commons/hooks/customs/usePagination";
 import { useFetchBoards } from "../../../commons/hooks/queries/board/useFetchBoards";
@@ -27,14 +24,12 @@ export default function BoardList(): JSX.Element {
   });
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <BoardListHeader onChangeSearch={onChangeSearch} />
-        <BoardListBody data={data} keyword={keyword} />
-        <BoardListFooter>
-          <Pagination01 {...paginationArgs} />
-        </BoardListFooter>
-      </S.Container>
-    </S.Wrapper>
+    <>
+      <BoardListHeader onChangeSearch={onChangeSearch} />
+      <BoardListBody data={data} keyword={keyword} />
+      <BoardListFooter>
+        <Pagination01 {...paginationArgs} />
+      </BoardListFooter>
+    </>
   );
 }
