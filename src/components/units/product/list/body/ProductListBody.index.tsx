@@ -44,7 +44,7 @@ export default function ProductListBody(): JSX.Element {
                   <TagsView01 tags={el.tags} />
                   <S.InfoBottom>
                     <S.SellerInfo>
-                      <UserIcon01 size={16} padding={4} />
+                      <UserIcon01 />
                       <span>{el.seller?.name}</span>
                     </S.SellerInfo>
                     <Pick01 text={el.pickedCount} />

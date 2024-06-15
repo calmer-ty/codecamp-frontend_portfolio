@@ -1,11 +1,12 @@
 import { useFetchProducts } from "../../queries/product/useFetchProducts";
 
 import type { IQuery, IQueryFetchUseditemsArgs } from "../../../../../commons/types/generated/types";
+import type { ApolloQueryResult } from "@apollo/client";
 
 export const useScrollProductsList = (): {
   data: Pick<IQuery, "fetchUseditems"> | undefined;
   onLoadMore: () => void;
-  refetch: (variables?: Partial<IQueryFetchUseditemsArgs> | undefined) => Promise<any>;
+  refetch: (variables?: Partial<IQueryFetchUseditemsArgs> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, "fetchUseditems">>>;
 } => {
   const { data, fetchMore, refetch } = useFetchProducts();
   // 댓글 무한 스크롤
