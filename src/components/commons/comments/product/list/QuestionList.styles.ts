@@ -24,7 +24,11 @@ export const CommentContents = styled.div`
 export const Writer = styled.span`
   font-weight: bold;
 `;
-export const Contents = styled.p``;
+export const Contents = styled.p`
+  white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
+  overflow: hidden; /* 텍스트가 영역을 넘어가면 숨김 처리 */
+  text-overflow: ellipsis; /* 넘어가는 텍스트를 ...으로 표시 */
+`;
 export const CreateDate = styled.span`
   font-size: 12px;
   color: #bdbdbd;
