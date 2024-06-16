@@ -6,5 +6,7 @@ export const getDate = (date: unknown): string => {
   const yyyy = _date.getFullYear();
   const mm = _date.getMonth() + 1;
   const dd = _date.getDate();
-  return `${yyyy}-${mm}-${dd}`;
+  const formattedDd = dd < 10 ? `0${dd}` : `${dd}`;
+  console.log(dd);
+  return `${yyyy}-${mm}-${formattedDd}`;
 };
