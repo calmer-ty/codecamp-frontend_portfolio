@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-// Library
 import { Rate } from "antd";
 import type { ICommentWriteProps } from "./CommentWrite.types";
 
@@ -22,7 +21,7 @@ export const InputWrap = styled.div`
   column-gap: 24px;
 `;
 // Info
-export const InfoInput = styled.input`
+export const UserInfoInput = styled.input`
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
