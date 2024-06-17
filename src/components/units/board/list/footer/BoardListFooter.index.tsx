@@ -7,7 +7,9 @@ export default function BoardListFooter(props: IBoardDetailFooterProps): JSX.Ele
   return (
     <S.Footer>
       <>{props.children}</>
-      <LinkButton01 text="게시물 등록하기" href="/boards/new" />
+      <S.ButtonWrap>
+        <LinkButton01 text="게시물 등록하기" href="/boards/new" />
+      </S.ButtonWrap>
     </S.Footer>
   );
 }

@@ -1,3 +1,4 @@
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import * as S from "./styles";
 import type { IPagination01Props } from "./types";
 
@@ -5,7 +6,7 @@ export default function Pagination01(props: IPagination01Props): JSX.Element {
   return (
     <S.Pagination>
       <S.PageBtn onClick={props.onClickPrevPage} isDisabled={props.startPage <= 1}>
-        {"<"}
+        <LeftOutlined />
       </S.PageBtn>
       {new Array(10)
         .fill(1)
@@ -20,7 +21,7 @@ export default function Pagination01(props: IPagination01Props): JSX.Element {
         ))}
 
       <S.PageBtn onClick={props.onClickNextPage} isDisabled={props.lastPage - props.startPage < 10}>
-        {">"}
+        <RightOutlined />
       </S.PageBtn>
     </S.Pagination>
   );
