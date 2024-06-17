@@ -1,5 +1,5 @@
-import { HeartFilled } from "@ant-design/icons";
+import * as S from "./styles";
 
 export default function HeartIcon01(): JSX.Element {
-  return <HeartFilled />;
+  return <S.HeartIcon />;
 }
