@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-export const checkValidation = async (file?: File): Promise<boolean> => {
+export const checkValidationImg = async (file?: File): Promise<boolean> => {
   const { Modal } = await import("antd");
   if (typeof file === "undefined") {
     Modal.error({ content: "파일이 없습니다." });

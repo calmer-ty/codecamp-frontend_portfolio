@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 // Hooks
-import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
+import { FETCH_BOARD } from "../../queries/board/useFetchBoard";
 import { FETCH_BOARDS } from "../../queries/board/useFetchBoards";
 import { useCreateBoard } from "../../mutations/board/useCreateBoard";
 import { useUpdateBoard } from "../../mutations/board/useUpdateBoard";
@@ -31,10 +31,6 @@ export const useBoard = (
   const [createBoard] = useCreateBoard();
   const [updateBoard] = useUpdateBoard();
   const [deleteBoard] = useDeleteBoard();
-
-  const { data: defaultData } = useFetchBoard({
-    boardId: id,
-  });
 
   const onClickSubmit = async (data: IFormData): Promise<void> => {
     try {
@@ -93,11 +89,6 @@ export const useBoard = (
       if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
     if (isChangedFiles) updateBoardInput.images = args?.fileUrls;
-
-    if (defaultData?.fetchBoard.contents === data.contents) {
-      Modal.error({ content: "내용이 수정되지 않았습니다." });
-      return;
-    }
 
     try {
       const result = await updateBoard({
