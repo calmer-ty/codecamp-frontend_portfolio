@@ -13,7 +13,7 @@ interface IInputProps {
 const inputStyle = {
   height: "52px",
   padding: "0 16px",
-  border: "1px solid #bdbdbd",
+  border: "1px solid #777",
 };
 
 export default function Input01(props: IInputProps): JSX.Element {
