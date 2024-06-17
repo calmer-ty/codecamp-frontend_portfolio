@@ -4,11 +4,6 @@ import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
 // emotion은 태그로 쓰이기 때문에 대문자로 사용한다
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,27 +11,30 @@ export const Container = styled.div`
   padding: 100px;
   border: 2px solid #bdbdbd;
   box-shadow: 5px 5px 5px #bdbdbd;
+  background-color: #fff;
 `;
 
 export const FlexRow = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  column-gap: 20px;
 `;
 export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
-export const InputWrap = styled.div`
+export const formItemWrap = styled.div`
   display: flex;
   flex-direction: column;
-  width: 486px;
+  width: 100%;
 `;
-export const Input = styled.input`
+export const AddressInput = styled.input`
   height: 52px;
   padding: 0 16px;
-  /* border-radius: 12px; */
+  border: 1px solid #000;
+  outline: none;
 `;
 export const Title = styled.div`
   margin-bottom: 60px;
