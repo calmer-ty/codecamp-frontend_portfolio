@@ -69,6 +69,7 @@ export const useBoard = (
           });
         },
       });
+      Modal.success({ content: "게시물을 등록했습니다." });
       void router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

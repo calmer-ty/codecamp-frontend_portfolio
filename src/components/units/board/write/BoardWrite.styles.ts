@@ -16,7 +16,7 @@ export const Container = styled.div`
   background-color: #fff;
 
   ${mediaQueries.desktop(css`
-    padding: 50px;
+    padding: 100px 50px;
   `)}
 `;
 
@@ -56,7 +56,7 @@ export const Form = styled.form`
   row-gap: 20px;
 `;
 export const Contents = styled.textarea`
-  width: 996px;
+  width: 100%;
   height: 480px;
   padding: 12px;
   border: 1px solid #777;
