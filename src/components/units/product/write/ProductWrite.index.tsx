@@ -68,6 +68,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     const newFiles = [...files];
     newFiles[index] = file;
     setFiles(newFiles);
+    console.log(fileUrl);
   };
 
   // Tags
