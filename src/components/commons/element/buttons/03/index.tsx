@@ -1,25 +1,6 @@
-interface IButtonArgs {
-  text: string;
-}
+import * as S from "./styles";
+import type { IButtonProps } from "./types";
 
-const buttonStyle = {
-  width: "100%",
-  height: "64px",
-  marginTop: "20px",
-  borderRadius: "16px",
-  fontWeight: "bold",
-  backgroundColor: "#4f4f4f",
-  color: "#fff",
-};
-
-export default function Button03(args: IButtonArgs): JSX.Element {
-  return (
-    <button
-      style={{
-        ...buttonStyle,
-      }}
-    >
-      {args.text}
-    </button>
-  );
+export default function Button03(props: IButtonProps): JSX.Element {
+  return <S.Button>{props.text}</S.Button>;
 }

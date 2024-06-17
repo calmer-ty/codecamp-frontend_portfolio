@@ -1,12 +1,5 @@
-import { HeartFilled } from "@ant-design/icons";
+import * as S from "./styles";
 
-interface IIconProps {
-  size: number;
-}
-
-const iconStyles = {
-  color: "#f00",
-};
-export default function HeartIcon01(props: IIconProps): JSX.Element {
-  return <HeartFilled style={{ fontSize: `${props.size}px`, ...iconStyles }} />;
+export default function HeartIcon01(): JSX.Element {
+  return <S.HeartIcon />;
 }

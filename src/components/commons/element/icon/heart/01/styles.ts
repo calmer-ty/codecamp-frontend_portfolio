@@ -1,12 +1,7 @@
-import { HeartFilled } from "@ant-design/icons";
 import styled from "@emotion/styled";
+import { HeartFilled } from "@ant-design/icons";
 
-export const LikeRate = styled.div`
-  display: flex;
-  gap: 5px;
-  align-items: center;
-`;
-export const IconHeart = styled(HeartFilled)`
+export const HeartIcon = styled(HeartFilled)`
   font-size: 18px;
   color: #f00;
 `;

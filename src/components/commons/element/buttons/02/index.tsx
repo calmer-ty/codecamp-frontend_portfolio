@@ -1,36 +1,13 @@
 import { useMoveToPage } from "../../../hooks/customs/useMoveToPage";
+import type { IButtonProps } from "./types";
+import * as S from "./styles";
 
-interface IButtonArgs {
-  text: string;
-  path: string;
-}
-
-const buttonStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  alignSelf: "flex-end",
-  width: "170px",
-  height: "52px",
-  fontWeight: "bold",
-  border: "1px solid #d9d9d9",
-  borderRadius: "10px",
-};
-const iconStyle = {
-  marginRight: "8px",
-};
-
-export default function Button02(args: IButtonArgs): JSX.Element {
+export default function Button02(props: IButtonProps): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
   return (
-    <button
-      style={{
-        ...buttonStyle,
-      }}
-      onClick={onClickMoveToPage(args.path)}
-    >
-      <img style={iconStyle} src="/images/board/list/ic_create.png"></img>
-      {args.text}
-    </button>
+    <S.Button onClick={onClickMoveToPage(props.path)}>
+      <S.Img src="/images/board/list/ic_create.png"></S.Img>
+      {props.text}
+    </S.Button>
   );
 }

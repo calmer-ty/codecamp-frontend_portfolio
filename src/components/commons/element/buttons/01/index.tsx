@@ -1,23 +1,6 @@
-interface IButtonProps {
-  text: string;
-  isActive: boolean;
-}
-
-const buttonStyle = {
-  width: "180px",
-  height: "52px",
-  fontWeight: "bold",
-};
+import type { IButtonProps } from "./types";
+import * as S from "./styles";
 
 export default function Button01(props: IButtonProps): JSX.Element {
-  return (
-    <button
-      style={{
-        ...buttonStyle,
-        backgroundColor: props.isActive ? "yellow" : "lightgray",
-      }}
-    >
-      {props.text}
-    </button>
-  );
+  return <S.Button isActive={props.isActive}>{props.text}</S.Button>;
 }

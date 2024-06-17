@@ -1,16 +1,12 @@
 import { useForm } from "react-hook-form";
-// Yup
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaBoardComment } from "../../../../../commons/libraries/validation";
-// Custom Hooks
 import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
-// Component
+
 import Textarea01 from "../../../element/textarea/01";
 import TitleComment from "../../../element/title/comment";
-import InputComment from "../../../element/inputs/comment";
-// Type
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaBoardComment } from "../../../../../commons/libraries/validation";
 import type { ICommentWriteProps, IFormData } from "./CommentWrite.types";
-// Style
 import * as S from "./CommentWrite.styles";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
@@ -30,8 +26,8 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
       {!props.isEdit && <TitleComment text="댓글" />}
       <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
-          <InputComment placeholder="작성자" defaultValue={props.el?.writer ?? ""} register={register("writer")} />
-          <InputComment type="password" placeholder="비밀번호" defaultValue={""} register={register("password")} />
+          <S.UserInfoInput placeholder="작성자" defaultValue={props.el?.writer ?? ""} {...register("writer")} />
+          <S.UserInfoInput type="password" placeholder="비밀번호" defaultValue={""} {...register("password")} />
           <S.RateScore onChange={setRating} value={rating} />
         </S.InputWrap>
         <Textarea01

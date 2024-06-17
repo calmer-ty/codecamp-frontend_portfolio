@@ -1,15 +1,6 @@
-import styled from "@emotion/styled";
-import { CloseOutlined } from "@ant-design/icons";
+import type { IDeleteButton01Props } from "./types";
+import * as S from "./styles";
 
-interface IButtonArgs {
-  onClick: () => void;
-}
-
-const DeleteButton = styled(CloseOutlined)`
-  font-size: 20px;
-  color: #777;
-`;
-
-export default function DeleteBtn01(props: IButtonArgs): JSX.Element {
-  return <DeleteButton onClick={props.onClick} />;
+export default function DeleteBtn01(props: IDeleteButton01Props): JSX.Element {
+  return <S.DeleteButton onClick={props.onClick} />;
 }
