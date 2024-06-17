@@ -32,6 +32,7 @@ export const Price = styled.span`
 
 // 슬라이드
 export const CustomSlider = styled(Slider)`
+  width: 100%;
   margin: 50px 0;
 `;
 export const ImgItem = styled.img`

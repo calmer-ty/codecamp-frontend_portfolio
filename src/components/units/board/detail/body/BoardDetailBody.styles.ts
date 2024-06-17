@@ -1,15 +1,19 @@
 import styled from "@emotion/styled";
 import ReactPlayer from "react-player";
+import Slider from "react-slick";
+
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 
-export const Body = styled.div`
+export const Body = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  row-gap: 60px;
+
+  position: relative;
 `;
 export const Title = styled.h2`
   width: 100%;
-  margin: 80px 0 40px 0;
+  margin-top: 30px;
   font-size: 36px;
   font-weight: 700;
 `;
@@ -17,9 +21,7 @@ export const ImgItem = styled.img`
   width: 100%;
   margin-bottom: 20px;
 `;
-export const Contents = styled.p`
-  margin-top: 40px;
-`;
+export const Contents = styled.div``;
 
 export const LikeWrap = styled.div`
   display: flex;
@@ -32,14 +34,13 @@ export const LikeItem = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 40px;
-  height: 51px;
+  height: 50px;
 `;
 
-export const LinkWrap = styled.div`
+export const ButtonWrap = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 100px;
-  column-gap: 24px;
+  justify-content: center;
+  column-gap: 30px;
 `;
 export const LinkBtn = styled.a`
   display: flex;
@@ -51,9 +52,13 @@ export const LinkBtn = styled.a`
   cursor: pointer;
 `;
 
+// 슬라이드
+export const CustomSlider = styled(Slider)``;
+
 export const LikeScore = styled.div``;
 export const Youtube = styled(ReactPlayer)`
-  margin: 120px 0;
+  width: 100% !important;
+  max-height: 480px;
 `;
 export const LikeIcon = styled(LikeOutlined)``;
 export const DislikeIcon = styled(DislikeOutlined)``;
