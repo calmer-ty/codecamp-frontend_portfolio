@@ -7,6 +7,7 @@ export const A = styled.a`
   align-self: flex-end;
   width: 170px;
   height: 52px;
+  font-size: 16px;
   font-weight: bold;
   border: 1px solid #d9d9d9;
   background-color: #fff;

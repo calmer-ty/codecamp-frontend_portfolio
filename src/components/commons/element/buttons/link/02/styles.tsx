@@ -9,6 +9,7 @@ export const A = styled.a`
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: #fff;
+  font-size: 16px;
   cursor: pointer;
   color: #000;
 `;

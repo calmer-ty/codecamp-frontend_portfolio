@@ -63,7 +63,7 @@ export default function ProductDetailBody(props: IProductDetailProps): JSX.Eleme
         </S.TextWrap>
         <S.Pick>
           <button onClick={onClickPick}>
-            <HeartIcon01 size={20} />
+            <HeartIcon01 />
           </button>
           <span>{props.data?.fetchUseditem.pickedCount}</span>
         </S.Pick>
