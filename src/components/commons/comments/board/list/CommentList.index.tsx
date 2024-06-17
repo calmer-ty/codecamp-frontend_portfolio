@@ -1,16 +1,14 @@
-import CommentWrite from "../write/CommentWrite.index";
-import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-// Custom Hooks
 import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useToggle } from "../../../hooks/customs/useToggle";
+import { getDate } from "../../../../../commons/libraries/utils";
+import CommentWrite from "../write/CommentWrite.index";
+
 import EditBtn01 from "../../../element/buttons/edit/01";
 import DeleteBtn01 from "../../../element/buttons/delete/01";
-// Type
+import UserIcon01 from "../../../element/icon/user/01";
+
 import type { IBoardComment } from "../../../../../commons/types/generated/types";
-// Style
 import * as S from "./CommentList.styles";
-import { getDate } from "../../../../../commons/libraries/utils";
 
 interface CommentItemProps {
   el: IBoardComment;
@@ -35,20 +33,17 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
 
       {!isEdit ? (
         <S.ListItem key={props.el._id}>
-          <S.FlexRow>
-            <Avatar size={40} icon={<UserOutlined />} style={{ marginRight: "16px" }} />
-            <S.FlexColumn>
-              <S.ItemTop>
-                <S.Writer>{props.el.writer}</S.Writer>
-                <S.RateScore value={props.el.rating} disabled={true} />
-              </S.ItemTop>
+          <S.ItemWrap>
+            <UserIcon01 />
+            <S.CommentContents>
+              <S.Writer>{props.el.writer}</S.Writer>
               <S.Contents>{props.el.contents}</S.Contents>
               <S.CreateDate>{getDate(props.el.createdAt)}</S.CreateDate>
-            </S.FlexColumn>
-          </S.FlexRow>
+            </S.CommentContents>
+          </S.ItemWrap>
           <S.BtnWrap>
             <EditBtn01 onClick={onToggleEdit} />
-            <DeleteBtn01 onClick={onToggleModal} />
+            <DeleteBtn01 onClick={onClickDelete} />
           </S.BtnWrap>
         </S.ListItem>
       ) : (

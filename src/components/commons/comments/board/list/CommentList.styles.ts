@@ -1,43 +1,35 @@
 import styled from "@emotion/styled";
 import { Modal, Rate } from "antd";
-// import dynamic from "next/dynamic";
-// const Modal = dynamic(async () => await import("antd"), {
-//   ssr: false,
-// });
-// const Rate = dynamic(async () => await import("antd"), {
-//   ssr: false,
-// });
-// Layout
-export const FlexRow = styled.div`
-  display: flex;
-`;
-export const FlexColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
-// List
-export const ListItem = styled.div`
+export const ListItem = styled.section`
   display: flex;
   flex-direction: column;
-  width: 1200px;
   position: relative;
   padding: 20px 0;
   border-bottom: 1px solid #bdbdbd;
+  background-color: rgba(255, 255, 255, 0.3);
+`;
+export const ItemWrap = styled.div`
+  display: flex;
+  column-gap: 16px;
+  justify-content: space-between;
+`;
+export const CommentContents = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  width: calc(100% - 50px);
 `;
 
-export const ItemTop = styled.div`
-  display: flex;
-  margin-bottom: 4px;
+export const Writer = styled.span`
+  font-weight: bold;
 `;
-export const Writer = styled.div`
-  margin-right: 16px;
+export const Contents = styled.p`
+  white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
+  overflow: hidden; /* 텍스트가 영역을 넘어가면 숨김 처리 */
+  text-overflow: ellipsis; /* 넘어가는 텍스트를 ...으로 표시 */
 `;
-export const Contents = styled.div`
-  margin-top: 6px;
-  margin-bottom: 20px;
-`;
-export const CreateDate = styled.div`
+export const CreateDate = styled.span`
   font-size: 12px;
   color: #bdbdbd;
 `;
@@ -50,17 +42,6 @@ export const BtnWrap = styled.div`
   top: 20px;
   right: 0;
 `;
-export const EditBtn = styled.button`
-  width: 18px;
-  height: 18px;
-  background: url("/images/boardComment/list/ic_edit.png") no-repeat center/contain;
-`;
-export const DeleteBtn = styled.button`
-  width: 18px;
-  height: 18px;
-  background: url("/images/boardComment/list/ic_exit.png") no-repeat center/contain;
-`;
-
 // Library
 export const CommentDeleteModal = styled(Modal)``;
 export const RateScore = styled(Rate)``;
