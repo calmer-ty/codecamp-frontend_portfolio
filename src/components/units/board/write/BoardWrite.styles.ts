@@ -33,8 +33,7 @@ export const formItemWrap = styled.div`
 export const AddressInput = styled.input`
   height: 52px;
   padding: 0 16px;
-  border: 1px solid #000;
-  outline: none;
+  border: 1px solid #777;
 `;
 export const Title = styled.div`
   margin-bottom: 60px;
@@ -54,6 +53,7 @@ export const Contents = styled.textarea`
   width: 996px;
   height: 480px;
   padding: 12px;
+  border: 1px solid #777;
 `;
 
 export const AddressWrap = styled.div`
@@ -62,11 +62,16 @@ export const AddressWrap = styled.div`
   row-gap: 20px;
 `;
 
+export const ZipcodeWrap = styled.div`
+  display: flex;
+  column-gap: 20px;
+`;
 export const Zipcode = styled.input`
   width: 77px;
   height: 52px;
   padding: 0 12px;
   text-align: center;
+  border: 1px solid #777;
 `;
 
 export const SearchBtn = styled.button`

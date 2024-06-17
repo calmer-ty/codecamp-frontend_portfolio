@@ -74,12 +74,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
           <S.FlexColumn>
             <Label01 text="주소" />
             <S.AddressWrap>
-              <S.FlexRow style={{ justifyContent: "flex-start", columnGap: "20px" }}>
+              <S.ZipcodeWrap>
                 <S.Zipcode readOnly value={zipcode !== "" ? zipcode : props.data?.fetchBoard.boardAddress?.zipcode ?? ""} {...register("zipcode")} />
                 <S.SearchBtn type="button" onClick={onClickAddressSearch}>
                   우편번호 검색
                 </S.SearchBtn>
-              </S.FlexRow>
+              </S.ZipcodeWrap>
               <S.AddressInput value={address !== "" ? address : props.data?.fetchBoard.boardAddress?.address ?? ""} readOnly {...register("address")} />
               <Input01 defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail ?? ""} register={register("addressDetail")} />
             </S.AddressWrap>
