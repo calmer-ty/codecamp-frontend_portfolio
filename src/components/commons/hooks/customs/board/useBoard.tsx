@@ -32,10 +32,6 @@ export const useBoard = (
   const [updateBoard] = useUpdateBoard();
   const [deleteBoard] = useDeleteBoard();
 
-  const { data: defaultData } = useFetchBoard({
-    boardId: id,
-  });
-
   const onClickSubmit = async (data: IFormData): Promise<void> => {
     try {
       const result = await createBoard({
@@ -93,11 +89,6 @@ export const useBoard = (
       if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
     if (isChangedFiles) updateBoardInput.images = args?.fileUrls;
-
-    if (defaultData?.fetchBoard.contents === data.contents) {
-      Modal.error({ content: "내용이 수정되지 않았습니다." });
-      return;
-    }
 
     try {
       const result = await updateBoard({

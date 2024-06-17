@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import checkValidationImg from "./validation";
+import { checkValidationImg } from "../../../../../commons/libraries/validation";
 
 import * as S from "./styles";
 import type { ChangeEvent } from "react";
@@ -11,7 +11,7 @@ interface IUpload01Props {
   onChangeFileUrls: (fileUrl: string, index: number, file?: File) => void;
 }
 
-export default function Upload01(props: IUpload01Props): JSX.Element {
+export default function Upload02(props: IUpload01Props): JSX.Element {
   const [fileReaderUrl, setFileReaderUrl] = useState("");
 
   // 참조 기능
@@ -26,7 +26,8 @@ export default function Upload01(props: IUpload01Props): JSX.Element {
 
     // 파일 업로드 조건을 걸어준다
     const isValid = checkValidationImg(file);
-    if (!isValid) return;
+    console.log(isValid);
+    if (isValid === undefined) return;
 
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
