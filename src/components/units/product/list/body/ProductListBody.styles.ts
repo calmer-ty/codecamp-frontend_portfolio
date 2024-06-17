@@ -38,7 +38,7 @@ export const ListItem = styled.a`
     background-color: rgba(205, 205, 205, 0.5);
   }
 
-  ${mediaQueries.desktop(css`
+  ${mediaQueries.tablet(css`
     flex-direction: column;
     row-gap: 20px;
   `)}
