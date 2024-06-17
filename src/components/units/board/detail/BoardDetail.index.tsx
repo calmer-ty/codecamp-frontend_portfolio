@@ -13,7 +13,6 @@ export default function BoardDetail(): JSX.Element {
   const { data } = useFetchBoard({
     boardId: id,
   });
-
   return (
     <>
       <S.CardWrap>
