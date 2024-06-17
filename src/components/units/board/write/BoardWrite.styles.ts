@@ -1,17 +1,23 @@
+import { mediaQueries } from "../../../../commons/styles/globalStyles";
 import styled from "@emotion/styled";
-// Library
+import { css } from "@emotion/react";
 import { Modal } from "antd";
+
 import DaumPostcodeEmbed from "react-daum-postcode";
 
 // emotion은 태그로 쓰이기 때문에 대문자로 사용한다
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  width: 100%;
   padding: 100px;
   border: 2px solid #bdbdbd;
   box-shadow: 5px 5px 5px #bdbdbd;
   background-color: #fff;
+
+  ${mediaQueries.desktop(css`
+    padding: 50px;
+  `)}
 `;
 
 export const FlexRow = styled.div`
