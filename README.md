@@ -44,7 +44,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## 자유게시판
 
 - 검색 기능
-[search.webm](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/c5a6a7fb-3edd-4657-8a51-82b1e317daa2)
+![search](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/88abb548-f5d4-4814-a8c3-d765c0329ddf)
 
 - 페이지네이션 기능
-[pagenation.webm](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/f3fb8531-9595-4c49-8033-cd558e4301ef)
+![pagenation](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/e9947ea3-4929-4422-b847-af42ad2ec0f3)
