@@ -99,7 +99,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             </S.ImgWrap>
           </S.FlexColumn>
 
-          <S.FlexColumn>
+          {/* <S.FlexColumn>
             <Label01 text="메인설정" />
             <S.RadioWrap>
               <S.RadioBtn type="radio" {...register("mainSetting")} />
@@ -107,7 +107,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               <S.RadioBtn type="radio" {...register("mainSetting")} />
               <S.RadioLabel>사진</S.RadioLabel>
             </S.RadioWrap>
-          </S.FlexColumn>
+          </S.FlexColumn> */}
 
           <Button01 isActive={formState.isValid} text={props.isEdit ? "수정하기" : "등록하기"} />
         </S.Form>
