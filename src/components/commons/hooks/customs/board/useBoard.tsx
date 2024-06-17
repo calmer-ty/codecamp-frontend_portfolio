@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 // Hooks
-import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
+import { FETCH_BOARD } from "../../queries/board/useFetchBoard";
 import { FETCH_BOARDS } from "../../queries/board/useFetchBoards";
 import { useCreateBoard } from "../../mutations/board/useCreateBoard";
 import { useUpdateBoard } from "../../mutations/board/useUpdateBoard";
