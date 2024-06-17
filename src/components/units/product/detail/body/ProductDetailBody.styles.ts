@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 export const Body = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 20px 10px;
+  row-gap: 60px;
 
   position: relative;
 `;
@@ -31,13 +31,9 @@ export const Price = styled.span`
 `;
 
 // 슬라이드
-export const CustomSlider = styled(Slider)`
-  width: 100%;
-  margin: 50px 0;
-`;
+export const CustomSlider = styled(Slider)``;
 export const ImgItem = styled.img`
-  max-height: 400px;
-  object-fit: contain;
+  object-fit: cover;
 `;
 export const Pick = styled.div`
   display: flex;
@@ -46,7 +42,7 @@ export const Pick = styled.div`
   row-gap: 5px;
 
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 0;
 `;
 export const Contents = styled.p``;
