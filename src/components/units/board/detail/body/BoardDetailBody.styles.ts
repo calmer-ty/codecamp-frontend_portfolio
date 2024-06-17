@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import ReactPlayer from "react-player";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 
@@ -17,10 +19,7 @@ export const Title = styled.h2`
   font-size: 36px;
   font-weight: 700;
 `;
-export const ImgItem = styled.img`
-  width: 100%;
-  margin-bottom: 20px;
-`;
+
 export const Contents = styled.div``;
 
 export const LikeWrap = styled.div`
@@ -54,6 +53,9 @@ export const LinkBtn = styled.a`
 
 // 슬라이드
 export const CustomSlider = styled(Slider)``;
+export const ImgItem = styled.img`
+  object-fit: cover;
+`;
 
 export const LikeScore = styled.div``;
 export const Youtube = styled(ReactPlayer)`
