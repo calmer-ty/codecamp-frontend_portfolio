@@ -12,12 +12,12 @@ export const useIdCheck = (
   useEffect(() => {
     const idFromQuery = router.query[id];
     if (idFromQuery === undefined || idFromQuery === null) {
-      console.log("id를 못찾았습니다");
+      // console.log("id를 못찾았습니다");
     } else if (typeof idFromQuery === "string") {
-      console.log(idFromQuery, "id를 찾았습니다 string");
+      // console.log(idFromQuery, "id를 찾았습니다 string");
       setQueryId(idFromQuery);
     } else if (typeof idFromQuery === "object") {
-      console.log(idFromQuery, "id를 찾았습니다 object");
+      // console.log(idFromQuery, "id를 찾았습니다 object");
       setQueryId(idFromQuery[0]);
     }
   }, [router.query[id]]);

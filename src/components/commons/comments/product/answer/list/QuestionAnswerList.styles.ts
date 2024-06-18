@@ -6,7 +6,7 @@ export const ListItem = styled.section`
   flex-direction: column;
   position: relative;
   padding: 20px 0;
-  border-bottom: 1px solid #bdbdbd;
+  margin-left: 40px;
   background-color: rgba(255, 255, 255, 0.3);
 `;
 export const ItemWrap = styled.div`
@@ -41,16 +41,6 @@ export const BtnWrap = styled.div`
   position: absolute;
   top: 20px;
   right: 0;
-`;
-export const AnswerToggleButton = styled.button`
-  display: flex;
-  align-items: center;
-  column-gap: 2px;
-  align-self: flex-start;
-  margin-bottom: 10px;
-`;
-export const AnswerCount = styled.span`
-  font-weight: bold;
 `;
 
 // Library
