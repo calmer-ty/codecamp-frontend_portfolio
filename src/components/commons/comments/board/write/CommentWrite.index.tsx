@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 
 import Textarea01 from "../../../element/textarea/01";
-import TitleComment from "../../../element/title/comment";
+import TitleComment01 from "../../../element/title/comment/01";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaBoardComment } from "../../../../../commons/libraries/validation";
@@ -23,7 +23,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
 
   return (
     <S.CommentWrite isEdit={props.isEdit}>
-      {!props.isEdit && <TitleComment text="댓글" />}
+      {!props.isEdit && <TitleComment01 text="댓글" />}
       <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
           <S.UserInfoInput placeholder="작성자" defaultValue={props.el?.writer ?? ""} {...register("writer")} />
@@ -33,7 +33,6 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
         <Textarea01
           placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
           isEdit={props.isEdit}
-          length={100}
           register={register("contents")}
           defaultValue={props.el?.contents ?? ""}
           word={typeof watch().contents === "string" ? watch().contents.length : 0}
