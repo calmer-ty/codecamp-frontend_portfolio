@@ -7,7 +7,7 @@ export default function Home(): JSX.Element {
   const LANDING_MENUS = [
     {
       name: "자유게시판",
-      src: "/images/landing/e-commerce.jpg",
+      src: "/images/landing/board.png",
       desc: "자신의 생각을 공유해보세요.",
     },
     {
@@ -22,7 +22,7 @@ export default function Home(): JSX.Element {
     },
     {
       name: "랜덤강아지",
-      src: "/images/landing/e-commerce.jpg",
+      src: "/images/landing/animal.png",
       desc: "다양한 강아지 사진을 볼 수 있어요.",
     },
     // {
@@ -42,6 +42,12 @@ export default function Home(): JSX.Element {
     autoplay: true,
     autoplaySpeed: 5000,
     responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
       {
         breakpoint: 768,
         settings: {
