@@ -14,7 +14,7 @@ export default function QuestionAnswerWrite(props: IQuestionAnswerWriteProps): J
     resolver: yupResolver(schemaProductQuestion),
   });
   const { onClickCreate } = useProductQuestionAnswer({
-    useditemQuestionId: props.el._id,
+    useditemQuestionId: props.el?._id,
   });
   console.log(props.el);
 
@@ -30,7 +30,15 @@ export default function QuestionAnswerWrite(props: IQuestionAnswerWriteProps): J
 
   return (
     <S.QuestionAnswerWrite onSubmit={handleSubmit(handleCreate)}>
-      <Textarea01 placeholder="답글을 등록해주세요." word={watch().contents?.length ?? 0} register={register("contents")} btnName="답글등록" />
+      <Textarea01
+        isEdit={props.isEdit ?? false}
+        defaultValue={props.el?.contents}
+        placeholder="답글을 등록해주세요."
+        register={register("contents")}
+        word={watch().contents?.length ?? 0}
+        onToggleEdit={props.onToggleEdit}
+        btnName={props.isEdit === true ? "답글수정" : "답글등록"}
+      />
     </S.QuestionAnswerWrite>
   );
 }

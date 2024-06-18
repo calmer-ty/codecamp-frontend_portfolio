@@ -1,5 +1,5 @@
-import type { IUseditemQuestion } from "../../../../../commons/types/generated/types";
+import type { IUseditemQuestionAnswer } from "../../../../../commons/types/generated/types";
 
 export interface IQuestionListProps {
-  el: IUseditemQuestion;
+  el: IUseditemQuestionAnswer;
 }

@@ -6,7 +6,7 @@ export interface ITextareaProps {
   register: UseFormRegisterReturn;
 
   word: number;
-  isEdit?: boolean;
+  isEdit: boolean;
   onToggleEdit?: () => void;
 
   btnName: string;
