@@ -35,7 +35,6 @@ export default function LayoutNavigation(): JSX.Element {
   const { data } = useFetchLoggedIn();
   const [accessToken] = useRecoilState(accessTokenState);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
 
   const client = useApolloClient();
 
