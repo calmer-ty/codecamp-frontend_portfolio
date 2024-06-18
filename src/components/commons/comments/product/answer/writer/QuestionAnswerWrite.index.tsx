@@ -14,9 +14,9 @@ export default function QuestionAnswerWrite(props: IQuestionAnswerWriteProps): J
     resolver: yupResolver(schemaProductQuestion),
   });
   const { onClickCreate } = useProductQuestionAnswer({
-    useditemQuestionId: props.el?._id,
+    useditemQuestionId: props.id,
   });
-  console.log(props.el);
+  console.log(props);
 
   const handleCreate = async (data: IFormData): Promise<void> => {
     await onClickCreate(data);
@@ -29,7 +29,7 @@ export default function QuestionAnswerWrite(props: IQuestionAnswerWriteProps): J
   // };
 
   return (
-    <S.QuestionAnswerWrite onSubmit={handleSubmit(handleCreate)}>
+    <S.Form onSubmit={handleSubmit(handleCreate)}>
       <Textarea01
         isEdit={props.isEdit ?? false}
         defaultValue={props.el?.contents}
@@ -39,6 +39,6 @@ export default function QuestionAnswerWrite(props: IQuestionAnswerWriteProps): J
         onToggleEdit={props.onToggleEdit}
         btnName={props.isEdit === true ? "답글수정" : "답글등록"}
       />
-    </S.QuestionAnswerWrite>
+    </S.Form>
   );
 }

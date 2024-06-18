@@ -21,6 +21,7 @@ export default function QuestionAnswerList(props: IQuestionAnswerListProps): JSX
   });
 
   console.log(props);
+
   return (
     <>
       {isEdit ? (

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useProductQuestion } from "../../../hooks/customs/product/useProductQuestion";
 
 import Textarea01 from "../../../element/textarea/01";
-import TitleComment from "../../../element/title/comment";
+import TitleComment01 from "../../../element/title/comment/01";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaProductQuestion } from "../../../../../commons/libraries/validation";
@@ -29,10 +29,11 @@ export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
     await onClickUpdate(data);
     reset(); // 폼 필드를 초기화
   };
+  console.log(props);
 
   return (
     <S.QuestionWrite isEdit={props.isEdit}>
-      {!props.isEdit && <TitleComment text="문의" />}
+      {!props.isEdit && <TitleComment01 text="문의" />}
       <S.Form onSubmit={handleSubmit(props.isEdit ? handleUpdate : handleCreate)}>
         <Textarea01
           isEdit={props.isEdit}
