@@ -3,7 +3,7 @@ import type { IUseditemQuestion } from "../../../../../../commons/types/generate
 export interface IQuestionAnswerWriteProps {
   isEdit?: boolean;
   onToggleEdit?: () => void;
-  el: IUseditemQuestion;
+  el?: IUseditemQuestion;
 }
 export interface IFormData {
   contents: string;

@@ -30,6 +30,7 @@ export const useProductQuestion = (
   const [deleteQuestion] = useDeleteProductQuestion();
 
   const onClickCreate = async (data: IFormData): Promise<void> => {
+    console.log(data);
     try {
       await createQuestion({
         variables: {

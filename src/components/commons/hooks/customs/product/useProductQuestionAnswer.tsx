@@ -4,9 +4,8 @@ import { Modal } from "antd";
 
 import type { IFormData } from "../../../comments/product/answer/writer/QuestionAnswerWrite.types";
 import { useDeleteProductQuestionAnswer } from "../../mutations/product/useDeleteProductQuestionAnswer";
-// import { FETCH_USEDITEM_QUESTIONS } from "../../queries/product/useFetchProductQuestions";
 interface IUseProductQuestionAnswerProps {
-  useditemQuestionId: string;
+  useditemQuestionId?: string;
   useditemQuestionAnswerId?: string;
 }
 
@@ -19,6 +18,7 @@ export const useProductQuestionAnswer = (
   const [createQuestionAnswer] = useCreateProductQuestionAnswer();
   const [deleteQuestionAnswer] = useDeleteProductQuestionAnswer();
   const onClickCreate = async (data: IFormData): Promise<void> => {
+    if (typeof props.useditemQuestionId !== "string") return;
     try {
       await createQuestionAnswer({
         variables: {

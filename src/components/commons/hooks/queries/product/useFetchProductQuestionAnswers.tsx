@@ -21,8 +21,6 @@ export const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
 `;
 
 export const useFetchProductQuestionAnswers = (props: string): QueryReturnType<"fetchUseditemQuestionAnswers", IQueryFetchUseditemQuestionAnswersArgs> => {
-  console.log(props);
-
   return useQuery<Pick<IQuery, "fetchUseditemQuestionAnswers">, IQueryFetchUseditemQuestionAnswersArgs>(FETCH_USEDITEM_QUESTION_ANSWERS, {
     variables: { useditemQuestionId: props },
   });

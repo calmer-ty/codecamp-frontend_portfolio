@@ -10,7 +10,7 @@ import type { IQuestionWriteProps, IFormData } from "./QuestionWrite.types";
 import * as S from "./QuestionWrite.styles";
 
 export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
-  const { register, handleSubmit, watch } = useForm<IFormData>({
+  const { register, handleSubmit, watch, reset } = useForm<IFormData>({
     mode: "onChange",
     resolver: yupResolver(schemaProductQuestion),
   });
@@ -20,10 +20,20 @@ export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
     onToggleEdit: props.onToggleEdit,
   });
 
+  const handleCreate = async (data: IFormData): Promise<void> => {
+    await onClickCreate(data);
+    reset(); // 폼 필드를 초기화
+  };
+
+  const handleUpdate = async (data: IFormData): Promise<void> => {
+    await onClickUpdate(data);
+    reset(); // 폼 필드를 초기화
+  };
+
   return (
     <S.QuestionWrite isEdit={props.isEdit}>
       {!props.isEdit && <TitleComment text="문의" />}
-      <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
+      <S.Form onSubmit={handleSubmit(props.isEdit ? handleUpdate : handleCreate)}>
         <Textarea01
           isEdit={props.isEdit}
           defaultValue={props.el?.contents}
