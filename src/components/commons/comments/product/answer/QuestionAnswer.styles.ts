@@ -7,6 +7,3 @@ export const AnswerToggleButton = styled.button`
   align-self: flex-start;
   margin-bottom: 10px;
 `;
-export const AnswerCount = styled.span`
-  font-weight: bold;
-`;

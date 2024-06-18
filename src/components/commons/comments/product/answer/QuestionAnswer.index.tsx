@@ -1,28 +1,26 @@
 import { useToggle } from "../../../hooks/customs/useToggle";
-import { useFetchProductQuestionAnswers } from "../../../hooks/queries/product/useFetchProductQuestionAnswers";
+import { useScrollQuestionAnswer } from "../../../hooks/customs/product/useScrollQuestionAnswer";
 
 import QuestionAnswerWrite from "./writer/QuestionAnswerWrite.index";
 import QuestionAnswerList from "./list/QuestionAnswerList.index";
+import InfiniteScroll from "react-infinite-scroller";
 
 import type { IQuestionAnswerProps } from "./QuestionAnswer.types";
 import * as S from "./QuestionAnswer.styles";
 
 export default function QuestionAnswer(props: IQuestionAnswerProps): JSX.Element {
-  console.log(props);
   const [isOpen, onToggleOpen] = useToggle(false);
-
-  const { data } = useFetchProductQuestionAnswers(props.el._id);
+  const { data, onLoadMore } = useScrollQuestionAnswer(props.el._id);
+  console.log(data);
   return (
     <>
-      <S.AnswerToggleButton onClick={onToggleOpen}>
-        답글
-        <S.AnswerCount>({data?.fetchUseditemQuestionAnswers.length})</S.AnswerCount>
-      </S.AnswerToggleButton>
+      <S.AnswerToggleButton onClick={onToggleOpen}>답글</S.AnswerToggleButton>
       {isOpen ? (
         <>
           <QuestionAnswerWrite id={props.el._id} />
-          {/* 대댓글 */}
-          {data?.fetchUseditemQuestionAnswers.map((el, _) => <QuestionAnswerList key={el._id} useditemQuestionId={props.el._id} el={el} />)}
+          <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+            {data?.fetchUseditemQuestionAnswers.map((el, _) => <QuestionAnswerList key={el._id} useditemQuestionId={props.el._id} el={el} />)}
+          </InfiniteScroll>
         </>
       ) : (
         <></>
