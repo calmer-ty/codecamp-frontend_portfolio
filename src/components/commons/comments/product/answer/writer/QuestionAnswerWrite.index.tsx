@@ -13,31 +13,33 @@ export default function QuestionAnswerWrite(props: IQuestionAnswerWriteProps): J
     mode: "onChange",
     resolver: yupResolver(schemaProductQuestion),
   });
-  const { onClickCreate } = useProductQuestionAnswer({
-    useditemQuestionId: props.id,
+  const { onClickCreate, onClickUpdate } = useProductQuestionAnswer({
+    useditemQuestionId: props.useditemQuestionId,
+    useditemQuestionAnswerId: props.el?._id,
+    onToggleEdit: props.onToggleEdit,
   });
-  console.log(props);
+  console.log("QuestionAnswerWrite", props);
 
   const handleCreate = async (data: IFormData): Promise<void> => {
     await onClickCreate(data);
     reset(); // 폼 필드를 초기화
   };
 
-  // const handleUpdate = async (data: IFormData): Promise<void> => {
-  //   await onClickUpdate(data);
-  //   reset(); // 폼 필드를 초기화
-  // };
+  const handleUpdate = async (data: IFormData): Promise<void> => {
+    await onClickUpdate(data);
+    reset(); // 폼 필드를 초기화
+  };
 
   return (
-    <S.Form onSubmit={handleSubmit(handleCreate)}>
+    <S.Form onSubmit={handleSubmit(props.isEdit ? handleUpdate : handleCreate)}>
       <Textarea01
-        isEdit={props.isEdit ?? false}
+        isEdit={props.isEdit}
         defaultValue={props.el?.contents}
         placeholder="답글을 등록해주세요."
         register={register("contents")}
         word={watch().contents?.length ?? 0}
         onToggleEdit={props.onToggleEdit}
-        btnName={props.isEdit === true ? "답글수정" : "답글등록"}
+        btnName={props.isEdit ? "답글수정" : "답글등록"}
       />
     </S.Form>
   );

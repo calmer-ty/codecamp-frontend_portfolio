@@ -22,6 +22,7 @@ export const useProductQuestion = (
   onClickUpdate: (data: IFormData) => Promise<void>;
   onClickDelete: () => Promise<void>;
 } => {
+  console.log("Q Props:", props);
   const router = useRouter();
   const useditemId = router.query.useditemId as string;
 

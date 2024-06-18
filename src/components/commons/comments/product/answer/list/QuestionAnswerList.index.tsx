@@ -20,12 +20,10 @@ export default function QuestionAnswerList(props: IQuestionAnswerListProps): JSX
     useditemQuestionAnswerId: props.el._id,
   });
 
-  console.log(props);
-
   return (
     <>
       {isEdit ? (
-        <QuestionAnswerWrite isEdit={true} onToggleEdit={onToggleEdit} el={props.el} />
+        <QuestionAnswerWrite isEdit={true} onToggleEdit={onToggleEdit} el={props.el} useditemQuestionId={props.useditemQuestionId} />
       ) : (
         <S.ListItem key={props.el._id}>
           <S.ItemWrap>

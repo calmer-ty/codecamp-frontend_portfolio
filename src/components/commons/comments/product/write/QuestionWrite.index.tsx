@@ -29,7 +29,6 @@ export default function QuestionWrite(props: IQuestionWriteProps): JSX.Element {
     await onClickUpdate(data);
     reset(); // 폼 필드를 초기화
   };
-  console.log(props);
 
   return (
     <S.QuestionWrite isEdit={props.isEdit}>
