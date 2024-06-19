@@ -1,32 +1,34 @@
 import dynamic from "next/dynamic";
 import styled from "@emotion/styled";
 import "react-quill/dist/quill.snow.css";
+import { mediaQueries } from "../../../../commons/styles/globalStyles";
+import { css } from "@emotion/react";
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
 
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-export const Container = styled.article`
+export const ProductWrite = styled.article`
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  width: 100%;
   padding: 100px;
   border: 2px solid #bdbdbd;
   box-shadow: 5px 5px 5px #bdbdbd;
+  background-color: #fff;
+
+  ${mediaQueries.desktop(css`
+    padding: 100px 50px;
+  `)}
 `;
 
-export const FlexRow = styled.div`
-  display: flex;
-  width: 100%;
-`;
-export const FlexColumn = styled.div`
-  display: flex;
-  width: 100%;
-`;
+// export const FlexRow = styled.div`
+//   display: flex;
+//   width: 100%;
+// `;
+// export const FlexColumn = styled.div`
+//   display: flex;
+//   width: 100%;
+// `;
 
 export const InputWrap = styled.div`
   display: flex;
@@ -53,13 +55,18 @@ export const Tags = styled.div`
   align-items: center;
   height: 52px;
   padding: 0 16px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #777;
 `;
 
+export const LatLngWrap = styled.div`
+  display: flex;
+  column-gap: 20px;
+`;
 export const LatLng = styled.input`
+  width: 100%;
   height: 52px;
   padding: 0 16px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #777;
 `;
 export const AreaWrap = styled.div`
   display: flex;
@@ -105,7 +112,7 @@ export const RadioBtn = styled.input`
 `;
 
 export const SubmitBtn = styled.button`
-  width: 179px;
+  width: 180px;
   height: 52px;
   margin-top: 40px;
   font-weight: 500;
