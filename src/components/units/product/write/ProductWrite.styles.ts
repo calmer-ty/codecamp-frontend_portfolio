@@ -21,15 +21,6 @@ export const ProductWrite = styled.article`
   `)}
 `;
 
-// export const FlexRow = styled.div`
-//   display: flex;
-//   width: 100%;
-// `;
-// export const FlexColumn = styled.div`
-//   display: flex;
-//   width: 100%;
-// `;
-
 export const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,9 +46,15 @@ export const Tags = styled.div`
   align-items: center;
   height: 52px;
   padding: 0 16px;
-  border: 1px solid #777;
+  border: 1px solid #aaa;
 `;
 
+export const AreaWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+  width: 100%;
+`;
 export const LatLngWrap = styled.div`
   display: flex;
   column-gap: 20px;
@@ -66,24 +63,20 @@ export const LatLng = styled.input`
   width: 100%;
   height: 52px;
   padding: 0 16px;
-  border: 1px solid #777;
+  border: 1px solid #aaa;
 `;
-export const AreaWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
+
 export const Map = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 50%;
 `;
 
 export const MapInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 55%;
+  width: 50%;
   row-gap: 20px;
 `;
 export const SearchBtn = styled.button`
@@ -96,6 +89,7 @@ export const SearchBtn = styled.button`
 export const Address = styled.input`
   height: 52px;
   padding: 0 12px;
+  border: 1px solid #aaa;
 `;
 
 export const ImgWrap = styled.div`
@@ -121,4 +115,10 @@ export const SubmitBtn = styled.button`
 export const Contents = styled(ReactQuill)`
   height: 300px;
   margin-bottom: 44px;
+  .ql-toolbar.ql-snow {
+    border: 1px solid #aaa;
+  }
+  .ql-container.ql-snow {
+    border: 1px solid #aaa;
+  }
 `;
