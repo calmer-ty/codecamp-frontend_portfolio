@@ -43,35 +43,35 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   return (
     <>
-      <S.Container>
+      <S.BoardWrite>
         <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
         <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickSubmit)}>
           <S.FlexRow>
-            <S.formItemWrap>
+            <S.InputWrap>
               <Label01 text="작성자" />
               <Input01 placeholder="이름을 작성해주세요." defaultValue={props.data?.fetchBoard.writer ?? ""} register={register("writer")} readOnly={props.isEdit} />
               <Error01 text={formState.errors?.writer?.message} />
-            </S.formItemWrap>
-            <S.formItemWrap>
+            </S.InputWrap>
+            <S.InputWrap>
               <Label01 text="비밀번호" />
               <Input01 type="password" placeholder="비밀번호를 작성해주세요." register={register("password")} />
               <Error01 text={formState.errors?.password?.message} />
-            </S.formItemWrap>
+            </S.InputWrap>
           </S.FlexRow>
 
-          <S.FlexColumn>
+          <S.InputWrap>
             <Label01 text="제목" />
             <Input01 placeholder="제목을 작성해주세요." defaultValue={props.data?.fetchBoard.title ?? ""} register={register("title")} />
             <Error01 text={formState.errors?.title?.message} />
-          </S.FlexColumn>
+          </S.InputWrap>
 
-          <S.FlexColumn>
+          <S.InputWrap>
             <Label01 text="내용" />
             <S.Contents placeholder="내용을 작성해주세요." defaultValue={props.data?.fetchBoard.contents} {...register("contents")} />
             <Error01 text={formState.errors?.contents?.message} />
-          </S.FlexColumn>
+          </S.InputWrap>
 
-          <S.FlexColumn>
+          <S.InputWrap>
             <Label01 text="주소" />
             <S.AddressWrap>
               <S.ZipcodeWrap>
@@ -83,21 +83,21 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               <S.AddressInput value={address !== "" ? address : props.data?.fetchBoard.boardAddress?.address ?? ""} readOnly {...register("address")} />
               <Input01 defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail ?? ""} register={register("addressDetail")} />
             </S.AddressWrap>
-          </S.FlexColumn>
+          </S.InputWrap>
 
-          <S.FlexColumn>
+          <S.InputWrap>
             <Label01 text="유튜브" />
             <Input01 placeholder="링크를 복사해주세요." defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""} register={register("youtubeUrl")} />
-          </S.FlexColumn>
+          </S.InputWrap>
 
-          <S.FlexColumn>
+          <S.InputWrap>
             <Label01 text="사진첨부" />
             <S.ImgWrap>
               {fileUrls.map((el, index) => {
                 return <Upload02 key={`${el}_${index}`} index={index} fileUrl={el} onChangeFileUrls={onChangeFileUrls} />;
               })}
             </S.ImgWrap>
-          </S.FlexColumn>
+          </S.InputWrap>
 
           {/* <S.FlexColumn>
             <Label01 text="메인설정" />
@@ -111,7 +111,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
           <Button01 isActive={formState.isValid} text={props.isEdit ? "수정하기" : "등록하기"} />
         </S.Form>
-      </S.Container>
+      </S.BoardWrite>
 
       {isOpen && (
         <S.AddressModal open={isOpen} onOk={onClickAddressSearch} onCancel={onClickAddressSearch}>
