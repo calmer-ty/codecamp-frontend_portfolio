@@ -46,6 +46,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
       contents: props.data?.fetchUseditem.contents ?? "",
       lat: props.data?.fetchUseditem.useditemAddress?.lat ?? 0,
       lng: props.data?.fetchUseditem.useditemAddress?.lng ?? 0,
+      address: props.data?.fetchUseditem.useditemAddress?.address ?? "",
       price: props.data?.fetchUseditem.price ?? "",
     };
     // 객체의 각 키-값 쌍에 대해 setValue를 호출
