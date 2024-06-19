@@ -149,13 +149,13 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             </S.InputWrap>
             <S.InputWrap>
               <Label01 text="주소" />
-              <S.InputWrap>
+              <S.AddressWrap>
                 <S.InputWrap>
                   <S.Address value={address !== "" ? address : props.data?.fetchUseditem.useditemAddress?.address ?? ""} readOnly {...register("address")} />
                   <Error01 text={errors.address?.message} />
                 </S.InputWrap>
                 <Input01 register={register("addressDetail")} />
-              </S.InputWrap>
+              </S.AddressWrap>
             </S.InputWrap>
           </S.MapInfo>
         </S.AreaWrap>

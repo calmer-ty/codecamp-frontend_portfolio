@@ -71,7 +71,6 @@ export const Map = styled.div`
   flex-direction: column;
   width: 50%;
 `;
-
 export const MapInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,12 +78,11 @@ export const MapInfo = styled.div`
   width: 50%;
   row-gap: 20px;
 `;
-export const SearchBtn = styled.button`
-  width: 124px;
-  height: 52px;
-  margin-left: 16px;
-  background-color: black;
-  color: white;
+
+export const AddressWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 `;
 export const Address = styled.input`
   height: 52px;
@@ -96,21 +94,14 @@ export const ImgWrap = styled.div`
   display: flex;
   column-gap: 24px;
 `;
-export const RadioLabel = styled.div`
-  margin-left: 8px;
-  margin-right: 20px;
-  font-weight: 500;
-`;
-export const RadioBtn = styled.input`
-  display: inline-block;
-`;
-
-export const SubmitBtn = styled.button`
-  width: 180px;
-  height: 52px;
-  margin-top: 40px;
-  font-weight: 500;
-`;
+// export const RadioLabel = styled.div`
+//   margin-left: 8px;
+//   margin-right: 20px;
+//   font-weight: 500;
+// `;
+// export const RadioBtn = styled.input`
+//   display: inline-block;
+// `;
 
 export const Contents = styled(ReactQuill)`
   height: 300px;
