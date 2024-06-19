@@ -22,7 +22,15 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   = useForm<IFormDataProductWrite>({ resolver: yupResolver(schemaProductWrite), mode: "onChange"});
 
   // 맵 선택 Hook
-  const { latlng, address } = useMap(props.data?.fetchUseditem.useditemAddress?.lat ?? 33.450701, props.data?.fetchUseditem.useditemAddress?.lng ?? 126.570667, true);
+  const lat = props.data?.fetchUseditem.useditemAddress?.lat;
+  const lng = props.data?.fetchUseditem.useditemAddress?.lng;
+  const { latlng, address } = useMap(lat ?? 33.450701, lng ?? 126.570667, true);
+  // 맵 클릭 이벤트 핸들러
+  useEffect(() => {
+    if (typeof address !== "string") return;
+    setValue("address", address);
+    void trigger("address");
+  }, [address]);
 
   // 상품 설명 이벤트
   const onChangeContents = (value: string): void => {
@@ -47,7 +55,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
         shouldValidate: true,
       });
     });
-    // 필요한 경우 trigger() 사용
     void trigger();
   }, [setValue, props.data?.fetchUseditem, trigger]);
 
@@ -143,7 +150,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
               </S.InputWrap>
               <S.InputWrap>
                 <Label01 text="주소" />
-                <S.InputWrap style={{ rowGap: "20px" }}>
+                <S.InputWrap>
                   <S.InputWrap>
                     <S.Address value={address !== "" ? address : props.data?.fetchUseditem.useditemAddress?.address ?? ""} readOnly {...register("address")} />
                     <Error01 text={errors.address?.message} />

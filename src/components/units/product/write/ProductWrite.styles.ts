@@ -28,7 +28,7 @@ export const FlexColumn = styled.div`
   width: 100%;
 `;
 
-export const InputWrap = styled.section`
+export const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -88,7 +88,6 @@ export const SearchBtn = styled.button`
 `;
 export const Address = styled.input`
   height: 52px;
-  margin-bottom: 16px;
   padding: 0 12px;
 `;
 
