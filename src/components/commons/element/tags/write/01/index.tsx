@@ -11,15 +11,20 @@ const tagInputStyle: React.CSSProperties = {
   marginInlineEnd: 8,
   verticalAlign: "top",
 };
-export default function TagsWrite01(): JSX.Element {
+export default function TagsWrite01(props: string[]): JSX.Element {
   const { token } = theme.useToken();
-  const [tags, setTags] = useState<string[]>(["모르겠다", "모르겠다2"]);
+  const [tags, setTags] = useState<string[]>([]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [editInputIndex, setEditInputIndex] = useState(-1);
   const [editInputValue, setEditInputValue] = useState("");
   const inputRef = useRef<InputRef>(null);
   const editInputRef = useRef<InputRef>(null);
+
+  useEffect(() => {
+    setTags(props);
+    console.log(props);
+  }, []);
 
   useEffect(() => {
     if (inputVisible) {

@@ -72,13 +72,11 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   };
 
   // Tags
-  const { props: tagsProps } = TagsWrite01();
   const tags: string[] = [];
-  const tagsTest: React.ReactElement[] = [];
-  tagsProps.children[0].forEach((el: React.ReactElement) => {
+  const { props: tagProps } = TagsWrite01(tags);
+  tagProps.children[0].forEach((el: React.ReactElement) => {
     if (typeof el.key !== "string") return;
     tags.push(el.key);
-    tagsTest.push(el);
   });
 
   // 상품 뮤테이션 Hook
@@ -122,8 +120,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.InputWrap>
             <Label01 text="태그입력" />
             <S.Tags>
-              {tagsProps.children.map((el: string) => (
-                <span key={el}>{el}</span>
+              {tagProps.children.map((el: string, index: number) => (
+                <span key={`${el}_${index}`}>{el}</span>
               ))}
             </S.Tags>
             <Error01 text={errors.tags?.message} />
@@ -165,15 +163,15 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             </S.ImgWrap>
           </S.InputWrap>
 
-          <S.InputWrap>
+          {/* <S.InputWrap>
             <Label01 text="메인사진 설정" />
             <S.FlexRow>
-              {/* <S.RadioBtn type="radio" {...register("mainSetting")} /> */}
+              <S.RadioBtn type="radio" {...register("mainSetting")} />
               <S.RadioLabel>사진1</S.RadioLabel>
-              {/* <S.RadioBtn type="radio" {...register("mainSetting")} /> */}
+              <S.RadioBtn type="radio" {...register("mainSetting")} />
               <S.RadioLabel>사진2</S.RadioLabel>
             </S.FlexRow>
-          </S.InputWrap>
+          </S.InputWrap> */}
 
           {/* <button type="button" onClick={validateAllFields}>
             Validate All Fields
