@@ -1,5 +1,6 @@
 import { useBoard } from "../../../../commons/hooks/customs/board/useBoard";
 import { useBoardLike } from "../../../../commons/hooks/customs/board/useBoardLike";
+import { isValidURL } from "../../../../../commons/libraries/validation";
 
 import type { IBoardDetailProps } from "../BoardDetail.types";
 import * as S from "./BoardDetailBody.styles";
@@ -22,7 +23,7 @@ export default function BoardDetailBody(props: IBoardDetailProps): JSX.Element {
       <S.Title>{props.data?.fetchBoard?.title}</S.Title>
       <S.CustomSlider {...settings}>{props.data?.fetchBoard.images?.filter((el) => el).map((el, index) => <S.ImgItem key={index} src={`http://storage.googleapis.com/${el}`} />)}</S.CustomSlider>
       <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
-      <S.Youtube url={props.data?.fetchBoard?.youtubeUrl ?? ""} muted playing />
+      {isValidURL(props.data?.fetchBoard?.youtubeUrl ?? "") && <S.Youtube url={props.data?.fetchBoard?.youtubeUrl ?? ""} muted playing />}
       <S.LikeWrap>
         <S.LikeItem>
           <S.LikeIcon onClick={onClickLike} style={{ fontSize: "30px", cursor: "pointer" }} />
