@@ -107,12 +107,5 @@ export const RadioBtn = styled.input`
   display: inline-block;
 `;
 
-export const SubmitBtn = styled.button`
-  width: 179px;
-  height: 52px;
-  margin-top: 40px;
-  font-weight: bold;
-`;
-
 export const AddressModal = styled(Modal)``;
 export const AddressSearchInput = styled(DaumPostcodeEmbed)``;
