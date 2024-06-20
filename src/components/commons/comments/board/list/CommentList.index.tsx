@@ -26,8 +26,10 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
     <>
       {isOpen && (
         <S.CommentDeleteModal visible={true} onOk={onClickDelete} onCancel={onToggleModal}>
-          <span>비밀번호 입력: </span>
-          <input type="password" onChange={onChangeDeletePassword} />
+          <S.ModalInner>
+            <span>비밀번호 입력: </span>
+            <input type="password" onChange={onChangeDeletePassword} />
+          </S.ModalInner>
         </S.CommentDeleteModal>
       )}
 
@@ -36,14 +38,17 @@ export default function CommentList(props: CommentItemProps): JSX.Element {
           <S.ItemWrap>
             <UserIcon01 />
             <S.CommentContents>
-              <S.Writer>{props.el.writer}</S.Writer>
+              <S.TopWrap>
+                <S.Writer>{props.el.writer}</S.Writer>
+                <S.RateScore disabled value={props.el.rating} />
+              </S.TopWrap>
               <S.Contents>{props.el.contents}</S.Contents>
               <S.CreateDate>{getDate(props.el.createdAt)}</S.CreateDate>
             </S.CommentContents>
           </S.ItemWrap>
           <S.BtnWrap>
             <EditBtn01 onClick={onToggleEdit} />
-            <DeleteBtn01 onClick={onClickDelete} />
+            <DeleteBtn01 onClick={onToggleModal} />
           </S.BtnWrap>
         </S.ListItem>
       ) : (

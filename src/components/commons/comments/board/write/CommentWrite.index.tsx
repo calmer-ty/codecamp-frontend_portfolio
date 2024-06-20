@@ -27,7 +27,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
       <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
         <S.InputWrap>
           <S.UserInfoInput placeholder="작성자" defaultValue={props.el?.writer ?? ""} {...register("writer")} />
-          <S.UserInfoInput type="password" placeholder="비밀번호" defaultValue={""} {...register("password")} />
+          <S.UserInfoInput type="password" placeholder="비밀번호(4자 이상)" defaultValue={""} {...register("password")} />
           <S.RateScore onChange={setRating} value={rating} />
         </S.InputWrap>
         <Textarea01
