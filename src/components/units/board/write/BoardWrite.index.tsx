@@ -18,12 +18,30 @@ import * as S from "./BoardWrite.styles";
 import type { IBoardWriteProps, IFormData } from "./BoardWrite.types";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
-  const { register, handleSubmit, formState } = useForm<IFormData>({
+  const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormData>({
     resolver: yupResolver(schemaBoardWrite),
     mode: "onChange",
   });
   const { isOpen, zipcode, address, onClickAddressSearch, onCompleteAddressSearch } = useAddressSearch();
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
+  useEffect(() => {
+    const itemData = {
+      writer: props.data?.fetchBoard.writer ?? "",
+      contents: props.data?.fetchBoard.contents ?? "",
+      title: props.data?.fetchBoard.title ?? "",
+    };
+
+    type ItemDataKey = keyof typeof itemData;
+
+    // 객체의 각 키-값 쌍에 대해 setValue를 호출
+    Object.entries(itemData).forEach(([key, value]) => {
+      setValue(key as ItemDataKey, value, {
+        shouldValidate: true,
+      });
+    });
+    void trigger();
+  }, [setValue, props.data?.fetchBoard, trigger]);
 
   useEffect(() => {
     const images = props.data?.fetchBoard.images;
