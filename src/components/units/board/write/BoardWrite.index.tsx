@@ -18,11 +18,12 @@ import * as S from "./BoardWrite.styles";
 import type { IBoardWriteProps, IFormData } from "./BoardWrite.types";
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
+  console.log("IBoardWriteProps: ", props);
   const { register, handleSubmit, setValue, trigger, formState } = useForm<IFormData>({
     resolver: yupResolver(schemaBoardWrite),
     mode: "onChange",
   });
-  const { isOpen, zipcode, address, onClickAddressSearch, onCompleteAddressSearch } = useAddressSearch();
+  const { isOpen, zipcode, address, onClickAddressSearch, onCompleteAddressSearch } = useAddressSearch(setValue);
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   useEffect(() => {
@@ -42,6 +43,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     });
     void trigger();
   }, [setValue, props.data?.fetchBoard, trigger]);
+
+  // form 모드가 onChange이기에 스테이트로 동작하는 이 두개의 변수는 setValue로 따로 초기값을 설정해주어야한다
+  useEffect(() => {
+    setValue("zipcode", props.data?.fetchBoard.boardAddress?.zipcode ?? "");
+    setValue("address", props.data?.fetchBoard.boardAddress?.address ?? "");
+  }, [props.data]);
 
   useEffect(() => {
     const images = props.data?.fetchBoard.images;

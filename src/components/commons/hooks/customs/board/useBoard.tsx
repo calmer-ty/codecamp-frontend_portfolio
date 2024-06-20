@@ -33,6 +33,7 @@ export const useBoard = (
   const [deleteBoard] = useDeleteBoard();
 
   const onClickSubmit = async (data: IFormData): Promise<void> => {
+    console.log(data);
     try {
       const result = await createBoard({
         variables: {
@@ -43,8 +44,8 @@ export const useBoard = (
             contents: data.contents,
             youtubeUrl: data.youtubeUrl,
             boardAddress: {
-              zipcode: props?.zipcode,
-              address: props?.address,
+              zipcode: data.zipcode,
+              address: data.address,
               addressDetail: data.addressDetail,
             },
             images: props?.fileUrls,
@@ -83,10 +84,15 @@ export const useBoard = (
     if (data.title !== "") updateBoardInput.title = data.title;
     if (data.contents !== "") updateBoardInput.contents = data.contents;
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
-    if (props?.zipcode !== "") updateBoardInput.boardAddress.zipcode = props?.zipcode;
-    if (props?.address !== "") updateBoardInput.boardAddress.address = props?.address;
-    if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
+    if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
+      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = data.zipcode;
+      if (data.address !== "") updateBoardInput.boardAddress.address = data.address;
+      if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
+    }
     if (isChangedFiles) updateBoardInput.images = props?.fileUrls;
+
+    // 네트워크 요청 전에 updateBoardInput 객체의 내용을 확인
+    console.log("updateBoardInput", updateBoardInput);
 
     try {
       console.log(props);
