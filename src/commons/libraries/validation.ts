@@ -21,6 +21,12 @@ export const checkValidationImg = async (file?: File): Promise<boolean> => {
   return true;
 };
 
+export const isValidURL = (url: string): boolean => {
+  const pattern = /^https?:\/\//i;
+
+  return pattern.test(url);
+};
+
 const passwordSchema = yup.string().required("비밀번호 입력은 필수입니다.").min(4, "비밀번호는 4자리 이상이여야 합니다").max(16, "비밀번호는 16자리 이하이여야 합니다");
 
 export const schemaBoardWrite = yup.object({

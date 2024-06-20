@@ -48,6 +48,7 @@ export const LinkBtn = styled.a`
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
+  font-size: 16px;
   cursor: pointer;
 `;
 
