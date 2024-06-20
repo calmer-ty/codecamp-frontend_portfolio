@@ -18,6 +18,7 @@ import { Dropdown, Space } from "antd";
 import type { MenuProps } from "antd";
 import type { DocumentNode } from "graphql";
 import * as S from "./LayoutNavigation.styles";
+import { useRouter } from "next/router";
 
 const NAVIGATION_MENUS = [
   // { name: "Firebase", page: "/boards_firebase" },
@@ -32,6 +33,8 @@ const USER_OPTIONS = [
 ];
 
 export default function LayoutNavigation(): JSX.Element {
+  const router = useRouter();
+
   const { data } = useFetchLoggedIn();
   const [accessToken] = useRecoilState(accessTokenState);
   const [isOpen, setIsOpen] = useState(false);
@@ -119,12 +122,6 @@ export default function LayoutNavigation(): JSX.Element {
       icon: <UserOutlined />,
       danger: true,
     },
-    // {
-    //   key: "3",
-    //   label: <S.LogoutBtn onClick={onClickFetchLoggedIn}>로그인 확인</S.LogoutBtn>,
-    //   icon: <UserOutlined />,
-    //   danger: true,
-    // },
   ];
 
   return (
@@ -133,15 +130,18 @@ export default function LayoutNavigation(): JSX.Element {
         <S.Navigation>
           {/* 네비게이션 메뉴 */}
           <S.Menus>
-            {NAVIGATION_MENUS.map((el) => (
-              <S.MenuItem key={el.page}>
-                <Link href={el.page}>
-                  <S.itemLink onClick={handleMovedNavOff} onMouseOver={prefetch(el.fetch)}>
-                    {el.name}
-                  </S.itemLink>
-                </Link>
-              </S.MenuItem>
-            ))}
+            {NAVIGATION_MENUS.map((el) => {
+              const isActive = router.asPath === el.page;
+              return (
+                <S.MenuItem key={el.page}>
+                  <Link href={el.page}>
+                    <S.itemLink onClick={handleMovedNavOff} onMouseOver={prefetch(el.fetch)} isActive={isActive}>
+                      {el.name}
+                    </S.itemLink>
+                  </Link>
+                </S.MenuItem>
+              );
+            })}
           </S.Menus>
 
           {/* 회원가입/로그인 */}

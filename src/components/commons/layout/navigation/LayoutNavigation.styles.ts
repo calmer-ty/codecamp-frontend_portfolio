@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button } from "antd";
 
-import type { IMenus } from "./LayoutNavigation.types";
+import type { IItemLinkProps, IMenus } from "./LayoutNavigation.types";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { mediaQueries } from "../../../../commons/styles/globalStyles";
 import { css } from "@emotion/react";
@@ -76,10 +76,14 @@ export const MenuItem = styled.li`
   font-size: 1.2rem;
   font-weight: 700;
 `;
-export const itemLink = styled.a`
+export const itemLink = styled.a<IItemLinkProps>`
+  color: ${(props) => (props.isActive ? "#1679AB" : "#000")};
   cursor: pointer;
   &:hover {
-    color: #74e291;
+    color: #1679ab;
+  }
+  @media (max-width: 1024px) {
+    color: ${(props) => (props.isActive ? "#1679AB" : "#FFF")};
   }
 `;
 
