@@ -9,8 +9,7 @@ import * as S from "./BoardDetail.styles";
 
 export default function BoardDetail(): JSX.Element {
   const router = useRouter();
-  const boardId = router.query.boardId as string;
-  const { data } = useFetchBoard({ boardId });
+  const { data } = useFetchBoard({ boardId: router.query.boardId as string });
   return (
     <>
       <S.CardWrap>

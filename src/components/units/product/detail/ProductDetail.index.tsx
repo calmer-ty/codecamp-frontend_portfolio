@@ -11,8 +11,7 @@ import * as S from "./ProductDetail.styles";
 
 export default function ProductDetail({ useditems }: IProductDetailPageProps): JSX.Element {
   const router = useRouter();
-  const useditemId = router.query.useditemId as string;
-  const { data } = useFetchProduct({ useditemId });
+  const { data } = useFetchProduct({ useditemId: router.query.useditemId as string });
   return (
     <>
       <Head>
