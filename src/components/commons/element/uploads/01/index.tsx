@@ -35,16 +35,26 @@ export default function Upload01(props: IUploadProps): JSX.Element {
 
   const imageSrc = fileReaderUrl !== "" ? fileReaderUrl : props.fileUrl !== "" ? `http://storage.googleapis.com/${props.fileUrl}` : "";
 
+  // 업로드할 이미지 지우기
+  const onClickImgRemove = (): void => {
+    props.onChangeFileUrls("", props.index);
+    setFileReaderUrl("");
+  };
+  // console.log(props);
+
   return (
     <>
       {imageSrc !== "" ? (
         // fileUrl에 값이 있다면 이미지 요소를 보여주고 없다면 버튼을 보여준다
-        <S.UploadImg
-          // 참조한 UploadInput을 클릭 이벤트로 넣어준다
-          onClick={onClickUpload}
-          // src={`http://storage.googleapis.com/${props.fileUrl}` ?? fileReaderUrl}
-          src={imageSrc}
-        />
+        <S.UploadWrap>
+          <S.UploadImg
+            // 참조한 UploadInput을 클릭 이벤트로 넣어준다
+            onClick={onClickUpload}
+            // src={`http://storage.googleapis.com/${props.fileUrl}` ?? fileReaderUrl}
+            src={imageSrc}
+          />
+          <S.UploadCloseBtn onClick={onClickImgRemove} />
+        </S.UploadWrap>
       ) : (
         <S.UploadBtn
           // 참조한 UploadInput을 클릭 이벤트로 넣어준다

@@ -38,13 +38,13 @@ export default function Upload02(props: IUploadProps): JSX.Element {
   const onClickImgRemove = (): void => {
     props.onChangeFileUrls("", props.index);
   };
-
+  console.log(props);
   return (
     <>
       {props.fileUrl !== "" ? (
         <S.UploadWrap>
           <S.UploadImg onClick={onClickUpload} src={`http://storage.googleapis.com/${props.fileUrl}`} />
-          <S.UploadCloseButton onClick={onClickImgRemove} />
+          <S.UploadCloseBtn onClick={onClickImgRemove} />
         </S.UploadWrap>
       ) : (
         <S.UploadBtn type="button" onClick={onClickUpload}>

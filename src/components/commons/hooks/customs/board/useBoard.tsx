@@ -19,7 +19,7 @@ interface IUseBoardArgs {
 }
 
 export const useBoard = (
-  args?: IUseBoardArgs
+  props?: IUseBoardArgs
 ): {
   onClickSubmit: (data: IFormData) => Promise<void>;
   onClickUpdate: (data: IFormData) => Promise<void>;
@@ -43,11 +43,11 @@ export const useBoard = (
             contents: data.contents,
             youtubeUrl: data.youtubeUrl,
             boardAddress: {
-              zipcode: args?.zipcode,
-              address: args?.address,
+              zipcode: props?.zipcode,
+              address: props?.address,
               addressDetail: data.addressDetail,
             },
-            images: args?.fileUrls,
+            images: props?.fileUrls,
           },
         },
         // refetchQueries: [
@@ -73,7 +73,7 @@ export const useBoard = (
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
-    const currentFiles = JSON.stringify(args?.fileUrls);
+    const currentFiles = JSON.stringify(props?.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
@@ -84,11 +84,11 @@ export const useBoard = (
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
     if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
       updateBoardInput.boardAddress = {};
-      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = args?.zipcode;
-      if (data.address !== "") updateBoardInput.boardAddress.address = args?.address;
+      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = props?.zipcode;
+      if (data.address !== "") updateBoardInput.boardAddress.address = props?.address;
       if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
-    if (isChangedFiles) updateBoardInput.images = args?.fileUrls;
+    if (isChangedFiles) updateBoardInput.images = props?.fileUrls;
 
     try {
       const result = await updateBoard({

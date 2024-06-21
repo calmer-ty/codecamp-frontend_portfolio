@@ -16,7 +16,6 @@ const tagInputStyle: React.CSSProperties = {
 export default function TagsWrite01(): JSX.Element {
   const router = useRouter();
   const { data } = useFetchProduct({ useditemId: router?.query.useditemId as string });
-  console.log("fetch: ", data?.fetchUseditem.tags);
 
   const { token } = theme.useToken();
   const [tags, setTags] = useState<string[]>([]);
@@ -30,7 +29,6 @@ export default function TagsWrite01(): JSX.Element {
   useEffect(() => {
     setTags(data?.fetchUseditem.tags ?? []);
   }, []);
-  console.log("child tags:", tags);
 
   useEffect(() => {
     if (inputVisible) {
