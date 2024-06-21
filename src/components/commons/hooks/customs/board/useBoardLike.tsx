@@ -1,8 +1,8 @@
-import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
-
+import { useRouter } from "next/router";
 import { useLikeBoard } from "../../mutations/board/useLikeBoard";
 import { useDislikeBoard } from "../../mutations/board/useDislikeBoard";
-import { useIdCheck } from "../useIdCheck";
+
+import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
 
 import type { IQuery, IQueryFetchBoardArgs } from "../../../../../commons/types/generated/types";
 
@@ -10,8 +10,8 @@ export const useBoardLike = (): {
   onClickLike: () => Promise<void>;
   onClickDislike: () => Promise<void>;
 } => {
-  const { id } = useIdCheck("boardId");
-  const { data } = useFetchBoard({ boardId: id });
+  const router = useRouter();
+  const { data } = useFetchBoard({ boardId: router.query.boardId as string });
 
   const [likeBoard] = useLikeBoard();
   const [dislikeBoard] = useDislikeBoard();
