@@ -98,10 +98,17 @@ export const useProduct = (
         return resultUrl !== undefined && resultUrl !== "" ? resultUrl : url;
       }) ?? [];
 
+    console.log("data.images", data.images);
     // files
     const defaultFiles = JSON.stringify(props.fileUrls);
     const currentFiles = JSON.stringify(newFileUrls);
     const isChangedFiles = currentFiles !== defaultFiles;
+    // console.log("props.fileUrls", props.fileUrls);
+    // console.log("resultFileUrls", resultFileUrls);
+    // console.log("newFileUrls", newFileUrls);
+    console.log("props.fileUrls", props.fileUrls);
+    console.log("newFileUrls", newFileUrls);
+    // console.log("isChangedFiles", isChangedFiles);
 
     // tags
     const currentTags = JSON.stringify(props.tags);

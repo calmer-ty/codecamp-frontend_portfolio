@@ -95,6 +95,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     address,
     tags,
   });
+  // console.log(files);
+  console.log("par", fileUrls);
 
   return (
     <S.ProductWrite>

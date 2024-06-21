@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
 // Hooks
-import { FETCH_BOARD } from "../../queries/board/useFetchBoard";
+import { FETCH_BOARD, useFetchBoard } from "../../queries/board/useFetchBoard";
 import { FETCH_BOARDS } from "../../queries/board/useFetchBoards";
 import { useCreateBoard } from "../../mutations/board/useCreateBoard";
 import { useUpdateBoard } from "../../mutations/board/useUpdateBoard";
 import { useDeleteBoard } from "../../mutations/board/useDeleteBoard";
-import { useIdCheck } from "../useIdCheck";
 // Component
 import { Modal } from "antd";
 // Type
@@ -26,7 +25,9 @@ export const useBoard = (
   onClickDelete: () => Promise<void>;
 } => {
   const router = useRouter();
-  const { id } = useIdCheck("boardId");
+  const boardId = router.query.boardId as string;
+  const { data } = useFetchBoard({ boardId });
+  console.log(data);
 
   const [createBoard] = useCreateBoard();
   const [updateBoard] = useUpdateBoard();
@@ -73,6 +74,7 @@ export const useBoard = (
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
+    console.log(data.images);
     const currentFiles = JSON.stringify(props?.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
@@ -93,14 +95,14 @@ export const useBoard = (
     try {
       const result = await updateBoard({
         variables: {
-          boardId: id,
+          boardId,
           password: data.password,
           updateBoardInput,
         },
         refetchQueries: [
           {
             query: FETCH_BOARD,
-            variables: { boardId: id },
+            variables: { boardId },
           },
         ],
       });
@@ -113,7 +115,7 @@ export const useBoard = (
   const onClickDelete = async (): Promise<void> => {
     try {
       await deleteBoard({
-        variables: { boardId: id },
+        variables: { boardId },
         refetchQueries: [
           {
             query: FETCH_BOARDS,
