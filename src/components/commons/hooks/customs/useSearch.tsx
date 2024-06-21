@@ -15,7 +15,6 @@ export const useSearchbar = (
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 } => {
   const [keyword, setKeyword] = useState("");
-  console.log(keyword);
 
   const getDebounce = _.debounce((value: string) => {
     void props.refetch({ search: value, page: 1 });

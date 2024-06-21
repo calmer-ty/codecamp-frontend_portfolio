@@ -75,6 +75,7 @@ export const MainImg = styled.img`
   width: 80px;
   height: 80px;
   object-fit: cover;
+  background-color: #ccc;
 
   ${mediaQueries.desktop(css`
     width: 60px;

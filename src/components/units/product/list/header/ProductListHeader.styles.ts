@@ -10,7 +10,7 @@ export const Header = styled.header`
   width: 100%;
 `;
 export const Title = styled.h2`
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   font-size: 36px;
   text-align: center;
 `;
