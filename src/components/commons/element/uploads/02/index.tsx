@@ -4,10 +4,10 @@ import { checkValidationImg } from "../../../../../commons/libraries/validation"
 import { Modal } from "antd";
 
 import type { ChangeEvent } from "react";
-import type { IUpload01Props } from "./types";
+import type { IUploadProps } from "./types";
 import * as S from "./styles";
 
-export default function Upload01(props: IUpload01Props): JSX.Element {
+export default function Upload02(props: IUploadProps): JSX.Element {
   const [uploadFile] = useUploadFile();
 
   // 참조 기능

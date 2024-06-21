@@ -1,10 +1,10 @@
-import type { IBoardComment, IUseditemQuestion } from "../../../../../commons/types/generated/types";
+import type { IUseditemQuestion } from "../../../../../commons/types/generated/types";
 
 export interface IFormData {
   contents: string;
 }
 export interface IQuestionWriteProps {
   isEdit: boolean;
-  el?: IUseditemQuestion | IBoardComment;
+  el?: IUseditemQuestion;
   onToggleEdit?: () => void;
 }

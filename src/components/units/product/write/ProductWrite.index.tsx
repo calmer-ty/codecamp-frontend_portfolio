@@ -22,7 +22,15 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   = useForm<IFormDataProductWrite>({ resolver: yupResolver(schemaProductWrite), mode: "onChange"});
 
   // 맵 선택 Hook
-  const { latlng, address } = useMap(props.data?.fetchUseditem.useditemAddress?.lat ?? 33.450701, props.data?.fetchUseditem.useditemAddress?.lng ?? 126.570667, true);
+  const lat = props.data?.fetchUseditem.useditemAddress?.lat;
+  const lng = props.data?.fetchUseditem.useditemAddress?.lng;
+  const { latlng, address } = useMap(lat ?? 33.450701, lng ?? 126.570667, true);
+  // 맵 클릭 이벤트 핸들러
+  useEffect(() => {
+    if (typeof address !== "string") return;
+    setValue("address", address);
+    void trigger("address");
+  }, [address]);
 
   // 상품 설명 이벤트
   const onChangeContents = (value: string): void => {
@@ -47,7 +55,6 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
         shouldValidate: true,
       });
     });
-    // 필요한 경우 trigger() 사용
     void trigger();
   }, [setValue, props.data?.fetchUseditem, trigger]);
 
@@ -72,13 +79,11 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   };
 
   // Tags
-  const { props: tagsProps } = TagsWrite01();
   const tags: string[] = [];
-  const tagsTest: React.ReactElement[] = [];
-  tagsProps.children[0].forEach((el: React.ReactElement) => {
+  const { props: tagProps } = TagsWrite01(tags);
+  tagProps.children[0].forEach((el: React.ReactElement) => {
     if (typeof el.key !== "string") return;
     tags.push(el.key);
-    tagsTest.push(el);
   });
 
   // 상품 뮤테이션 Hook
@@ -92,95 +97,93 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   });
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Title>상품 {props.isEdit ? "수정" : "등록"}하기</S.Title>
-        <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
-          <S.InputWrap>
-            <Label01 text="상품명" />
-            <Input01 placeholder="상품명을 작성해주세요." defaultValue={props.data?.fetchUseditem.name} register={register("name")} />
-            <Error01 text={errors.name?.message} />
-          </S.InputWrap>
-          <S.InputWrap>
-            <Label01 text="한줄요약" />
-            <Input01 placeholder="상품 한줄요약을 작성해주세요." defaultValue={props.data?.fetchUseditem.remarks} register={register("remarks")} />
-            <Error01 text={errors.remarks?.message} />
-          </S.InputWrap>
+    <S.ProductWrite>
+      <S.Title>상품 {props.isEdit ? "수정" : "등록"}하기</S.Title>
+      <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
+        <S.InputWrap>
+          <Label01 text="상품명" />
+          <Input01 placeholder="상품명을 작성해주세요." defaultValue={props.data?.fetchUseditem.name} register={register("name")} />
+          <Error01 text={errors.name?.message} />
+        </S.InputWrap>
+        <S.InputWrap>
+          <Label01 text="한줄요약" />
+          <Input01 placeholder="상품 한줄요약을 작성해주세요." defaultValue={props.data?.fetchUseditem.remarks} register={register("remarks")} />
+          <Error01 text={errors.remarks?.message} />
+        </S.InputWrap>
 
-          <S.InputWrap>
-            <Label01 text="상품설명" />
-            <S.Contents placeholder="상품설명을 작성해주세요." defaultValue={props.data?.fetchUseditem.contents} onChange={onChangeContents} />
-            <Error01 text={errors.contents?.message} />
-          </S.InputWrap>
+        <S.InputWrap>
+          <Label01 text="상품설명" />
+          <S.Contents placeholder="상품설명을 작성해주세요." defaultValue={props.data?.fetchUseditem.contents} onChange={onChangeContents} />
+          <Error01 text={errors.contents?.message} />
+        </S.InputWrap>
 
-          <S.InputWrap>
-            <Label01 text="판매 가격" />
-            <Input01 placeholder="0" defaultValue={props.data?.fetchUseditem.price ?? ""} register={register("price")} />
-            <Error01 text={errors.price?.message} />
-          </S.InputWrap>
+        <S.InputWrap>
+          <Label01 text="판매 가격" />
+          <Input01 placeholder="0" defaultValue={props.data?.fetchUseditem.price ?? ""} register={register("price")} />
+          <Error01 text={errors.price?.message} />
+        </S.InputWrap>
 
-          <S.InputWrap>
-            <Label01 text="태그입력" />
-            <S.Tags>
-              {tagsProps.children.map((el: string) => (
-                <span key={el}>{el}</span>
-              ))}
-            </S.Tags>
-            <Error01 text={errors.tags?.message} />
-          </S.InputWrap>
+        <S.InputWrap>
+          <Label01 text="태그입력" />
+          <S.Tags>
+            {tagProps.children.map((el: string, index: number) => (
+              <span key={`${el}_${index}`}>{el}</span>
+            ))}
+          </S.Tags>
+          <Error01 text={errors.tags?.message} />
+        </S.InputWrap>
 
-          <S.AreaWrap>
-            <S.Map>
-              <Label01 text="거래위치" />
-              <div id="map" style={{ width: "100%", height: "100%" }}></div>
-            </S.Map>
-            <S.MapInfo>
-              <S.InputWrap>
-                <Label01 text="위도/경도" />
-                <S.FlexRow style={{ columnGap: "20px" }}>
-                  <S.LatLng type="number" value={latlng !== "" ? latlng?.Ma : props.data?.fetchUseditem.useditemAddress?.lat ?? ""} readOnly {...register("lat")} />
-                  <S.LatLng type="number" value={latlng !== "" ? latlng?.La : props.data?.fetchUseditem.useditemAddress?.lng ?? ""} readOnly {...register("lng")} />
-                </S.FlexRow>
-                <Error01 text={errors.lat?.message} />
-              </S.InputWrap>
-              <S.InputWrap>
-                <Label01 text="주소" />
-                <S.InputWrap style={{ rowGap: "20px" }}>
-                  <S.InputWrap>
-                    <S.Address value={address !== "" ? address : props.data?.fetchUseditem.useditemAddress?.address ?? ""} readOnly {...register("address")} />
-                    <Error01 text={errors.address?.message} />
-                  </S.InputWrap>
-                  <Input01 register={register("addressDetail")} />
+        <S.AreaWrap>
+          <S.Map>
+            <Label01 text="거래위치" />
+            <div id="map" style={{ width: "100%", height: "100%" }}></div>
+          </S.Map>
+          <S.MapInfo>
+            <S.InputWrap>
+              <Label01 text="위도/경도" />
+              <S.LatLngWrap>
+                <S.LatLng type="number" value={latlng !== "" ? latlng?.Ma : props.data?.fetchUseditem.useditemAddress?.lat ?? ""} readOnly {...register("lat")} />
+                <S.LatLng type="number" value={latlng !== "" ? latlng?.La : props.data?.fetchUseditem.useditemAddress?.lng ?? ""} readOnly {...register("lng")} />
+              </S.LatLngWrap>
+              <Error01 text={errors.lat?.message} />
+            </S.InputWrap>
+            <S.InputWrap>
+              <Label01 text="주소" />
+              <S.AddressWrap>
+                <S.InputWrap>
+                  <S.Address value={address !== "" ? address : props.data?.fetchUseditem.useditemAddress?.address ?? ""} readOnly {...register("address")} />
+                  <Error01 text={errors.address?.message} />
                 </S.InputWrap>
-              </S.InputWrap>
-            </S.MapInfo>
-          </S.AreaWrap>
+                <Input01 register={register("addressDetail")} />
+              </S.AddressWrap>
+            </S.InputWrap>
+          </S.MapInfo>
+        </S.AreaWrap>
 
-          <S.InputWrap>
-            <Label01 text="사진첨부" />
-            <S.ImgWrap>
-              {fileUrls.map((el, index) => (
-                <Upload01 key={`${el}_${index}`} index={index} fileUrl={el} onChangeFileUrls={onChangeFileUrls} />
-              ))}
-            </S.ImgWrap>
-          </S.InputWrap>
+        <S.InputWrap>
+          <Label01 text="사진첨부" />
+          <S.ImgWrap>
+            {fileUrls.map((el, index) => (
+              <Upload01 key={`${el}_${index}`} index={index} fileUrl={el} onChangeFileUrls={onChangeFileUrls} />
+            ))}
+          </S.ImgWrap>
+        </S.InputWrap>
 
-          <S.InputWrap>
+        {/* <S.InputWrap>
             <Label01 text="메인사진 설정" />
             <S.FlexRow>
-              {/* <S.RadioBtn type="radio" {...register("mainSetting")} /> */}
+              <S.RadioBtn type="radio" {...register("mainSetting")} />
               <S.RadioLabel>사진1</S.RadioLabel>
-              {/* <S.RadioBtn type="radio" {...register("mainSetting")} /> */}
+              <S.RadioBtn type="radio" {...register("mainSetting")} />
               <S.RadioLabel>사진2</S.RadioLabel>
             </S.FlexRow>
-          </S.InputWrap>
+          </S.InputWrap> */}
 
-          {/* <button type="button" onClick={validateAllFields}>
+        {/* <button type="button" onClick={validateAllFields}>
             Validate All Fields
           </button> */}
-          <Button01 text={props.isEdit ? "수정하기" : "등록하기"} isActive={isValid} />
-        </S.Form>
-      </S.Container>
-    </S.Wrapper>
+        <Button01 text={props.isEdit ? "수정하기" : "등록하기"} isActive={isValid} />
+      </S.Form>
+    </S.ProductWrite>
   );
 }

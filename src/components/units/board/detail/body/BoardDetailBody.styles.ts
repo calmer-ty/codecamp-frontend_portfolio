@@ -48,11 +48,24 @@ export const LinkBtn = styled.a`
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
+  font-size: 16px;
   cursor: pointer;
 `;
 
 // 슬라이드
-export const CustomSlider = styled(Slider)``;
+export const CustomSlider = styled(Slider)`
+  .slick-arrow.slick-prev {
+    left: -40px;
+  }
+  .slick-arrow.slick-next {
+    right: -28px;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 30px;
+    color: #1679ab;
+  }
+`;
 export const ImgItem = styled.img`
   object-fit: cover;
 `;

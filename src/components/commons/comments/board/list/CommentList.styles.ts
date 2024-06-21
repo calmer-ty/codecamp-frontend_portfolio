@@ -21,6 +21,11 @@ export const CommentContents = styled.div`
   width: calc(100% - 50px);
 `;
 
+export const TopWrap = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+`;
 export const Writer = styled.span`
   font-weight: bold;
 `;
@@ -44,4 +49,8 @@ export const BtnWrap = styled.div`
 `;
 // Library
 export const CommentDeleteModal = styled(Modal)``;
+export const ModalInner = styled.div`
+  display: flex;
+  column-gap: 10px;
+`;
 export const RateScore = styled(Rate)``;

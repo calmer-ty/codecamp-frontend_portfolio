@@ -17,7 +17,6 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   // 로그인 페이지에서 가져온 accessToken을 모든 페이지에 뿌릴 수 있게 설정
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
-  console.log("restoreAccessToken", restoreAccessToken);
 
   useEffect(() => {
     void restoreAccessToken.toPromise().then((newAccessToken) => {

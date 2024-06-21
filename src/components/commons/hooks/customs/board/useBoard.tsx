@@ -12,14 +12,14 @@ import { Modal } from "antd";
 import type { IUpdateBoardInput } from "../../../../../commons/types/generated/types";
 import type { IFormData } from "../../../../units/board/write/BoardWrite.types";
 
-interface IUseBoardArgs {
+interface IUseBoardProps {
   fileUrls: string[];
   address: string;
   zipcode: string;
 }
 
 export const useBoard = (
-  args?: IUseBoardArgs
+  props?: IUseBoardProps
 ): {
   onClickSubmit: (data: IFormData) => Promise<void>;
   onClickUpdate: (data: IFormData) => Promise<void>;
@@ -43,11 +43,11 @@ export const useBoard = (
             contents: data.contents,
             youtubeUrl: data.youtubeUrl,
             boardAddress: {
-              zipcode: args?.zipcode,
-              address: args?.address,
+              zipcode: props?.zipcode,
+              address: props?.address,
               addressDetail: data.addressDetail,
             },
-            images: args?.fileUrls,
+            images: props?.fileUrls,
           },
         },
         // refetchQueries: [
@@ -73,24 +73,23 @@ export const useBoard = (
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
-    const currentFiles = JSON.stringify(args?.fileUrls);
+    const currentFiles = JSON.stringify(props?.fileUrls);
     const defaultFiles = JSON.stringify(data.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
     const updateBoardInput: IUpdateBoardInput = {};
+    updateBoardInput.boardAddress = {};
 
     if (data.title !== "") updateBoardInput.title = data.title;
     if (data.contents !== "") updateBoardInput.contents = data.contents;
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
-    if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
-      updateBoardInput.boardAddress = {};
-      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = args?.zipcode;
-      if (data.address !== "") updateBoardInput.boardAddress.address = args?.address;
-      if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
-    }
-    if (isChangedFiles) updateBoardInput.images = args?.fileUrls;
+    if (props?.zipcode !== "") updateBoardInput.boardAddress.zipcode = props?.zipcode;
+    if (props?.address !== "") updateBoardInput.boardAddress.address = props?.address;
+    if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
+    if (isChangedFiles) updateBoardInput.images = props?.fileUrls;
 
     try {
+      console.log(props);
       const result = await updateBoard({
         variables: {
           boardId: id,
@@ -104,6 +103,7 @@ export const useBoard = (
           },
         ],
       });
+      Modal.success({ content: "게시물을 수정했습니다." });
       void router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

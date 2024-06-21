@@ -24,7 +24,7 @@ interface IUseProductArgs {
 }
 
 export const useProduct = (
-  args: IUseProductArgs
+  props: IUseProductArgs
 ): {
   onClickCreate: (data: IFormDataProductWrite) => Promise<void>;
   onClickUpdate: (data: IFormDataProductWrite) => Promise<void>;
@@ -59,7 +59,7 @@ export const useProduct = (
 
   // 판매 상품 등록
   const onClickCreate = async (data: IFormDataProductWrite): Promise<void> => {
-    const resultFileUrls = await uploadFilesAndGetUrls(args.files); // 파일 업로드 및 URL 처리 함수 호출하여 파일 URL 배열 획득
+    const resultFileUrls = await uploadFilesAndGetUrls(props.files); // 파일 업로드 및 URL 처리 함수 호출하여 파일 URL 배열 획득
     try {
       const result = await createProduct({
         variables: {
@@ -68,11 +68,11 @@ export const useProduct = (
             remarks: data.remarks,
             contents: data.contents,
             price: data.price,
-            tags: args.tags,
+            tags: props.tags,
             useditemAddress: {
-              lat: args.latlng.Ma,
-              lng: args.latlng.La,
-              address: args.address,
+              lat: props.latlng.Ma,
+              lng: props.latlng.La,
+              address: props.address,
               addressDetail: data.addressDetail,
             },
             images: resultFileUrls, // 업로드된 파일 URL 배열 전달
@@ -88,23 +88,23 @@ export const useProduct = (
 
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
-    if (typeof args._id !== "string") return;
+    if (typeof props._id !== "string") return;
 
-    const resultFileUrls = await uploadFilesAndGetUrls(args.files);
-    // 파일 URL 병합 로직 / const newFileUrls = args.fileUrls?.map((url, index) => resultFileUrls[index] || url);
+    const resultFileUrls = await uploadFilesAndGetUrls(props.files);
+    // 파일 URL 병합 로직 / const newFileUrls = props.fileUrls?.map((url, index) => resultFileUrls[index] || url);
     const newFileUrls =
-      args.fileUrls?.map((url, index) => {
+      props.fileUrls?.map((url, index) => {
         const resultUrl = typeof resultFileUrls[index] === "string" ? resultFileUrls[index] : undefined;
         return resultUrl !== undefined && resultUrl !== "" ? resultUrl : url;
       }) ?? [];
 
     // files
-    const defaultFiles = JSON.stringify(args.fileUrls);
+    const defaultFiles = JSON.stringify(props.fileUrls);
     const currentFiles = JSON.stringify(newFileUrls);
     const isChangedFiles = currentFiles !== defaultFiles;
 
     // tags
-    const currentTags = JSON.stringify(args.tags);
+    const currentTags = JSON.stringify(props.tags);
     const defaultTags = JSON.stringify(data.tags);
     const isChangedTags = currentTags !== defaultTags;
 
@@ -113,26 +113,26 @@ export const useProduct = (
     if (data.remarks !== "") updateUseditemInput.remarks = data.remarks;
     if (data.contents !== "") updateUseditemInput.contents = data.contents;
     if (data.price !== null) updateUseditemInput.price = data.price;
-    if (args.address !== "" || data.addressDetail !== "") {
+    if (props.address !== "" || data.addressDetail !== "") {
       updateUseditemInput.useditemAddress = {};
-      if (data.lat !== null) updateUseditemInput.useditemAddress.lat = args.latlng.Ma;
-      if (data.lng !== null) updateUseditemInput.useditemAddress.lng = args.latlng.La;
-      if (args.address !== "") updateUseditemInput.useditemAddress.address = args.address;
+      if (data.lat !== null) updateUseditemInput.useditemAddress.lat = props.latlng.Ma;
+      if (data.lng !== null) updateUseditemInput.useditemAddress.lng = props.latlng.La;
+      if (props.address !== "") updateUseditemInput.useditemAddress.address = props.address;
       if (data.addressDetail !== "") updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
     }
     if (isChangedFiles) updateUseditemInput.images = newFileUrls;
-    if (isChangedTags) updateUseditemInput.tags = args.tags;
+    if (isChangedTags) updateUseditemInput.tags = props.tags;
 
     try {
       const result = await updateProduct({
         variables: {
-          useditemId: args._id,
+          useditemId: props._id,
           updateUseditemInput,
         },
         refetchQueries: [
           {
             query: FETCH_USEDITEM,
-            variables: { useditemId: args._id },
+            variables: { useditemId: props._id },
           },
         ],
       });
@@ -145,11 +145,11 @@ export const useProduct = (
 
   // 판매 상품 삭제
   const onClickDelete = async (): Promise<void> => {
-    if (typeof args._id !== "string") return;
+    if (typeof props._id !== "string") return;
 
     try {
       await deleteProduct({
-        variables: { useditemId: args._id },
+        variables: { useditemId: props._id },
         refetchQueries: [
           {
             query: FETCH_USEDITEMS,
@@ -165,20 +165,20 @@ export const useProduct = (
 
   // 상품 찜하기
   const onClickPick = async (): Promise<void> => {
-    if (typeof args._id !== "string") return;
-    console.log(args._id);
+    if (typeof props._id !== "string") return;
+    console.log(props._id);
 
     try {
       await pickProduct({
-        variables: { useditemId: args._id },
+        variables: { useditemId: props._id },
         optimisticResponse: {
-          toggleUseditemPick: args.pick ?? 0,
+          toggleUseditemPick: props.pick ?? 0,
         },
         update: (cache, { data }) => {
           const prevData = cache.readQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>({
             query: FETCH_USEDITEM,
             variables: {
-              useditemId: args._id ?? "",
+              useditemId: props._id ?? "",
             },
           });
           // 디버깅: 캐시에서 읽은 데이터 확인
@@ -187,11 +187,11 @@ export const useProduct = (
           cache.writeQuery({
             query: FETCH_USEDITEM,
             variables: {
-              useditemId: args._id,
+              useditemId: props._id,
             },
             data: {
               fetchUseditem: {
-                _id: args._id,
+                _id: props._id,
                 __typename: "Useditem",
                 ...prevData?.fetchUseditem,
                 pickedCount: data?.toggleUseditemPick,

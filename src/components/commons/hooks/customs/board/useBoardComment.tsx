@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useCreateBoardComment } from "../../mutations/board/useCreateBoardComment";
 import { useUpdateBoardComment } from "../../mutations/board/useUpdateBoardComment";
@@ -13,14 +13,14 @@ import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import type { IFormData } from "../../../comments/board/write/CommentWrite.types";
 import type { IUpdateBoardCommentInput } from "../../../../../commons/types/generated/types";
 
-interface IUseBoardCommentArgs {
+interface IUseBoardCommentProps {
   rating?: number;
   boardCommentId?: string;
   onToggleEdit?: () => void;
 }
 
 export const useBoardComment = (
-  args: IUseBoardCommentArgs
+  props: IUseBoardCommentProps
 ): {
   onClickCreate: (data: IFormData) => Promise<void>;
   onClickUpdate: (data: IFormData) => Promise<void>;
@@ -30,7 +30,13 @@ export const useBoardComment = (
   setRating: Dispatch<SetStateAction<number | undefined>>;
 } => {
   const { id } = useIdCheck("boardId");
-  const [rating, setRating] = useState(args.rating);
+  const [rating, setRating] = useState(props.rating);
+
+  useEffect(() => {
+    console.log("rating이 변경되었습니다:", rating);
+    // 여기에 필요한 로직을 추가하세요
+  }, [rating]);
+
   const [deletePassword, setDeletePassword] = useState("");
 
   const [createComment] = useCreateBoardComment();
@@ -41,27 +47,8 @@ export const useBoardComment = (
     setDeletePassword(event.target.value);
   };
 
-  const onClickDelete = async (): Promise<void> => {
-    if (typeof args?.boardCommentId !== "string") return;
-    try {
-      await deleteComment({
-        variables: {
-          boardCommentId: args.boardCommentId,
-          password: deletePassword,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_COMMENTS,
-            variables: { boardId: id },
-          },
-        ],
-      });
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
-  };
-
   const onClickCreate = async (data: IFormData): Promise<void> => {
+    console.log(data);
     try {
       await createComment({
         variables: {
@@ -87,6 +74,7 @@ export const useBoardComment = (
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
+    console.log(data);
     if (data.contents === "") {
       Modal.error({ content: "수정한 내용이 없습니다." });
       return;
@@ -98,14 +86,17 @@ export const useBoardComment = (
 
     try {
       const updateBoardCommentInput: IUpdateBoardCommentInput = {};
-      if (typeof args.boardCommentId !== "string") return;
+      if (typeof props.boardCommentId !== "string") return;
       if (data.contents !== "") updateBoardCommentInput.contents = data.contents;
-      if (data.rating !== args?.rating) updateBoardCommentInput.rating = args.rating;
+      if (rating !== props.rating) {
+        // 스테이트를 사용해 변경된 값으로 업데이트를 해주면 반영이 된다.
+        updateBoardCommentInput.rating = rating;
+      }
       await updateComment({
         variables: {
           updateBoardCommentInput,
           password: data.password,
-          boardCommentId: args.boardCommentId,
+          boardCommentId: props.boardCommentId,
         },
         refetchQueries: [
           {
@@ -114,7 +105,27 @@ export const useBoardComment = (
           },
         ],
       });
-      args.onToggleEdit?.();
+      props.onToggleEdit?.();
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
+  };
+
+  const onClickDelete = async (): Promise<void> => {
+    if (typeof props?.boardCommentId !== "string") return;
+    try {
+      await deleteComment({
+        variables: {
+          boardCommentId: props.boardCommentId,
+          password: deletePassword,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_COMMENTS,
+            variables: { boardId: id },
+          },
+        ],
+      });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

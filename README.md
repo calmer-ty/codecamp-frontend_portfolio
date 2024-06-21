@@ -1,50 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+##  자유게시판
+##  게시판 리스트
 
-## Getting Started
+  ![게시물 리스트](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/4baa9a38-13d5-4262-9fb0-b6825ce2e849)
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##  게시판 등록/수정/삭제
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![게시물](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/508c6281-0657-42e1-b4e4-50bc11c10707)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+##  게시판 댓글
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## 프로젝트 소개
-
-## 자유게시판
-
-- 검색 기능
-![search](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/88abb548-f5d4-4814-a8c3-d765c0329ddf)
-
-- 페이지네이션 기능
-![pagenation](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/e9947ea3-4929-4422-b847-af42ad2ec0f3)
+![게시물 댓글](https://github.com/calmer-ty/codecamp-frontend_portfolio/assets/114653572/30911c50-2000-4bf8-b0c6-b807d585d9e3)

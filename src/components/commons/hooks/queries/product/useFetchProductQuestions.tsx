@@ -23,7 +23,6 @@ export const FETCH_USEDITEM_QUESTIONS = gql`
 
 export const useFetchProductQuestions = (): QueryReturnType<"fetchUseditemQuestions", IQueryFetchUseditemQuestionsArgs> => {
   const { id } = useIdCheck("useditemId");
-  console.log(id);
   return useQuery<Pick<IQuery, "fetchUseditemQuestions">, IQueryFetchUseditemQuestionsArgs>(FETCH_USEDITEM_QUESTIONS, {
     variables: { useditemId: id },
   });

@@ -1,34 +1,27 @@
 import dynamic from "next/dynamic";
 import styled from "@emotion/styled";
 import "react-quill/dist/quill.snow.css";
+import { mediaQueries } from "../../../../commons/styles/globalStyles";
+import { css } from "@emotion/react";
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
 
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-export const Container = styled.article`
+export const ProductWrite = styled.article`
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  width: 100%;
   padding: 100px;
   border: 2px solid #bdbdbd;
   box-shadow: 5px 5px 5px #bdbdbd;
+  background-color: #fff;
+
+  ${mediaQueries.desktop(css`
+    padding: 100px 50px;
+  `)}
 `;
 
-export const FlexRow = styled.div`
-  display: flex;
-  width: 100%;
-`;
-export const FlexColumn = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-export const InputWrap = styled.section`
+export const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -53,66 +46,70 @@ export const Tags = styled.div`
   align-items: center;
   height: 52px;
   padding: 0 16px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #aaa;
 `;
 
-export const LatLng = styled.input`
-  height: 52px;
-  padding: 0 16px;
-  border: 1px solid #bdbdbd;
-`;
 export const AreaWrap = styled.div`
   display: flex;
   justify-content: space-between;
+  column-gap: 20px;
   width: 100%;
 `;
+export const LatLngWrap = styled.div`
+  display: flex;
+  column-gap: 20px;
+`;
+export const LatLng = styled.input`
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #aaa;
+`;
+
 export const Map = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 50%;
 `;
-
 export const MapInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 55%;
+  width: 50%;
   row-gap: 20px;
 `;
-export const SearchBtn = styled.button`
-  width: 124px;
-  height: 52px;
-  margin-left: 16px;
-  background-color: black;
-  color: white;
+
+export const AddressWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 `;
 export const Address = styled.input`
   height: 52px;
-  margin-bottom: 16px;
   padding: 0 12px;
+  border: 1px solid #aaa;
 `;
 
 export const ImgWrap = styled.div`
   display: flex;
   column-gap: 24px;
 `;
-export const RadioLabel = styled.div`
-  margin-left: 8px;
-  margin-right: 20px;
-  font-weight: 500;
-`;
-export const RadioBtn = styled.input`
-  display: inline-block;
-`;
-
-export const SubmitBtn = styled.button`
-  width: 179px;
-  height: 52px;
-  margin-top: 40px;
-  font-weight: 500;
-`;
+// export const RadioLabel = styled.div`
+//   margin-left: 8px;
+//   margin-right: 20px;
+//   font-weight: 500;
+// `;
+// export const RadioBtn = styled.input`
+//   display: inline-block;
+// `;
 
 export const Contents = styled(ReactQuill)`
   height: 300px;
   margin-bottom: 44px;
+  .ql-toolbar.ql-snow {
+    border: 1px solid #aaa;
+  }
+  .ql-container.ql-snow {
+    border: 1px solid #aaa;
+  }
 `;

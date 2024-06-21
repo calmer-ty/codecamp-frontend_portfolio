@@ -6,7 +6,7 @@ import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
 // emotion은 태그로 쓰이기 때문에 대문자로 사용한다
-export const Container = styled.div`
+export const BoardWrite = styled.article`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -20,26 +20,29 @@ export const Container = styled.div`
   `)}
 `;
 
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 20px;
+`;
+export const InputWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 export const FlexRow = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   column-gap: 20px;
 `;
-export const FlexColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-export const formItemWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
 export const AddressInput = styled.input`
   height: 52px;
   padding: 0 16px;
-  border: 1px solid #777;
+  border: 1px solid #aaa;
 `;
 export const Title = styled.div`
   margin-bottom: 60px;
@@ -48,18 +51,11 @@ export const Title = styled.div`
   text-align: center;
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  row-gap: 20px;
-`;
 export const Contents = styled.textarea`
   width: 100%;
   height: 480px;
   padding: 12px;
-  border: 1px solid #777;
+  border: 1px solid #aaa;
 `;
 
 export const AddressWrap = styled.div`
@@ -77,7 +73,7 @@ export const Zipcode = styled.input`
   height: 52px;
   padding: 0 12px;
   text-align: center;
-  border: 1px solid #777;
+  border: 1px solid #aaa;
 `;
 
 export const SearchBtn = styled.button`
@@ -109,13 +105,6 @@ export const RadioLabel = styled.div`
 `;
 export const RadioBtn = styled.input`
   display: inline-block;
-`;
-
-export const SubmitBtn = styled.button`
-  width: 179px;
-  height: 52px;
-  margin-top: 40px;
-  font-weight: bold;
 `;
 
 export const AddressModal = styled(Modal)``;

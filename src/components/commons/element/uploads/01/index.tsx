@@ -1,17 +1,11 @@
 import { useRef, useState } from "react";
 import { checkValidationImg } from "../../../../../commons/libraries/validation";
 
-import * as S from "./styles";
 import type { ChangeEvent } from "react";
+import type { IUploadProps } from "./types";
+import * as S from "./styles";
 
-interface IUpload01Props {
-  fileUrl: string;
-  index: number;
-  file?: File;
-  onChangeFileUrls: (fileUrl: string, index: number, file?: File) => void;
-}
-
-export default function Upload02(props: IUpload01Props): JSX.Element {
+export default function Upload01(props: IUploadProps): JSX.Element {
   const [fileReaderUrl, setFileReaderUrl] = useState("");
 
   // 참조 기능

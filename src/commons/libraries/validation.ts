@@ -21,6 +21,12 @@ export const checkValidationImg = async (file?: File): Promise<boolean> => {
   return true;
 };
 
+export const isValidURL = (url: string): boolean => {
+  const pattern = /^https?:\/\//i;
+
+  return pattern.test(url);
+};
+
 const passwordSchema = yup.string().required("비밀번호 입력은 필수입니다.").min(4, "비밀번호는 4자리 이상이여야 합니다").max(16, "비밀번호는 16자리 이하이여야 합니다");
 
 export const schemaBoardWrite = yup.object({
@@ -51,12 +57,6 @@ export const schemaUserJoin = yup.object({
 
 export const schemaProductWrite = yup.object({
   name: yup.string().required("상품명은 필수입니다."),
-  // name: yup.string().when("$isEdit", {
-  //   is: true, // 조건: $isEdit 값이 true일 때
-  //   then: yup.string().optional(), // 그 경우에 적용할 스키마
-  //   otherwise: yup.string().required("상품명은 필수입니다."), // 그 외의 경우에 적용할 스키마
-  // }),
-  // remarks: yup.string().optional(),
   remarks: yup.string().required("상품한줄은 필수입니다."),
   contents: yup.string().required("상품설명은 필수입니다."),
   price: yup.number().typeError("숫자를 입력해주세요.").required("상품가격은 필수입니다."),

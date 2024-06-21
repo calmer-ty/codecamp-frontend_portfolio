@@ -5,6 +5,7 @@ export const UploadBtn = styled.button`
   width: 100px;
   height: 100px;
   background-color: lightgray;
+  font-weight: bold;
 `;
 export const UploadInput = styled.input`
   display: none;

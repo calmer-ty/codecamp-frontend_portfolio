@@ -8,6 +8,5 @@ export const getDate = (date: unknown): string => {
   const dd = _date.getDate();
   const formattedMm = mm < 10 ? `0${mm}` : `${mm}`;
   const formattedDd = dd < 10 ? `0${dd}` : `${dd}`;
-  console.log(dd);
   return `${yyyy}-${formattedMm}-${formattedDd}`;
 };

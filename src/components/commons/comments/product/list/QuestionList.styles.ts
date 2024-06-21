@@ -42,6 +42,7 @@ export const BtnWrap = styled.div`
   top: 20px;
   right: 0;
 `;
+
 // Library
 export const CommentDeleteModal = styled(Modal)``;
 export const RateScore = styled(Rate)``;
