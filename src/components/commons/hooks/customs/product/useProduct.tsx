@@ -5,7 +5,7 @@ import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { usePickProduct } from "../../mutations/product/usePickProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import { FETCH_USEDITEM } from "../../queries/product/useFetchProduct";
+import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
 
 import { Modal } from "antd";
@@ -32,6 +32,9 @@ export const useProduct = (
   onClickPick: () => Promise<void>;
 } => {
   const router = useRouter();
+  const useditemId = router.query.useditemId as string;
+  const { data: productData } = useFetchProduct({ useditemId });
+
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
   const [deleteProduct] = useDeleteProduct();
@@ -98,10 +101,17 @@ export const useProduct = (
         return resultUrl !== undefined && resultUrl !== "" ? resultUrl : url;
       }) ?? [];
 
+    console.log("data.images", data.images);
     // files
-    const defaultFiles = JSON.stringify(props.fileUrls);
+    const defaultFiles = JSON.stringify(productData?.fetchUseditem.images);
     const currentFiles = JSON.stringify(newFileUrls);
     const isChangedFiles = currentFiles !== defaultFiles;
+    // console.log("props.fileUrls", props.fileUrls);
+    // console.log("resultFileUrls", resultFileUrls);
+    // console.log("newFileUrls", newFileUrls);
+    console.log("props.fileUrls", props.fileUrls);
+    console.log("newFileUrls", newFileUrls);
+    // console.log("isChangedFiles", isChangedFiles);
 
     // tags
     const currentTags = JSON.stringify(props.tags);

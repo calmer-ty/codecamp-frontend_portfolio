@@ -22,7 +22,7 @@ export const UploadImg = styled.img`
   object-fit: cover;
   cursor: pointer;
 `;
-export const UploadCloseButton = styled(CloseOutlined)`
+export const UploadCloseBtn = styled(CloseOutlined)`
   position: absolute;
   top: 4px;
   right: 4px;

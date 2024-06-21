@@ -23,6 +23,6 @@ export const FETCH_BOARD = gql`
   }
 `;
 
-export const useFetchBoard = (variables: IQueryFetchBoardArgs): QueryReturnType<"fetchBoard", IQueryFetchBoardArgs> => {
+export const useFetchBoardLike = (variables: IQueryFetchBoardArgs): QueryReturnType<"fetchBoard", IQueryFetchBoardArgs> => {
   return useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(FETCH_BOARD, { variables });
 };
