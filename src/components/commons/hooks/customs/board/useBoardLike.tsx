@@ -11,7 +11,8 @@ export const useBoardLike = (): {
   onClickDislike: () => Promise<void>;
 } => {
   const router = useRouter();
-  const { data } = useFetchBoard({ boardId: router.query.boardId as string });
+  const boardId = router.query.boardId as string;
+  const { data } = useFetchBoard({ boardId });
 
   const [likeBoard] = useLikeBoard();
   const [dislikeBoard] = useDislikeBoard();
@@ -21,7 +22,7 @@ export const useBoardLike = (): {
 
     try {
       await likeBoard({
-        variables: { boardId: id },
+        variables: { boardId },
         optimisticResponse: {
           likeBoard: (data?.fetchBoard.likeCount ?? 0) + 1,
         },
@@ -29,17 +30,17 @@ export const useBoardLike = (): {
           const prevData = cache.readQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>({
             query: FETCH_BOARD,
             variables: {
-              boardId: id,
+              boardId,
             },
           });
           cache.writeQuery({
             query: FETCH_BOARD,
             variables: {
-              boardId: id,
+              boardId,
             },
             data: {
               fetchBoard: {
-                _id: id,
+                _id: boardId,
                 __typename: "Board",
                 ...prevData?.fetchBoard,
                 likeCount: data?.likeBoard,
@@ -56,22 +57,22 @@ export const useBoardLike = (): {
     const { Modal } = await import("antd");
     try {
       await dislikeBoard({
-        variables: { boardId: id },
+        variables: { boardId },
         update: (cache, { data }) => {
           const prevData = cache.readQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>({
             query: FETCH_BOARD,
             variables: {
-              boardId: id,
+              boardId,
             },
           });
           cache.writeQuery({
             query: FETCH_BOARD,
             variables: {
-              boardId: id,
+              boardId,
             },
             data: {
               fetchBoard: {
-                _id: id,
+                _id: boardId,
                 __typename: "Board",
                 ...prevData?.fetchBoard,
                 dislikeCount: data?.dislikeBoard,

@@ -4,6 +4,8 @@ import { Input, Tag, theme, Tooltip } from "antd";
 
 import type { InputRef } from "antd";
 import * as S from "./styles";
+import { useRouter } from "next/router";
+import { useFetchProduct } from "../../../../hooks/queries/product/useFetchProduct";
 
 const tagInputStyle: React.CSSProperties = {
   width: 64,
@@ -11,7 +13,11 @@ const tagInputStyle: React.CSSProperties = {
   marginInlineEnd: 8,
   verticalAlign: "top",
 };
-export default function TagsWrite01(props: string[]): JSX.Element {
+export default function TagsWrite01(): JSX.Element {
+  const router = useRouter();
+  const { data } = useFetchProduct({ useditemId: router?.query.useditemId as string });
+  console.log("fetch: ", data?.fetchUseditem.tags);
+
   const { token } = theme.useToken();
   const [tags, setTags] = useState<string[]>([]);
   const [inputVisible, setInputVisible] = useState(false);
@@ -22,9 +28,9 @@ export default function TagsWrite01(props: string[]): JSX.Element {
   const editInputRef = useRef<InputRef>(null);
 
   useEffect(() => {
-    setTags(props);
-    console.log(props);
+    setTags(data?.fetchUseditem.tags ?? []);
   }, []);
+  console.log("child tags:", tags);
 
   useEffect(() => {
     if (inputVisible) {

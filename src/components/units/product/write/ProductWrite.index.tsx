@@ -80,7 +80,7 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
 
   // Tags
   const tags: string[] = [];
-  const { props: tagProps } = TagsWrite01(tags);
+  const { props: tagProps } = TagsWrite01();
   tagProps.children[0].forEach((el: React.ReactElement) => {
     if (typeof el.key !== "string") return;
     tags.push(el.key);
