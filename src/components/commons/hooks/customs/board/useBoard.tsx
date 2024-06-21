@@ -26,8 +26,7 @@ export const useBoard = (
 } => {
   const router = useRouter();
   const boardId = router.query.boardId as string;
-  const { data } = useFetchBoard({ boardId });
-  console.log(data);
+  const { data: boardData } = useFetchBoard({ boardId });
 
   const [createBoard] = useCreateBoard();
   const [updateBoard] = useUpdateBoard();
@@ -76,7 +75,7 @@ export const useBoard = (
   const onClickUpdate = async (data: IFormData): Promise<void> => {
     console.log(data.images);
     const currentFiles = JSON.stringify(props?.fileUrls);
-    const defaultFiles = JSON.stringify(data.images);
+    const defaultFiles = JSON.stringify(boardData?.fetchBoard.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
     const updateBoardInput: IUpdateBoardInput = {};
