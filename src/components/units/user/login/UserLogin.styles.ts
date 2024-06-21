@@ -9,7 +9,8 @@ export const Container = styled.div`
   flex-direction: column;
   width: 384px;
 `;
-export const Logo = styled.div`
+export const Logo = styled.img`
+  width: 300px;
   margin-bottom: 80px;
   font-size: 44px;
 `;

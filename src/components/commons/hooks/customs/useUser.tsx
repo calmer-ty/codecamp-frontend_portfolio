@@ -19,7 +19,7 @@ export const useUser = (): {
 } => {
   const router = useRouter();
   const [visitedPage] = useRecoilState(visitedPageState);
-  console.log(visitedPage);
+  // console.log(visitedPage);
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [createUser] = useCreateUser();
@@ -82,7 +82,7 @@ export const useUser = (): {
         return;
       }
       setAccessToken(accessToken);
-      void router.push("/");
+      void router.push(visitedPage);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

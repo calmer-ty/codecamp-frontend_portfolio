@@ -1,20 +1,22 @@
 import { useRecoilState } from "recoil";
 import { visitedPageState } from "../../../../commons/stores";
+import { useRouter } from "next/router";
 
 export const useMoveToPage = (): {
   visitedPage: string;
-  onClickMoveToPage: (path: string) => () => void;
+  onClickMoveToPage: () => void;
 } => {
+  const router = useRouter();
   const [visitedPage, setVisitedPage] = useRecoilState(visitedPageState);
 
-  const onClickMoveToPage = (path: string) => () => {
-    if (typeof path !== "string") {
+  const onClickMoveToPage = (): void => {
+    if (typeof router.asPath !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
     }
-    console.log(visitedPage);
-    setVisitedPage(path);
+    setVisitedPage(router.asPath);
   };
+  console.log(visitedPage);
 
   return {
     visitedPage,
