@@ -101,17 +101,10 @@ export const useProduct = (
         return resultUrl !== undefined && resultUrl !== "" ? resultUrl : url;
       }) ?? [];
 
-    console.log("data.images", data.images);
     // files
     const defaultFiles = JSON.stringify(productData?.fetchUseditem.images);
     const currentFiles = JSON.stringify(newFileUrls);
     const isChangedFiles = currentFiles !== defaultFiles;
-    // console.log("props.fileUrls", props.fileUrls);
-    // console.log("resultFileUrls", resultFileUrls);
-    // console.log("newFileUrls", newFileUrls);
-    console.log("props.fileUrls", props.fileUrls);
-    console.log("newFileUrls", newFileUrls);
-    // console.log("isChangedFiles", isChangedFiles);
 
     // tags
     const currentTags = JSON.stringify(props.tags);
@@ -169,7 +162,7 @@ export const useProduct = (
       Modal.error({ content: "상품이 삭제되었습니다!" });
       void router.push("/products");
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) Modal.error({ content: "로그인 후 삭제가 가능합니다" });
     }
   };
 
