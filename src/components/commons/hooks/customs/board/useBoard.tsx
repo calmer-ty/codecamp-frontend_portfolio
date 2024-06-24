@@ -80,16 +80,9 @@ export const useBoard = (
     const isChangedFiles = currentFiles !== defaultFiles;
 
     const updateBoardInput: IUpdateBoardInput = {};
-    updateBoardInput.boardAddress = {};
-
     if (data.title !== "") updateBoardInput.title = data.title;
     if (data.contents !== "") updateBoardInput.contents = data.contents;
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
-    if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
-      if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = data.zipcode;
-      if (data.address !== "") updateBoardInput.boardAddress.address = data.address;
-      if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
-    }
     if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
       updateBoardInput.boardAddress = {};
       if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = props?.zipcode;
