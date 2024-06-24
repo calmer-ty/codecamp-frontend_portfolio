@@ -92,6 +92,7 @@ export const useProduct = (
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof props._id !== "string") return;
+    console.log(data.contents);
 
     const resultFileUrls = await uploadFilesAndGetUrls(props.files);
     // 파일 URL 병합 로직 / const newFileUrls = props.fileUrls?.map((url, index) => resultFileUrls[index] || url);
@@ -162,7 +163,7 @@ export const useProduct = (
       Modal.error({ content: "상품이 삭제되었습니다!" });
       void router.push("/products");
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: "로그인 후 삭제가 가능합니다" });
+      if (error instanceof Error) Modal.error({ content: "상품에 대한 권한이 없습니다" });
     }
   };
 
@@ -204,7 +205,7 @@ export const useProduct = (
         },
       });
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: "로그인 후 찜하기가 가능합니다" });
+      if (error instanceof Error) Modal.error({ content: "로그인 후 이용해주세요" });
     }
   };
 

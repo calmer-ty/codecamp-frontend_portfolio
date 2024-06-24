@@ -64,6 +64,8 @@ export const LatLng = styled.input`
   height: 52px;
   padding: 0 16px;
   border: 1px solid #aaa;
+
+  text-overflow: ellipsis;
 `;
 
 export const Map = styled.div`
@@ -88,6 +90,8 @@ export const Address = styled.input`
   height: 52px;
   padding: 0 12px;
   border: 1px solid #aaa;
+
+  text-overflow: ellipsis;
 `;
 
 export const ImgWrap = styled.div`
