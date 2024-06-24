@@ -5,5 +5,6 @@ export const AnswerToggleButton = styled.button`
   align-items: center;
   column-gap: 2px;
   align-self: flex-start;
-  margin-bottom: 10px;
+  height: 30px;
+  margin-left: 4px;
 `;
