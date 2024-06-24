@@ -14,7 +14,7 @@ export default function QuestionAnswer(props: IQuestionAnswerProps): JSX.Element
 
   return (
     <>
-      <S.AnswerToggleButton onClick={onToggleOpen}>답글</S.AnswerToggleButton>
+      <S.AnswerToggleButton onClick={onToggleOpen}>{isOpen ? "답글 닫기" : "답글"}</S.AnswerToggleButton>
       {isOpen ? (
         <>
           <QuestionAnswerWrite isEdit={false} useditemQuestionId={props.el._id} />
