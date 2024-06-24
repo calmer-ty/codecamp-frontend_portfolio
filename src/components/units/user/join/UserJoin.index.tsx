@@ -30,22 +30,22 @@ export default function UserJoin(): JSX.Element {
           <S.InputWrap>
             <Label01 text="이메일" />
             <Input02 register={register("email")} />
-            <Error01 text={formState.errors.email?.message} />
+            <Error01 text={formState.errors.email?.message ?? ""} />
           </S.InputWrap>
           <S.InputWrap>
             <Label01 text="이름" />
             <Input02 register={register("name")} />
-            <Error01 text={formState.errors.name?.message} />
+            <Error01 text={formState.errors.name?.message ?? ""} />
           </S.InputWrap>
           <S.InputWrap>
             <Label01 text="비밀번호" />
             <Input02 type="password" register={register("password")} />
-            <Error01 text={formState.errors.password?.message} />
+            <Error01 text={formState.errors.password?.message ?? ""} />
           </S.InputWrap>
           <S.InputWrap>
             <Label01 text="비밀번호 확인" />
             <Input02 type="password" register={register("passwordCheck")} />
-            <Error01 text={formState.errors.passwordCheck?.message} />
+            <Error01 text={formState.errors.passwordCheck?.message ?? ""} />
           </S.InputWrap>
           <Button03 text="회원가입하기" />
         </S.Form>

@@ -32,12 +32,12 @@ export default function UserLogin(): JSX.Element {
         <S.InputWrap>
           <Label01 text="이메일" />
           <Input02 register={register("email")} />
-          <Error01 text={formState.errors.email?.message} />
+          <Error01 text={formState.errors.email?.message ?? ""} />
         </S.InputWrap>
         <S.InputWrap>
           <Label01 text="비밀번호" />
           <Input02 type="password" register={register("password")} />
-          <Error01 text={formState.errors.email?.message} />
+          <Error01 text={formState.errors.email?.message ?? ""} />
         </S.InputWrap>
         <Button03 text="로그인하기" />
       </S.Form>
