@@ -21,5 +21,5 @@ export const getServerSideProps: GetServerSideProps<IProductDetailPageProps> = a
     useditemId,
   });
 
-  return { props: { useditems: { name: result.fetchUseditem.name, remarks: result.fetchUseditem.remarks, images: result.fetchUseditem.images ?? [] } } };
+  return { props: { useditem: { name: result.fetchUseditem.name, remarks: result.fetchUseditem.remarks, images: result.fetchUseditem.images ?? [] } } };
 };
