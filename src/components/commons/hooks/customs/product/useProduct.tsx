@@ -81,6 +81,11 @@ export const useProduct = (
             images: resultFileUrls, // 업로드된 파일 URL 배열 전달
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEMS,
+          },
+        ],
       });
       Modal.success({ content: "상품이 등록되었습니다!" });
       void router.push(`/products/${result.data?.createUseditem._id}`);
