@@ -5,7 +5,7 @@ import { useUpdateProduct } from "../../mutations/product/useUpdateProduct";
 import { useDeleteProduct } from "../../mutations/product/useDeleteProduct";
 import { usePickProduct } from "../../mutations/product/usePickProduct";
 import { useUploadFile } from "../../mutations/useUploadFile";
-import { FETCH_USEDITEM } from "../../queries/product/useFetchProduct";
+import { FETCH_USEDITEM, useFetchProduct } from "../../queries/product/useFetchProduct";
 import { FETCH_USEDITEMS } from "../../queries/product/useFetchProducts";
 
 import { Modal } from "antd";
@@ -32,6 +32,9 @@ export const useProduct = (
   onClickPick: () => Promise<void>;
 } => {
   const router = useRouter();
+  const useditemId = router.query.useditemId as string;
+  const { data: productData } = useFetchProduct({ useditemId });
+
   const [createProduct] = useCreateProduct();
   const [updateProduct] = useUpdateProduct();
   const [deleteProduct] = useDeleteProduct();
@@ -78,6 +81,11 @@ export const useProduct = (
             images: resultFileUrls, // 업로드된 파일 URL 배열 전달
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEMS,
+          },
+        ],
       });
       Modal.success({ content: "상품이 등록되었습니다!" });
       void router.push(`/products/${result.data?.createUseditem._id}`);
@@ -89,6 +97,7 @@ export const useProduct = (
   // 판매 상품 수정
   const onClickUpdate = async (data: IFormDataProductWrite): Promise<void> => {
     if (typeof props._id !== "string") return;
+    console.log(data.contents);
 
     const resultFileUrls = await uploadFilesAndGetUrls(props.files);
     // 파일 URL 병합 로직 / const newFileUrls = props.fileUrls?.map((url, index) => resultFileUrls[index] || url);
@@ -99,7 +108,7 @@ export const useProduct = (
       }) ?? [];
 
     // files
-    const defaultFiles = JSON.stringify(props.fileUrls);
+    const defaultFiles = JSON.stringify(productData?.fetchUseditem.images);
     const currentFiles = JSON.stringify(newFileUrls);
     const isChangedFiles = currentFiles !== defaultFiles;
 
@@ -159,7 +168,7 @@ export const useProduct = (
       Modal.error({ content: "상품이 삭제되었습니다!" });
       void router.push("/products");
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) Modal.error({ content: "상품에 대한 권한이 없습니다" });
     }
   };
 
@@ -201,7 +210,7 @@ export const useProduct = (
         },
       });
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: "로그인 후 찜하기가 가능합니다" });
+      if (error instanceof Error) Modal.error({ content: "로그인 후 이용해주세요" });
     }
   };
 

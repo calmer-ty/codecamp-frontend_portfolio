@@ -12,7 +12,7 @@ export const Body = styled.section`
 `;
 export const ListWrap = styled.div`
   overflow-y: scroll;
-  max-height: calc(200px * 10);
+  max-height: calc(241px * 4);
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
   &::-webkit-scrollbar {
@@ -34,11 +34,22 @@ export const ListItem = styled.a`
   background-color: #f9f9f9;
   cursor: pointer;
 
+  position: relative;
   &:hover {
-    background-color: rgba(205, 205, 205, 0.5);
+    &::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
   }
 
-  ${mediaQueries.desktop(css`
+  ${mediaQueries.tablet(css`
     flex-direction: column;
     row-gap: 20px;
   `)}
@@ -54,18 +65,12 @@ export const ItemInfo = styled.div`
   `)}
 `;
 
-// export const InfoTop = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   color: #4f4f4f;
-// `;
-
 export const ItemImg = styled.img`
   width: 200px;
   height: 200px;
   object-fit: cover;
+  background-color: #ccc;
 `;
-
 export const ItemTitle = styled.span`
   margin-bottom: 4px;
   font-size: 24px;

@@ -5,8 +5,7 @@ import { useFetchProduct } from "../../../../src/components/commons/hooks/querie
 
 export default function ProductsEditPage(): JSX.Element {
   const router = useRouter();
-  const useditemId = router.query.useditemId as string;
-  const { data } = useFetchProduct({ useditemId });
+  const { data } = useFetchProduct({ useditemId: router.query.useditemId as string });
 
   return <ProductWrite isEdit={true} data={data} />;
 }

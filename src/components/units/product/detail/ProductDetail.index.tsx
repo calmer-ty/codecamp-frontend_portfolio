@@ -9,16 +9,16 @@ import ProductDetailFooter from "./footer/ProductDetailFooter.index";
 import type { IProductDetailPageProps } from "../../../../../pages/products/[useditemId]/type";
 import * as S from "./ProductDetail.styles";
 
-export default function ProductDetail({ useditems }: IProductDetailPageProps): JSX.Element {
+export default function ProductDetail({ useditem }: IProductDetailPageProps): JSX.Element {
   const router = useRouter();
-  const useditemId = router.query.useditemId as string;
-  const { data } = useFetchProduct({ useditemId });
+  const { data } = useFetchProduct({ useditemId: router.query.useditemId as string });
+
   return (
     <>
       <Head>
-        <meta property="og:title" content={useditems.name} />
-        <meta property="og:description" content={useditems.remarks} />
-        <meta property="og:image" content={useditems.images?.[0]} />
+        <meta property="og:title" content={useditem.name} />
+        <meta property="og:description" content={useditem.remarks} />
+        <meta property="og:image" content={useditem.images?.[0]} />
         <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
       </Head>
       <S.CardWrap>

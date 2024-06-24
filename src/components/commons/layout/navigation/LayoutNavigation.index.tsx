@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { useApolloClient } from "@apollo/client";
 import { useEffect, useState } from "react";
@@ -9,6 +10,7 @@ import { useFetchLoggedIn } from "../../hooks/queries/useFetchLoggedIn";
 import { FETCH_BOARDS } from "../../hooks/queries/board/useFetchBoards";
 import { FETCH_USEDITEMS } from "../../hooks/queries/product/useFetchProducts";
 import { FETCH_USEDITEMS_BEST } from "../../hooks/queries/product/useFetchBestProducts";
+import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
 
 import UserIcon01 from "../../element/icon/user/01";
 
@@ -18,7 +20,6 @@ import { Dropdown, Space } from "antd";
 import type { MenuProps } from "antd";
 import type { DocumentNode } from "graphql";
 import * as S from "./LayoutNavigation.styles";
-import { useRouter } from "next/router";
 
 const NAVIGATION_MENUS = [
   // { name: "Firebase", page: "/boards_firebase" },
@@ -42,6 +43,7 @@ export default function LayoutNavigation(): JSX.Element {
   const client = useApolloClient();
 
   const { onClickLogout } = useUser();
+  const { onClickMoveToPage } = useMoveToPage();
 
   // Prefetch
   const prefetch = (fetch?: DocumentNode[]) => async () => {
@@ -64,8 +66,9 @@ export default function LayoutNavigation(): JSX.Element {
     setIsOpen((prev) => !prev);
   };
   // Nav Menu Router push시, rightNav 사라짐
-  const handleMovedNavOff = (): void => {
+  const handleNav = (): void => {
     setIsOpen(false);
+    onClickMoveToPage(router.asPath)();
   };
 
   // // PC 해상도일 때, sideNav가 켜져있다면 초기화
@@ -135,7 +138,7 @@ export default function LayoutNavigation(): JSX.Element {
               return (
                 <S.MenuItem key={el.page}>
                   <Link href={el.page}>
-                    <S.itemLink onClick={handleMovedNavOff} onMouseOver={prefetch(el.fetch)} isActive={isActive}>
+                    <S.itemLink onClick={handleNav} onMouseOver={prefetch(el.fetch)} isActive={isActive}>
                       {el.name}
                     </S.itemLink>
                   </Link>
@@ -151,7 +154,7 @@ export default function LayoutNavigation(): JSX.Element {
                 {USER_OPTIONS.map((el) => (
                   <S.MenuItem key={el.page}>
                     <Link href={el.page}>
-                      <S.UserOptBtn onClick={handleMovedNavOff}>{el.name}</S.UserOptBtn>
+                      <S.UserOptBtn onClick={handleNav}>{el.name}</S.UserOptBtn>
                     </Link>
                   </S.MenuItem>
                 ))}

@@ -26,23 +26,21 @@ export default function UserLogin(): JSX.Element {
   // 테스트
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Logo>Logo</S.Logo>
-        <S.Form onSubmit={handleSubmit(onClickLoginExample)}>
-          <S.InputWrap>
-            <Label01 text="이메일" />
-            <Input02 register={register("email")} />
-            <Error01 text={formState.errors.email?.message} />
-          </S.InputWrap>
-          <S.InputWrap>
-            <Label01 text="비밀번호" />
-            <Input02 type="password" register={register("password")} />
-            <Error01 text={formState.errors.email?.message} />
-          </S.InputWrap>
-          <Button03 text="로그인하기" />
-        </S.Form>
-      </S.Container>
-    </S.Wrapper>
+    <>
+      <S.Logo src="/images/tae_logo_bk.webp"></S.Logo>
+      <S.Form onSubmit={handleSubmit(onClickLoginExample)}>
+        <S.InputWrap>
+          <Label01 text="이메일" />
+          <Input02 register={register("email")} />
+          <Error01 text={formState.errors.email?.message ?? ""} />
+        </S.InputWrap>
+        <S.InputWrap>
+          <Label01 text="비밀번호" />
+          <Input02 type="password" register={register("password")} />
+          <Error01 text={formState.errors.email?.message ?? ""} />
+        </S.InputWrap>
+        <Button03 text="로그인하기" />
+      </S.Form>
+    </>
   );
 }

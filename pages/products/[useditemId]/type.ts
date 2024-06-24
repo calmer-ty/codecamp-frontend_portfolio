@@ -1,5 +1,5 @@
 export interface IProductDetailPageProps {
-  useditems: {
+  useditem: {
     name: string;
     remarks: string;
     images: string[];

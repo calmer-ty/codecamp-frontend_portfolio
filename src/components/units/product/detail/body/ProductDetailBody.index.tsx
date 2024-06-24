@@ -32,7 +32,7 @@ export default function ProductDetailBody(props: IProductDetailProps): JSX.Eleme
   const { onClickPayment } = usePayment(props.data?.fetchUseditem);
   const { onClickDelete, onClickPick } = useProduct({ _id: props.data.fetchUseditem._id, pick: props.data.fetchUseditem.pickedCount ?? 0 });
 
-  useMap(props.data?.fetchUseditem.useditemAddress?.lat, props.data?.fetchUseditem.useditemAddress?.lng, false);
+  useMap(props.data?.fetchUseditem.useditemAddress?.lat ?? 0, props.data?.fetchUseditem.useditemAddress?.lng ?? 0, false);
 
   // 오늘 본 상품
   useEffect(() => {

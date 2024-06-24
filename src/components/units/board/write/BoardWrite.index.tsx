@@ -75,25 +75,25 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             <S.InputWrap>
               <Label01 text="작성자" />
               <Input01 placeholder="이름을 작성해주세요." defaultValue={props.data?.fetchBoard.writer ?? ""} register={register("writer")} readOnly={props.isEdit} />
-              <Error01 text={formState.errors?.writer?.message} />
+              <Error01 text={formState.errors?.writer?.message ?? ""} />
             </S.InputWrap>
             <S.InputWrap>
               <Label01 text="비밀번호" />
               <Input01 type="password" placeholder="비밀번호를 작성해주세요." register={register("password")} />
-              <Error01 text={formState.errors?.password?.message} />
+              <Error01 text={formState.errors?.password?.message ?? ""} />
             </S.InputWrap>
           </S.FlexRow>
 
           <S.InputWrap>
             <Label01 text="제목" />
             <Input01 placeholder="제목을 작성해주세요." defaultValue={props.data?.fetchBoard.title ?? ""} register={register("title")} />
-            <Error01 text={formState.errors?.title?.message} />
+            <Error01 text={formState.errors?.title?.message ?? ""} />
           </S.InputWrap>
 
           <S.InputWrap>
             <Label01 text="내용" />
             <S.Contents placeholder="내용을 작성해주세요." defaultValue={props.data?.fetchBoard.contents} {...register("contents")} />
-            <Error01 text={formState.errors?.contents?.message} />
+            <Error01 text={formState.errors?.contents?.message ?? ""} />
           </S.InputWrap>
 
           <S.InputWrap>

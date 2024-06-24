@@ -12,10 +12,11 @@ export const Body = styled.section`
   position: relative;
 `;
 
-export const TextWrap = styled.section`
+export const TextWrap = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 6px;
+  margin-top: 20px;
 `;
 export const Remark = styled.span`
   font-size: 18px;

@@ -10,7 +10,7 @@ import type { ICommentWriteProps, IFormData } from "./CommentWrite.types";
 import * as S from "./CommentWrite.styles";
 
 export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
-  const { register, handleSubmit, watch } = useForm<IFormData>({
+  const { register, handleSubmit, watch, reset } = useForm<IFormData>({
     mode: "onChange",
     resolver: yupResolver(schemaBoardComment),
   });
@@ -21,13 +21,23 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
     onToggleEdit: props.onToggleEdit,
   });
 
+  const handleCreate = async (data: IFormData): Promise<void> => {
+    await onClickCreate(data);
+    reset(); // 폼 필드를 초기화
+  };
+
+  const handleUpdate = async (data: IFormData): Promise<void> => {
+    await onClickUpdate(data);
+    reset(); // 폼 필드를 초기화
+  };
+
   return (
     <S.CommentWrite isEdit={props.isEdit}>
       {!props.isEdit && <TitleComment01 text="댓글" />}
-      <S.Form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}>
+      <S.Form onSubmit={handleSubmit(props.isEdit ? handleUpdate : handleCreate)}>
         <S.InputWrap>
-          <S.UserInfoInput placeholder="작성자" defaultValue={props.el?.writer ?? ""} {...register("writer")} />
-          <S.UserInfoInput type="password" placeholder="비밀번호" defaultValue={""} {...register("password")} />
+          <S.UserInfoInput readOnly={props.isEdit} placeholder="작성자" defaultValue={props.el?.writer ?? ""} {...register("writer")} />
+          <S.UserInfoInput type="password" placeholder="비밀번호(4자 이상)" defaultValue={""} {...register("password")} />
           <S.RateScore onChange={setRating} value={rating} />
         </S.InputWrap>
         <Textarea01

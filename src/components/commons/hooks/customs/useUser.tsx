@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 
-import { accessTokenState } from "../../../../commons/stores";
+import { accessTokenState, visitedPageState } from "../../../../commons/stores";
 import { useCreateUser } from "../mutations/user/useCreateUser";
 import { useLoginUser } from "../mutations/user/useLoginUser";
 import { useLoginUserExample } from "../mutations/user/useLoginUserExample";
@@ -18,6 +18,8 @@ export const useUser = (): {
   onClickLogout: () => Promise<void>;
 } => {
   const router = useRouter();
+  const [visitedPage] = useRecoilState(visitedPageState);
+  // console.log(visitedPage);
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [createUser] = useCreateUser();
@@ -58,7 +60,7 @@ export const useUser = (): {
         return;
       }
       setAccessToken(accessToken);
-      void router.push("/");
+      void router.push(visitedPage);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -80,7 +82,7 @@ export const useUser = (): {
         return;
       }
       setAccessToken(accessToken);
-      void router.push("/");
+      void router.push(visitedPage);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
