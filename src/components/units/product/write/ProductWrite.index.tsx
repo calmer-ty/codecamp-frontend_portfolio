@@ -19,24 +19,25 @@ import * as S from "./ProductWrite.styles";
 export default function ProductWrite(props: IProductWriteProps): JSX.Element {
   // prettier-ignore
   const { register, handleSubmit, setValue, trigger, formState: { errors, isValid } } 
-  = useForm<IFormDataProductWrite>({ resolver: yupResolver(schemaProductWrite), mode: "onChange"});
+  = useForm<IFormDataProductWrite>({ resolver: yupResolver(schemaProductWrite), mode: "onChange",
+    defaultValues: {
+      name: props.data?.fetchUseditem.name,
+      remarks: props.data?.fetchUseditem.remarks,
+      price: props.data?.fetchUseditem.price ?? 0,
+    }
+  });
 
   // 맵 선택 Hook
   const lat = props.data?.fetchUseditem.useditemAddress?.lat;
   const lng = props.data?.fetchUseditem.useditemAddress?.lng;
   const { latlng, address } = useMap(lat ?? 33.450701, lng ?? 126.570667, true);
+
   // 맵 클릭 이벤트 핸들러
   useEffect(() => {
     if (typeof address !== "string") return;
     setValue("address", address);
     void trigger("address");
   }, [address]);
-
-  // 상품 설명 이벤트
-  const onChangeContents = (value: string): void => {
-    setValue("contents", value === "<p><br></p>" ? "" : value);
-    void trigger("contents");
-  };
 
   // 초기 값 설정 및 유효성 검사
   useEffect(() => {
@@ -62,6 +63,12 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     const images = props.data?.fetchUseditem.images;
     if (images !== undefined && images !== null) setFileUrls([...images]);
   }, [props.data]);
+
+  // 상품 설명 이벤트
+  const onChangeContents = (value: string): void => {
+    setValue("contents", value === "<p><br></p>" ? "" : value);
+    void trigger("contents");
+  };
 
   // 파일 전송 기능
   const [files, setFiles] = useState<File[]>(new Array(3).fill(null));
@@ -142,8 +149,8 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
             <S.InputWrap>
               <Label01 text="위도/경도" />
               <S.LatLngWrap>
-                <S.LatLng type="number" value={latlng !== "" ? latlng?.Ma : props.data?.fetchUseditem.useditemAddress?.lat ?? ""} readOnly {...register("lat")} />
-                <S.LatLng type="number" value={latlng !== "" ? latlng?.La : props.data?.fetchUseditem.useditemAddress?.lng ?? ""} readOnly {...register("lng")} />
+                <S.LatLng type="number" value={latlng !== "" ? latlng?.Ma : props.data?.fetchUseditem.useditemAddress?.lat ?? ""} readOnly />
+                <S.LatLng type="number" value={latlng !== "" ? latlng?.La : props.data?.fetchUseditem.useditemAddress?.lng ?? ""} readOnly />
               </S.LatLngWrap>
               <Error01 text={errors.lat?.message ?? ""} />
             </S.InputWrap>
