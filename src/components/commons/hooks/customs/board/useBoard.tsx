@@ -73,34 +73,21 @@ export const useBoard = (
   };
 
   const onClickUpdate = async (data: IFormData): Promise<void> => {
-<<<<<<< HEAD
-    const currentFiles = JSON.stringify(props?.fileUrls);
-    const defaultFiles = JSON.stringify(data.images);
-=======
     console.log(data.images);
     const currentFiles = JSON.stringify(props?.fileUrls);
     const defaultFiles = JSON.stringify(boardData?.fetchBoard.images);
->>>>>>> feature/product-write
     const isChangedFiles = currentFiles !== defaultFiles;
 
     const updateBoardInput: IUpdateBoardInput = {};
-    updateBoardInput.boardAddress = {};
-
     if (data.title !== "") updateBoardInput.title = data.title;
     if (data.contents !== "") updateBoardInput.contents = data.contents;
     if (data.youtubeUrl !== "") updateBoardInput.youtubeUrl = data.youtubeUrl;
-<<<<<<< HEAD
-    if (props?.zipcode !== "") updateBoardInput.boardAddress.zipcode = props?.zipcode;
-    if (props?.address !== "") updateBoardInput.boardAddress.address = props?.address;
-    if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
-=======
     if (data.zipcode !== "" || data.address !== "" || data.addressDetail !== "") {
       updateBoardInput.boardAddress = {};
       if (data.zipcode !== "") updateBoardInput.boardAddress.zipcode = props?.zipcode;
       if (data.address !== "") updateBoardInput.boardAddress.address = props?.address;
       if (data.addressDetail !== "") updateBoardInput.boardAddress.addressDetail = data.addressDetail;
     }
->>>>>>> feature/product-write
     if (isChangedFiles) updateBoardInput.images = props?.fileUrls;
 
     try {
