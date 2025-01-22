@@ -2,27 +2,32 @@ import Head from "next/head";
 
 // Style
 import * as S from "../src/commons/styles/landing";
+import Link from "next/link";
 
 export default function Home(): JSX.Element {
   const LANDING_MENUS = [
     {
       name: "자유게시판",
-      src: "/images/landing/board.png",
+      imageSrc: "/images/landing/board.png",
+      src: "/boards",
       desc: "자신의 생각을 공유해보세요.",
     },
     {
       name: "중고마켓",
-      src: "/images/landing/e-commerce.jpg",
+      imageSrc: "/images/landing/e-commerce.jpg",
+      src: "/products",
       desc: "사용하지 않는 물건을 판매하고, 구매할 수 있어요.",
     },
     {
       name: "마이페이지",
-      src: "/images/landing/e-commerce.jpg",
+      imageSrc: "/images/landing/e-commerce.jpg",
+      src: "myPage",
       desc: "나의 정보들을 확인해요.",
     },
     {
       name: "랜덤강아지",
-      src: "/images/landing/animal.png",
+      imageSrc: "/images/landing/animal.png",
+      src: "/randomDogImg",
       desc: "다양한 강아지 사진을 볼 수 있어요.",
     },
     // {
@@ -68,17 +73,19 @@ export default function Home(): JSX.Element {
       <S.Contents>
         <S.CustomSlider {...settings}>
           {LANDING_MENUS.map((el, index) => (
-            <S.SliderInner key={index}>
-              <S.SliderItem>
-                <S.Figure>
-                  <S.Figcaption>
-                    <S.Title>{el.name}</S.Title>
-                    <S.Desc>{el.desc}</S.Desc>
-                  </S.Figcaption>
-                  <S.MainImg src={el.src} />
-                </S.Figure>
-              </S.SliderItem>
-            </S.SliderInner>
+            <div className="SliderInner" key={`${el.name}_${index}`}>
+              <div className="slideItem">
+                <Link href={el.src ?? ""}>
+                  <figure>
+                    <figcaption>
+                      <h3>{el.name}</h3>
+                      <p>{el.desc}</p>
+                    </figcaption>
+                    <S.MainImg src={el.imageSrc} />
+                  </figure>
+                </Link>
+              </div>
+            </div>
           ))}
         </S.CustomSlider>
       </S.Contents>

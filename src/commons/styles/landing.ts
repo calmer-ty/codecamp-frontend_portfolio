@@ -12,10 +12,12 @@ export const CustomSlider = styled(Slider)`
   .slick-track {
     padding: 10px 0;
   }
-  .slick-slide.slick-center article {
+  .slick-slide.slick-center .slideItem {
     box-shadow: 0px 8px 6px -6px #666;
     border: 1px solid #666;
     opacity: 1;
+    cursor: pointer;
+    pointer-events: all;
   }
   .slick-arrow {
     z-index: 1;
@@ -35,40 +37,43 @@ export const CustomSlider = styled(Slider)`
   .slick-dots {
     bottom: -35px;
   }
+
+  .slideItem {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    margin: 0 10px;
+    padding: 30px;
+    background-color: #fff;
+    opacity: 0.6;
+    pointer-events: none;
+
+    figure {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      row-gap: 20px;
+
+      figcaption {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        font-size: 1.2rem;
+        word-break: keep-all;
+
+        h3 {
+          font-size: 1.6rem;
+          font-weight: bold;
+        }
+        p {
+          height: 56px;
+        }
+      }
+    }
+  }
 `;
 
-export const SliderInner = styled.div``;
-
-export const SliderItem = styled.article`
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-
-  margin: 0 10px;
-  padding: 30px;
-  background-color: #fff;
-  opacity: 0.6;
-`;
-export const Title = styled.h3`
-  font-size: 1.6rem;
-  font-weight: bold;
-`;
-export const Figure = styled.figure`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  row-gap: 20px;
-`;
-export const Figcaption = styled.figcaption`
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  font-size: 1.2rem;
-  word-break: keep-all;
-`;
-export const Desc = styled.p`
-  height: 56px;
-`;
 export const MainImg = styled.img`
   object-fit: cover;
 `;
