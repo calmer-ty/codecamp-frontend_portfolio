@@ -5,28 +5,26 @@ export declare const window: typeof globalThis & {
 };
 
 export const useMap = (
-  lat: number,
-  lng: number,
+  lat: any,
+  lng: any,
   enableClick: boolean
 ): {
   latlng: any;
-  address: string;
+  address: any;
 } => {
   const [latlng, setLatlng] = useState<any>("");
   const [address, setAddress] = useState<any>("");
-
+  const appKey = process.env.NEXT_PUBLIC_KAKAO_APP_KEY;
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=86e8d7dcdac578c6f87227c9b54397f1&libraries=services&autoload=false";
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&libraries=services&autoload=false`;
+
     document.head.appendChild(script);
 
     script.onload = () => {
       window.kakao.maps.load(function () {
         const container = document.getElementById("map");
-        if (container === null) {
-          console.error("Map container element not found");
-          return;
-        }
+
         // -----------------------------------
         // 공통 부분: 맵 초기화
         // -----------------------------------
