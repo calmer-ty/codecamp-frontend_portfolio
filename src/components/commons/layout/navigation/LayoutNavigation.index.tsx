@@ -25,7 +25,7 @@ const NAVIGATION_MENUS = [
   // { name: "Firebase", page: "/boards_firebase" },
   { name: "자유게시판", page: "/boards", fetch: [FETCH_BOARDS] },
   { name: "중고마켓", page: "/products", fetch: [FETCH_USEDITEMS, FETCH_USEDITEMS_BEST] },
-  { name: "마이페이지", page: "/myPage" },
+  // { name: "마이페이지", page: "/myPage" },
   { name: "랜덤강아지", page: "/randomDogImg" },
 ];
 const USER_OPTIONS = [

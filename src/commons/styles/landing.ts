@@ -43,11 +43,12 @@ export const CustomSlider = styled(Slider)`
     flex-direction: column;
     row-gap: 10px;
 
-    margin: 0 10px;
+    margin: 0 40px;
     padding: 30px;
     background-color: #fff;
-    opacity: 0.6;
-    pointer-events: none;
+    /* opacity: 0.6; */
+    /* pointer-events: none; */
+    cursor: pointer;
 
     figure {
       display: flex;

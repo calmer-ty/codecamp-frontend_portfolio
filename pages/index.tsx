@@ -18,12 +18,12 @@ export default function Home(): JSX.Element {
       src: "/products",
       desc: "사용하지 않는 물건을 판매하고, 구매할 수 있어요.",
     },
-    {
-      name: "마이페이지",
-      imageSrc: "/images/landing/e-commerce.jpg",
-      src: "myPage",
-      desc: "나의 정보들을 확인해요.",
-    },
+    // {
+    //   name: "마이페이지",
+    //   imageSrc: "/images/landing/e-commerce.jpg",
+    //   src: "myPage",
+    //   desc: "나의 정보들을 확인해요.",
+    // },
     {
       name: "랜덤강아지",
       imageSrc: "/images/landing/animal.png",
@@ -37,9 +37,9 @@ export default function Home(): JSX.Element {
     // },
   ];
   const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
+    // className: "center",
+    // centerMode: true,
+    // infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
